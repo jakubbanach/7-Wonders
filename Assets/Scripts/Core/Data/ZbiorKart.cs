@@ -112,7 +112,7 @@ public static class ZbiorKart
                 KolorKarty.Żółty
             ),
             new(
-                "Magazyn kamienia",
+                "Magazyn Kamienia",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
                 new List<Efekt>
@@ -122,7 +122,7 @@ public static class ZbiorKart
                 KolorKarty.Żółty
             ),
             new(
-                "Magazyn drewna",
+                "Magazyn Drewna",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
                 new List<Efekt>
@@ -132,7 +132,7 @@ public static class ZbiorKart
                 KolorKarty.Żółty
             ),
             new(
-                "Magazyn gliny",
+                "Magazyn Gliny",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
                 new List<Efekt>

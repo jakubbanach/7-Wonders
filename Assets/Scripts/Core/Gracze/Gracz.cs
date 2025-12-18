@@ -63,6 +63,15 @@ public class Gracz
         KartyCudow.Add(kartaCudu);
     }
 
+    public string WypiszKartyCudu()
+    {
+        return string.Join(", ", KartyCudow.Select(k => k.Nazwa));
+    }
+
+    public int WypiszLiczbeSurowca(Surowiec surowiec)
+    {
+        return Surowce.ContainsKey(surowiec) ? Surowce[surowiec] : 0;
+    }
     public void ZbudujKarteCudu(KartaCudu kartaCudu)
     {
         kartaCudu.Zagraj(Surowce);
