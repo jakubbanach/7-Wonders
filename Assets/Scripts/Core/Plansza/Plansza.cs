@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 
 public class Plansza
 {
@@ -63,5 +64,30 @@ public class Plansza
             nowaStrefa.UzyjStrefy();
             ObecnaStrefa = nowaStrefa;
         }
+    }
+
+    public string WypiszStan()
+    {
+        return $"Pion konfliktu na pozycji: {PionKonfliktu.PobierzPozycje()}\n" +
+               $"Zetony postepu: {string.Join(", ", ZetonyPostepu.Select(z => z.Nazwa))}\n" +
+               $"Strefy: {string.Join(", ", Strefy.Select(s => s.Nazwa))}";
+    }
+
+    public string WypiszTorKonfliktu()
+    {
+        var sb = new StringBuilder();
+
+        for (int i = -9; i <= 9; i++)
+        {
+            if (i == PionKonfliktu.Pozycja)
+                sb.Append("[X]");
+            else
+                sb.Append("[]");
+        }
+
+        sb.AppendLine();
+        sb.AppendLine(" G1 <---------------------------------> G2");
+
+        return sb.ToString();
     }
 }

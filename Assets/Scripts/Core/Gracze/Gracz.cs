@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class Gracz
 {
@@ -55,6 +56,8 @@ public class Gracz
 
     public void ZbudujKarte(Karta karta)
     {
+        if (karta == null)
+            throw new ArgumentNullException(nameof(karta));
         ZbudowaneKarty.Add(karta);
     }
 
@@ -93,4 +96,11 @@ public class Gracz
         // Implementacja wykonania ruchu
     }
 
+    public string WypiszStan()
+    {
+        var surowceOpis = string.Join(", ", Surowce.Select(s => $"{s.Key}: {s.Value}"));
+        var kartyOpis = string.Join(", ", ZbudowaneKarty.Select(k => k.Nazwa));
+        var kartyCuduOpis = string.Join(", ", KartyCudow.Select(k => k.Nazwa));
+        return $"Gracz: {Nazwa}\nSurowce: {surowceOpis}\nZbudowane Karty: {kartyOpis}\nKarty Cudów: {kartyCuduOpis}";
+    }
 }

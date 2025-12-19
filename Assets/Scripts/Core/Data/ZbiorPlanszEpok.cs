@@ -10,7 +10,7 @@ public static class ZbiorPlanszEpok
         {
             Epoka.EpokaI => InicjalizujPlanszeEpokiI(talia),
             Epoka.EpokaII => InicjalizujPlanszeEpokiII(talia),
-            //Epoka.EpokaIII => InicjalizujPlanszeEpokiIII(talia),
+            Epoka.EpokaIII => InicjalizujPlanszeEpokiIII(talia),
             _ => throw new ArgumentException("Nieznana epoka")
         };
     }
@@ -87,7 +87,7 @@ public static class ZbiorPlanszEpok
             e1,e2,e3,e4,e5,e6
         };
 
-        return new PlanszaEpoki
+        return new PlanszaEpoki(Epoka.EpokaI)
         {
             Pola = pola
         };
@@ -161,7 +161,7 @@ public static class ZbiorPlanszEpok
             e1,e2
         };
 
-        return new PlanszaEpoki
+        return new PlanszaEpoki(Epoka.EpokaII)
         {
             Pola = pola
         };
@@ -249,9 +249,93 @@ public static class ZbiorPlanszEpok
             g1,g2
         };
 
-        return new PlanszaEpoki
+        return new PlanszaEpoki(Epoka.EpokaIII)
         {
             Pola = pola
         };
     }
+
+    public static void WypiszPlansze(PlanszaEpoki plansza)
+    {
+        int maxSzerokosc = 11;
+
+        int[] uklad = plansza.Epoka switch
+        {
+            Epoka.EpokaI => new[] { 2, 3, 4, 5, 6 },
+            Epoka.EpokaII => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaIII => new[] { 2, 3, 4, 2, 4, 3, 2 },
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+        int index = 0;
+
+        foreach (int liczbaPol in uklad)
+        {
+            int szerokoscWiersza = liczbaPol * 2;
+            int paddingLewy = (maxSzerokosc - szerokoscWiersza) / 2;
+
+            Console.Write(new string(' ', paddingLewy));
+
+            for (int i = 0; i < liczbaPol; i++)
+            {
+                var pole = plansza.Pola[index++];
+
+                string symbol =
+                    pole.CzyDostepna ? "D" :
+                    pole.CzyZakryta ? "X" :
+                    "O";
+                if(pole.Karta == null)
+                {
+                    symbol = "-";
+                }
+
+                Console.Write(symbol + " ");
+            }
+
+            Console.WriteLine();
+        }
+    }
+
+    public static IEnumerable<Karta> Tasuj(List<Karta> talia, Random rng)
+    {
+        return talia.OrderBy(_ => rng.Next()).ToList();
+    }
+
+    public static string PlanszaDoStringa(PlanszaEpoki plansza)
+        {
+        var wynik = new System.Text.StringBuilder();
+        int maxSzerokosc = 11;
+        int[] uklad = plansza.Epoka switch
+        {
+            Epoka.EpokaI => new[] { 2, 3, 4, 5, 6 },
+            Epoka.EpokaII => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaIII => new[] { 2, 3, 4, 2, 4, 3, 2 },
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        int index = 0;
+        foreach (int liczbaPol in uklad)
+        {
+            int szerokoscWiersza = liczbaPol * 2;
+            int paddingLewy = (maxSzerokosc - szerokoscWiersza) / 2;
+            wynik.Append(new string(' ', paddingLewy));
+            for (int i = 0; i < liczbaPol; i++)
+            {
+                var pole = plansza.Pola[index++];
+                string symbol =
+                    pole.CzyDostepna ? "D" :
+                    pole.CzyZakryta ? "X" :
+                    "O";
+                if (pole.Karta == null)
+                {
+                    symbol = "-";
+                }
+                wynik.Append(symbol + " ");
+            }
+            wynik.AppendLine();
+        }
+
+        wynik.AppendLine("[D] Dostêpna | [X] Zakryta | [O] Odkryta | [-] Puste pole");
+        return wynik.ToString();
+    }
+
 }

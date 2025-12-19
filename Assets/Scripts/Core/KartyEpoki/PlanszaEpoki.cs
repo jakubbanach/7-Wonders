@@ -37,4 +37,41 @@ public class PlanszaEpoki
             }
         }
     }
+
+    public string PlanszaDoStringa()
+    {
+        var wynik = new System.Text.StringBuilder();
+        int maxSzerokosc = 11;
+        int[] uklad = Epoka switch
+        {
+            Epoka.EpokaI => new[] { 2, 3, 4, 5, 6 },
+            Epoka.EpokaII => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaIII => new[] { 2, 3, 4, 2, 4, 3, 2 },
+            _ => throw new ArgumentOutOfRangeException()
+        };
+        int index = 0;
+        foreach (int liczbaPol in uklad)
+        {
+            int szerokoscWiersza = liczbaPol * 2;
+            int paddingLewy = (maxSzerokosc - szerokoscWiersza) / 2;
+            wynik.Append(new string(' ', paddingLewy));
+            for (int i = 0; i < liczbaPol; i++)
+            {
+                var pole = Pola[index++];
+                string symbol =
+                    pole.CzyDostepna ? "D" :
+                    pole.CzyZakryta ? "X" :
+                    "O";
+                if (pole.Karta == null)
+                {
+                    symbol = "-";
+                }
+                wynik.Append(symbol + " ");
+            }
+            wynik.AppendLine();
+        }
+
+        wynik.AppendLine("[D] Dostêpna | [X] Zakryta | [O] Odkryta | [-] Puste pole");
+        return wynik.ToString();
+    }
 }
