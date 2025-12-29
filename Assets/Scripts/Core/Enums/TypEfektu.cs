@@ -15,7 +15,7 @@ public enum TypEfektu
     OdlozKartePrzeciwnika,
     RozegrajTurePonownie,
     PrzeciwnikOdkladaMonety,
-    //WybierzZetonPostepu,
+    WybierzZetonPostepu,
     //Efekty ZetonyPostepu
     DodatkoweMilitariaZaCzerwoneKarty,
     KoniecGry3PunktyZaZetonPostepu,

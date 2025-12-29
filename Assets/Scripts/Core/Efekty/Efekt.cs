@@ -23,6 +23,71 @@ public class Efekt
         return $"Efekt: {TypEfektu}, Surowce: {string.Join(", ", Surowce)}, Wartoœæ: {Wartosc}, Tekst: {Tekst}";
     }
 
+    public void ZastosujEfekt(Gracz gracz, PlanszaKonfliktu planszaKonfliktu = null)
+    {
+        // Implementacja zastosowania efektu na graczu
+        // Ta metoda mo¿e byæ rozszerzona w zale¿noœci od typu efektu
+        switch (TypEfektu)
+        {
+            case TypEfektu.Surowiec:
+                foreach (var surowiec in Surowce)
+                {
+                    gracz.DodajSurowiec(surowiec.Key, surowiec.Value);
+                }
+                break;
+            //case TypEfektu.WyborSurowca: -> do implementacji wyboru surowca przez gracza
+            //case TypEfektu.PunktyZwyciestwa: -> do Punktacji Koncowej
+            case TypEfektu.Monety:
+                gracz.DodajMonety(Wartosc);
+                break;
+            case TypEfektu.PunktyMilitarne:
+                if (planszaKonfliktu != null)
+                {
+                    planszaKonfliktu.PrzesunPion(Wartosc, gracz);
+                }
+                break;
+            //case TypEfektu.ZmianaCenySurowca: -> do implementacji zmiany ceny surowca
+            case TypEfektu.BialySymbol:
+                gracz.BialeSymbole.Add(Tekst);
+                break;
+            case TypEfektu.SymbolNaukowy:
+                gracz.symboleNaukowe.Add(SymbolNaukowy);
+                break;
+            case TypEfektu.MonetyZaKarty:
+                if (Tekst == "Cuda")
+                {
+                    var liczbaKart = gracz.KartyCudow.Count;
+                    // dodaj warunek zbudowania karty cudu
+                    // do dodania karty cudu przeciwnika
+                    gracz.DodajMonety(Wartosc * liczbaKart);
+                }
+                else
+                {
+                    var liczbaKart = gracz.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst);
+                    gracz.DodajMonety(Wartosc * liczbaKart);
+                }
+                break;
+            //case TypEfektu.PunktyZaKarty: -> do Punktacji Koncowej
+            //case TypEfektu.RozegrajTurePonownie: -> do implementacji w mechanice tury
+            case TypEfektu.PrzeciwnikOdkladaMonety:
+                // do implementacji w mechanice tury
+                break;
+            //case TypEfektu.DarmowaBudowlaZOdrzuconychKart: -> do implementacji w mechanice tury
+            case TypEfektu.OdlozKartePrzeciwnika:
+                // do implementacji w mechanice tury
+                break;
+            case TypEfektu.Wylosuj3ZetonyPostepu:
+                // do implementacji w mechanice tury
+                break;
+            case TypEfektu.WybierzZetonPostepu:
+                // do implementacji w mechanice tury
+                break;
+            default:
+                // Inne typy efektów do implementacji
+                break;
+        }
+    }
+
     public string Wypisz()
     {
         switch (TypEfektu)

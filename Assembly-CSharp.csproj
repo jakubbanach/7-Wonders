@@ -77,7 +77,7 @@
     <Compile Include="Assets\Scripts\Core\Data\ZbiorZetonowPostepu.cs" />
     <Compile Include="Assets\Scripts\Core\Data\ZbiorKart.cs" />
     <Compile Include="Assets\Scripts\Core\Gracze\Ruch.cs" />
-    <Compile Include="Assets\Scripts\Core\Plansza\Plansza.cs" />
+    <Compile Include="Assets\Scripts\Core\Plansza\PlanszaKonfliktu.cs" />
     <Compile Include="Assets\Scripts\Core\KartyEpoki\Karta.cs" />
     <Compile Include="Assets\Scripts\Core\Enums\TypEfektu.cs" />
     <Compile Include="Assets\Scripts\Core\Plansza\PionKonfliktu.cs" />

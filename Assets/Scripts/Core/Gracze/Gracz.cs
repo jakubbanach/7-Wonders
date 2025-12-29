@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,8 @@ public class Gracz
     public List<KartaCudu> KartyCudow { get; protected set; }
     public List<Karta> ZbudowaneKarty{ get; protected set; }
     public Dictionary<Surowiec, int> Surowce { get; protected set; }
+    public List<SymbolNaukowy> symboleNaukowe { get; protected set; } = new List<SymbolNaukowy>();
+    public List<String> BialeSymbole { get; protected set; } = new List<String>();
 
     public Gracz(string nazwa)
     {
@@ -59,6 +62,10 @@ public class Gracz
         if (karta == null)
             throw new ArgumentNullException(nameof(karta));
         ZbudowaneKarty.Add(karta);
+        foreach (var efekt in karta.Efekty)
+        {
+            efekt.ZastosujEfekt(this);
+        }
     }
 
     public void DodajKarteCudu(KartaCudu kartaCudu)

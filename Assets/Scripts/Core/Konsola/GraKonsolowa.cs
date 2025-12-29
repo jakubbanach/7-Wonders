@@ -9,7 +9,7 @@ public class GraKonsolowa
     //private readonly PlanszaFactory _planszaFactory = new();
     private readonly IWyborKarty _wyborKarty = new WyborKartKonsola();
     private Gracz[] gracze;
-    private Plansza plansza;
+    private PlanszaKonfliktu plansza;
     private PlanszaEpoki planszaEpoki;
     private Gracz aktywnyGracz;
 
@@ -100,14 +100,14 @@ public class GraKonsolowa
         Console.ReadKey();
         RozegrajEpoke(planszaEpoki);
     }
-    Plansza InicjalizacjaPlanszy()
+    PlanszaKonfliktu InicjalizacjaPlanszy()
     {
         var pionKonfliktu = new PionKonfliktu(0);
         var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
 
         // Inicjalizacja planszy do gry
-        return new Plansza(pionKonfliktu, zetonyPostepu, strefy);
+        return new PlanszaKonfliktu(pionKonfliktu, zetonyPostepu, strefy);
     }
 
     Gracz[] InicjalizacjaGraczy(String nazwa1 = "Gracz 1", String nazwa2 = "Gracz 2")
@@ -173,7 +173,7 @@ public class GraKonsolowa
         }
     }
 
-    string WypiszPlansze(PlanszaEpoki planszaEpoki, Gracz[] gracze, Plansza planszaKonfliktu)
+    string WypiszPlansze(PlanszaEpoki planszaEpoki, Gracz[] gracze, PlanszaKonfliktu planszaKonfliktu)
     {
         var sb = new StringBuilder();
 

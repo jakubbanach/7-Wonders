@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
-public class Plansza
+public class PlanszaKonfliktu
 {
     public PionKonfliktu PionKonfliktu { get; protected set; }
     public List<ZetonPostepu> ZetonyPostepu { get; protected set; }
@@ -10,7 +12,7 @@ public class Plansza
 
     private List<(int start, int end, Strefa strefa)> _mapaStref;
 
-    public Plansza(PionKonfliktu pionKonfliktu, List<ZetonPostepu> zetonyPostepu, List<Strefa> strefy)
+    public PlanszaKonfliktu(PionKonfliktu pionKonfliktu, List<ZetonPostepu> zetonyPostepu, List<Strefa> strefy)
     {
         PionKonfliktu = pionKonfliktu;
         ZetonyPostepu = zetonyPostepu;
