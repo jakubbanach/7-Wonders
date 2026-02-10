@@ -157,7 +157,6 @@ public class GraKonsolowa
 
     void RozegrajTure(Gracz gracz, Gracz przeciwnik, Karta karta)
     {
-        Console.WriteLine($"Co chcesz zrobiæ z kart¹?");
         TypRuchu typRuchu = WybierzRuch(karta);
 
         Ruch ruch = new Ruch(aktywnyGracz, przeciwnik, karta, typRuchu);

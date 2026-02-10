@@ -55,4 +55,28 @@ public class KartaCudu
         }
         return string.Join(" + ", kosztList);
     }
+    public string WypiszEfekty(bool poZagraniu = false)
+    {
+        if (Efekty == null || Efekty.Count == 0)
+        {
+            return "Brak efektów";
+        }
+
+        if (poZagraniu)
+        {
+            var efektyList = Efekty
+                .Where(e => e != null && Karta.WybraneEfekty.Contains(e.TypEfektu))
+                .Select(e => e.Wypisz())
+                .ToList();
+            return efektyList.Count == 0
+                ? "Brak efektów"
+                : string.Join(", ", efektyList);
+        }
+
+        return string.Join(", ", Efekty.Select(e => e.Wypisz()));
+    }
+    public string WypiszOpis()
+    {
+        return $"{Nazwa,-30} | Koszt: {WypiszKoszt(),-6} | {WypiszEfekty()}";
+    }
 }

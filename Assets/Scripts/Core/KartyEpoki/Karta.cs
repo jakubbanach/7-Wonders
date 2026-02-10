@@ -74,7 +74,7 @@ public class Karta
     {
         if (Koszt == null || Koszt.Count == 0)
         {
-            return "Brak kosztu";
+            return "0";
         }
         List<string> kosztList = new List<string>();
         foreach (var surowiec in Koszt)
@@ -83,5 +83,45 @@ public class Karta
         }
         return string.Join(" + ", kosztList);
     }
+    public string WypiszEfekty(bool poZagraniu = false)
+    {
+        if (Efekty == null || Efekty.Count == 0)
+        {
+            return "Brak efektów";
+        }
 
+        if (poZagraniu)
+        {
+            var efektyList = Efekty
+                .Where(e => e != null && WybraneEfekty.Contains(e.TypEfektu))
+                .Select(e => e.Wypisz())
+                .ToList();
+            return efektyList.Count == 0
+                ? "Brak efektów"
+                : string.Join(", ", efektyList);
+        }
+        
+        return string.Join(", ", Efekty.Select(e => e.Wypisz()));
+    }
+
+    public string WypiszOpis()
+    {
+        return $"{Nazwa,-20} | {KolorKarty,-9} | Koszt: {WypiszKoszt(),-6} | {WypiszEfekty()}";
+    }
+
+    public static readonly HashSet<TypEfektu> WybraneEfekty = new()
+    {
+        TypEfektu.WyborSurowca,
+        TypEfektu.PunktyZwyciestwa,
+        TypEfektu.PunktyMilitarne,
+        TypEfektu.ZmianaCenySurowca,
+        TypEfektu.SymbolNaukowy,
+        TypEfektu.PunktyZaKarty,
+        TypEfektu.DodatkoweMilitariaZaCzerwoneKarty,
+        TypEfektu.KoniecGry3PunktyZaZetonPostepu,
+        TypEfektu.MniejMaterialowNaNiebieskieKarty,
+        TypEfektu.MniejMaterialowNaCuda,
+        TypEfektu.MonetyZaBudoweZBialymSymbolem,
+        TypEfektu.MonetyPrzeciwnikaZaMaterialy,
+    };
 }

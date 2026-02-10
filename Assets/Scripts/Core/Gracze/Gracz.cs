@@ -67,6 +67,11 @@ public class Gracz
         return string.Join(", ", KartyCudow.Select(k => k.Nazwa));
     }
 
+    public string WypiszKartyCuduSzczegolowo()
+    {
+        return string.Join("\n", KartyCudow.Select(k => $"{k.Nazwa} (Koszt: {k.WypiszKoszt()}), (Efekty:{k.WypiszEfekty()})"));
+    }
+
     public int WypiszLiczbeSurowca(Surowiec surowiec)
     {
         return Surowce.ContainsKey(surowiec) ? Surowce[surowiec] : 0;
@@ -85,6 +90,12 @@ public class Gracz
     {
         // Implementacja pobierania dostêpnych kart
         return ZbudowaneKarty;
+    }
+
+    public List<KartaCudu> PobierzZbudowaneKartyCudow()
+    {
+        // Implementacja pobierania zagranych kart cudów
+        return KartyCudow.Where(k => k.CzyZagrana).ToList();
     }
 
     public void ZbudujKarte(Karta karta, Gracz przeciwnik)
@@ -153,9 +164,31 @@ public class Gracz
 
     public string WypiszStan()
     {
+        var kartyCuduOpis = string.Join(",\n\t",
+            KartyCudow.Select(cud => cud.WypiszOpis()));
+
+        var zbudowaneKartyCuduOpis = string.Join(", ",
+            PobierzZbudowaneKartyCudow().Select(cud => cud.WypiszOpis()));
+
+
         var surowceOpis = string.Join(", ", Surowce.Select(s => $"{s.Key}: {s.Value}"));
-        var kartyOpis = string.Join(", ", ZbudowaneKarty.Select(k => k.Nazwa));
-        var kartyCuduOpis = string.Join(", ", KartyCudow.Select(k => k.Nazwa));
-        return $"Gracz: {Nazwa}\nSurowce: {surowceOpis}\nZbudowane Karty: {kartyOpis}\nKarty Cudów: {kartyCuduOpis}";
+        
+        var kartyOpis = string.Join(", ",ZbudowaneKarty
+                .GroupBy(k => k.KolorKarty)
+                .OrderBy(g => g.Key)
+                .Select(g => $"{g.Count()}x {g.Key}"));
+
+
+        var efektyOpis = string.Join(", ", ZbudowaneKarty
+            .Select(k => k.WypiszEfekty(poZagraniu: true))
+            .Concat(PobierzZbudowaneKartyCudow().
+                Select(k => k.WypiszEfekty(poZagraniu: true)))
+            .Where(e => e != "Brak efektów"));
+        return $"Gracz: {Nazwa}\n" +
+            $"Karty Cudów: \n\t{kartyCuduOpis}\n" +
+            $"Surowce: {surowceOpis}\n" +
+            $"Zbudowane Karty: {kartyOpis}\n" +
+            $"Zbudowane Cuda: {zbudowaneKartyCuduOpis}\n" +
+            $"Efekty: {efektyOpis}";
     }
 }

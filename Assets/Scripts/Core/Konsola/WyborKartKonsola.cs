@@ -12,9 +12,15 @@ public class WyborKartKonsola : IWyborKarty
         while (true)
         {
             Console.WriteLine("Dostêpne karty:");
-            for (int i = 0; i < dostepne.Count; i++)
+            int index = 0;
+            foreach (var pole in dostepne)
             {
-                Console.WriteLine($"{i}: {dostepne[i].Karta!.Nazwa} (Koszt: {dostepne[i].Karta.WypiszKoszt()})");
+                var karta = pole.Karta;
+                if (karta == null)
+                    continue;
+
+                Console.WriteLine($"{index}: {karta.WypiszOpis()}");
+                index++;
             }
 
             Console.Write("Wybierz kartê: ");
