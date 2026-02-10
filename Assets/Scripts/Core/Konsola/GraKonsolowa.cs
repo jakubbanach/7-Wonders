@@ -12,6 +12,7 @@ public class GraKonsolowa
     private PlanszaKonfliktu plansza;
     private PlanszaEpoki planszaEpoki;
     private Gracz aktywnyGracz;
+    private Gracz przeciwnik => gracze.First(g => g != aktywnyGracz);
 
     public GraKonsolowa()
     {
@@ -21,24 +22,30 @@ public class GraKonsolowa
         aktywnyGracz = gracze[0];
     }
 
+    public void PrzydzielanieKartCudow()
+    {
+        List<KartaCudu> kartyCudow = InicjalizacjaKartCudow();
+        // Przydzielanie kart cudów do graczy -> hardkodowane dla testów
+        gracze[0].DodajKarteCudu(kartyCudow[0]);
+        gracze[0].DodajKarteCudu(kartyCudow[2]);
+        gracze[0].DodajKarteCudu(kartyCudow[4]);
+        gracze[0].DodajKarteCudu(kartyCudow[10]);
+
+        gracze[1].DodajKarteCudu(kartyCudow[5]);
+        gracze[1].DodajKarteCudu(kartyCudow[6]);
+        gracze[1].DodajKarteCudu(kartyCudow[7]);
+        gracze[1].DodajKarteCudu(kartyCudow[9]);
+    }
+
     public void Start()
     {
         Dictionary<Epoka, List<Karta>> kartyEpok = InicjalizacjaKartEpok();
-        List<KartaCudu> kartyCudow = InicjalizacjaKartCudow();
 
         Gracz gracz1 = gracze[0];
         Gracz gracz2 = gracze[1];
 
         // Przydzielanie kart cudów do graczy -> hardkodowane dla testów
-        gracz1.DodajKarteCudu(kartyCudow[0]);
-        gracz1.DodajKarteCudu(kartyCudow[2]);
-        gracz1.DodajKarteCudu(kartyCudow[4]);
-        gracz1.DodajKarteCudu(kartyCudow[10]);
-
-        gracz2.DodajKarteCudu(kartyCudow[5]);
-        gracz2.DodajKarteCudu(kartyCudow[6]);
-        gracz2.DodajKarteCudu(kartyCudow[7]);
-        gracz2.DodajKarteCudu(kartyCudow[9]);
+        PrzydzielanieKartCudow();
 
         Console.WriteLine($"Pion konfliktu na pozycji: {plansza.PionKonfliktu.PobierzPozycje()}");
         Console.WriteLine($"Zetony postepu: {string.Join(", ", plansza.ZetonyPostepu.Select(z => z.Nazwa))}");
@@ -56,32 +63,6 @@ public class GraKonsolowa
         ZbiorPlanszEpok.WypiszPlansze(planszaEpoki);
         Console.WriteLine("Naciœnij dowolny klawisz, aby rozpocz¹æ grê...");
         Console.ReadKey();
-        //DOCELOWO - rozgrywka do koñca epoki
-        //while (!planszaEpoki.CzyKoniecEpoki)
-        //{
-        //    RozegrajTure();
-        //}
-
-        //while (planszaEpoki.DostepneKarty.Any())
-        //{
-        //    Console.Clear();
-        //    var wypisanaPlansza = WypiszPlansze(planszaEpoki, gracze, plansza);
-        //    Console.WriteLine(wypisanaPlansza);
-
-        //    Console.WriteLine($"Ruch gracza: {aktywnyGracz.Nazwa}");
-        //    int indeks = _wyborKarty.Wybierz(planszaEpoki.DostepneKarty.ToList());
-        //    PoleKarty wybrana = planszaEpoki.DostepneKarty.ElementAt(indeks);
-
-        //    Console.WriteLine($"Wybrano kartê: {wybrana.Karta!.Nazwa}");
-
-        //    aktywnyGracz.ZbudujKarte(wybrana.Karta);
-        //    planszaEpoki.UsunPole(wybrana);
-
-        //    Console.WriteLine(new string('*', 11));
-
-        //    aktywnyGracz = aktywnyGracz == gracz1 ? gracz2 : gracz1;
-
-        //}
         RozegrajEpoke(planszaEpoki);
         Console.WriteLine("Koniec epoki!");
 
@@ -150,6 +131,39 @@ public class GraKonsolowa
         return ZbiorPlanszEpok.Utworz(epoka, taliaKart.ToList());
     }
 
+    TypRuchu WybierzRuch(Karta karta)
+    {
+        Console.WriteLine($"Co chcesz zrobiæ z kart¹?");
+        while(true)
+        {
+            Console.WriteLine("1. Zagraj kartê");
+            Console.WriteLine("2. Odrzuæ kartê");
+            Console.WriteLine("3. Zbuduj cud");
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+                    return TypRuchu.ZbudujKarte;
+                case "2":
+                    return TypRuchu.OdrzucKarte;
+                case "3":
+                    return TypRuchu.ZbudujCud;
+                default:
+                    Console.WriteLine("Nieprawid³owy wybór, spróbuj ponownie.");
+                    continue;
+            }
+        }
+    }
+
+    void RozegrajTure(Gracz gracz, Gracz przeciwnik, Karta karta)
+    {
+        Console.WriteLine($"Co chcesz zrobiæ z kart¹?");
+        TypRuchu typRuchu = WybierzRuch(karta);
+
+        Ruch ruch = new Ruch(aktywnyGracz, przeciwnik, karta, typRuchu);
+        ruch.Wykonaj();
+    }
+
     void RozegrajEpoke(PlanszaEpoki planszaEpoki)
     {
         while (planszaEpoki.DostepneKarty.Any())
@@ -157,15 +171,17 @@ public class GraKonsolowa
             Console.Clear();
             var wypisanaPlansza = WypiszPlansze(planszaEpoki, gracze, plansza);
             Console.WriteLine(wypisanaPlansza);
-
             Console.WriteLine($"Ruch gracza: {aktywnyGracz.Nazwa}");
+
             int indeks = _wyborKarty.Wybierz(planszaEpoki.DostepneKarty.ToList());
-            PoleKarty wybrana = planszaEpoki.DostepneKarty.ElementAt(indeks);
+            PoleKarty wybranaKarta = planszaEpoki.DostepneKarty.ElementAt(indeks);
 
-            Console.WriteLine($"Wybrano kartê: {wybrana.Karta!.Nazwa}");
+            Console.WriteLine($"Wybrano kartê: {wybranaKarta.Karta!.Nazwa}");
 
-            aktywnyGracz.ZbudujKarte(wybrana.Karta);
-            planszaEpoki.UsunPole(wybrana);
+            RozegrajTure(aktywnyGracz, przeciwnik, wybranaKarta.Karta);
+            //aktywnyGracz.WykonajRuch(wybrana.Karta);
+            //aktywnyGracz.ZbudujKarte(wybrana.Karta);
+            planszaEpoki.UsunPole(wybranaKarta);
 
             Console.WriteLine(new string('*', 11));
 

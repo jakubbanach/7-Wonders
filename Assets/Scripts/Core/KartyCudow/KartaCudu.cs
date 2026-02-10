@@ -15,31 +15,17 @@ public class KartaCudu
         CzyZagrana = czyZagrana;
     }
 
-    public void Zagraj(Dictionary<Surowiec, int> posiadaneSurowce)
+    public void OznaczJakoZagrana()
     {
-
-        if (CzyZagrana)
-        {
-            Console.WriteLine($"Karta cudu {Nazwa} zosta³a ju¿ zagrana.");
-            return;
-        }
-        int posiadaneMonety = posiadaneSurowce.ContainsKey(Surowiec.Monety) ? posiadaneSurowce[Surowiec.Monety] : 0;
-        int koszt = PobierzKoszt(posiadaneSurowce);
-        if (koszt <= posiadaneMonety)
-        {
-            posiadaneSurowce[Surowiec.Monety] = posiadaneMonety - koszt;
-            CzyZagrana = true;
-            Console.WriteLine($"Karta cudu {Nazwa} zosta³a zagrana.");
-        }
-        else
-        {
-            Console.WriteLine($"Brak wystarczaj¹cych surowców, aby zagraæ kartê cudu {Nazwa}.");
-        }
+        CzyZagrana = true;
     }
-
-    private int PobierzKoszt(Dictionary<Surowiec, int> posiadaneSurowce)
+    public int ObliczKoszt(Dictionary<Surowiec, int> posiadaneSurowce)
     {
-        int kosztMonet = 0;
+        int kosztMonet = 0; 
+        if (Koszt == null || Koszt.Count == 0)
+        {
+            return 0;
+        }
         foreach (var surowiec in Koszt)
         {
             if (surowiec.Key == Surowiec.Monety)

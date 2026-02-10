@@ -1,6 +1,6 @@
 public enum TypRuchu
 {
-    WznoszenieBudowli,
-    OdrzucenieKarty,
-    BudowaCudu
+    ZbudujKarte,
+    OdrzucKarte,
+    ZbudujCud
 }

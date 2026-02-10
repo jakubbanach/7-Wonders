@@ -57,17 +57,6 @@ public class Gracz
         }
     }
 
-    public void ZbudujKarte(Karta karta)
-    {
-        if (karta == null)
-            throw new ArgumentNullException(nameof(karta));
-        ZbudowaneKarty.Add(karta);
-        foreach (var efekt in karta.Efekty)
-        {
-            efekt.ZastosujEfekt(this);
-        }
-    }
-
     public void DodajKarteCudu(KartaCudu kartaCudu)
     {
         KartyCudow.Add(kartaCudu);
@@ -82,10 +71,10 @@ public class Gracz
     {
         return Surowce.ContainsKey(surowiec) ? Surowce[surowiec] : 0;
     }
-    public void ZbudujKarteCudu(KartaCudu kartaCudu)
-    {
-        kartaCudu.Zagraj(Surowce);
-    }
+    //public void ZbudujKarteCudu(KartaCudu kartaCudu)
+    //{
+    //    kartaCudu.Zagraj(Surowce);
+    //}
 
     public void UsunKarte(Karta karta)
     {
@@ -98,10 +87,69 @@ public class Gracz
         return ZbudowaneKarty;
     }
 
-    public void WykonajRuch(Ruch ruch)
+    public void ZbudujKarte(Karta karta, Gracz przeciwnik)
     {
-        // Implementacja wykonania ruchu
+        if (karta.CzyZagrana)
+            throw new InvalidOperationException("Ta karta zosta³a ju¿ zagrana.");
+        //TODO: Dodaæ obs³ugê darmowej budowy
+        //TODO: Uwzglêdniæ karty przeciwnika, które mog¹ podwy¿szyæ koszt
+        //TODO: Dodaæ obs³ugê efektów kart, które mog¹ obni¿yæ koszt budowy
+        int koszt = karta.ObliczKoszt(Surowce); 
+        int monety = Surowce.TryGetValue(Surowiec.Monety, out var m) ? m : 0;
+        
+        if (koszt > monety)
+            throw new InvalidOperationException("Nie mo¿na zbudowaæ tej karty.");
+
+        DodajMonety(-koszt);
+        karta.OznaczJakoZagrana();
+
+        ZbudowaneKarty.Add(karta);
+
+        foreach (var efekt in karta.Efekty)
+        {
+            efekt.ZastosujEfekt(this);
+        }
     }
+
+    public void OdrzucKarte(Karta karta)
+    {
+        if (karta == null)
+            throw new ArgumentNullException(nameof(karta));
+
+        karta.OznaczJakoOdrzucona();
+
+        int monety = 2;
+
+        int liczbaZoltychKart = ZbudowaneKarty
+            .Count(k => k.KolorKarty == KolorKarty.¯ó³ty);
+
+        monety += liczbaZoltychKart;
+
+        DodajMonety(monety);
+    }
+
+    public void ZbudujCud(Karta karta, Gracz przeciwnik, KartaCudu kartaCudu)
+    {
+        if (kartaCudu.CzyZagrana)
+            throw new InvalidOperationException("Cud ju¿ zbudowany.");
+
+        int koszt = kartaCudu.ObliczKoszt(Surowce);
+        int monety = Surowce.TryGetValue(Surowiec.Monety, out var m) ? m : 0;
+
+        if (koszt > monety)
+            throw new InvalidOperationException("Nie mo¿na zbudowaæ cudu.");
+
+        DodajMonety(-koszt);
+
+        kartaCudu.OznaczJakoZagrana();
+        karta.OznaczJakoZagrana(); // wsuwanie karty pod karte cudu
+
+        foreach (var efekt in kartaCudu.Efekty)
+        {
+            efekt.ZastosujEfekt(this);
+        }
+    }
+
 
     public string WypiszStan()
     {

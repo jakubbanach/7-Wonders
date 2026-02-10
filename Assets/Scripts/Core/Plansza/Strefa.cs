@@ -1,13 +1,13 @@
 public class Strefa
 {
-    public String Nazwa { get; }
+    public string Nazwa { get; }
     public int LiczbaPol { get; }
     public int LiczbaTraconychMonet { get; }
     public int LiczbaPunktow { get; }
     public bool CzyZajeta { get; protected set; }
     public bool CzyJuzUzyta { get; private set; }
 
-    public Strefa(String nazwa, int liczbaPol, int liczbaTraconychMonet, int liczbaPunktow, bool czyZajeta, bool czyJuzUzyta)
+    public Strefa(string nazwa, int liczbaPol, int liczbaTraconychMonet, int liczbaPunktow, bool czyZajeta, bool czyJuzUzyta)
     {
         Nazwa = nazwa;
         LiczbaPol = liczbaPol;

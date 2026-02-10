@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class Karta
@@ -10,6 +11,7 @@ public class Karta
     public string DarmowaBudowa { get; set; } = "";
     public bool CzyWidoczna { get; protected set; } = false;
     public bool CzyZagrana { get; protected set; } = false;
+    public bool CzyOdrzucona { get; protected set; } = false;
 
     public Karta(string nazwa, Epoka epoka, Dictionary<Surowiec, int> koszt, List<Efekt> efekty,
         KolorKarty kolorKarty, string darmowaBudowa="", bool czyWidoczna=false, bool czyZagrana = false)
@@ -29,14 +31,43 @@ public class Karta
         CzyWidoczna = widoczna;
     }
 
-    public void UstawZagranie(bool zagrana)
+    public void OznaczJakoOdrzucona()
     {
-        CzyZagrana = zagrana;
+        CzyOdrzucona = true;
+    }
+
+    public void OznaczJakoZagrana()
+    {
+        CzyZagrana = true;
     }
 
     public void DodajEfekt(Efekt efekt)
     {
         Efekty.Add(efekt);
+    }
+
+    public int ObliczKoszt(Dictionary<Surowiec, int> posiadaneSurowce)
+    {
+        int kosztMonet = 0;
+        if (Koszt == null || Koszt.Count == 0)
+        {
+            return 0;
+        }
+        foreach (var surowiec in Koszt)
+        {
+            if (surowiec.Key == Surowiec.Monety)
+            {
+                kosztMonet += surowiec.Value;
+            }
+            else
+            {
+                var posiadanaIlosc = posiadaneSurowce.ContainsKey(surowiec.Key) ? posiadaneSurowce[surowiec.Key] : 0;
+                // Dodaæ jeszcze warunek dokupienia surowców za monety bazuj¹c na drugim graczu!!!
+                //var IloscSurowcaPrzeciwnika = przeciwnik.Surowce(surowiec.Key); 
+                kosztMonet += Math.Max(0, surowiec.Value - posiadanaIlosc) * 2; // + IloscSurowcaPrzeciwnika;
+            }
+        }
+        return kosztMonet;
     }
 
     public string WypiszKoszt()

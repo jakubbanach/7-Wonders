@@ -21,22 +21,16 @@ public class Ruch
     {
         switch (TypRuchu)
         {
-            case TypRuchu.WznoszenieBudowli:
-                Gracz.ZbudujKarte(KartaDoZagrania);
+            case TypRuchu.ZbudujKarte:
+                Gracz.ZbudujKarte(KartaDoZagrania, Przeciwnik);
                 break;
-            case TypRuchu.OdrzucenieKarty:
-                Gracz.DodajMonety(2);
-                //int liczbaZoltychKart = 0;
-                //liczenie zoltych kart gracza dajacych monety za odrzucenie karty
-                //var liczbaZoltychKart = Gracz.PobierzDostepneKarty().Count(karta => karta.KolorKarty == KolorKarty.¯ó³ty);
-                //Gracz.DodajMonety(liczbaZoltychKart);
+            case TypRuchu.OdrzucKarte:
+                Gracz.OdrzucKarte(KartaDoZagrania);
                 break;
-            case TypRuchu.BudowaCudu:
+            case TypRuchu.ZbudujCud:
                 //tutaj zaimplementowac wybor karty cudu
-                KartaCudu Cud = Gracz.KartyCudow[0];
-                Gracz.ZbudujKarteCudu(Cud);
-                //usuwanie karty budynku po zbudowaniu cudu (chowanie pod karte cudu)
-                //Talia.UsunKarte(KartaDoZagrania); //talia kart budynkow
+                KartaCudu Cud = Gracz.KartyCudow[0]; //Gracz.WybierzNiezbudowanyCud();
+                Gracz.ZbudujCud(KartaDoZagrania, Przeciwnik, Cud);
                 break;
             default:
                 Console.WriteLine("Nieznany typ ruchu.");
