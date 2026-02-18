@@ -46,8 +46,15 @@ public class Karta
         Efekty.Add(efekt);
     }
 
-    public int ObliczKoszt(Dictionary<Surowiec, int> posiadaneSurowce)
+    public int ObliczKoszt(Gracz gracz, Gracz przeciwnik)
     {
+        var posiadaneSurowce = gracz.Surowce;
+        var posiadaneKarty = gracz.PobierzZbudowaneKarty();
+        var posiadaneKartyCudu = gracz.PobierzZbudowaneKartyCudow();
+
+        var przeciwnikSurowce = przeciwnik.Surowce;
+        var przeciwnikKarty = przeciwnik.PobierzZbudowaneKarty();
+
         int kosztMonet = 0;
         if (Koszt == null || Koszt.Count == 0)
         {
@@ -63,8 +70,11 @@ public class Karta
             {
                 var posiadanaIlosc = posiadaneSurowce.ContainsKey(surowiec.Key) ? posiadaneSurowce[surowiec.Key] : 0;
                 // Dodaæ jeszcze warunek dokupienia surowców za monety bazuj¹c na drugim graczu!!!
-                //var IloscSurowcaPrzeciwnika = przeciwnik.Surowce(surowiec.Key); 
-                kosztMonet += Math.Max(0, surowiec.Value - posiadanaIlosc) * 2; // + IloscSurowcaPrzeciwnika;
+                var surowiecPrzeciwnika = przeciwnikSurowce.ContainsKey(surowiec.Key) ? przeciwnikSurowce[surowiec.Key] : 0;
+
+                var brakujaceIlosci = Math.Max(0, surowiec.Value - posiadanaIlosc);
+                kosztMonet += brakujaceIlosci * (2 + surowiecPrzeciwnika); // 2 monety + 1 za ka¿dy surowiec, który posiada przeciwnik
+
             }
         }
         return kosztMonet;
@@ -73,18 +83,16 @@ public class Karta
     public string WypiszKoszt()
     {
         if (Koszt == null || Koszt.Count == 0)
+        {
             return "0";
-
-        var kosztList = Koszt.Select(s => $"{s.Value}x{s.Key}").ToList();
-
-        string kosztString = string.Join(" + ", kosztList);
-
-        if (!string.IsNullOrEmpty(DarmowaBudowa))
-            kosztString += $" (Darmowa budowa: {DarmowaBudowa})";
-
-        return kosztString;
+        }
+        List<string> kosztList = new List<string>();
+        foreach (var surowiec in Koszt)
+        {
+            kosztList.Add($"{surowiec.Value}x{surowiec.Key}");
+        }
+        return string.Join(" + ", kosztList);
     }
-
     public string WypiszEfekty(bool poZagraniu = false)
     {
         if (Efekty == null || Efekty.Count == 0)
