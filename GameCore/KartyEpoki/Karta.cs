@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Karta
 {
@@ -46,8 +47,53 @@ public class Karta
         Efekty.Add(efekt);
     }
 
+    private Dictionary<Surowiec, int> ObliczBrakujaceSurowce(Dictionary<Surowiec, int> posiadaneSurowce)
+    {
+        var brakujaceSurowce = new Dictionary<Surowiec, int>();
+
+        foreach (var surowiec in Koszt)
+        {
+            if (surowiec.Key == Surowiec.Monety)
+            {
+                brakujaceSurowce[surowiec.Key] = surowiec.Value;
+                continue;
+            }
+
+            var posiadane = posiadaneSurowce.GetValueOrDefault(surowiec.Key);
+            brakujaceSurowce[surowiec.Key] = Math.Max(0, surowiec.Value - posiadane);
+        }
+        return brakujaceSurowce;
+    }
+
+    private void ZastosowanieEfektowWyboruSurowca(List<Efekt> efektyWyboruSurowca, Dictionary<Surowiec, int> brakujaceSurowce, Dictionary<Surowiec, int> przeciwnikSurowce, List<Efekt> efektyZmianyCeny)
+    {
+        foreach (var efekt in efektyWyboruSurowca)
+        {
+            var najlepszyWybor = efekt.Surowce.Keys
+                .Where(s => brakujaceSurowce.GetValueOrDefault(s) > 0)
+                .OrderByDescending(s =>
+                {
+                    if (efektyZmianyCeny.Any(e => e.Surowiec == s))
+                        return 1; // koszt zakupu 1 sztuki, bo efekt zmienia cenê na 1 monetê
+                    
+                    var iloscPrzeciwnika = przeciwnikSurowce.GetValueOrDefault(s);
+                    return 2 + iloscPrzeciwnika; // koszt zakupu 1 sztuki
+                })
+                .FirstOrDefault();
+
+            if (najlepszyWybor != default)
+            {
+                brakujaceSurowce[najlepszyWybor]--;
+            }
+        }
+    }
+
     public int ObliczKoszt(Gracz gracz, Gracz przeciwnik)
     {
+        if (Koszt == null || Koszt.Count == 0)
+        {
+            return 0;
+        }
         var posiadaneSurowce = gracz.Surowce;
         var posiadaneKarty = gracz.PobierzZbudowaneKarty();
         var posiadaneKartyCudu = gracz.PobierzZbudowaneKartyCudow();
@@ -55,25 +101,46 @@ public class Karta
         var przeciwnikSurowce = przeciwnik.Surowce;
         var przeciwnikKarty = przeciwnik.PobierzZbudowaneKarty();
 
+        var efektyGracza = gracz.PobierzEfekty();
+        var efektyWyboruSurowca = efektyGracza
+            .Where(e => e.TypEfektu == TypEfektu.WyborSurowca)
+            .ToList();
+        var efektyZmianyCeny = efektyGracza
+            .Where(e => e.TypEfektu == TypEfektu.ZmianaCenySurowca)
+            .ToList();
+
         int kosztMonet = 0;
-        if (Koszt == null || Koszt.Count == 0)
-        {
-            return 0;
-        }
-        foreach (var surowiec in Koszt)
+
+        //if (efektyGracza.Any(e => e.TypEfektu == TypEfektu.MniejMaterialowNaNiebieskieKarty && KolorKarty == KolorKarty.Niebieski))
+        //{
+        //    return 0;
+        //}
+        //if (efektyGracza.Any(e => e.TypEfektu == TypEfektu.MniejMaterialowNaCuda && DarmowaBudowa == "Cud"))
+        //{
+        //    return 0;
+        //}
+        //if (efektyGracza.Any(e => e.TypEfektu == TypEfektu.MonetyZaBudoweZBialymSymbolem && posiadaneKarty.Any(k => k.DarmowaBudowa.Contains("Bia³y symbol"))))
+        //{
+        //    return 0;
+        //}
+
+        var brakujaceSurowce = ObliczBrakujaceSurowce(posiadaneSurowce);
+        ZastosowanieEfektowWyboruSurowca(efektyWyboruSurowca, brakujaceSurowce, przeciwnikSurowce, efektyZmianyCeny);
+
+        foreach (var surowiec in brakujaceSurowce)
         {
             if (surowiec.Key == Surowiec.Monety)
             {
                 kosztMonet += surowiec.Value;
             }
-            else
+            else if (surowiec.Value > 0)
             {
-                var posiadanaIlosc = posiadaneSurowce.ContainsKey(surowiec.Key) ? posiadaneSurowce[surowiec.Key] : 0;
-                // Dodaæ jeszcze warunek dokupienia surowców za monety bazuj¹c na drugim graczu!!!
-                var surowiecPrzeciwnika = przeciwnikSurowce.ContainsKey(surowiec.Key) ? przeciwnikSurowce[surowiec.Key] : 0;
+                bool zmianaCeny = efektyZmianyCeny.Any(e => e.Surowiec == surowiec.Key);
 
-                var brakujaceIlosci = Math.Max(0, surowiec.Value - posiadanaIlosc);
-                kosztMonet += brakujaceIlosci * (2 + surowiecPrzeciwnika); // 2 monety + 1 za ka¿dy surowiec, który posiada przeciwnik
+                var iloscPrzeciwnika = przeciwnikSurowce.GetValueOrDefault(surowiec.Key);
+                int kosztJednegoSurowca = zmianaCeny ? 1 : 2 + iloscPrzeciwnika;
+
+                kosztMonet += surowiec.Value * kosztJednegoSurowca;
 
             }
         }

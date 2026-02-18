@@ -35,8 +35,12 @@ public class Efekt
                     gracz.DodajSurowiec(surowiec.Key, surowiec.Value);
                 }
                 break;
-            //case TypEfektu.WyborSurowca: -> do implementacji wyboru surowca przez gracza
-            //case TypEfektu.PunktyZwyciestwa: -> do Punktacji Koncowej
+            case TypEfektu.WyborSurowca:
+                // brak efektu natychmiastowego, do implementacji w mechanice tury
+                break;
+            case TypEfektu.PunktyZwyciestwa: // -> do Punktacji Koncowej
+                gracz.DodajPunktyZwyciestwa(Wartosc);
+                break;
             case TypEfektu.Monety:
                 gracz.DodajMonety(Wartosc);
                 break;

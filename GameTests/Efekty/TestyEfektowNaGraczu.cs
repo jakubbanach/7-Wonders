@@ -25,16 +25,166 @@ public class TestyEfektowNaGraczu
         Assert.Equal(7, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe monety
     }
 
-    //[Fact]
-    //public void Efekt_PunktyZwyciestwa()
-    //{
-    //    Gracz gracz = new Gracz("TestowyGracz");
-    //    var efekt = new Efekt(
-    //        TypEfektu.PunktyZwyciestwa,
-    //        wartość: 5
-    //    );
+    [Fact]
+    public void Efekt_WyborSurowca_Powinien_Zmniejszyc_Koszt()
+    {
+        Gracz gracz = new Gracz("TestowyGracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
 
-    //}
+        var efekt = new Efekt(
+            TypEfektu.WyborSurowca,
+            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 } }
+        );
+
+        var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Stajnie"); 
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+
+        Assert.Equal(2, koszt);
+        gracz.DodajEfekt(efekt);
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        Assert.Equal(0, koszt);
+    }
+
+    [Fact]
+    public void Efekt_WyborSurowca_2_karty()
+    {
+        Gracz gracz = new Gracz("TestowyGracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(
+            TypEfektu.WyborSurowca,
+            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 } }
+        );
+
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Biblioteka"); 
+
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+
+        Assert.Equal(6, koszt);
+        
+        gracz.DodajEfekt(efekt);
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);   
+        Assert.Equal(4, koszt);
+        
+        gracz.DodajEfekt(efekt);
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        Assert.Equal(2, koszt);
+    }
+
+    [Fact]
+    public void Efekt_WyborSurowca()
+    {
+        Gracz gracz = new Gracz("TestowyGracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(
+            TypEfektu.WyborSurowca, 
+            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }}
+        );
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Biblioteka"); // koszt: 1 drewno, 1 kamien, 1 szklo
+        _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(6, koszt);
+
+        przeciwnik.DodajSurowiec(Surowiec.Drewno, 1);
+
+        // Koszt się zwiększa o 1, ponieważ przeciwnik ma więcej drewna
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po dodaniu drewna przeciwnikowi: {koszt}");
+        Assert.Equal(7, koszt);
+
+        gracz.DodajEfekt(efekt);
+        // silnik powinien wybrać drewno, bo koszt drewna jest większy niż koszt kamienia
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
+        Assert.Equal(4, koszt); // drewno teraz jest darmowe (więc płacimy za 2 surowce)
+    }
+
+    [Fact]
+    public void Efekt_ZmianaCenySurowca()
+    {
+        Gracz gracz = new Gracz("TestowyGracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(
+            TypEfektu.ZmianaCenySurowca,
+            surowiec: Surowiec.Kamień, 
+            wartość: 1
+        );
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Łaźnie"); // koszt: 1 kamien
+        _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(2, koszt);
+
+        gracz.DodajEfekt(efekt);
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
+        Assert.Equal(1, koszt);
+    }
+    [Fact]
+    public void Efekt_ZmianaCenySurowca_i_Efekt_WyborSurowca()
+    {
+        Gracz gracz = new Gracz("TestowyGracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efektZmiana = new Efekt(
+            TypEfektu.ZmianaCenySurowca,
+            surowiec: Surowiec.Kamień, 
+            wartość: 1
+        );
+
+        var efektWybor = new Efekt(
+            TypEfektu.WyborSurowca,
+            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 } }
+        );
+
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Biblioteka"); // koszt: 1 drewno, 1 kamien, 1 szklo
+        _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(6, koszt);
+
+        przeciwnik.DodajSurowiec(Surowiec.Kamień, 1);
+
+        // Koszt się zwiększa o 1, ponieważ przeciwnik ma więcej drewna
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po dodaniu drewna przeciwnikowi: {koszt}");
+        Assert.Equal(7, koszt);
+
+        gracz.DodajEfekt(efektZmiana);
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po zastosowaniu efektu zmiany ceny: {koszt}");
+        Assert.Equal(5, koszt); // kamień jest za 1 (więc płacimy za 2 surowce i 1 za kamień)
+
+        gracz.DodajEfekt(efektWybor);
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po zastosowaniu efektu wyboru surowca: {koszt}");
+        Assert.Equal(3, koszt); // drewno jest darmowe, więc płacimy tylko za drewno i szkło
+    }
+
+
+
+    [Fact]
+    public void Efekt_PunktyZwyciestwa()
+    {
+        Gracz gracz = new Gracz("TestowyGracz");
+        var efekt = new Efekt(
+            TypEfektu.PunktyZwyciestwa,
+            wartość: 5
+        );
+        efekt.ZastosujEfekt(gracz);
+        Assert.Equal(5, gracz.PunktyZwyciestwa);
+    }
     [Fact]
     public void Efekt_Monety()
     {

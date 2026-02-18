@@ -66,6 +66,29 @@ public class TestyKartEpok
     }
 
     [Fact]
+    public void Test_DarmowaBudowa_BialySymbol_Efekt_MonetyZaBudoweZBialymSymbolem()
+    {
+        var kartaEpoki = ZbiorKart.TaliaEpokiIII.First(k => k.Nazwa == "Uniwersytet");
+        // Symulacja darmowej budowy karty z bia³ym symbolem
+        var gracz = new Gracz("TestowyGracz");
+        var przeciwnik = new Gracz("Przeciwnik");
+        gracz.BialeSymbole.Add("Harfa");
+        gracz.DodajMonety(-7); // Usuniêcie monet, aby karta by³a darmowa
+
+        var efekt = new Efekt(
+            TypEfektu.MonetyZaBudoweZBialymSymbolem, 
+            wartoœæ: 4
+        );
+        gracz.DodajEfekt(efekt);
+
+        Assert.Equal(0, gracz.Surowce[Surowiec.Monety]);
+
+        gracz.ZbudujKarte(kartaEpoki, przeciwnik);
+        Assert.Contains(kartaEpoki, gracz.PobierzZbudowaneKarty());
+        Assert.Equal(4, gracz.Surowce[Surowiec.Monety]);
+    }
+
+    [Fact]
     public void Test_Koszt_SurowcePrzeciwnika()
     {
         var kartaEpoki = new Karta("TEEEEST", Epoka.EpokaI, new Dictionary<Surowiec, int>

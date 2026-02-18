@@ -12,6 +12,7 @@ public class Gracz
     public List<SymbolNaukowy> symboleNaukowe { get; protected set; } = new List<SymbolNaukowy>();
     public List<String> BialeSymbole { get; protected set; } = new List<String>();
     public List<Efekt> Efekty { get; protected set; } = new List<Efekt>();
+    public int PunktyZwyciestwa { get; protected set; }
 
     public Gracz(string nazwa)
     {
@@ -21,6 +22,7 @@ public class Gracz
         ZbudowaneKarty = new List<Karta>();
         Surowce = new Dictionary<Surowiec, int>();
         InicjalizujSurowce();
+        PunktyZwyciestwa = 0;
     }
 
     private void InicjalizujSurowce()
@@ -94,6 +96,16 @@ public class Gracz
         Efekty.Add(efekt);
     }
 
+    public void UsunEfekt(Efekt efekt)
+    {
+        Efekty.Remove(efekt);
+    }
+
+    public void DodajPunktyZwyciestwa(int punkty)
+    {
+        PunktyZwyciestwa += punkty;
+    }
+
     public List<Efekt> PobierzEfekty()
     {
         return Efekty;
@@ -117,6 +129,12 @@ public class Gracz
             {
                 if (bialySymbol == karta.DarmowaBudowa)
                 {
+                    // TODO: Uwzglêdniæ efekt kiedy gracz dostaje monety za budowê karty z bia³ym symbolem
+                    var efektMonetyZaBudoweZBialymSymbolem = Efekty.FirstOrDefault(e => e.TypEfektu == TypEfektu.MonetyZaBudoweZBialymSymbolem);
+                    if (efektMonetyZaBudoweZBialymSymbolem != null)
+                    {
+                        this.DodajMonety(efektMonetyZaBudoweZBialymSymbolem.Wartosc);
+                    }
                     karta.OznaczJakoZagrana();
                     ZbudowaneKarty.Add(karta);
                     foreach (var efekt in karta.Efekty)
