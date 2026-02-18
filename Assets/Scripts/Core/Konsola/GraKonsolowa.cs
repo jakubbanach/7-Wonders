@@ -9,14 +9,14 @@ public class GraKonsolowa
     //private readonly PlanszaFactory _planszaFactory = new();
     private readonly IWyborKarty _wyborKarty = new WyborKartKonsola();
     private Gracz[] gracze;
-    private PlanszaKonfliktu plansza;
+    private PlanszaKonfliktu planszaKonfliktu;
     private PlanszaEpoki planszaEpoki;
     private Gracz aktywnyGracz;
     private Gracz przeciwnik => gracze.First(g => g != aktywnyGracz);
 
     public GraKonsolowa()
     {
-        plansza = InicjalizacjaPlanszy();
+        planszaKonfliktu = InicjalizacjaPlanszy();
         gracze = InicjalizacjaGraczy();
         planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaI);
         aktywnyGracz = gracze[0];
@@ -47,9 +47,9 @@ public class GraKonsolowa
         // Przydzielanie kart cudów do graczy -> hardkodowane dla testów
         PrzydzielanieKartCudow();
 
-        Console.WriteLine($"Pion konfliktu na pozycji: {plansza.PionKonfliktu.PobierzPozycje()}");
-        Console.WriteLine($"Zetony postepu: {string.Join(", ", plansza.ZetonyPostepu.Select(z => z.Nazwa))}");
-        Console.WriteLine($"Strefy: {string.Join(", ", plansza.Strefy.Select(s => s.Nazwa))}");
+        Console.WriteLine($"Pion konfliktu na pozycji: {planszaKonfliktu.PionKonfliktu.PobierzPozycje()}");
+        Console.WriteLine($"Zetony postepu: {string.Join(", ", planszaKonfliktu.ZetonyPostepu.Select(z => z.Nazwa))}");
+        Console.WriteLine($"Strefy: {string.Join(", ", planszaKonfliktu.Strefy.Select(s => s.Nazwa))}");
 
         Console.WriteLine($"Karty Gracza 1: {gracz1.WypiszKartyCudu()}");
         Console.WriteLine($"Karty Gracza 2: {gracz2.WypiszKartyCudu()}");
@@ -58,13 +58,13 @@ public class GraKonsolowa
 
         Gracz aktywnyGracz = gracz1;
 
-        Console.WriteLine("Plansza Epoki I:");
+        //Console.WriteLine("Plansza Epoki I:");
 
-        ZbiorPlanszEpok.WypiszPlansze(planszaEpoki);
-        Console.WriteLine("Naciœnij dowolny klawisz, aby rozpocz¹æ grê...");
-        Console.ReadKey();
-        RozegrajEpoke(planszaEpoki);
-        Console.WriteLine("Koniec epoki!");
+        //ZbiorPlanszEpok.WypiszPlansze(planszaEpoki);
+        //Console.WriteLine("Naciœnij dowolny klawisz, aby rozpocz¹æ grê...");
+        //Console.ReadKey();
+        //RozegrajEpoke(planszaEpoki);
+        //Console.WriteLine("Koniec epoki!");
 
         planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaII);
         Console.WriteLine("Plansza Epoki II:");
@@ -160,7 +160,7 @@ public class GraKonsolowa
         TypRuchu typRuchu = WybierzRuch(karta);
 
         Ruch ruch = new Ruch(aktywnyGracz, przeciwnik, karta, typRuchu);
-        ruch.Wykonaj();
+        ruch.Wykonaj(planszaKonfliktu);
     }
 
     void RozegrajEpoke(PlanszaEpoki planszaEpoki)
@@ -168,7 +168,7 @@ public class GraKonsolowa
         while (planszaEpoki.DostepneKarty.Any())
         {
             Console.Clear();
-            var wypisanaPlansza = WypiszPlansze(planszaEpoki, gracze, plansza);
+            var wypisanaPlansza = WypiszPlansze(planszaEpoki, gracze, planszaKonfliktu);
             Console.WriteLine(wypisanaPlansza);
             Console.WriteLine($"Ruch gracza: {aktywnyGracz.Nazwa}");
 

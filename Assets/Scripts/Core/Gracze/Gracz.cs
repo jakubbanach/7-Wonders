@@ -98,7 +98,7 @@ public class Gracz
         return KartyCudow.Where(k => k.CzyZagrana).ToList();
     }
 
-    public void ZbudujKarte(Karta karta, Gracz przeciwnik)
+    public void ZbudujKarte(Karta karta, Gracz przeciwnik, PlanszaKonfliktu planszaKonfliktu=null)
     {
         if (karta.CzyZagrana)
             throw new InvalidOperationException("Ta karta zosta³a ju¿ zagrana.");
@@ -118,7 +118,7 @@ public class Gracz
 
         foreach (var efekt in karta.Efekty)
         {
-            efekt.ZastosujEfekt(this);
+            efekt.ZastosujEfekt(this, planszaKonfliktu);
         }
     }
 
@@ -139,7 +139,7 @@ public class Gracz
         DodajMonety(monety);
     }
 
-    public void ZbudujCud(Karta karta, Gracz przeciwnik, KartaCudu kartaCudu)
+    public void ZbudujCud(Karta karta, Gracz przeciwnik, KartaCudu kartaCudu, PlanszaKonfliktu planszaKonfliktu=null)
     {
         if (kartaCudu.CzyZagrana)
             throw new InvalidOperationException("Cud ju¿ zbudowany.");
@@ -157,7 +157,7 @@ public class Gracz
 
         foreach (var efekt in kartaCudu.Efekty)
         {
-            efekt.ZastosujEfekt(this);
+            efekt.ZastosujEfekt(this, planszaKonfliktu);
         }
     }
 
@@ -184,11 +184,17 @@ public class Gracz
             .Concat(PobierzZbudowaneKartyCudow().
                 Select(k => k.WypiszEfekty(poZagraniu: true)))
             .Where(e => e != "Brak efektów"));
+
+        var bialeSymboleOpis = BialeSymbole.Count > 0 ? 
+            $"{string.Join(", ", BialeSymbole)}" 
+            : "";
+
         return $"Gracz: {Nazwa}\n" +
             $"Karty Cudów: \n\t{kartyCuduOpis}\n" +
             $"Surowce: {surowceOpis}\n" +
             $"Zbudowane Karty: {kartyOpis}\n" +
             $"Zbudowane Cuda: {zbudowaneKartyCuduOpis}\n" +
-            $"Efekty: {efektyOpis}";
+            $"Efekty: {efektyOpis}\n" +
+            $"Bia³e Symbole: {bialeSymboleOpis}";
     }
 }

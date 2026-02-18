@@ -73,16 +73,18 @@ public class Karta
     public string WypiszKoszt()
     {
         if (Koszt == null || Koszt.Count == 0)
-        {
             return "0";
-        }
-        List<string> kosztList = new List<string>();
-        foreach (var surowiec in Koszt)
-        {
-            kosztList.Add($"{surowiec.Value}x{surowiec.Key}");
-        }
-        return string.Join(" + ", kosztList);
+
+        var kosztList = Koszt.Select(s => $"{s.Value}x{s.Key}").ToList();
+
+        string kosztString = string.Join(" + ", kosztList);
+
+        if (!string.IsNullOrEmpty(DarmowaBudowa))
+            kosztString += $" (Darmowa budowa: {DarmowaBudowa})";
+
+        return kosztString;
     }
+
     public string WypiszEfekty(bool poZagraniu = false)
     {
         if (Efekty == null || Efekty.Count == 0)
