@@ -148,9 +148,6 @@ public class TestyKartEpok
         koszt = kartaEpoki.ObliczKoszt(przeciwnik, gracz);
         Assert.Equal(12, koszt);
     }
-
-
-
     [Fact]
     public void Test_BrakMozliwosciZakupu_PrzeciwnikMaSurowce()
     {

@@ -24,5 +24,4 @@ public enum TypEfektu
     MonetyZaBudoweZBialymSymbolem, // za ka¿d¹ budowê 4 monety
     MonetyPrzeciwnikaZaMaterialy, // przeciwnik p³aci wszystkie monety za surowce do gracza zamiast do banku
     ZaBudoweCuduRozegrajTurePonownie // po zagraniu karty cudu gracz rozgrywa turê ponownie
-
 }

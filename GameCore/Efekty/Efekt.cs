@@ -23,10 +23,8 @@ public class Efekt
         return $"Efekt: {TypEfektu}, Surowce: {string.Join(", ", Surowce)}, Wartoœæ: {Wartosc}, Tekst: {Tekst}";
     }
 
-    public void ZastosujEfekt(Gracz gracz, PlanszaKonfliktu planszaKonfliktu = null)
+    public void ZastosujEfekt(Gracz gracz, Gracz? przeciwnik = null, PlanszaKonfliktu? planszaKonfliktu = null)
     {
-        // Implementacja zastosowania efektu na graczu
-        // Ta metoda mo¿e byæ rozszerzona w zale¿noœci od typu efektu
         switch (TypEfektu)
         {
             case TypEfektu.Surowiec:
@@ -36,7 +34,7 @@ public class Efekt
                 }
                 break;
             case TypEfektu.WyborSurowca:
-                // brak efektu natychmiastowego, do implementacji w mechanice tury
+                // brak efektu natychmiastowego, implementacja w funkcji ObliczKoszt
                 break;
             case TypEfektu.PunktyZwyciestwa: // -> do Punktacji Koncowej
                 gracz.DodajPunktyZwyciestwa(Wartosc);
@@ -50,7 +48,9 @@ public class Efekt
                     planszaKonfliktu.PrzesunPion(Wartosc, gracz);
                 }
                 break;
-            //case TypEfektu.ZmianaCenySurowca: -> do implementacji zmiany ceny surowca
+            case TypEfektu.ZmianaCenySurowca:
+                // brak efektu natychmiastowego, implementacja w funkcji ObliczKoszt
+                break;
             case TypEfektu.BialySymbol:
                 gracz.BialeSymbole.Add(Tekst);
                 break;
@@ -60,27 +60,34 @@ public class Efekt
             case TypEfektu.MonetyZaKarty:
                 if (Tekst == "Cuda")
                 {
-                    var liczbaKart = gracz.KartyCudow.Count;
-                    // dodaj warunek zbudowania karty cudu
-                    // do dodania karty cudu przeciwnika
-                    gracz.DodajMonety(Wartosc * liczbaKart);
+                    var liczbaKartGracza = gracz.KartyCudow.Count;
+                    var liczbaKartPrzeciwnika = przeciwnik != null ? przeciwnik.KartyCudow.Count : 0;
+                    
+                    gracz.DodajMonety(Wartosc * (liczbaKartGracza>liczbaKartPrzeciwnika ? liczbaKartGracza : liczbaKartPrzeciwnika));
+                }
+                else if (Tekst == "Br¹zowy i Szary")
+                {
+                    var liczbaKartGracza = gracz.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Br¹zowy || k.KolorKarty == KolorKarty.Szary);
+                    var liczbaKartPrzeciwnika = przeciwnik != null ? przeciwnik.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Br¹zowy || k.KolorKarty == KolorKarty.Szary) : 0;
+                    gracz.DodajMonety(Wartosc * (liczbaKartGracza > liczbaKartPrzeciwnika ? liczbaKartGracza : liczbaKartPrzeciwnika));
                 }
                 else
                 {
-                    var liczbaKart = gracz.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst);
-                    gracz.DodajMonety(Wartosc * liczbaKart);
+                    var liczbaKartGracza = gracz.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst);
+                    var liczbaKartPrzeciwnika = przeciwnik != null ? przeciwnik.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst) : 0;
+                    gracz.DodajMonety(Wartosc * (liczbaKartGracza > liczbaKartPrzeciwnika ? liczbaKartGracza : liczbaKartPrzeciwnika));
                 }
                 break;
             //case TypEfektu.PunktyZaKarty: -> do Punktacji Koncowej
-            //case TypEfektu.RozegrajTurePonownie: -> do implementacji w mechanice tury
-            case TypEfektu.PrzeciwnikOdkladaMonety:
+            //case TypEfektu.DarmowaBudowlaZOdrzuconychKart: -> do implementacji w mechanice tury
+            case TypEfektu.Wylosuj3ZetonyPostepu:
                 // do implementacji w mechanice tury
                 break;
-            //case TypEfektu.DarmowaBudowlaZOdrzuconychKart: -> do implementacji w mechanice tury
             case TypEfektu.OdlozKartePrzeciwnika:
                 // do implementacji w mechanice tury
                 break;
-            case TypEfektu.Wylosuj3ZetonyPostepu:
+            //case TypEfektu.RozegrajTurePonownie: -> do implementacji w mechanice tury
+            case TypEfektu.PrzeciwnikOdkladaMonety:
                 // do implementacji w mechanice tury
                 break;
             case TypEfektu.WybierzZetonPostepu:

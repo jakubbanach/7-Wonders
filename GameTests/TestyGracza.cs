@@ -44,15 +44,15 @@ public class TestyGracza
         Assert.Equal(3, gracz.Surowce[Surowiec.Drewno]);
     }
 
-    //[Fact]
-    //public void ZbudujKarte_Dla_Gracza()
-    //{
-    //    var gracz = new Gracz("TestowyGracz");
-    //    var przeciwnik = new Gracz("Przeciwnik");
-    //    var karta = ZbiorKart.TaliaEpokiI.First();
-    //    gracz.ZbudujKarte(karta, przeciwnik);
-    //    Assert.Contains(karta, gracz.ZbudowaneKarty);
-    //}
+    [Fact]
+    public void ZbudujKarte_Dla_Gracza()
+    {
+        var gracz = new Gracz("TestowyGracz");
+        var przeciwnik = new Gracz("Przeciwnik");
+        var karta = ZbiorKart.TaliaEpokiI.First();
+        gracz.ZbudujKarte(karta, przeciwnik);
+        Assert.Contains(karta, gracz.ZbudowaneKarty);
+    }
     [Fact]
     public void DodajKarteCudu_Dla_Gracza()
     {
@@ -89,54 +89,55 @@ public class TestyGracza
         Assert.Contains(TypEfektu.SymbolNaukowy, gracz.PobierzEfekty().Select(e => e.TypEfektu));
         Assert.Contains(TypEfektu.PunktyZwyciestwa, gracz.PobierzEfekty().Select(e => e.TypEfektu));
     }
-    //[Fact]
-    //public void ZbudujKarteCudu_Brak_Niektorych_Surowcow()
-    //{
-    //    var gracz = new Gracz("TestowyGracz");
-    //    var przeciwnik = new Gracz("Przeciwnik");
-    //    // karta cudu to ta z nazwą "Piramida Cheopsa"
-    //    var karta = ZbiorKart.TaliaEpokiI.First();
-    //    var kartaCudu = ZbiorKart.TaliaKartyCudow.
-    //        First(k => k.Nazwa == "Piramida Cheopsa");
-    //    gracz.DodajKarteCudu(kartaCudu);
-    //    gracz.DodajSurowiec(Surowiec.Drewno, 2);
-    //    gracz.DodajSurowiec(Surowiec.Papirus, 1);
-    //    _output.WriteLine("Koszt karty:");
-    //    _output.WriteLine(kartaCudu.WypiszKoszt());
+    [Fact]
+    public void ZbudujKarteCudu_Brak_Niektorych_Surowcow()
+    {
+        var gracz = new Gracz("TestowyGracz");
+        var przeciwnik = new Gracz("Przeciwnik");
+        // karta cudu to ta z nazwą "Piramida Cheopsa"
+        var karta = ZbiorKart.TaliaEpokiI.First();
+        var kartaCudu = ZbiorKart.TaliaKartyCudow.
+            First(k => k.Nazwa == "Piramida Cheopsa");
+        gracz.DodajKarteCudu(kartaCudu);
+        gracz.DodajSurowiec(Surowiec.Drewno, 2);
+        gracz.DodajSurowiec(Surowiec.Papirus, 1);
+        _output.WriteLine("Koszt karty:");
+        _output.WriteLine(kartaCudu.WypiszKoszt());
 
-    //    _output.WriteLine("Surowce gracza:");
-    //    _output.WriteLine(
-    //        string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
-    //    );
-    //    gracz.ZbudujCud(karta, przeciwnik, kartaCudu);
-    //    _output.WriteLine("Surowce gracza:");
-    //    _output.WriteLine(
-    //        string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
-    //    );
-    //    Assert.True(kartaCudu.CzyZagrana);
-    //}
-    //[Fact]
-    //public void ZbudujKarteCudu_Nie_Mozna_Kupic_Karty()
-    //{
-    //    var gracz = new Gracz("TestowyGracz");
-    //    var przeciwnik = new Gracz("Przeciwnik");
-    //    // karta cudu to ta z nazwą "Piramida Cheopsa"
-    //    var karta = ZbiorKart.TaliaEpokiI.First();
-    //    var kartaCudu = ZbiorKart.TaliaKartyCudow.
-    //        First(k => k.Nazwa == "Piramida Cheopsa");
-    //    _output.WriteLine("Koszt karty:");
-    //    _output.WriteLine(kartaCudu.WypiszKoszt());
+        _output.WriteLine("Surowce gracza:");
+        _output.WriteLine(
+            string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
+        );
+        gracz.ZbudujCud(karta, przeciwnik, kartaCudu);
+        _output.WriteLine("Surowce gracza:");
+        _output.WriteLine(
+            string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
+        );
+        Assert.True(kartaCudu.CzyZagrana);
+    }
+    [Fact]
+    public void ZbudujKarteCudu_Nie_Mozna_Kupic_Karty()
+    {
+        var gracz = new Gracz("TestowyGracz");
+        var przeciwnik = new Gracz("Przeciwnik");
+        // karta cudu to ta z nazwą "Piramida Cheopsa"
+        var karta = ZbiorKart.TaliaEpokiI.First();
+        var kartaCudu = ZbiorKart.TaliaKartyCudow.
+            First(k => k.Nazwa == "Piramida Cheopsa");
+        _output.WriteLine("Koszt karty:");
+        _output.WriteLine(kartaCudu.WypiszKoszt());
 
-    //    _output.WriteLine("Surowce gracza:");
-    //    _output.WriteLine(
-    //        string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
-    //    );
-    //    gracz.DodajKarteCudu(kartaCudu);
-    //    gracz.ZbudujCud(karta, przeciwnik, kartaCudu);
-    //    _output.WriteLine("Surowce gracza:");
-    //    _output.WriteLine(
-    //        string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
-    //    );
-    //    Assert.False(kartaCudu.CzyZagrana);
-    //}
+        _output.WriteLine("Surowce gracza:");
+        _output.WriteLine(
+            string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
+        );
+        gracz.DodajKarteCudu(kartaCudu);
+        var ex = Assert.Throws<InvalidOperationException>(() => gracz.ZbudujCud(karta, przeciwnik, kartaCudu));
+        Assert.Equal("Nie można zbudować cudu.", ex.Message);
+        
+        _output.WriteLine("Surowce gracza:");
+        _output.WriteLine(
+            string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
+        );
+    }
 }

@@ -172,7 +172,50 @@ public class TestyEfektowNaGraczu
         Assert.Equal(3, koszt); // drewno jest darmowe, więc płacimy tylko za drewno i szkło
     }
 
+    [Fact]
+    public void Efekt_MonetyPrzeciwnikaZaMaterialy()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
 
+        var efekt = new Efekt(TypEfektu.MonetyPrzeciwnikaZaMaterialy);
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Łaźnie"); // koszt: 1 kamien
+        _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(2, koszt);
+
+        gracz.DodajEfekt(efekt);
+
+        przeciwnik.ZbudujKarte(karta, gracz);
+        _output.WriteLine($"Monety przeciwnika po zbudowaniu karty: {przeciwnik.WypiszLiczbeSurowca(Surowiec.Monety)}");
+        Assert.Equal(7 - 2, przeciwnik.WypiszLiczbeSurowca(Surowiec.Monety)); // Przeciwnik traci monety za surowce;
+        Assert.Equal(7 + 2, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Gracz dostaje monety przeciwnika za surowce;
+    }
+    [Fact]
+    public void Efekt_MonetyPrzeciwnikaZaMaterialy_Monety()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(TypEfektu.MonetyPrzeciwnikaZaMaterialy);
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Karawanseraj"); // koszt: 2 monety, 1 szkło, 1 papirus
+        _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(6, koszt);
+
+        gracz.DodajEfekt(efekt);
+
+        przeciwnik.ZbudujKarte(karta, gracz);
+        _output.WriteLine($"Monety przeciwnika po zbudowaniu karty: {przeciwnik.WypiszLiczbeSurowca(Surowiec.Monety)}");
+        Assert.Equal(7 - 6, przeciwnik.WypiszLiczbeSurowca(Surowiec.Monety)); // Przeciwnik traci monety za surowce;
+        Assert.Equal(7 + 4, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Gracz dostaje monety przeciwnika za surowce;
+    }
 
     [Fact]
     public void Efekt_PunktyZwyciestwa()
@@ -200,6 +243,7 @@ public class TestyEfektowNaGraczu
     public void Efekt_PunktyMilitarne()
     {
         Gracz gracz = new Gracz("GraczA");
+        Gracz przeciwnik = new Gracz("GraczB");
         var pionKonfliktu = new PionKonfliktu(0);
         var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
@@ -210,7 +254,7 @@ public class TestyEfektowNaGraczu
             TypEfektu.PunktyMilitarne,
             wartość: 2
         );
-        efekt.ZastosujEfekt(gracz, plansza);
+        efekt.ZastosujEfekt(gracz, przeciwnik, plansza);
         Assert.Equal(2, plansza.PionKonfliktu.PobierzPozycje());
     }
     [Fact]
@@ -235,46 +279,135 @@ public class TestyEfektowNaGraczu
         efekt.ZastosujEfekt(gracz);
         Assert.Contains(SymbolNaukowy.Koło, gracz.symboleNaukowe);
     }
-    //[Fact]
-    //public void Efekt_MonetyZaKarty_Cuda()
-    //{
-    //    Gracz gracz = new Gracz("TestowyGracz");
-    //    Gracz przeciwnik = new Gracz("Przeciwnik");
-    //    var kartaCudu = ZbiorKart.TaliaKartyCudow.First();
-    //    gracz.DodajKarteCudu(kartaCudu);
-    //    _output.WriteLine($"Testowana karta cudu: {kartaCudu.Nazwa}");
+    [Fact]
+    public void Efekt_MonetyZaKarty_Cuda()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+        var kartaCudu = ZbiorKart.TaliaKartyCudow.First();
+        gracz.DodajKarteCudu(kartaCudu);
+        _output.WriteLine($"Testowana karta cudu: {kartaCudu.Nazwa}");
 
-    //    // nazwa karty z efektem za cuda to "Arena"
-    //    var talia = ZbiorKart.TaliaEpokiIII;
-    //    var kartaZEfektem = talia.First(k => k.Nazwa == "Arena");
-        
-    //    _output.WriteLine($"Testowana karta: {kartaZEfektem.Nazwa}");
-    //    gracz.ZbudujKarte(kartaZEfektem, przeciwnik);
+        var efekt = new Efekt(
+            TypEfektu.MonetyZaKarty, 
+            tekst: "Cuda", 
+            wartość: 2
+        );
+        efekt.ZastosujEfekt(gracz, przeciwnik);
 
-    //    Assert.Equal(7 + 2, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe 7 + 2 monety za każdą z 2 kart cudu
-    //}
-    //[Fact]
-    //public void Efekt_MonetyZaKarty_Kolor()
-    //{
-    //    Gracz gracz = new Gracz("TestowyGracz");
-    //    Gracz przeciwnik = new Gracz("Przeciwnik");
-    //    var talia = ZbiorKart.TaliaEpokiII;
+        Assert.Equal(7 + 2, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe 7 + 2 monety za każdą z kart cudu
+    }
+    [Fact]
+    public void Efekt_MonetyZaKarty_Cuda_PrzeciwnikMaWiecejKart()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+        var kartaCudu = ZbiorKart.TaliaKartyCudow.First();
+        var drugaKartaCudu = ZbiorKart.TaliaKartyCudow.Skip(1).First();
+        var trzeciaKartaCudu = ZbiorKart.TaliaKartyCudow.Skip(2).First();
+        gracz.DodajKarteCudu(kartaCudu);
+        _output.WriteLine($"Testowana karta cudu: {kartaCudu.Nazwa}");
 
-    //    var zolteKarty = talia.Where(k => k.KolorKarty == KolorKarty.Żółty).Take(3).ToList();
-    //    foreach (var karta in zolteKarty)
-    //    {
-    //        gracz.ZbudujKarte(karta, przeciwnik);
-    //        _output.WriteLine($"Zbudowana karta: {karta.Nazwa} (Kolor: {karta.KolorKarty})");
-    //    }
+        przeciwnik.DodajKarteCudu(drugaKartaCudu);
+        przeciwnik.DodajKarteCudu(trzeciaKartaCudu);
 
-    //    var kartaZEfektem = ZbiorKart.TaliaEpokiIII.First(k => k.Nazwa == "Latarnia Morska");
-    //    _output.WriteLine($"Testowana karta: {kartaZEfektem.Nazwa} (Kolor: {kartaZEfektem.KolorKarty})");
+        var efekt = new Efekt(
+            TypEfektu.MonetyZaKarty, 
+            tekst: "Cuda", 
+            wartość: 2
+        );
+        efekt.ZastosujEfekt(gracz, przeciwnik);
 
-    //    var monetyPrzed = gracz.WypiszLiczbeSurowca(Surowiec.Monety);
-    //    gracz.ZbudujKarte(kartaZEfektem, przeciwnik);
+        Assert.Equal(7 + 4, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe 7 + 2 monety za każdą z 2 kart cudu przeciwnika
+    }
+    [Fact]
+    public void Efekt_MonetyZaKarty_Kolor()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+        var talia = ZbiorKart.TaliaEpokiII;
 
-    //    Assert.Equal(3, zolteKarty.Count);
-    //    Assert.Equal(4, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Żółty));
-    //    Assert.Equal(monetyPrzed + 4, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 4 monety za każdą z 4 żółtych kart
-    //}
+        var zolteKarty = talia.Where(k => k.KolorKarty == KolorKarty.Żółty).Take(3).ToList();
+        gracz.DodajMonety(10); // Dodajemy trochę monet, żeby gracz mógł zbudować karty
+        foreach (var karta in zolteKarty)
+        {
+            gracz.ZbudujKarte(karta, przeciwnik);
+            _output.WriteLine($"Zbudowana karta: {karta.Nazwa} (Kolor: {karta.KolorKarty})");
+        }
+
+        var efekt = new Efekt(
+            TypEfektu.MonetyZaKarty, 
+            tekst: "Żółty", 
+            wartość: 1
+        );
+
+        var monetyPrzed = gracz.WypiszLiczbeSurowca(Surowiec.Monety);
+        efekt.ZastosujEfekt(gracz, przeciwnik);
+
+        Assert.Equal(3, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Żółty));
+        Assert.Equal(monetyPrzed + 3, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 3 monety za każdą z 3 żółtych kart
+    }
+    [Fact]
+    public void Efekt_MonetyZaKarty_Kolor_PrzeciwnikMaWiecejKart()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var zieloneKarty = ZbiorKart.TaliaEpokiI.Where(k => k.KolorKarty == KolorKarty.Zielony).Take(3).ToList();
+        var zieloneKartyPrzeciwnika = ZbiorKart.TaliaEpokiII.Where(k => k.KolorKarty == KolorKarty.Zielony).Take(4).ToList();
+        gracz.DodajMonety(10); // Dodajemy trochę monet, żeby gracz mógł zbudować karty
+        przeciwnik.DodajMonety(20); // Dodajemy trochę monet, żeby przeciwnik mógł zbudować karty
+        foreach (var karta in zieloneKarty)
+        {
+            gracz.ZbudujKarte(karta, przeciwnik);
+            _output.WriteLine($"Zbudowana karta: {karta.Nazwa} (Kolor: {karta.KolorKarty})");
+        }
+        foreach (var karta in zieloneKartyPrzeciwnika)
+        {
+            przeciwnik.ZbudujKarte(karta, gracz);
+            _output.WriteLine($"Zbudowana karta przeciwnika: {karta.Nazwa} (Kolor: {karta.KolorKarty})");
+        }
+
+        var efekt = new Efekt(
+            TypEfektu.MonetyZaKarty, 
+            tekst: "Zielony", 
+            wartość: 1
+        );
+
+        var monetyPrzed = gracz.WypiszLiczbeSurowca(Surowiec.Monety);
+        efekt.ZastosujEfekt(gracz, przeciwnik);
+
+        Assert.Equal(3, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Zielony));
+        Assert.Equal(4, przeciwnik.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Zielony));
+        Assert.Equal(monetyPrzed + 4, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 4 monety za każdą z 4 zielonych kart przeciwnika
+    }
+    [Fact]
+    public void Efekt_MonetyZaKarty_KolorBrazowyISzary()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+        var talia = ZbiorKart.TaliaEpokiII;
+
+        var karty = talia.Where(k => k.KolorKarty == KolorKarty.Brązowy).Take(3).ToList().Concat
+            (talia.Where(k => k.KolorKarty == KolorKarty.Szary).Take(2)).ToList();
+        gracz.DodajMonety(10); // Dodajemy trochę monet, żeby gracz mógł zbudować karty
+        foreach (var karta in karty)
+        {
+            gracz.ZbudujKarte(karta, przeciwnik);
+            _output.WriteLine($"Zbudowana karta: {karta.Nazwa} (Kolor: {karta.KolorKarty})");
+        }
+
+        var efekt = new Efekt(
+            TypEfektu.MonetyZaKarty,
+            tekst: "Brązowy i Szary",
+            wartość: 1
+        );
+
+        var monetyPrzed = gracz.WypiszLiczbeSurowca(Surowiec.Monety);
+        efekt.ZastosujEfekt(gracz, przeciwnik);
+
+        Assert.Equal(3, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Brązowy));
+        Assert.Equal(2, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Szary));
+        Assert.Equal(monetyPrzed + 5, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 5 monety za każdą z kart brązowych i szarych
+    }
 }

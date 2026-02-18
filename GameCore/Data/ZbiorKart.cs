@@ -319,7 +319,7 @@ public static class ZbiorKart
                 KolorKarty.Szary
             ),
             new(
-                "Karawanaseraj",
+                "Karawanseraj",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
@@ -572,15 +572,13 @@ public static class ZbiorKart
                 KolorKarty.Fioletowy
             ),
             new(
-                "Cech Amatorów",
+                "Cech Armatorów",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Brązowy", wartość: 1),
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Szary", wartość: 1),
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Brązowy", wartość: 1),
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Szary", wartość: 1)
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Brązowy i Szary", wartość: 1),
+                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Brązowy i Szary", wartość: 1),
                 },
                 KolorKarty.Fioletowy
             ),

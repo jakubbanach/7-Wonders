@@ -139,7 +139,7 @@ public class Gracz
                     ZbudowaneKarty.Add(karta);
                     foreach (var efekt in karta.Efekty)
                     {
-                        efekt.ZastosujEfekt(this, planszaKonfliktu);
+                        efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu);
                     }
                     return;
                 }
@@ -154,13 +154,18 @@ public class Gracz
             throw new InvalidOperationException("Nie mo¿na zbudowaæ tej karty.");
 
         DodajMonety(-koszt);
+        if (przeciwnik.Efekty.Any(e => e.TypEfektu == TypEfektu.MonetyPrzeciwnikaZaMaterialy))
+        {
+            var kosztSurowcaMonety = karta.Koszt.TryGetValue(Surowiec.Monety, out var kosztMonet) ? kosztMonet : 0;
+            przeciwnik.DodajMonety(koszt - kosztSurowcaMonety);
+        }
         karta.OznaczJakoZagrana();
 
         ZbudowaneKarty.Add(karta);
 
         foreach (var efekt in karta.Efekty)
         {
-            efekt.ZastosujEfekt(this, planszaKonfliktu);
+            efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu);
             DodajEfekt(efekt);
         }
     }
@@ -200,7 +205,7 @@ public class Gracz
 
         foreach (var efekt in kartaCudu.Efekty)
         {
-            efekt.ZastosujEfekt(this, planszaKonfliktu);
+            efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu);
             DodajEfekt(efekt);
         }
     }
