@@ -49,7 +49,9 @@ public class TestyGracza
     {
         var gracz = new Gracz("TestowyGracz");
         var przeciwnik = new Gracz("Przeciwnik");
-        var karta = ZbiorKart.TaliaEpokiI.First();
+        var karta = ZbiorKart.TaliaEpokiI.Where(k => k.Nazwa == "Składowisko Kamienia").First();
+        karta.OznaczJakoNiezagrana();
+        _output.WriteLine("Koszt karty: " + karta.WypiszKoszt());
         gracz.ZbudujKarte(karta, przeciwnik);
         Assert.Contains(karta, gracz.ZbudowaneKarty);
     }
@@ -63,6 +65,7 @@ public class TestyGracza
         _output.WriteLine(gracz.WypiszKartyCudu());
         Assert.Equal("Piramida Cheopsa", gracz.WypiszKartyCudu());
         gracz.DodajKarteCudu(ZbiorKart.TaliaKartyCudow.Skip(1).First());
+        _output.WriteLine(gracz.WypiszKartyCudu());
         Assert.Equal("Piramida Cheopsa, Wiszące Ogrody Semiramidy", gracz.WypiszKartyCudu());
     }
     [Fact]
@@ -74,9 +77,12 @@ public class TestyGracza
         var karta = ZbiorKart.TaliaEpokiI.First();
         var kartaCudu = ZbiorKart.TaliaKartyCudow.
             First(k => k.Nazwa == "Piramida Cheopsa");
+        karta.OznaczJakoNiezagrana();
+        kartaCudu.OznaczJakoNiezagrana();
         gracz.DodajKarteCudu(kartaCudu);
         gracz.DodajSurowiec(Surowiec.Drewno, 3);
         gracz.DodajSurowiec(Surowiec.Papirus, 1);
+        _output.WriteLine("Koszt karty: " + kartaCudu.WypiszKoszt());
         gracz.ZbudujCud(karta, przeciwnik, kartaCudu);
         Assert.True(kartaCudu.CzyZagrana);
     }
@@ -96,23 +102,21 @@ public class TestyGracza
         var przeciwnik = new Gracz("Przeciwnik");
         // karta cudu to ta z nazwą "Piramida Cheopsa"
         var karta = ZbiorKart.TaliaEpokiI.First();
+        karta.OznaczJakoNiezagrana();
         var kartaCudu = ZbiorKart.TaliaKartyCudow.
             First(k => k.Nazwa == "Piramida Cheopsa");
+        kartaCudu.OznaczJakoNiezagrana();
+
         gracz.DodajKarteCudu(kartaCudu);
         gracz.DodajSurowiec(Surowiec.Drewno, 2);
         gracz.DodajSurowiec(Surowiec.Papirus, 1);
-        _output.WriteLine("Koszt karty:");
-        _output.WriteLine(kartaCudu.WypiszKoszt());
+        
+        _output.WriteLine("Koszt karty: " + kartaCudu.WypiszKoszt());
 
-        _output.WriteLine("Surowce gracza:");
-        _output.WriteLine(
-            string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
-        );
+        _output.WriteLine("Surowce gracza: " + string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}")));
+        
         gracz.ZbudujCud(karta, przeciwnik, kartaCudu);
-        _output.WriteLine("Surowce gracza:");
-        _output.WriteLine(
-            string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}"))
-        );
+        _output.WriteLine("Surowce gracza po zbudowaniu: " + string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}")));
         Assert.True(kartaCudu.CzyZagrana);
     }
     [Fact]
@@ -124,6 +128,8 @@ public class TestyGracza
         var karta = ZbiorKart.TaliaEpokiI.First();
         var kartaCudu = ZbiorKart.TaliaKartyCudow.
             First(k => k.Nazwa == "Piramida Cheopsa");
+        kartaCudu.OznaczJakoNiezagrana();
+
         _output.WriteLine("Koszt karty:");
         _output.WriteLine(kartaCudu.WypiszKoszt());
 

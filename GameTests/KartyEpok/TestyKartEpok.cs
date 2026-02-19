@@ -56,9 +56,10 @@ public class TestyKartEpok
         var kartaEpoki = ZbiorKart.TaliaEpokiIII.First(k => k.Nazwa == "Latarnia Morska");
         // Symulacja darmowej budowy karty z bia³ym symbolem
         var gracz = new Gracz("TestowyGracz");
+        var przeciwnik = new Gracz("Przeciwnik");
         gracz.BialeSymbole.Add("Wazon");
         gracz.DodajMonety(-7); // Usuniêcie monet, aby karta by³a darmowa
-        gracz.ZbudujKarte(kartaEpoki, null);
+        gracz.ZbudujKarte(kartaEpoki, przeciwnik);
         _output.WriteLine($"Karta: {kartaEpoki.Nazwa}, Koszt: {string.Join(", ", kartaEpoki.Koszt.Select(k => $"{k.Key}: {k.Value}"))}");
         _output.WriteLine($"Czy karta ma bialy symbol jako zakup? {kartaEpoki.DarmowaBudowa}");
         _output.WriteLine($"Bia³y symbol gracza: {string.Join(", ", gracz.BialeSymbole)}");

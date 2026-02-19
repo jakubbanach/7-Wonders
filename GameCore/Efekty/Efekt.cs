@@ -23,7 +23,7 @@ public class Efekt
         return $"Efekt: {TypEfektu}, Surowce: {string.Join(", ", Surowce)}, Wartoœæ: {Wartosc}, Tekst: {Tekst}";
     }
 
-    public void ZastosujEfekt(Gracz gracz, Gracz? przeciwnik = null, PlanszaKonfliktu? planszaKonfliktu = null)
+    public void ZastosujEfekt(Gracz gracz, Gracz? przeciwnik = null, PlanszaKonfliktu? planszaKonfliktu = null, Karta? karta = null)
     {
         switch (TypEfektu)
         {
@@ -45,7 +45,13 @@ public class Efekt
             case TypEfektu.PunktyMilitarne:
                 if (planszaKonfliktu != null)
                 {
-                    planszaKonfliktu.PrzesunPion(Wartosc, gracz);
+                    int wartoscDoDodania = Wartosc;
+                    if (karta != null && karta.KolorKarty == KolorKarty.Czerwony && 
+                        gracz.Efekty.Any(e => e.TypEfektu == TypEfektu.DodatkoweMilitariaZaCzerwoneKarty))
+                    {
+                        wartoscDoDodania += 1; // Dodaj 1 punkt militarny za ka¿d¹ czerwon¹ kartê
+                    }
+                    planszaKonfliktu.PrzesunPion(wartoscDoDodania, gracz);
                 }
                 break;
             case TypEfektu.ZmianaCenySurowca:

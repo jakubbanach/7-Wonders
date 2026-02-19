@@ -104,6 +104,68 @@ public class TestyEfektowNaGraczu
         _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
         Assert.Equal(4, koszt); // drewno teraz jest darmowe (więc płacimy za 2 surowce)
     }
+    [Fact]
+    public void Efekt_WyborSurowca_NadmiarPosiadanychSurowcow()
+    {
+        Gracz gracz = new Gracz("TestowyGracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(
+            TypEfektu.WyborSurowca, 
+            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }}
+        );
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Posąg"); // koszt: 2 glina
+        _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(4, koszt);
+
+        gracz.DodajSurowiec(Surowiec.Glina, 2);
+        
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po dodaniu 2x gliny graczowi: {koszt}");
+        Assert.Equal(0, koszt);
+
+        gracz.DodajEfekt(efekt);
+        // silnik nic nie powinien wybierać, bo gracz ma już wystarczająco surowca, żeby zbudować kartę
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
+        Assert.Equal(0, koszt); // drewno teraz jest darmowe (więc płacimy za 2 surowce)
+    }
+    [Fact]
+    public void Efekt_WyborSurowca_NadmiarPosiadanychSurowcow_Monety()
+    {
+        Gracz gracz = new Gracz("TestowyGracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(
+            TypEfektu.WyborSurowca, 
+            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }}
+        );
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Forum"); // koszt: 3 monety, 1 glina
+        _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(5, koszt);
+
+        gracz.DodajSurowiec(Surowiec.Glina, 1);
+        
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po dodaniu gliny graczowi: {koszt}");
+        Assert.Equal(3, koszt);
+
+        gracz.DodajEfekt(efekt);
+        // silnik nic nie powinien wybierać, bo gracz ma już wystarczająco surowca, żeby zbudować kartę
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
+        Assert.Equal(3, koszt); // drewno teraz jest darmowe (więc płacimy za 2 surowce)
+    }
 
     [Fact]
     public void Efekt_ZmianaCenySurowca()
@@ -204,6 +266,7 @@ public class TestyEfektowNaGraczu
 
         // Symulacja wyboru najlepszego surowca do danej karty
         var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Karawanseraj"); // koszt: 2 monety, 1 szkło, 1 papirus
+        karta.OznaczJakoNiezagrana(); // Upewniamy się, że karta jest niezagrana, aby można było ją zbudować
         _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt przed efektem: {koszt}");
@@ -359,11 +422,13 @@ public class TestyEfektowNaGraczu
         przeciwnik.DodajMonety(20); // Dodajemy trochę monet, żeby przeciwnik mógł zbudować karty
         foreach (var karta in zieloneKarty)
         {
+            karta.OznaczJakoNiezagrana(); // Upewniamy się, że karta jest niezagrana, aby można było ją zbudować
             gracz.ZbudujKarte(karta, przeciwnik);
             _output.WriteLine($"Zbudowana karta: {karta.Nazwa} (Kolor: {karta.KolorKarty})");
         }
         foreach (var karta in zieloneKartyPrzeciwnika)
         {
+            karta.OznaczJakoNiezagrana(); // Upewniamy się, że karta jest niezagrana, aby można było ją zbudować
             przeciwnik.ZbudujKarte(karta, gracz);
             _output.WriteLine($"Zbudowana karta przeciwnika: {karta.Nazwa} (Kolor: {karta.KolorKarty})");
         }
@@ -409,5 +474,160 @@ public class TestyEfektowNaGraczu
         Assert.Equal(3, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Brązowy));
         Assert.Equal(2, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Szary));
         Assert.Equal(monetyPrzed + 5, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 5 monety za każdą z kart brązowych i szarych
+    }
+
+    [Fact]
+    public void Test_Koszt_MniejMaterialowNaNiebieskieKarty()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(
+            TypEfektu.MniejMaterialowNaNiebieskieKarty, 
+            wartość: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
+        );
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Gmach Sądu"); // koszt: 2 drewno, 1 szkło (niebieska karta)
+        _output.WriteLine($"Testowana karta: {karta.Nazwa}, Kolor: {karta.KolorKarty} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(6, koszt);
+
+        gracz.DodajEfekt(efekt);
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
+        _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
+        Assert.Equal(2, koszt);
+    }
+    [Fact]
+    public void Test_Koszt_MniejMaterialowNaNiebieskieKarty2()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(
+            TypEfektu.MniejMaterialowNaNiebieskieKarty, 
+            wartość: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
+        );
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiIII.First(k => k.Nazwa == "Pałac"); // koszt: 1 drewno, 1 glina, 1 kamień, 2 szkło (niebieska karta)
+        _output.WriteLine($"Testowana karta: {karta.Nazwa}, Kolor: {karta.KolorKarty} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(10, koszt);
+
+        gracz.DodajSurowiec(Surowiec.Drewno, 1);
+        przeciwnik.DodajSurowiec(Surowiec.Szkło, 2);
+        koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
+        _output.WriteLine($"Koszt po dodaniu surowców efektu: {koszt}");
+        Assert.Equal(12, koszt);
+
+        gracz.DodajEfekt(efekt);
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
+        _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
+        Assert.Equal(4, koszt);
+    }
+    [Fact]
+    public void Test_Koszt_MniejMaterialowNaNiebieskieKarty3()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        var efekt = new Efekt(
+            TypEfektu.MniejMaterialowNaNiebieskieKarty, 
+            wartość: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
+        );
+
+        // Symulacja wyboru najlepszego surowca do danej karty
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Świątynia"); // koszt: 1 drewno, 1 papier (niebieska karta)
+        _output.WriteLine($"Testowana karta: {karta.Nazwa}, Kolor: {karta.KolorKarty} (Koszt: {string.Join(", ", karta.Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        var koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
+        _output.WriteLine($"Koszt przed efektem: {koszt}");
+        Assert.Equal(4, koszt);
+
+        gracz.DodajSurowiec(Surowiec.Drewno, 1);
+        koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
+        _output.WriteLine($"Koszt po dodaniu surowców efektu: {koszt}");
+        Assert.Equal(2, koszt);
+
+        gracz.DodajEfekt(efekt);
+
+        koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
+        _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
+        Assert.Equal(0, koszt);
+    }
+    [Fact]
+    public void Test_Koszt_MniejMaterialowZaCuda()
+    {
+        Gracz gracz = new Gracz("Gracz");
+        Gracz przeciwnik = new Gracz("Przeciwnik");
+
+        
+    }
+
+    [Fact]
+    public void Test_DodatkoweMilitariaZaCzerwoneKarty()
+    {
+        Gracz gracz = new Gracz("GraczA");
+        Gracz przeciwnik = new Gracz("GraczB");
+        var pionKonfliktu = new PionKonfliktu(0);
+        var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
+        var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
+        var strefy = ZbiorStref.Strefy.ToList();
+
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+
+        var efekt = new Efekt(
+            TypEfektu.DodatkoweMilitariaZaCzerwoneKarty
+        );
+        var czerwonaKarta = ZbiorKart.TaliaEpokiI.Where(k => k.KolorKarty == KolorKarty.Czerwony).Take(3).ToList();
+        
+        _output.WriteLine($"Testowana karta: {czerwonaKarta[0].Nazwa}, Kolor: {czerwonaKarta[0].KolorKarty} (Koszt: {string.Join(", ", czerwonaKarta[0].Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        gracz.ZbudujKarte(czerwonaKarta[0], przeciwnik, plansza);
+        
+        Assert.Equal(1, plansza.PionKonfliktu.PobierzPozycje());
+        Assert.Equal("Strefa 1 dla A", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
+
+        gracz.DodajEfekt(efekt);
+
+        _output.WriteLine($"Testowana karta: {czerwonaKarta[1].Nazwa}, Kolor: {czerwonaKarta[1].KolorKarty} (Koszt: {string.Join(", ", czerwonaKarta[1].Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        gracz.ZbudujKarte(czerwonaKarta[1], przeciwnik, plansza);
+
+        Assert.Equal(3, plansza.PionKonfliktu.PobierzPozycje());
+        Assert.Equal("Strefa 2 dla A", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
+    }
+    [Fact] //TODO
+    public void Test_DodatkoweMilitariaZaCzerwoneKarty_Cud()
+    {
+        Gracz gracz = new Gracz("GraczA");
+        Gracz przeciwnik = new Gracz("GraczB");
+        var pionKonfliktu = new PionKonfliktu(0);
+        var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
+        var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
+        var strefy = ZbiorStref.Strefy.ToList();
+
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+
+        var efekt = new Efekt(
+            TypEfektu.DodatkoweMilitariaZaCzerwoneKarty
+        );
+        var czerwonaKarta = ZbiorKart.TaliaEpokiI.Where(k => k.KolorKarty == KolorKarty.Czerwony).Take(3).ToList();
+
+        _output.WriteLine($"Testowana karta: {czerwonaKarta[0].Nazwa}, Kolor: {czerwonaKarta[0].KolorKarty} (Koszt: {string.Join(", ", czerwonaKarta[0].Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        gracz.ZbudujKarte(czerwonaKarta[0], przeciwnik, plansza);
+
+        Assert.Equal(1, plansza.PionKonfliktu.PobierzPozycje());
+        Assert.Equal("Strefa 1 dla A", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
+
+        gracz.DodajEfekt(efekt);
+
+        _output.WriteLine($"Testowana karta: {czerwonaKarta[1].Nazwa}, Kolor: {czerwonaKarta[1].KolorKarty} (Koszt: {string.Join(", ", czerwonaKarta[1].Koszt.Select(k => $"{k.Value} {k.Key}"))})");
+        gracz.ZbudujKarte(czerwonaKarta[1], przeciwnik, plansza);
+
+        Assert.Equal(3, plansza.PionKonfliktu.PobierzPozycje());
+        Assert.Equal("Strefa 2 dla A", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
     }
 }

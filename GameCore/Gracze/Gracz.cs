@@ -139,7 +139,7 @@ public class Gracz
                     ZbudowaneKarty.Add(karta);
                     foreach (var efekt in karta.Efekty)
                     {
-                        efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu);
+                        efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu, karta);
                     }
                     return;
                 }
@@ -147,7 +147,7 @@ public class Gracz
         }
         //TODO: Uwzglêdniæ karty przeciwnika, które mog¹ podwy¿szyæ koszt
         //TODO: Dodaæ obs³ugê efektów kart, które mog¹ obni¿yæ koszt budowy
-        int koszt = karta.ObliczKoszt(this, przeciwnik); 
+        int koszt = karta.ObliczKoszt(this, przeciwnik, karta: karta); 
         int monety = Surowce.TryGetValue(Surowiec.Monety, out var m) ? m : 0;
         
         if (koszt > monety)
@@ -165,7 +165,7 @@ public class Gracz
 
         foreach (var efekt in karta.Efekty)
         {
-            efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu);
+            efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu, karta);
             DodajEfekt(efekt);
         }
     }
@@ -192,7 +192,7 @@ public class Gracz
         if (kartaCudu.CzyZagrana)
             throw new InvalidOperationException("Cud ju¿ zbudowany.");
 
-        int koszt = kartaCudu.ObliczKoszt(Surowce);
+        int koszt = karta.ObliczKoszt(this, przeciwnik, kartaCudu: kartaCudu);
         int monety = Surowce.TryGetValue(Surowiec.Monety, out var m) ? m : 0;
 
         if (koszt > monety)

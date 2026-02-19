@@ -57,6 +57,10 @@ public  class TestyPlanszyEpok
             .OrderBy(x => System.Guid.NewGuid())
             .Take(20)
             .ToList();
+        foreach (var kartaEpoki in taliaKart)
+        {
+            kartaEpoki.OznaczJakoNiezagrana();
+        }
         var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart);
         var gracz = new Gracz("TestowyGracz");
         var przeciwnik = new Gracz("Przeciwnik");
