@@ -94,7 +94,10 @@ public class Efekt
                 break;
             //case TypEfektu.RozegrajTurePonownie: -> do implementacji w mechanice tury
             case TypEfektu.PrzeciwnikOdkladaMonety:
-                // do implementacji w mechanice tury
+                if (przeciwnik != null)
+                {
+                    przeciwnik.DodajMonety(-Wartosc);
+                }
                 break;
             case TypEfektu.WybierzZetonPostepu:
                 // do implementacji w mechanice tury

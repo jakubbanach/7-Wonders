@@ -145,8 +145,7 @@ public class Gracz
                 }
             }
         }
-        //TODO: Uwzglêdniæ karty przeciwnika, które mog¹ podwy¿szyæ koszt
-        //TODO: Dodaæ obs³ugê efektów kart, które mog¹ obni¿yæ koszt budowy
+        
         int koszt = karta.ObliczKoszt(this, przeciwnik, karta: karta); 
         int monety = Surowce.TryGetValue(Surowiec.Monety, out var m) ? m : 0;
         

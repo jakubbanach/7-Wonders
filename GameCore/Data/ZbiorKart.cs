@@ -885,7 +885,7 @@ public static class ZbiorKart
                 }
             ),
             new(
-                "Kolor Rodyjski",
+                "Kolos Rodyjski",
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 3 }, { Surowiec.Szkło, 1 } },
                 new List<Efekt>
                 {
