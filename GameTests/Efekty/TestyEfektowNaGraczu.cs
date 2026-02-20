@@ -360,7 +360,9 @@ public class TestyEfektowNaGraczu
         Gracz gracz = new Gracz("Gracz");
         Gracz przeciwnik = new Gracz("Przeciwnik");
         var kartaCudu = ZbiorKart.TaliaKartyCudow.First();
+        kartaCudu.OznaczJakoNiezagrana();
         gracz.DodajKarteCudu(kartaCudu);
+        kartaCudu.OznaczJakoZagrana();
         _output.WriteLine($"Testowana karta cudu: {kartaCudu.Nazwa}");
 
         var efekt = new Efekt(
@@ -406,6 +408,7 @@ public class TestyEfektowNaGraczu
         gracz.DodajMonety(10); // Dodajemy trochę monet, żeby gracz mógł zbudować karty
         foreach (var karta in zolteKarty)
         {
+            karta.OznaczJakoNiezagrana(); // Upewniamy się, że karta jest niezagrana, aby można było ją zbudować
             gracz.ZbudujKarte(karta, przeciwnik);
             _output.WriteLine($"Zbudowana karta: {karta.Nazwa} (Kolor: {karta.KolorKarty})");
         }
@@ -665,6 +668,7 @@ public class TestyEfektowNaGraczu
         );
         var czerwonaKarta = ZbiorKart.TaliaEpokiI.Where(k => k.KolorKarty == KolorKarty.Czerwony).Take(3).ToList();
         var kartaCudu = ZbiorKart.TaliaKartyCudow.First(k => k.Nazwa == "Kolos Rodyjski");
+        kartaCudu.OznaczJakoNiezagrana(); // Upewniamy się, że karta jest niezagrana, aby można było ją zbudować
 
         _output.WriteLine($"Testowana karta: {kartaCudu.Nazwa} (Koszt: {kartaCudu.WypiszKoszt()})");
         gracz.DodajEfekt(efekt);

@@ -46,7 +46,7 @@ public class KartaCudu : KartaBazowa
         if (poZagraniu)
         {
             var efektyList = Efekty
-                .Where(e => e != null && Karta.WybraneEfekty.Contains(e.TypEfektu))
+                .Where(e => e != null && WybraneEfekty.Contains(e.TypEfektu))
                 .Select(e => e.Wypisz())
                 .ToList();
             return efektyList.Count == 0

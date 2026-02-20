@@ -88,20 +88,4 @@ public class Karta : KartaBazowa
     {
         return $"{Nazwa,-20} | {KolorKarty,-9} | Koszt: {WypiszKoszt(),-6} | {WypiszEfekty()}";
     }
-
-    public static readonly HashSet<TypEfektu> WybraneEfekty = new()
-    {
-        TypEfektu.WyborSurowca,
-        TypEfektu.PunktyZwyciestwa,
-        TypEfektu.PunktyMilitarne,
-        TypEfektu.ZmianaCenySurowca,
-        TypEfektu.SymbolNaukowy,
-        TypEfektu.PunktyZaKarty,
-        TypEfektu.DodatkoweMilitariaZaCzerwoneKarty,
-        TypEfektu.KoniecGry3PunktyZaZetonPostepu,
-        TypEfektu.MniejMaterialowNaNiebieskieKarty,
-        TypEfektu.MniejMaterialowNaCuda,
-        TypEfektu.MonetyZaBudoweZBialymSymbolem,
-        TypEfektu.MonetyPrzeciwnikaZaMaterialy,
-    };
 }

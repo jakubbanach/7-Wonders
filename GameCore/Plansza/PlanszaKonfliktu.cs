@@ -58,12 +58,14 @@ public class PlanszaKonfliktu
 
         if (!nowaStrefa.CzyJuzUzyta && PionKonfliktu.PobierzPozycje() != poprzednia)
         {
-            // tu logika gry:
-            //if (nowaStrefa.LiczbaTraconychMonet > 0)
-            //    gracz.UsunMonety(nowaStrefa.LiczbaTraconychMonet);
-
-            //if (nowaStrefa.LiczbaPunktow > 0)
-            //    gracz.DodajPunkty(nowaStrefa.LiczbaPunktow);
+            if (nowaStrefa.LiczbaTraconychMonet > 0)
+            {
+                Console.WriteLine($"{gracz.Nazwa} traci {nowaStrefa.LiczbaTraconychMonet} monet z powodu wejœcia na strefê {nowaStrefa.Nazwa}!");
+                if (gracz == Gracze[0])
+                    Gracze[1].DodajMonety(-nowaStrefa.LiczbaTraconychMonet); // Przekazujemy karê przeciwnikowi
+                else
+                    Gracze[0].DodajMonety(-nowaStrefa.LiczbaTraconychMonet); // Przekazujemy karê przeciwnikowi
+            }
 
             nowaStrefa.UzyjStrefy();
             ObecnaStrefa = nowaStrefa;

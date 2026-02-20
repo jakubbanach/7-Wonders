@@ -178,4 +178,26 @@ public abstract class KartaBazowa
         }
         return kosztMonet;
     }
+
+    public static readonly HashSet<TypEfektu> WybraneEfekty = new()
+    {
+        TypEfektu.WyborSurowca,
+        TypEfektu.PunktyZwyciestwa,
+        TypEfektu.PunktyMilitarne,
+        TypEfektu.ZmianaCenySurowca,
+        TypEfektu.SymbolNaukowy,
+        TypEfektu.PunktyZaKarty,
+        TypEfektu.DodatkoweMilitariaZaCzerwoneKarty,
+        TypEfektu.KoniecGry3PunktyZaZetonPostepu,
+        TypEfektu.MniejMaterialowNaNiebieskieKarty,
+        TypEfektu.MniejMaterialowNaCuda,
+        TypEfektu.MonetyZaBudoweZBialymSymbolem,
+        TypEfektu.MonetyPrzeciwnikaZaMaterialy,
+    };
+
+    public static readonly HashSet<TypEfektu> EfektyKoniecGry = new()
+    {
+        TypEfektu.PunktyZaKarty,
+        TypEfektu.KoniecGry3PunktyZaZetonPostepu,
+    };
 }

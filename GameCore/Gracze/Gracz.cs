@@ -13,6 +13,7 @@ public class Gracz
     public List<String> BialeSymbole { get; protected set; } = new List<String>();
     public List<Efekt> Efekty { get; protected set; } = new List<Efekt>();
     public int PunktyZwyciestwa { get; protected set; }
+    public List<ZetonPostepu> ZetonyPostepu { get; protected set; } = new List<ZetonPostepu>();
 
     public Gracz(string nazwa)
     {
@@ -99,6 +100,19 @@ public class Gracz
     public void UsunEfekt(Efekt efekt)
     {
         Efekty.Remove(efekt);
+    }
+
+    public void DodajSymbolNaukowy(SymbolNaukowy symbol)
+    {
+        SymboleNaukowe.Add(symbol);
+    }
+    public void DodajBialySymbol(string symbol)
+    {
+        BialeSymbole.Add(symbol);
+    }
+    public void DodajZetonPostepu(ZetonPostepu zeton)
+    {
+        ZetonyPostepu.Add(zeton);
     }
 
     public void DodajPunktyZwyciestwa(int punkty)

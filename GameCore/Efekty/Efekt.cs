@@ -33,9 +33,6 @@ public class Efekt
                     gracz.DodajSurowiec(surowiec.Key, surowiec.Value);
                 }
                 break;
-            case TypEfektu.WyborSurowca:
-                // brak efektu natychmiastowego, implementacja w funkcji ObliczKoszt
-                break;
             case TypEfektu.PunktyZwyciestwa: // -> do Punktacji Koncowej
                 gracz.DodajPunktyZwyciestwa(Wartosc);
                 break;
@@ -54,37 +51,26 @@ public class Efekt
                     planszaKonfliktu.PrzesunPion(wartoscDoDodania, gracz);
                 }
                 break;
-            case TypEfektu.ZmianaCenySurowca:
-                // brak efektu natychmiastowego, implementacja w funkcji ObliczKoszt
-                break;
             case TypEfektu.BialySymbol:
-                gracz.BialeSymbole.Add(Tekst);
+                gracz.DodajBialySymbol(Tekst);
                 break;
             case TypEfektu.SymbolNaukowy:
-                gracz.SymboleNaukowe.Add(SymbolNaukowy);
+                gracz.DodajSymbolNaukowy(SymbolNaukowy);
                 break;
             case TypEfektu.MonetyZaKarty:
-                if (Tekst == "Cuda")
+                Func<Gracz, int> licznikKart = Tekst switch
                 {
-                    var liczbaKartGracza = gracz.KartyCudow.Count;
-                    var liczbaKartPrzeciwnika = przeciwnik != null ? przeciwnik.KartyCudow.Count : 0;
-                    
-                    gracz.DodajMonety(Wartosc * (liczbaKartGracza>liczbaKartPrzeciwnika ? liczbaKartGracza : liczbaKartPrzeciwnika));
-                }
-                else if (Tekst == "Br¹zowy i Szary")
-                {
-                    var liczbaKartGracza = gracz.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Br¹zowy || k.KolorKarty == KolorKarty.Szary);
-                    var liczbaKartPrzeciwnika = przeciwnik != null ? przeciwnik.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Br¹zowy || k.KolorKarty == KolorKarty.Szary) : 0;
-                    gracz.DodajMonety(Wartosc * (liczbaKartGracza > liczbaKartPrzeciwnika ? liczbaKartGracza : liczbaKartPrzeciwnika));
-                }
-                else
-                {
-                    var liczbaKartGracza = gracz.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst);
-                    var liczbaKartPrzeciwnika = przeciwnik != null ? przeciwnik.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst) : 0;
-                    gracz.DodajMonety(Wartosc * (liczbaKartGracza > liczbaKartPrzeciwnika ? liczbaKartGracza : liczbaKartPrzeciwnika));
-                }
+                    "Monety" => g => g.WypiszLiczbeSurowca(Surowiec.Monety) / 3,
+                    "Cuda" => g => g.KartyCudow.Where(k => k.CzyZagrana).Count(),
+                    "Br¹zowy i Szary" => g => g.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Br¹zowy || k.KolorKarty == KolorKarty.Szary),
+                    _ => g => g.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst)
+                };
+
+                int n1 = licznikKart(gracz);
+                int n2 = przeciwnik != null ? licznikKart(przeciwnik) : 0;
+
+                gracz.DodajMonety(Wartosc * Math.Max(n1, n2));
                 break;
-            //case TypEfektu.PunktyZaKarty: -> do Punktacji Koncowej
             //case TypEfektu.DarmowaBudowlaZOdrzuconychKart: -> do implementacji w mechanice tury
             case TypEfektu.Wylosuj3ZetonyPostepu:
                 // do implementacji w mechanice tury
@@ -100,6 +86,8 @@ public class Efekt
                 }
                 break;
             case TypEfektu.WybierzZetonPostepu:
+                // jakoœ daæ graczowi wybór ¿etonu postêpu
+                // wybrany ¿eton dodajemy do gracza
                 // do implementacji w mechanice tury
                 break;
             default:
