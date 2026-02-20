@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,10 @@ public class TestPlanszy
         // losuj 5 zetonow postepu
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
+        var gracz = new Gracz("Gracz");
+        var przeciwnik = new Gracz("Przeciwnik");
 
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze: new[] { gracz, przeciwnik });
 
         _output.WriteLine($"Pion konfliktu na pozycji: {plansza.PionKonfliktu.PobierzPozycje()}");
         _output.WriteLine($"Zetony postepu: {string.Join(", ", plansza.ZetonyPostepu.Select(z => z.Nazwa))}");
@@ -39,10 +42,12 @@ public class TestPlanszy
         var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
+        var gracz = new Gracz("Gracz");
+        var przeciwnik = new Gracz("Przeciwnik");
 
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze: new[] { gracz, przeciwnik });
         
-        plansza.PrzesunPion(1, new Gracz("GraczA"));
+        plansza.PrzesunPion(1, gracz);
         Assert.Equal(1, plansza.PionKonfliktu.PobierzPozycje());
         Assert.Equal("Strefa 1 dla A", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
     }
@@ -53,10 +58,12 @@ public class TestPlanszy
         var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
+        var gracz = new Gracz("Gracz");
+        var przeciwnik = new Gracz("Przeciwnik");
 
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze: new[] { gracz, przeciwnik });
 
-        plansza.PrzesunPion(9, new Gracz("GraczA"));
+        plansza.PrzesunPion(9, gracz);
         Assert.Equal(9, plansza.PionKonfliktu.PobierzPozycje());
         Assert.Equal("Zwyciestwo A", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
     }
@@ -67,11 +74,13 @@ public class TestPlanszy
         var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
+        var gracz = new Gracz("Gracz");
+        var przeciwnik = new Gracz("Przeciwnik");
 
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze: new[] { gracz, przeciwnik });
 
-        plansza.PrzesunPion(3, new Gracz("GraczA"));
-        plansza.PrzesunPion(4, new Gracz("GraczB"));
+        plansza.PrzesunPion(3, gracz);
+        plansza.PrzesunPion(4, przeciwnik);
         Assert.Equal(-1, plansza.PionKonfliktu.PobierzPozycje());
         Assert.Equal("Strefa 1 dla B", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
     }

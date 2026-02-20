@@ -13,11 +13,12 @@ public class GraKonsolowa
     private PlanszaEpoki planszaEpoki;
     private Gracz aktywnyGracz;
     private Gracz przeciwnik => gracze.First(g => g != aktywnyGracz);
+    private StanGry stanGry = new StanGry();
 
     public GraKonsolowa()
     {
-        planszaKonfliktu = InicjalizacjaPlanszy();
         gracze = InicjalizacjaGraczy();
+        planszaKonfliktu = InicjalizacjaPlanszy();
         planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaI);
         aktywnyGracz = gracze[0];
     }
@@ -88,7 +89,7 @@ public class GraKonsolowa
         var strefy = ZbiorStref.Strefy.ToList();
 
         // Inicjalizacja planszy do gry
-        return new PlanszaKonfliktu(pionKonfliktu, zetonyPostepu, strefy);
+        return new PlanszaKonfliktu(pionKonfliktu, zetonyPostepu, strefy, gracze);
     }
 
     Gracz[] InicjalizacjaGraczy(String nazwa1 = "Gracz 1", String nazwa2 = "Gracz 2")
@@ -139,7 +140,7 @@ public class GraKonsolowa
             Console.WriteLine("1. Zagraj kartê");
             Console.WriteLine("2. Odrzuæ kartê");
             Console.WriteLine("3. Zbuduj cud");
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
             switch (input)
             {
                 case "1":
@@ -161,6 +162,15 @@ public class GraKonsolowa
 
         Ruch ruch = new Ruch(aktywnyGracz, przeciwnik, karta, typRuchu);
         ruch.Wykonaj(planszaKonfliktu);
+        stanGry.CzyZwyciestwoMilitarne(gracze, planszaKonfliktu.PionKonfliktu.PobierzPozycje());
+        stanGry.CzyZwyciestwoNaukowe(gracze);
+        if (stanGry.CzyZakonczona)
+        {
+            Console.WriteLine("Gra zakoñczona!");
+            Console.WriteLine($"Zwyciêzca: {stanGry?.Zwyciezca?.Nazwa}");
+            Console.WriteLine($"Punkty zwyciêstwa: {stanGry?.Zwyciezca?.PunktyZwyciestwa}");
+            Environment.Exit(0);
+        }
     }
 
     void RozegrajEpoke(PlanszaEpoki planszaEpoki)

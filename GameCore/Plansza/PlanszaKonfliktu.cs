@@ -8,17 +8,19 @@ public class PlanszaKonfliktu
     public PionKonfliktu PionKonfliktu { get; protected set; }
     public List<ZetonPostepu> ZetonyPostepu { get; protected set; }
     public List<Strefa> Strefy { get; protected set; }
+    public Gracz[] Gracze { get; protected set; }
     private Strefa ObecnaStrefa;
 
     private List<(int start, int end, Strefa strefa)> _mapaStref;
 
-    public PlanszaKonfliktu(PionKonfliktu pionKonfliktu, List<ZetonPostepu> zetonyPostepu, List<Strefa> strefy)
+    public PlanszaKonfliktu(PionKonfliktu pionKonfliktu, List<ZetonPostepu> zetonyPostepu, List<Strefa> strefy, Gracz[] gracze)
     {
         PionKonfliktu = pionKonfliktu;
         ZetonyPostepu = zetonyPostepu;
         Strefy = strefy;
         ObecnaStrefa = Strefy.Find(strefa => strefa.Nazwa == "Startowa") ?? throw new InvalidOperationException("Brak strefy startowej na planszy.");
         ZbudujMapeStref();
+        Gracze = gracze;
     }
 
     private void ZbudujMapeStref()
@@ -45,16 +47,16 @@ public class PlanszaKonfliktu
 
     public void PrzesunPion(int ile, Gracz gracz)
     {
-        int poprzednia = PionKonfliktu.Pozycja;
-        if (gracz.Nazwa == "GraczA")
+        int poprzednia = PionKonfliktu.PobierzPozycje();
+        if (gracz == Gracze[0])
             PionKonfliktu.Przesun(ile);
         else
             PionKonfliktu.Przesun(-ile);
         //PionKonfliktu.Przesun(ile);
 
-        var nowaStrefa = PobierzStrefeDlaPozycji(PionKonfliktu.Pozycja);
+        var nowaStrefa = PobierzStrefeDlaPozycji(PionKonfliktu.PobierzPozycje());
 
-        if (!nowaStrefa.CzyJuzUzyta && PionKonfliktu.Pozycja != poprzednia)
+        if (!nowaStrefa.CzyJuzUzyta && PionKonfliktu.PobierzPozycje() != poprzednia)
         {
             // tu logika gry:
             //if (nowaStrefa.LiczbaTraconychMonet > 0)
@@ -81,7 +83,7 @@ public class PlanszaKonfliktu
 
         for (int i = -9; i <= 9; i++)
         {
-            if (i == PionKonfliktu.Pozycja)
+            if (i == PionKonfliktu.PobierzPozycje())
                 sb.Append("[X]");
             else
                 sb.Append("[]");

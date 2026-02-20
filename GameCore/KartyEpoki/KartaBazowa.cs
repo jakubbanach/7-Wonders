@@ -17,11 +17,11 @@ public abstract class KartaBazowa
         Efekty = efekty;
     }
 
-    private Dictionary<Surowiec, int> ObliczBrakujaceSurowce(Dictionary<Surowiec, int> posiadaneSurowce)
+    private Dictionary<Surowiec, int> ObliczBrakujaceSurowce(Dictionary<Surowiec, int> posiadaneSurowce, Dictionary<Surowiec, int> kosztZKarty)
     {
         var brakujaceSurowce = new Dictionary<Surowiec, int>();
 
-        foreach (var surowiec in Koszt)
+        foreach (var surowiec in kosztZKarty)
         {
             if (surowiec.Key == Surowiec.Monety)
             {
@@ -129,9 +129,12 @@ public abstract class KartaBazowa
         {
             throw new ArgumentException("Nie można podać jednocześnie karty i karty cudu.");
         }
+        
+        Dictionary<Surowiec, int> kosztZKarty = Koszt;
         if (kartaCudu != null)
-            Koszt = kartaCudu.Koszt;
-        if (Koszt == null || Koszt.Count == 0)
+            kosztZKarty = kartaCudu.Koszt;
+
+        if (kosztZKarty == null || kosztZKarty.Count == 0)
         {
             return 0;
         }
@@ -152,7 +155,7 @@ public abstract class KartaBazowa
 
         int kosztMonet = 0;
 
-        var brakujaceSurowce = ObliczBrakujaceSurowce(posiadaneSurowce);
+        var brakujaceSurowce = ObliczBrakujaceSurowce(posiadaneSurowce, kosztZKarty);
         // zastosowanie efektów zmiany ceny surowca
         ZastosowanieEfektowWyboruSurowca(efektyWyboruSurowca, brakujaceSurowce, przeciwnikSurowce, efektyGracza);
         // zastosowanie efektów mniej materiałów na niebieskie karty i cuda

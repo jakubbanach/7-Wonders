@@ -2,7 +2,7 @@
 public class PionKonfliktu
 {
     public const int MaksymalnaPozycja = 9;
-    public int Pozycja { get; private set; }
+    private int Pozycja { get; set; }
     //public Strefa AktualnaStrefa { get; protected set; }
 
     public PionKonfliktu(int pozycja)
@@ -18,10 +18,5 @@ public class PionKonfliktu
     public int PobierzPozycje()
     {
         return Pozycja;
-    }
-
-    public bool CzyZwyciestwo()
-    {
-        return Pozycja >= MaksymalnaPozycja || Pozycja <= -MaksymalnaPozycja;
     }
 }

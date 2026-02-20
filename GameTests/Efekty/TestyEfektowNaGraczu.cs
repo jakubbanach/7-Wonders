@@ -324,7 +324,7 @@ public class TestyEfektowNaGraczu
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
 
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze: new[] { gracz, przeciwnik });
         var efekt = new Efekt(
             TypEfektu.PunktyMilitarne,
             wartość: 2
@@ -352,7 +352,7 @@ public class TestyEfektowNaGraczu
             symbolNaukowy: SymbolNaukowy.Koło
         );
         efekt.ZastosujEfekt(gracz);
-        Assert.Contains(SymbolNaukowy.Koło, gracz.symboleNaukowe);
+        Assert.Contains(SymbolNaukowy.Koło, gracz.SymboleNaukowe);
     }
     [Fact]
     public void Efekt_MonetyZaKarty_Cuda()
@@ -623,12 +623,12 @@ public class TestyEfektowNaGraczu
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
 
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze: new[] { gracz, przeciwnik });
 
         var efekt = new Efekt(
             TypEfektu.DodatkoweMilitariaZaCzerwoneKarty
         );
-        var czerwonaKarta = ZbiorKart.TaliaEpokiI.Where(k => k.KolorKarty == KolorKarty.Czerwony).Take(3).ToList();
+        var czerwonaKarta = ZbiorKart.TaliaEpokiI.Where(k => k.KolorKarty == KolorKarty.Czerwony).Take(2).ToList();
         foreach (var karta in czerwonaKarta)
         {
             karta.OznaczJakoNiezagrana(); // Upewniamy się, że karta jest niezagrana, aby można było ją zbudować
@@ -658,7 +658,7 @@ public class TestyEfektowNaGraczu
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
 
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze: new[] { gracz, przeciwnik });
 
         var efekt = new Efekt(
             TypEfektu.DodatkoweMilitariaZaCzerwoneKarty

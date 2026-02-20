@@ -9,7 +9,7 @@ public class Gracz
     public List<KartaCudu> KartyCudow { get; protected set; }
     public List<Karta> ZbudowaneKarty{ get; protected set; }
     public Dictionary<Surowiec, int> Surowce { get; protected set; }
-    public List<SymbolNaukowy> symboleNaukowe { get; protected set; } = new List<SymbolNaukowy>();
+    public List<SymbolNaukowy> SymboleNaukowe { get; protected set; } = new List<SymbolNaukowy>();
     public List<String> BialeSymbole { get; protected set; } = new List<String>();
     public List<Efekt> Efekty { get; protected set; } = new List<Efekt>();
     public int PunktyZwyciestwa { get; protected set; }

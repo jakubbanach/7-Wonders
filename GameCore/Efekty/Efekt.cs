@@ -61,7 +61,7 @@ public class Efekt
                 gracz.BialeSymbole.Add(Tekst);
                 break;
             case TypEfektu.SymbolNaukowy:
-                gracz.symboleNaukowe.Add(SymbolNaukowy);
+                gracz.SymboleNaukowe.Add(SymbolNaukowy);
                 break;
             case TypEfektu.MonetyZaKarty:
                 if (Tekst == "Cuda")

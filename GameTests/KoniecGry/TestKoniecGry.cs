@@ -14,23 +14,62 @@ public class TestKoniecGry
         _output = output;
     }
     [Fact]
-    public void Test_Zwyciestwo_Militarne()
+    public void Test_CzyZwyciestwoMilitarne_Zwyciestwo()
     {
         var pionKonfliktu = new PionKonfliktu(0);
         var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
         var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
         var strefy = ZbiorStref.Strefy.ToList();
+        var gracze = new[] { new Gracz("GraczA"), new Gracz("GraczB") };
 
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy);
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze);
 
-        plansza.PrzesunPion(9, new Gracz("GraczA"));
-        Assert.Equal(9, plansza.PionKonfliktu.PobierzPozycje());
-        Assert.Equal("Zwyciestwo A", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
+        var stanGry = new StanGry();
+
+        plansza.PrzesunPion(9, gracze[0]);
+        stanGry.CzyZwyciestwoMilitarne(gracze, pionKonfliktu.PobierzPozycje());
+
+        Assert.True(stanGry.CzyZakonczona);
+        Assert.Equal(gracze[0], stanGry.Zwyciezca);
+        Assert.Equal(TypZwyciestwa.Militarne, stanGry.TypZwyciestwa);
+    }
+    [Fact]
+    public void Test_CzyZwyciestwoMilitarne_BrakZwyciestwa()
+    {
+        var pionKonfliktu = new PionKonfliktu(0);
+        var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
+        var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
+        var strefy = ZbiorStref.Strefy.ToList();
+        var gracze = new[] { new Gracz("GraczA"), new Gracz("GraczB") };
+
+        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze);
+
+        var stanGry = new StanGry();
+
+        plansza.PrzesunPion(1, gracze[1]);
+        plansza.PrzesunPion(9, gracze[0]);
+        stanGry.CzyZwyciestwoMilitarne(gracze, pionKonfliktu.PobierzPozycje());
+
+        Assert.False(stanGry.CzyZakonczona);
+        Assert.Equal(TypZwyciestwa.Brak, stanGry.TypZwyciestwa);
     }
     [Fact]
     public void Test_Zwyciestwo_Naukowe()
     {
+        var gracze = new[] { new Gracz("GraczA"), new Gracz("GraczB") };
 
+        var stanGry = new StanGry();
+
+        foreach (var symbol in Enum.GetValues<SymbolNaukowy>())
+        {
+            gracze[0].SymboleNaukowe.Add(symbol);
+        }
+
+        stanGry.CzyZwyciestwoNaukowe(gracze);
+
+        Assert.True(stanGry.CzyZakonczona);
+        Assert.Equal(gracze[0], stanGry.Zwyciezca);
+        Assert.Equal(TypZwyciestwa.Naukowe, stanGry.TypZwyciestwa);
     }
     [Fact]
     public void Test_ZliczaniePunktow_Militaria()
