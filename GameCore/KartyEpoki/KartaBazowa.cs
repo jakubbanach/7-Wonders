@@ -179,7 +179,7 @@ public abstract class KartaBazowa
         return kosztMonet;
     }
 
-    public static readonly HashSet<TypEfektu> WybraneEfekty = new()
+    public static readonly HashSet<TypEfektu> WybraneEfekty = new HashSet<TypEfektu>()
     {
         TypEfektu.WyborSurowca,
         TypEfektu.PunktyZwyciestwa,
@@ -195,7 +195,7 @@ public abstract class KartaBazowa
         TypEfektu.MonetyPrzeciwnikaZaMaterialy,
     };
 
-    public static readonly HashSet<TypEfektu> EfektyKoniecGry = new()
+    public static readonly HashSet<TypEfektu> EfektyKoniecGry = new HashSet<TypEfektu>()
     {
         TypEfektu.PunktyZaKarty,
         TypEfektu.KoniecGry3PunktyZaZetonPostepu,

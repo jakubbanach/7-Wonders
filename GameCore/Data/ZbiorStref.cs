@@ -12,7 +12,7 @@ public static class ZbiorStref
     {
         var strefy = new List<Strefa>
         {
-            new(
+            new Strefa(
                 "Zwyciestwo B",
                 1,
                 0,
@@ -20,7 +20,7 @@ public static class ZbiorStref
                 false,
                 false
             ),
-            new(
+            new Strefa(
                 "Strefa 3 dla B",
                 3,
                 5,
@@ -28,7 +28,7 @@ public static class ZbiorStref
                 false,
                 false
             ),
-            new(
+            new Strefa(
                 "Strefa 2 dla B",
                 3,
                 2,
@@ -36,7 +36,7 @@ public static class ZbiorStref
                 false,
                 false
             ),
-            new(
+            new Strefa(
                 "Strefa 1 dla B",
                 2,
                 0,
@@ -44,7 +44,7 @@ public static class ZbiorStref
                 false,
                 false
             ),
-            new(
+            new Strefa(
                 "Startowa",
                 1,
                 0,
@@ -52,7 +52,7 @@ public static class ZbiorStref
                 true,
                 true
             ),
-            new(
+            new Strefa(
                 "Strefa 1 dla A",
                 2,
                 0,
@@ -60,7 +60,7 @@ public static class ZbiorStref
                 false,
                 false
             ),
-            new(
+            new Strefa(
                 "Strefa 2 dla A",
                 3,
                 2,
@@ -68,7 +68,7 @@ public static class ZbiorStref
                 false,
                 false
             ),
-            new(
+            new Strefa(
                 "Strefa 3 dla A",
                 3,
                 5,
@@ -76,7 +76,7 @@ public static class ZbiorStref
                 false,
                 false
             ),
-            new(
+            new Strefa(
                 "Zwyciestwo A",
                 1,
                 0,

@@ -14,7 +14,7 @@ public static class ZbiorZetonowPostepu
     {
         var zetony = new List<ZetonPostepu>
         {
-            new(
+            new ZetonPostepu(
                 "Rolnictwo",
                 new List<Efekt>
                 {
@@ -22,49 +22,49 @@ public static class ZbiorZetonowPostepu
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartoœæ: 4),
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Filozofia",
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartoœæ: 7)
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Prawo",
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.SymbolNaukowy, symbolNaukowy:SymbolNaukowy.Waga)
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Strategia",
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.DodatkoweMilitariaZaCzerwoneKarty)
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Matematyka",
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.KoniecGry3PunktyZaZetonPostepu)
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Architektura",
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.MniejMaterialowNaCuda, wartoœæ: 2)
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Budownictwo",
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.MniejMaterialowNaNiebieskieKarty, wartoœæ: 2)
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Urbanistyka",
                 new List<Efekt>
                 {
@@ -72,14 +72,14 @@ public static class ZbiorZetonowPostepu
                     new Efekt(TypEfektu.MonetyZaBudoweZBialymSymbolem, wartoœæ: 4),
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Ekonomia",
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.MonetyPrzeciwnikaZaMaterialy)
                 }
             ),
-            new(
+            new ZetonPostepu(
                 "Teologia",
                 new List<Efekt>
                 {

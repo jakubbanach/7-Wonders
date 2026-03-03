@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public static class ZbiorKart
 {
@@ -20,7 +21,7 @@ public static class ZbiorKart
     {
         var talia = new List<Karta>
         {
-            new(
+            new Karta(
                 "Wycinka",
                 Epoka.EpokaI,
                 null,
@@ -30,7 +31,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
                 "Złoża Gliny",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
@@ -40,7 +41,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
                 "Składowisko Kamienia",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
@@ -50,7 +51,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
                 "Glinianka",
                 Epoka.EpokaI,
                 null,
@@ -60,7 +61,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
                 "Skład Drewna",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
@@ -70,7 +71,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
                 "Kamieniołom",
                 Epoka.EpokaI,
                 null,
@@ -80,7 +81,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
                 "Huta Szkła",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
@@ -90,7 +91,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Szary
             ),
-            new(
+            new Karta(
                 "Wytwórnia Papirusu",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
@@ -100,7 +101,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Szary
             ),
-            new(
+            new Karta(
                 "Tawerna",
                 Epoka.EpokaI,
                 null,
@@ -111,7 +112,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Magazyn Kamienia",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
@@ -121,7 +122,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Magazyn Drewna",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
@@ -131,7 +132,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Magazyn Gliny",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
@@ -141,7 +142,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Skryptorium",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
@@ -152,7 +153,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Zielony
             ),
-            new(
+            new Karta(
                 "Apteka",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Szkło, 1 } },
@@ -163,7 +164,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Zielony
             ),
-            new(
+            new Karta(
                 "Zielarnia",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
@@ -174,7 +175,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Zielony
             ),
-            new(
+            new Karta(
                 "Warsztat",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Papirus, 1 } },
@@ -185,7 +186,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Zielony
             ),
-            new(
+            new Karta(
                 "Garnizon",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 } },
@@ -196,7 +197,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Palisada",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
@@ -207,7 +208,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Wieża Strażnicza",
                 Epoka.EpokaI,
                 null,
@@ -217,7 +218,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Stajnie",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 } },
@@ -228,7 +229,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Teatr",
                 Epoka.EpokaI,
                 null,
@@ -239,7 +240,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Niebieski
             ),
-            new(
+            new Karta(
                 "Łaźnie",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 } },
@@ -250,7 +251,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Niebieski
             ),
-            new(
+            new Karta(
                 "Ołtarz",
                 Epoka.EpokaI,
                 null,
@@ -268,7 +269,7 @@ public static class ZbiorKart
     {
         var talia = new List<Karta>
         {
-            new(
+            new Karta(
             "Kamieniołom Stokowy",
             Epoka.EpokaII,
             new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
@@ -278,7 +279,7 @@ public static class ZbiorKart
             },
             KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
             "Cegielnia",
             Epoka.EpokaII,
             new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
@@ -288,7 +289,7 @@ public static class ZbiorKart
             },
             KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
             "Tartak",
             Epoka.EpokaII,
             new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
@@ -298,7 +299,7 @@ public static class ZbiorKart
             },
             KolorKarty.Brązowy
             ),
-            new(
+            new Karta(
                 "Pracownia Wyrobu Szkła",
                 Epoka.EpokaII,
                 null,
@@ -308,7 +309,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Szary
             ),
-            new(
+            new Karta(
                 "Suszarnia Papirusu",
                 Epoka.EpokaII,
                 null,
@@ -318,7 +319,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Szary
             ),
-            new(
+            new Karta(
                 "Karawanseraj",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
@@ -330,7 +331,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Urząd celny",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 4 } },
@@ -341,7 +342,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Browar",
                 Epoka.EpokaII,
                 null,
@@ -352,7 +353,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Forum",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 }, { Surowiec.Glina, 1 } },
@@ -364,7 +365,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Labolatorium",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Szkło, 2 }, { Surowiec.Drewno, 1 } },
@@ -376,7 +377,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Zielony
             ),
-            new(
+            new Karta(
                 "Biblioteka",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 } },
@@ -388,7 +389,7 @@ public static class ZbiorKart
                 KolorKarty.Zielony,
                 darmowaBudowa: "Księga"
             ),
-            new(
+            new Karta(
                 "Szkoła",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 2 } },
@@ -400,7 +401,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Zielony
             ),
-            new(
+            new Karta(
                 "Ambulatorium",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamień, 1 } },
@@ -412,7 +413,7 @@ public static class ZbiorKart
                 KolorKarty.Zielony,
                 darmowaBudowa: "Zębatka"
             ),
-            new(
+            new Karta(
                 "Mury Obronne",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 } },
@@ -422,7 +423,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Plac Apelowy",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szkło, 1 } },
@@ -433,7 +434,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Koszary",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
@@ -444,7 +445,7 @@ public static class ZbiorKart
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Miecz"
             ),
-            new(
+            new Karta(
                 "Stadniny",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Drewno, 1 } },
@@ -455,7 +456,7 @@ public static class ZbiorKart
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Podkowa"
             ),
-            new(
+            new Karta(
                 "Tor Strzelecki",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 1 } },
@@ -466,7 +467,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Gmach Sądu",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szkło, 1 } },
@@ -476,7 +477,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Niebieski
             ),
-            new(
+            new Karta(
                 "Akwedukt",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 3 } },
@@ -487,7 +488,7 @@ public static class ZbiorKart
                 KolorKarty.Niebieski,
                 darmowaBudowa: "Kropla"
             ),
-            new(
+            new Karta(
                 "Mównica",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 } },
@@ -498,7 +499,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Niebieski
             ),
-            new(
+            new Karta(
                 "Świątynia",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 1 } },
@@ -510,7 +511,7 @@ public static class ZbiorKart
                 KolorKarty.Niebieski,
                 darmowaBudowa: "Księżyc"
             ),
-            new(
+            new Karta(
                 "Posąg",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 } },
@@ -529,7 +530,7 @@ public static class ZbiorKart
     {
         var gildie = new List<Karta>
         {
-            new(
+            new Karta(
                 "Cech Lichwiarzy",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Drewno, 2 } },
@@ -539,7 +540,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Fioletowy
             ),
-            new(
+            new Karta(
                 "Cech Budowniczych",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 } },
@@ -549,7 +550,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Fioletowy
             ),
-            new(
+            new Karta(
                 "Gildia Kupiecka",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
@@ -560,7 +561,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Fioletowy
             ),
-            new(
+            new Karta(
                 "Stowarzyszenie Urzędników",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
@@ -571,7 +572,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Fioletowy
             ),
-            new(
+            new Karta(
                 "Cech Armatorów",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
@@ -582,7 +583,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Fioletowy
             ),
-            new(
+            new Karta(
                 "Gildia Strategów",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
@@ -593,7 +594,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Fioletowy
             ),
-            new(
+            new Karta(
                 "Towarzystwo Naukowe",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Drewno, 2 } },
@@ -607,7 +608,7 @@ public static class ZbiorKart
         };
         var talia = new List<Karta>
         {
-            new(
+            new Karta(
                 "Latarnia Morska",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szkło, 1 } },
@@ -619,7 +620,7 @@ public static class ZbiorKart
                 KolorKarty.Żółty,
                 darmowaBudowa: "Wazon"
             ),
-            new(
+            new Karta(
                 "Port",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
@@ -630,7 +631,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Arena",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 } },
@@ -642,7 +643,7 @@ public static class ZbiorKart
                 KolorKarty.Żółty,
                 darmowaBudowa: "Beczka"
             ),
-            new(
+            new Karta(
                 "Izba Handlowa",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Papirus, 2 } },
@@ -653,7 +654,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Zbrojownia",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Szkło, 1 } },
@@ -664,7 +665,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Żółty
             ),
-            new(
+            new Karta(
                 "Akademia",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 2 } },
@@ -675,7 +676,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Zielony
             ),
-            new(
+            new Karta(
                 "Pracownia Naukowa",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
@@ -686,7 +687,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Zielony
             ),
-            new(
+            new Karta(
                 "Uniwersytet",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
@@ -698,7 +699,7 @@ public static class ZbiorKart
                 KolorKarty.Zielony,
                 darmowaBudowa: "Harfa"
             ),
-            new(
+            new Karta(
                 "Ambulatorium",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Papirus, 2 } },
@@ -710,7 +711,7 @@ public static class ZbiorKart
                 KolorKarty.Zielony,
                 darmowaBudowa: "Lampa"
             ),
-            new(
+            new Karta(
                 "Cyrk",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamień, 2 } },
@@ -721,7 +722,7 @@ public static class ZbiorKart
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Hełm"
             ),
-            new(
+            new Karta(
                 "Fortyfikacje",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
@@ -732,7 +733,7 @@ public static class ZbiorKart
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Mur"
             ),
-            new(
+            new Karta(
                 "Arsenał",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 3 }, { Surowiec.Drewno, 2 } },
@@ -742,7 +743,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Siedziba Trybuna",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 8 }},
@@ -752,7 +753,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Czerwony
             ),
-            new(
+            new Karta(
                 "Machiny Oblężnicze",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 3 }, { Surowiec.Szkło, 1 } },
@@ -763,7 +764,7 @@ public static class ZbiorKart
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Strzelnica"
             ),
-            new(
+            new Karta(
                 "Obelisk",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Szkło, 1 } },
@@ -773,7 +774,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Niebieski
             ),
-            new(
+            new Karta(
                 "Budynek Senatu",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamień, 1 }, { Surowiec.Papirus, 1 } },
@@ -784,7 +785,7 @@ public static class ZbiorKart
                 KolorKarty.Niebieski,
                 darmowaBudowa: "Sąd"
             ),
-            new(
+            new Karta(
                 "Mównica",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 3 }, { Surowiec.Drewno, 2 } },
@@ -794,7 +795,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Niebieski
             ),
-            new(
+            new Karta(
                 "Pałac",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 2 } },
@@ -804,7 +805,7 @@ public static class ZbiorKart
                 },
                 KolorKarty.Niebieski
             ),
-            new(
+            new Karta(
                 "Panteon",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 2 } },
@@ -815,7 +816,7 @@ public static class ZbiorKart
                 KolorKarty.Niebieski,
                 darmowaBudowa: "Słońce"
             ),
-            new(
+            new Karta(
                 "Ogrody",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Drewno, 2 } },
@@ -834,7 +835,7 @@ public static class ZbiorKart
     {
         var talia = new List<KartaCudu>
         {
-            new(
+            new KartaCudu(
                 "Piramida Cheopsa",
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 3 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
@@ -842,7 +843,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 9)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Wiszące Ogrody Semiramidy",
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
@@ -852,7 +853,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Świątynia Artemidy W Efezie",
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
@@ -861,7 +862,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.RozegrajTurePonownie)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Sfinks",
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Szkło, 2 } },
                 new List<Efekt>
@@ -870,7 +871,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.RozegrajTurePonownie)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Latarnia Morska Na Faros",
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Papirus, 2 } },
                 new List<Efekt>
@@ -884,7 +885,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 4)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Kolos Rodyjski",
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 3 }, { Surowiec.Szkło, 1 } },
                 new List<Efekt>
@@ -893,7 +894,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Via Appia",
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Glina, 2 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
@@ -904,7 +905,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Pireus",
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Kamień, 1 }, { Surowiec.Glina, 1 } },
                 new List<Efekt>
@@ -918,7 +919,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 2)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Mauzoleum W Halikarnasie",
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szkło, 2 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
@@ -927,7 +928,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 2)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Circus Maximus",
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 } },
                 new List<Efekt>
@@ -937,7 +938,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Posąg Zeusa W Olimpii",
                 new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 2 } },
                 new List<Efekt>
@@ -947,7 +948,7 @@ public static class ZbiorKart
                     new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
                 }
             ),
-            new(
+            new KartaCudu(
                 "Biblioteka Aleksandryjska",
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 3 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>

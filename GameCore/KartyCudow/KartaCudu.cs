@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using System.Linq;
 public class KartaCudu : KartaBazowa
 {
     //public string Nazwa { get; protected set; }
