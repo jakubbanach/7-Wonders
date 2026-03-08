@@ -36,6 +36,10 @@ public class Gracz
         DodajMonety(7);
         //DodajSurowiec(Surowiec.Monety, 7);
     }
+    public int Monety()
+    {
+        return Surowce.TryGetValue(Surowiec.Monety, out var monety) ? monety : 0;
+    }
     public void DodajMonety(int ilosc)
     {
         //Monety += ilosc;

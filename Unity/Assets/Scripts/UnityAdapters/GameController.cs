@@ -3,18 +3,26 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private GraKonsolowa gra;
+    private Gra gra;
+    public UIManager uiManager;
 
     [SerializeField] private TextMeshProUGUI statusText;
 
     void Start()
     {
-        gra = new GraKonsolowa();
+        gra = Gra.StworzNowaGre();
         statusText.text = "Gra rozpoczêta";
+        uiManager.Setup(gra);
     }
 
     public void OnKlikRuch()
     {
         statusText.text = "Klikniêto ruch!";
+    }
+    public void WykonajRuch(Karta karta, TypRuchu ruch)
+    {
+        gra.WykonajRuch(karta, ruch);
+
+        uiManager.Odswiez();
     }
 }

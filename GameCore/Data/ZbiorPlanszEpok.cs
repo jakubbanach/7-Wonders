@@ -17,10 +17,10 @@ public static class ZbiorPlanszEpok
 
     private static PlanszaEpoki InicjalizujPlanszeEpokiI(List<Karta> talia)
     {
-        var karty = talia;
-            //.OrderBy(x => System.Guid.NewGuid())
-            //.Take(20)
-            //.ToList();
+        var karty = talia
+            .OrderBy(x => System.Guid.NewGuid())
+            .Take(20)
+            .ToList();
         // WARSTWA 1 – 2 odkryte
         var a1 = new PoleKarty(karty[0], false);
         var a2 = new PoleKarty(karty[1], false);
@@ -95,10 +95,10 @@ public static class ZbiorPlanszEpok
 
     private static PlanszaEpoki InicjalizujPlanszeEpokiII(List<Karta> talia)
     {
-        var karty = talia;
-        //.OrderBy(x => System.Guid.NewGuid())
-        //.Take(18)
-        //.ToList();
+        var karty = talia
+            .OrderBy(x => System.Guid.NewGuid())
+            .Take(20)
+            .ToList();
 
         // WARSTWA 1 – 6 odkrytych
         var a1 = new PoleKarty(karty[0], false);
@@ -169,10 +169,13 @@ public static class ZbiorPlanszEpok
 
     private static PlanszaEpoki InicjalizujPlanszeEpokiIII(List<Karta> talia)
     {
-        var karty = talia;
-        //.OrderBy(x => System.Guid.NewGuid())
-        //.Take(20)
-        //.ToList();
+        // TODO: 3 karty Gildii + 17 kart z 3 epoki (razem 20 kart)
+        var karty = talia
+            .OrderBy(x => System.Guid.NewGuid())
+            .Take(20)
+            .ToList();
+
+        //var kartyGildii
 
         // WARSTWA 1 – 2 odkryte
         var a1 = new PoleKarty(karty[0], false);

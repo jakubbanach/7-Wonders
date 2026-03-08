@@ -40,8 +40,6 @@ public class GraKonsolowa
 
     public void Start()
     {
-        Dictionary<Epoka, List<Karta>> kartyEpok = InicjalizacjaKartEpok();
-
         Gracz gracz1 = gracze[0];
         Gracz gracz2 = gracze[1];
 
@@ -98,20 +96,6 @@ public class GraKonsolowa
         {
             new Gracz(nazwa1),
             new Gracz(nazwa2)
-        };
-    }
-
-    Dictionary<Epoka, List<Karta>> InicjalizacjaKartEpok()
-    {
-        var kartyEpokiI = ZbiorKart.TaliaEpokiI;
-        var kartyEpokiII = ZbiorKart.TaliaEpokiII;
-        var kartyEpokiIII = ZbiorKart.TaliaEpokiIII;
-
-        return new Dictionary<Epoka, List<Karta>>
-        {
-            { Epoka.EpokaI, kartyEpokiI.ToList() },
-            { Epoka.EpokaII, kartyEpokiII.ToList() },
-            { Epoka.EpokaIII, kartyEpokiIII.ToList() }
         };
     }
 
