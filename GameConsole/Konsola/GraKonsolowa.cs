@@ -167,14 +167,14 @@ public class GraKonsolowa
             Console.WriteLine($"Ruch gracza: {aktywnyGracz.Nazwa}");
 
             int indeks = _wyborKarty.Wybierz(planszaEpoki.DostepneKarty.ToList());
-            PoleKarty wybranaKarta = planszaEpoki.DostepneKarty.ElementAt(indeks);
+            PoleKarty wybranePole = planszaEpoki.DostepneKarty.ElementAt(indeks);
 
-            Console.WriteLine($"Wybrano kartê: {wybranaKarta.Karta!.Nazwa}");
+            Console.WriteLine($"Wybrano kartê: {wybranePole.Karta!.Nazwa}");
 
-            RozegrajTure(aktywnyGracz, przeciwnik, wybranaKarta.Karta);
+            RozegrajTure(aktywnyGracz, przeciwnik, wybranePole.Karta);
             //aktywnyGracz.WykonajRuch(wybrana.Karta);
             //aktywnyGracz.ZbudujKarte(wybrana.Karta);
-            planszaEpoki.UsunPole(wybranaKarta);
+            planszaEpoki.UsunPole(wybranePole);
 
             Console.WriteLine(new string('*', 11));
 

@@ -47,17 +47,23 @@ public class Gra
             new StanGry());
     }
 
-    public void WykonajRuch(Karta karta, TypRuchu typRuchu)
+    public void WykonajRuch(PoleKarty poleKarty, TypRuchu typRuchu)
     {
-        Ruch ruch = new Ruch(AktywnyGracz, Przeciwnik, karta, typRuchu);
+        Ruch ruch = new Ruch(AktywnyGracz, Przeciwnik, poleKarty.Karta, typRuchu);
         ruch.Wykonaj(planszaKonfliktu);
+        planszaEpoki.UsunPole(poleKarty);
         if (CzyKoniecGry())
         {
             Console.WriteLine("Gra zakończona!");
             return;
         }
         // czy tutaj nie dać logiki wykonania ponownego ruchu - efekt RozegrajTurePonownie
-        // Zmiana aktywnego gracza
+        ZmienTure(); 
+    }
+
+    private void ZmienTure()
+    {
+        idAktywnegoGracza = (idAktywnegoGracza + 1) % gracze.Length;
     }
 
     public IReadOnlyList<Karta> DostepneKarty()

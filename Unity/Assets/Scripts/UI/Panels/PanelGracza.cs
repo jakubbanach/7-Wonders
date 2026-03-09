@@ -12,5 +12,6 @@ public class PanelGracza : MonoBehaviour
         nameText.text = gracz.Nazwa;
         moneyText.text = "Monety: " + gracz.Monety();
         Karta[] karty = gracz.PobierzZbudowaneKarty().ToArray();
+        Debug.Log("Gracz " + gracz.Nazwa + " ma " + karty.Length + " zbudowanych kart.");
     }
 }

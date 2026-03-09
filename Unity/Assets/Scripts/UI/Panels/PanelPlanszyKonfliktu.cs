@@ -45,9 +45,9 @@ public class PanelPlanszyKonfliktu : MonoBehaviour
     {
         Debug.Log("OdswiezPolaKonfliktu: " + planszaKonfliktu.PionKonfliktu.PobierzPozycje());
         var strefaDlaKonfliktu = planszaKonfliktu.PobierzStrefeDlaPozycji(planszaKonfliktu.PionKonfliktu.PobierzPozycje());
-        Debug.Log("Strefa dla konfliktu: " + strefaDlaKonfliktu.Nazwa);
-        Debug.Log("Pola strefy: " + strefaDlaKonfliktu.LiczbaPol);
-        Debug.Log("Punkty za strefe: " + strefaDlaKonfliktu.LiczbaPunktow);
+        //Debug.Log("Strefa dla konfliktu: " + strefaDlaKonfliktu.Nazwa);
+        //Debug.Log("Pola strefy: " + strefaDlaKonfliktu.LiczbaPol);
+        //Debug.Log("Punkty za strefe: " + strefaDlaKonfliktu.LiczbaPunktow);
         //foreach (Transform child in polaKonfliktuContainer)
         //{
         //    Destroy(child.gameObject);

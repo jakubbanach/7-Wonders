@@ -25,7 +25,7 @@ public class PanelPlanszyKart : MonoBehaviour
             var layout = row.AddComponent<HorizontalLayoutGroup>();
             layout.childAlignment = TextAnchor.MiddleCenter;
 
-            Debug.Log("Liczba kart w tej linii: " + liczbaKart);
+            //Debug.Log("Liczba kart w tej linii: " + liczbaKart);
             for (int i = 0; i < liczbaKart; i++)
             {
                 var pole = plansza.Pola[index++];

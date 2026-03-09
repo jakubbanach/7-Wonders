@@ -11,27 +11,46 @@ public class CardView : MonoBehaviour, IPointerClickHandler
     private PoleKarty pole;
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (pole == null || pole.Karta == null)
+        {
+            Debug.Log("Klikniêto puste pole. Nie mo¿na zagraæ karty.");
+            return;
+        }
+
         Debug.Log("Klikniêto kartê: " + pole.Karta.Nazwa);
         if (pole.CzyZakryta)
         {
             Debug.Log("Ta karta jest zakryta. Nie mo¿na jej zagraæ.");
             return;
         }
-        if (pole.BlokujacePola != null && pole.BlokujacePola.Count > 0)
+        if (pole.CzyDostepna == false)
         {
             Debug.Log("Ta karta jest zablokowana przez inne pola. Nie mo¿na jej zagraæ.");
             return;
         }
-        //Object.FindFirstObjectByType<GameController>().WykonajRuch(pole.Karta, TypRuchu.ZbudujKarte);
+        Object.FindFirstObjectByType<GameController>().WykonajRuch(pole, TypRuchu.ZbudujKarte);
     }
 
     public void Setup(PoleKarty pole)
     {
         this.pole = pole;
+        
+        if (pole.Karta == null)
+        {
+            nameText.text = "";
+            cardImage.color = Hex("#9096A5");
+            return;
+        }
 
         if (pole.CzyZakryta)
         {
             nameText.text = "Zakryta";
+        }
+        else if (pole.Karta.CzyZagrana)
+        {
+            nameText.text = "";
+            //UstawKolorKarty(KolorKarty.Czarny);
+            cardImage = null; // Ukryj obraz karty, jeœli jest ju¿ zagrana
         }
         else
         {

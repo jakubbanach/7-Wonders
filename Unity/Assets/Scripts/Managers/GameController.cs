@@ -19,9 +19,9 @@ public class GameController : MonoBehaviour
     {
         statusText.text = "Klikniêto ruch!";
     }
-    public void WykonajRuch(Karta karta, TypRuchu ruch)
+    public void WykonajRuch(PoleKarty poleKarty, TypRuchu ruch)
     {
-        gra.WykonajRuch(karta, ruch);
+        gra.WykonajRuch(poleKarty, ruch);
 
         uiManager.Odswiez();
     }
