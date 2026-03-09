@@ -4,6 +4,9 @@ public class PanelPlanszyKart : MonoBehaviour
 {
     [SerializeField] private Transform container;
     [SerializeField] private CardView cardPrefab;
+    [SerializeField] private GameController controller;
+
+    [SerializeField] private int spacing = 40;
 
     public void Odswiez(Gra gra)
     {
@@ -19,11 +22,18 @@ public class PanelPlanszyKart : MonoBehaviour
 
         foreach (var liczbaKart in uklad)
         {
-            GameObject row = new GameObject("Row");
-            row.transform.SetParent(container);
+            GameObject row = new GameObject("Row", typeof(RectTransform));
+            row.transform.SetParent(container, false);
 
             var layout = row.AddComponent<HorizontalLayoutGroup>();
             layout.childAlignment = TextAnchor.MiddleCenter;
+            layout.childControlHeight = false;
+            layout.childControlWidth = false;
+            layout.childForceExpandHeight = false;
+            layout.childForceExpandWidth = false;
+            layout.spacing = spacing;
+
+            row.AddComponent<ContentSizeFitter>().horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
 
             //Debug.Log("Liczba kart w tej linii: " + liczbaKart);
             for (int i = 0; i < liczbaKart; i++)
@@ -31,7 +41,7 @@ public class PanelPlanszyKart : MonoBehaviour
                 var pole = plansza.Pola[index++];
 
                 var card = Instantiate(cardPrefab, row.transform);
-                card.Setup(pole);
+                card.Setup(pole, controller);
             }
         }
     }

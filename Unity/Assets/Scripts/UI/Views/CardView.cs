@@ -9,32 +9,13 @@ public class CardView : MonoBehaviour, IPointerClickHandler
     [SerializeField] private TMP_Text nameText;
 
     private PoleKarty pole;
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (pole == null || pole.Karta == null)
-        {
-            Debug.Log("Klikniêto puste pole. Nie mo¿na zagraæ karty.");
-            return;
-        }
-
-        Debug.Log("Klikniêto kartê: " + pole.Karta.Nazwa);
-        if (pole.CzyZakryta)
-        {
-            Debug.Log("Ta karta jest zakryta. Nie mo¿na jej zagraæ.");
-            return;
-        }
-        if (pole.CzyDostepna == false)
-        {
-            Debug.Log("Ta karta jest zablokowana przez inne pola. Nie mo¿na jej zagraæ.");
-            return;
-        }
-        Object.FindFirstObjectByType<GameController>().WykonajRuch(pole, TypRuchu.ZbudujKarte);
-    }
-
-    public void Setup(PoleKarty pole)
+    private GameController controller;
+    public void Setup(PoleKarty pole, GameController gameController = null)
     {
         this.pole = pole;
-        
+        if (gameController != null)
+            controller = gameController;
+
         if (pole.Karta == null)
         {
             nameText.text = "";
@@ -58,6 +39,39 @@ public class CardView : MonoBehaviour, IPointerClickHandler
             UstawKolorKarty(pole.Karta.KolorKarty);
         }
     }
+    public void Setup(Karta karta)
+    {
+        if (karta == null)
+        {
+            nameText.text = "";
+            cardImage.color = Hex("#9096A5");
+            return;
+        }
+        nameText.text = karta.Nazwa;
+        UstawKolorKarty(karta.KolorKarty);
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (pole == null || pole.Karta == null)
+        {
+            Debug.Log("Klikniêto puste pole. Nie mo¿na zagraæ karty.");
+            return;
+        }
+
+        Debug.Log("Klikniêto kartê: " + pole.Karta.Nazwa);
+        if (pole.CzyZakryta)
+        {
+            Debug.Log("Ta karta jest zakryta. Nie mo¿na jej zagraæ.");
+            return;
+        }
+        if (pole.CzyDostepna == false)
+        {
+            Debug.Log("Ta karta jest zablokowana przez inne pola. Nie mo¿na jej zagraæ.");
+            return;
+        }
+        controller.WykonajRuch(pole, TypRuchu.ZbudujKarte);
+    }
+
     private void UstawKolorKarty(KolorKarty kolor)
     {
         switch (kolor)
