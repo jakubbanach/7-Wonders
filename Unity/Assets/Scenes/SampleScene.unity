@@ -212,6 +212,7 @@ MonoBehaviour:
   conflictText: {fileID: 1063003435}
   zetonyContainer: {fileID: 1437534423}
   zetonPrefab: {fileID: 3503852798813333450, guid: e9cd838edb153fd4f9f84312af8c7c63, type: 3}
+  polaKonfliktuContainer: {fileID: 0}
 --- !u!1 &84481347
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,8 +303,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -275.06}
-  m_SizeDelta: {x: 399.4243, y: 50}
+  m_AnchoredPosition: {x: 0, y: -275}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &183465733
 MonoBehaviour:
@@ -486,7 +487,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -230}
+  m_AnchoredPosition: {x: -388, y: -275.06}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &231284079
@@ -947,6 +948,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587056492}
   m_CullTransparentMesh: 1
+--- !u!1 &827076331
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827076332}
+  - component: {fileID: 827076333}
+  m_Layer: 5
+  m_Name: Uklad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &827076332
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827076331}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1404967155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.0006904602, y: -0.0000038146973}
+  m_SizeDelta: {x: 540.91, y: 390}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &827076333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827076331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 1
+  m_ChildControlHeight: 1
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 1
+  m_ReverseArrangement: 0
 --- !u!1 &964524651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,8 +1455,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -357.5, y: -62.5}
-  m_SizeDelta: {x: -715, y: -125}
+  m_AnchoredPosition: {x: -389.99997, y: -62.5}
+  m_SizeDelta: {x: -780.00006, y: -125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1388176751
 MonoBehaviour:
@@ -1477,13 +1540,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 827076332}
   m_Father: {fileID: 84481348}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.500008}
-  m_SizeDelta: {x: -600, y: -175.00002}
+  m_AnchoredPosition: {x: 3.4136047, y: -50.000004}
+  m_SizeDelta: {x: -422.0933, y: -100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1404967156
 MonoBehaviour:
@@ -1535,8 +1599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f7b50c8766e6a45a36e518ca51e1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardsParent: {fileID: 0}
-  cardPrefab: {fileID: 0}
+  container: {fileID: 827076332}
+  cardPrefab: {fileID: -8948686077795567205, guid: 87820963e7bec254ca212778f1cf1a41, type: 3}
 --- !u!1 &1437534422
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,8 +1700,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 357.5, y: -62.5}
-  m_SizeDelta: {x: -715, y: -125}
+  m_AnchoredPosition: {x: 390, y: -62.5}
+  m_SizeDelta: {x: -780, y: -125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1476611276
 MonoBehaviour:

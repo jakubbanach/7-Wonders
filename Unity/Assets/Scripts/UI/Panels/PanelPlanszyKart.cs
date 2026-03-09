@@ -1,29 +1,38 @@
 using UnityEngine;
+using UnityEngine.UI;
 public class PanelPlanszyKart : MonoBehaviour
 {
-    public Transform cardsParent;
-    public GameObject cardPrefab;
+    [SerializeField] private Transform container;
+    [SerializeField] private CardView cardPrefab;
 
     public void Odswiez(Gra gra)
     {
-        //Clear();
+        var plansza = gra.PlanszaEpoki;
+        var uklad = plansza.Uklad();
 
-        //var karty = gra.DostepneKarty();
+        int index = 0;
 
-        //foreach (var karta in karty)
-        //{
-        //    GameObject obj = Instantiate(cardPrefab, cardsParent);
-
-        //    CardView view = obj.GetComponent<CardView>();
-        //    view.Setup(karta);
-        //}
-    }
-
-    void Clear()
-    {
-        foreach (Transform child in cardsParent)
-        {
+        foreach (Transform child in container)
             Destroy(child.gameObject);
+
+        Debug.Log("Odswiezanie planszy kart..." + gra.Epoka.ToString());
+
+        foreach (var liczbaKart in uklad)
+        {
+            GameObject row = new GameObject("Row");
+            row.transform.SetParent(container);
+
+            var layout = row.AddComponent<HorizontalLayoutGroup>();
+            layout.childAlignment = TextAnchor.MiddleCenter;
+
+            Debug.Log("Liczba kart w tej linii: " + liczbaKart);
+            for (int i = 0; i < liczbaKart; i++)
+            {
+                var pole = plansza.Pola[index++];
+
+                var card = Instantiate(cardPrefab, row.transform);
+                card.Setup(pole);
+            }
         }
     }
 }

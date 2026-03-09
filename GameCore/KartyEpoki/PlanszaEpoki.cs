@@ -38,17 +38,22 @@ public class PlanszaEpoki
         }
     }
 
-    public string PlanszaDoStringa()
+    public int[] Uklad()
     {
-        var wynik = new System.Text.StringBuilder();
-        int maxSzerokosc = 11;
-        int[] uklad = Epoka switch
+        return Epoka switch
         {
             Epoka.EpokaI => new[] { 2, 3, 4, 5, 6 },
             Epoka.EpokaII => new[] { 6, 5, 4, 3, 2 },
             Epoka.EpokaIII => new[] { 2, 3, 4, 2, 4, 3, 2 },
             _ => throw new ArgumentOutOfRangeException()
         };
+    }
+
+    public string PlanszaDoStringa()
+    {
+        var wynik = new System.Text.StringBuilder();
+        int maxSzerokosc = 11;
+        int[] uklad = Uklad();
         int index = 0;
         foreach (int liczbaPol in uklad)
         {
