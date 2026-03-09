@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class WygladKarty : MonoBehaviour
+public class CardView : MonoBehaviour
 {
     public TMP_Text nameText;
 

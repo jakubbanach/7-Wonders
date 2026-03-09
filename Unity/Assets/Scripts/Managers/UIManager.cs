@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public PanelPlanszyKart panelKart;
-    public PanelPlanszyKonfliktu panelKonfliktu;
-    public PanelGracza panelGracz1;
-    public PanelGracza panelGracz2;
+    [SerializeField] private PanelPlanszyKart panelKart;
+    [SerializeField] private PanelPlanszyKonfliktu panelKonfliktu;
+    [SerializeField] private PanelGracza panelGracz1;
+    [SerializeField] private PanelGracza panelGracz2;
 
     private Gra gra;
 

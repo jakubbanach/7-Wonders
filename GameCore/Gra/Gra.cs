@@ -25,6 +25,9 @@ public class Gra
     }
 
     public Gracz[] Gracze => gracze;
+    public PlanszaKonfliktu PlanszaKonfliktu => planszaKonfliktu;
+    public PlanszaEpoki PlanszaEpoki => planszaEpoki;
+    public StanGry StanGry => stanGry;
     public Gracz AktywnyGracz => gracze[idAktywnegoGracza];
 
     public Gracz Przeciwnik =>

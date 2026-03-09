@@ -10,6 +10,7 @@ public class PanelGracza : MonoBehaviour
     public void Odswiez(Gracz gracz)
     {
         nameText.text = gracz.Nazwa;
-        moneyText.text = gracz.Monety() + " $";
+        moneyText.text = "Monety: " + gracz.Monety();
+        Karta[] karty = gracz.PobierzZbudowaneKarty().ToArray();
     }
 }
