@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PanelPlanszyKonfliktu : MonoBehaviour
 {
-    [SerializeField] private TMP_Text conflictText;
-
     [SerializeField] private Transform zetonyContainer;
     [SerializeField] private ZetonPostepuView zetonPrefab;
 
-    [SerializeField] private Transform polaKonfliktuContainer;
-    //[SerializeField] private PoleKonfliktuView polePrefab;
+    [SerializeField] private Transform TorKonfliktuContainer;
+    [SerializeField] private PoleKonfliktuView polePrefab;
 
     private IReadOnlyList<Strefa> strefy = ZbiorStref.Strefy;
+    private List<PoleKonfliktuView> pola = new();
 
     public void Odswiez(Gra gra)
     {
@@ -21,10 +20,10 @@ public class PanelPlanszyKonfliktu : MonoBehaviour
         var zetonyPostepu = planszaKonfliktu.ZetonyPostepu;
         var zbiorStref = ZbiorStref.Strefy;
 
-        conflictText.text = "Konflikt: " + konflikt.PobierzPozycje();
         // tutaj bedzie przydzielenie obrazkow do zetonu postepu na planszy konfliktu
         OdswiezZetony(zetonyPostepu);
         OdswiezPolaKonfliktu(planszaKonfliktu);
+        OdswiezPion(planszaKonfliktu);
 
     }
 
@@ -41,25 +40,28 @@ public class PanelPlanszyKonfliktu : MonoBehaviour
             view.Setup(zeton);
         }
     }
-    private void OdswiezPolaKonfliktu(PlanszaKonfliktu planszaKonfliktu)
+    private void OdswiezPolaKonfliktu(PlanszaKonfliktu plansza)
     {
-        Debug.Log("OdswiezPolaKonfliktu: " + planszaKonfliktu.PionKonfliktu.PobierzPozycje());
-        var strefaDlaKonfliktu = planszaKonfliktu.PobierzStrefeDlaPozycji(planszaKonfliktu.PionKonfliktu.PobierzPozycje());
-        //Debug.Log("Strefa dla konfliktu: " + strefaDlaKonfliktu.Nazwa);
-        //Debug.Log("Pola strefy: " + strefaDlaKonfliktu.LiczbaPol);
-        //Debug.Log("Punkty za strefe: " + strefaDlaKonfliktu.LiczbaPunktow);
-        //foreach (Transform child in polaKonfliktuContainer)
-        //{
-        //    Destroy(child.gameObject);
-        //}
+        foreach (Transform child in TorKonfliktuContainer)
+            Destroy(child.gameObject);
 
-        //foreach (var strefa in strefy)
-        //{
-        //    if strefa, != konflikt.PobierzPozycje())
-        //        continue;
-        //    var view = Instantiate(zetonPrefab, polaKonfliktuContainer);
-        //    view.Setup(strefa);
-        //}
-        //planszaKonfliktu.PobierzStrefeDlaPozycji(planszaKonfliktu.PionKonfliktu.PobierzPozycje());
+        pola.Clear();
+
+        for (int pos = -9; pos <= 9; pos++)
+        {
+            var strefa = plansza.PobierzStrefeDlaPozycji(pos);
+
+            var pole = Instantiate(polePrefab, TorKonfliktuContainer);
+            pole.Setup(pos, strefa);
+
+            pola.Add(pole);
+        }
+    }
+
+    private void OdswiezPion(PlanszaKonfliktu plansza)
+    {
+        int pos = plansza.PionKonfliktu.PobierzPozycje();
+
+        pola[pos + 9].image.color = Color.red; // ustawienie koloru pola, na którym znajduje siê pion konfliktu
     }
 }

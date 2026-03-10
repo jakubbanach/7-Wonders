@@ -63,7 +63,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Panels\PanelPlanszyKart.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\PanelGracza.cs" />
+    <Compile Include="Assets\Scripts\UI\Views\PoleKonfliktuView.cs" />
     <Compile Include="Assets\Scripts\UI\Panels\PanelPlanszyKonfliktu.cs" />
+    <Compile Include="Assets\Scripts\UI\Views\WonderCardView.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\Scripts\Managers\GameController.cs" />
     <Compile Include="Assets\Scripts\UI\Views\ZetonPostepuView.cs" />

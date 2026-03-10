@@ -17,6 +17,9 @@ public class PanelGracza : MonoBehaviour
 
     [SerializeField] private CardView boughtCardPrefab;
 
+    [SerializeField] private Transform wondersContainer;
+    [SerializeField] private WonderCardView wonderCardPrefab;
+
     void Clear(Transform container)
     {
         foreach (Transform child in container)
@@ -27,7 +30,10 @@ public class PanelGracza : MonoBehaviour
         nameText.text = gracz.Nazwa;
         moneyText.text = "Monety: " + gracz.Monety();
         Karta[] karty = gracz.PobierzZbudowaneKarty().ToArray();
+        KartaCudu[] cuda = gracz.KartyCudow.ToArray();
         Debug.Log("Gracz " + gracz.Nazwa + " ma " + karty.Length + " zbudowanych kart.");
+        Debug.Log("Gracz " + gracz.Nazwa + " ma " + cuda.Length + " kart cudow.");
+
         Clear(brownContainer);
         Clear(grayContainer);
         Clear(blueContainer);
@@ -42,6 +48,12 @@ public class PanelGracza : MonoBehaviour
 
             var view = Instantiate(boughtCardPrefab, container);
             view.Setup(karta);
+        }
+        Clear(wondersContainer);
+        foreach (var wonder in gracz.KartyCudow)
+        {
+            var view = Instantiate(wonderCardPrefab, wondersContainer);
+            view.Setup(wonder);
         }
     }
 

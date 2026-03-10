@@ -3,10 +3,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class CardView : MonoBehaviour, IPointerClickHandler
+public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image cardImage;
     [SerializeField] private TMP_Text nameText;
+
+    [SerializeField] private Image border;
+
+    private Color normalColor = Color.black;
+    private Color hoverColor = Color.yellow;
 
     private PoleKarty pole;
     private GameController controller;
@@ -16,27 +21,31 @@ public class CardView : MonoBehaviour, IPointerClickHandler
         if (gameController != null)
             controller = gameController;
 
-        if (pole.Karta == null)
+        if (pole.Karta == null) // brak karty na polu
         {
             nameText.text = "";
             cardImage.color = Hex("#9096A5");
+            border.color = Hex("#9096A5");
             return;
         }
 
-        if (pole.CzyZakryta)
+        if (pole.CzyZakryta) // karta jest zakryta
         {
             nameText.text = "Zakryta";
+            border.color = Hex("#FFFFFF");
         }
-        else if (pole.Karta.CzyZagrana)
+        else if (pole.CzyDostepna) // karta jest zagrana
         {
-            nameText.text = "";
-            //UstawKolorKarty(KolorKarty.Czarny);
-            cardImage = null; // Ukryj obraz karty, jeœli jest ju¿ zagrana
+            nameText.text = pole.Karta.Nazwa;
+            UstawKolorKarty(pole.Karta.KolorKarty);
         }
         else
         {
             nameText.text = pole.Karta.Nazwa;
             UstawKolorKarty(pole.Karta.KolorKarty);
+            // ukryj widocznoœæ bordera (tak jak w inspektorze siê robi)
+            border.enabled = false;
+
         }
     }
     public void Setup(Karta karta)
@@ -45,6 +54,7 @@ public class CardView : MonoBehaviour, IPointerClickHandler
         {
             nameText.text = "";
             cardImage.color = Hex("#9096A5");
+            border.color = Hex("#9096A5");
             return;
         }
         nameText.text = karta.Nazwa;
@@ -70,6 +80,24 @@ public class CardView : MonoBehaviour, IPointerClickHandler
             return;
         }
         controller.WykonajRuch(pole, TypRuchu.ZbudujKarte);
+    }
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (pole == null || pole.Karta == null || pole.CzyZakryta || !pole.CzyDostepna)
+        {
+            return;
+        }
+        border.color = hoverColor;
+        //border.color *= 1.5f;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (pole == null || pole.Karta == null || pole.CzyZakryta || !pole.CzyDostepna)
+        {
+            return;
+        }
+        border.color = normalColor;
     }
 
     private void UstawKolorKarty(KolorKarty kolor)

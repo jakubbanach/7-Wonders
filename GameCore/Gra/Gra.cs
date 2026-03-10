@@ -39,6 +39,7 @@ public class Gra
         var planszaKonfliktu = InicjalizacjaPlanszy(gracze);
         var planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaI);
         var cuda = InicjalizacjaKartCudow();
+        PrzydzielenieCudow(gracze, cuda);
 
         return new Gra(
             gracze,
@@ -140,5 +141,17 @@ public class Gra
             .OrderBy(x => Guid.NewGuid())
             .Take(8) // 4 w pierwszej fazie wyboru, 4 w drugiej fazie wyboru
             .ToList();
+    }
+    //TEMP: Gracze sami wybieraja cuda, ale na potrzeby testowania przydzielamy im losowo 4 karty
+    private static void PrzydzielenieCudow(Gracz[] gracze, List<KartaCudu> cuda)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            gracze[0].KartyCudow.Add(cuda[i]);
+        }
+        for (int i = 4; i < 8; i++)
+        {
+            gracze[1].KartyCudow.Add(cuda[i]);
+        }
     }
 }
