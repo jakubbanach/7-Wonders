@@ -25,6 +25,21 @@ public class Karta : KartaBazowa
         CzyZagrana = czyZagrana;
     }
 
+    private Karta(Karta karta) : base(karta.Nazwa, karta.Koszt, karta.Efekty)
+    {
+        Epoka = karta.Epoka;
+        KolorKarty = karta.KolorKarty;
+        DarmowaBudowa = karta.DarmowaBudowa;
+        CzyWidoczna = karta.CzyWidoczna;
+        CzyOdrzucona = karta.CzyOdrzucona;
+        CzyZagrana = karta.CzyZagrana;
+    }
+
+    public Karta Clone()
+    {
+        return new Karta(this);
+    }
+
     public void UstawWidocznosc(bool widoczna)
     {
         CzyWidoczna = widoczna;

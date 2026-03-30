@@ -12,6 +12,18 @@ public class PlanszaEpoki
         Epoka = epoka;
         Pola = new List<PoleKarty>();
     }
+
+    private PlanszaEpoki(PlanszaEpoki plansza)
+    {
+        Epoka = plansza.Epoka;
+        Pola = plansza.Pola.Select(p => p.Clone()).ToList();
+    }
+
+    public PlanszaEpoki Clone()
+    {
+        return new PlanszaEpoki(this);
+    }
+
     public IEnumerable<PoleKarty> DostepneKarty =>
         Pola.Where(p => p.CzyDostepna && p.Karta != null);
 

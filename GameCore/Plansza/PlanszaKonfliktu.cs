@@ -23,6 +23,21 @@ public class PlanszaKonfliktu
         Gracze = gracze;
     }
 
+    private PlanszaKonfliktu(PlanszaKonfliktu plansza)
+    {
+        PionKonfliktu = plansza.PionKonfliktu.Clone();
+        ZetonyPostepu = plansza.ZetonyPostepu;
+        Strefy = plansza.Strefy.Select(s => s.Clone()).ToList();
+        ObecnaStrefa = Strefy.First(s => s.Nazwa == plansza.ObecnaStrefa.Nazwa);
+        ZbudujMapeStref();
+        Gracze = plansza.Gracze.Select(g => g.Clone()).ToArray();
+    }
+
+    public PlanszaKonfliktu Clone()
+    {
+        return new PlanszaKonfliktu(this);
+    }
+
     private void ZbudujMapeStref()
     {
         _mapaStref = new List<(int, int, Strefa)>();

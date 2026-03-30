@@ -23,6 +23,20 @@ public class StanGry
         PunktyGracza2 = 0;
     }
 
+    private StanGry(StanGry stan)
+    {
+        CzyZakonczona = stan.CzyZakonczona;
+        TypZwyciestwa = stan.TypZwyciestwa;
+        Zwyciezca = stan.Zwyciezca;
+        PunktyGracza1 = stan.PunktyGracza1;
+        PunktyGracza2 = stan.PunktyGracza2;
+    }
+
+    public StanGry Clone()
+    {
+        return new StanGry(this);
+    }
+
     public void CzyZwyciestwoMilitarne(Gracz[] gracze, int pozycjaPionu)
     {
         if (pozycjaPionu >= 9)

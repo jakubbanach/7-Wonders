@@ -10,6 +10,11 @@ public class PionKonfliktu
         Pozycja = pozycja;
     }
 
+    public PionKonfliktu Clone()
+    {
+        return new PionKonfliktu(Pozycja);
+    }
+
     public void Przesun(int iloscPol)
     {
         Pozycja += iloscPol;

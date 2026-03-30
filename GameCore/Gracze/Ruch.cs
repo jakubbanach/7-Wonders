@@ -28,7 +28,7 @@ public class Ruch
                 Gracz.OdrzucKarte(KartaDoZagrania);
                 break;
             case TypRuchu.ZbudujCud:
-                //tutaj zaimplementowac wybor karty cudu
+                // TODO: Implementacja wyboru karty cudu
                 KartaCudu Cud = Gracz.KartyCudow[0]; //Gracz.WybierzNiezbudowanyCud();
                 Gracz.ZbudujCud(KartaDoZagrania, Przeciwnik, Cud, planszaKonfliktu);
                 break;

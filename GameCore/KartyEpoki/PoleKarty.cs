@@ -19,6 +19,18 @@ public class PoleKarty
         BlokujacePola = new List<PoleKarty>();
     }
 
+    private PoleKarty(PoleKarty pole)
+    {
+        Karta = pole.Karta?.Clone();
+        CzyZakryta = pole.CzyZakryta;
+        BlokujacePola = pole.BlokujacePola.Select(p => p.Clone()).ToList();
+    }
+
+    public PoleKarty Clone()
+    {
+        return new PoleKarty(this);
+    }
+
     public bool CzyDostepna =>
         !CzyZakryta &&
         BlokujacePola.All(p => p.Karta == null);

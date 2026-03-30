@@ -33,6 +33,22 @@ public class Gra
     public Gracz Przeciwnik =>
         gracze.First(g => g != AktywnyGracz);
 
+    private Gra(Gra gra)
+    {
+        idAktywnegoGracza = gra.idAktywnegoGracza;
+        gracze = gra.gracze
+            .Select(g => g.Clone())
+            .ToArray();
+        planszaKonfliktu = gra.planszaKonfliktu.Clone();
+        planszaEpoki = gra.planszaEpoki.Clone();
+        stanGry = gra.stanGry.Clone();
+    }
+
+    public Gra Clone()
+    {
+        return new Gra(this);
+    }
+
     public static Gra StworzNowaGre(string nazwa1="Gracz 1", string nazwa2="Gracz 2")
     {
         var gracze = InicjalizacjaGraczy(nazwa1, nazwa2);
@@ -69,14 +85,51 @@ public class Gra
 
     public IReadOnlyList<Karta> DostepneKarty()
     {
-        // Logika zwracająca dostępne karty dla aktywnego gracza
-        return new List<Karta>();
+        var karty = planszaEpoki.DostepneKarty
+            .Select(p => p.Karta)
+            .ToList();
+        if (!karty.Any())
+        {
+            Console.WriteLine("Brak dostępnych kart na planszy epoki!");
+            return new List<Karta>();
+        }
+        return karty;
     }
 
-    public IReadOnlyList<TypRuchu> DostepneRuchy(Karta karta)
+    public IReadOnlyList<TypRuchu> DostepneRuchyKarty(Karta karta)
     {
         // Logika zwracająca dostępne ruchy dla danej karty
         return new List<TypRuchu>();
+    }
+    public IReadOnlyList<Ruch> DostepneRuchy()
+    {
+        var wynik = new List<Ruch>();
+        var karty = DostepneKarty();
+        var kartyCudow = AktywnyGracz.KartyCudow;
+
+        foreach (var karta in karty)
+        {
+            if(!karta.CzyWidoczna || karta.CzyOdrzucona || karta.CzyZagrana)
+                continue;
+            // budowa karty
+            var budowaKarty = AktywnyGracz.CzyMoznaZbudowacKarte(karta, Przeciwnik);
+            if (budowaKarty.MoznaZagrac)
+            {
+                wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.ZbudujKarte));
+            }
+            // odrzucenie karty
+            wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.OdrzucKarte));
+            // budowa cudu
+            foreach (var kartaCudu in kartyCudow)
+            {
+                var budowaCudu = AktywnyGracz.CzyMoznaZbudowacCud(karta, Przeciwnik, kartaCudu);
+                if (budowaCudu.MoznaZagrac)
+                {
+                    wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.ZbudujCud));
+                }
+            }
+        }
+        return wynik;
     }
 
     public bool CzyKoniecEpoki()

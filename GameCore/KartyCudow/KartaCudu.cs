@@ -15,6 +15,17 @@ public class KartaCudu : KartaBazowa
         CzyZagrana = czyZagrana;
     }
 
+    private KartaCudu(KartaCudu kartaCudu)
+        : base(kartaCudu.Nazwa, kartaCudu.Koszt, kartaCudu.Efekty)
+    {
+        CzyZagrana = kartaCudu.CzyZagrana;
+    }
+
+    public KartaCudu Clone()
+    {
+        return new KartaCudu(this);
+    }
+
     public void OznaczJakoNiezagrana() // przydatne do resetowania stanu kart po zakoñczeniu gry
     {
         CzyZagrana = false;

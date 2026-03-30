@@ -17,6 +17,21 @@ public class Strefa
         CzyJuzUzyta = czyJuzUzyta;
     }
 
+    private Strefa(Strefa strefa)
+    {
+        Nazwa = strefa.Nazwa;
+        LiczbaPol = strefa.LiczbaPol;
+        LiczbaTraconychMonet = strefa.LiczbaTraconychMonet;
+        LiczbaPunktow = strefa.LiczbaPunktow;
+        CzyZajeta = strefa.CzyZajeta;
+        CzyJuzUzyta = strefa.CzyJuzUzyta;
+    }
+
+    public Strefa Clone()
+    {
+        return new Strefa(this);
+    }
+
     public void UzyjStrefy()
     {
         CzyJuzUzyta = true;
