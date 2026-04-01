@@ -153,10 +153,10 @@ public class Gra
             // odrzucenie karty
             wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.OdrzucKarte));
             // budowa cudu
-            if (!CzyLiczbaZbudowanychCudowMniejsza7())
-                continue;
             foreach (var kartaCudu in kartyCudow)
             {
+                //if (!CzyLiczbaZbudowanychCudowMniejsza7())
+                //    continue;
                 var budowaCudu = AktywnyGracz.CzyMoznaZbudowacCud(karta, Przeciwnik, kartaCudu);
                 if (budowaCudu.MoznaZagrac)
                 {

@@ -15,7 +15,7 @@ class Program
     static void SimulationRunnerFunction()
     {
         int seed = 12345;
-        int games = 80; // tutaj jest jakis blad
+        int games = 46; // tutaj jest jakis blad
 
         var simulationRunner = new SimulationRunner(
             seed,
@@ -38,7 +38,7 @@ class Program
     }
     static void GameRunnerFunction()
     {
-        int seed = 12424;
+        int seed = 12345+45;
 
         var runner = new GameRunner(
             seed: seed,

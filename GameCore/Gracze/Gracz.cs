@@ -253,6 +253,9 @@ public class Gracz
         if (kartaCudu.CzyZagrana)
             return new WynikBudowy { MoznaZagrac = false, Koszt = 0 };
 
+        //if (PobierzZbudowaneKartyCudow().Count + przeciwnik.PobierzZbudowaneKartyCudow().Count == 7)
+        //    return new WynikBudowy { MoznaZagrac = false, Koszt = 0 };
+
         int koszt = karta.ObliczKoszt(this, przeciwnik, kartaCudu: kartaCudu);
         int monety = Surowce.TryGetValue(Surowiec.Monety, out var m) ? m : 0;
 
