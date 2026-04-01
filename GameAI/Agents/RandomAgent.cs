@@ -9,6 +9,7 @@ public class RandomAgent : IAgent
     public Ruch DecideMove(Gra gra)
     {
         var ruchy = gra.DostepneRuchy(); // Pobierz wszystkie dostępne 
+        Console.WriteLine($"Dostępne ruchy: {ruchy.Count}");
         return ruchy[random.Next(ruchy.Count)];
     }
 }

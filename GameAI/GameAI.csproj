@@ -8,6 +8,11 @@
     <ItemGroup>
 	    <ProjectReference Include="..\GameCore\GameCore.csproj" />
     </ItemGroup>
+	
+    <ItemGroup>
+      <Folder Include="Metrics\" />
+      <Folder Include="Tournament\" />
+    </ItemGroup>
 
 
 </Project>

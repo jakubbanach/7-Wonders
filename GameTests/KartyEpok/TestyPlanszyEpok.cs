@@ -90,6 +90,21 @@ public  class TestyPlanszyEpok
         Assert.Equal(5, planszaEpokiI.DostepneKarty.ToList().Count());
     }
 
+    [Fact]
+    public void Test_ZnajdzPole()
+    {
+        var taliaKart = ZbiorKart.TaliaEpokiI
+            .OrderBy(x => System.Guid.NewGuid())
+            .Take(20)
+            .ToList();
+        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart);
+        var kartaDoZnaleziona = taliaKart[0];
+        var poleZnaleziona = planszaEpokiI.ZnajdzPole(kartaDoZnaleziona);
+        Assert.NotNull(poleZnaleziona);
+        Assert.Equal(kartaDoZnaleziona, poleZnaleziona!.Karta);
+         _output.WriteLine($"Znaleziono pole dla karty: {kartaDoZnaleziona.Nazwa}");
+    }
+
     //[Fact]
     //public void Test_PrzejscieCalejEpoki()
     //{

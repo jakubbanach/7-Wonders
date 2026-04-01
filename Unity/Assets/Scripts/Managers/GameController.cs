@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     }
     public void WykonajRuch(PoleKarty poleKarty, TypRuchu ruch)
     {
-        gra.WykonajRuch(poleKarty, ruch);
+        gra.WykonajRuch(poleKarty.Karta, ruch);
 
         uiManager.Odswiez();
     }

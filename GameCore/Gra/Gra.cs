@@ -7,7 +7,7 @@ public class Gra
 {
     private readonly Gracz[] gracze;
     private readonly PlanszaKonfliktu planszaKonfliktu;
-    private readonly PlanszaEpoki planszaEpoki;
+    private PlanszaEpoki planszaEpoki;
     private readonly StanGry stanGry;
 
     private int idAktywnegoGracza = 0;
@@ -64,18 +64,57 @@ public class Gra
             new StanGry());
     }
 
-    public void WykonajRuch(PoleKarty poleKarty, TypRuchu typRuchu)
+    public void WykonajRuch(Ruch ruchNew)
     {
-        Ruch ruch = new Ruch(AktywnyGracz, Przeciwnik, poleKarty.Karta, typRuchu);
+        var karta = ZnajdzDostepnaKarte(ruchNew.KartaDoZagrania.Nazwa);
+
+        //Console.WriteLine($"Dostępne karty: {string.Join(", ", DostepneKarty().Select(k => k.Nazwa))}");
+        //Console.WriteLine($"Wybrana karta: {karta.Nazwa}");
+
+        var kartaCudu = ruchNew.KartaCudu == null ? null : ZnajdzKarteCudu(ruchNew.KartaCudu.Nazwa);
+
+        Ruch ruch = new Ruch(AktywnyGracz, Przeciwnik, karta, ruchNew.TypRuchu, kartaCudu);
         ruch.Wykonaj(planszaKonfliktu);
+
+        var poleKarty = planszaEpoki.ZnajdzPole(karta);
+        if (poleKarty == null)
+        {
+            Console.WriteLine("Nie można znaleźć karty na planszy epoki!");
+            return;
+        }
         planszaEpoki.UsunPole(poleKarty);
         if (CzyKoniecGry())
         {
             Console.WriteLine("Gra zakończona!");
             return;
         }
+        if (CzyKoniecEpoki())
+        {
+            Console.WriteLine("Koniec epoki! Przechodzimy do kolejnej epoki.");
+            if (planszaEpoki.Epoka == Epoka.EpokaIII)
+            {
+                Console.WriteLine("Koniec gry! Przechodzimy do podsumowania wyników.");
+                // dopisac logike podsumowania wynikow
+                return;
+            }
+            //var planszaEpokiNew = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1);
+            //planszaEpoki.ZmienPlansze(planszaEpokiNew);
+            planszaEpoki = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1);
+        }
         // czy tutaj nie dać logiki wykonania ponownego ruchu - efekt RozegrajTurePonownie
         ZmienTure(); 
+    }
+
+    private Karta ZnajdzDostepnaKarte(string nazwa)
+    {
+        return DostepneKarty()
+            .First(k => k.Nazwa == nazwa);
+    }
+
+    private KartaCudu ZnajdzKarteCudu(string nazwa)
+    {
+        return AktywnyGracz.KartyCudow
+            .First(k => k.Nazwa == nazwa);
     }
 
     private void ZmienTure()
@@ -96,11 +135,6 @@ public class Gra
         return karty;
     }
 
-    public IReadOnlyList<TypRuchu> DostepneRuchyKarty(Karta karta)
-    {
-        // Logika zwracająca dostępne ruchy dla danej karty
-        return new List<TypRuchu>();
-    }
     public IReadOnlyList<Ruch> DostepneRuchy()
     {
         var wynik = new List<Ruch>();
@@ -125,7 +159,7 @@ public class Gra
                 var budowaCudu = AktywnyGracz.CzyMoznaZbudowacCud(karta, Przeciwnik, kartaCudu);
                 if (budowaCudu.MoznaZagrac)
                 {
-                    wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.ZbudujCud));
+                    wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.ZbudujCud, kartaCudu));
                 }
             }
         }

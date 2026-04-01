@@ -35,6 +35,17 @@ public class PlanszaEpoki
     public IEnumerable<PoleKarty> WidoczneKarty =>
         Pola.Where(p => !p.CzyZakryta);
 
+    public void ZmienPlansze(PlanszaEpoki nowaPlansza)
+    {
+        Epoka = nowaPlansza.Epoka;
+        Pola = nowaPlansza.Pola.Select(p => p.Clone()).ToList();
+    }
+
+    public PoleKarty ZnajdzPole(Karta karta)
+    {
+        return Pola.FirstOrDefault(p => p.Karta == karta);
+    }
+
     public void UsunPole(PoleKarty pole)
     {
         pole.UsunKarte();

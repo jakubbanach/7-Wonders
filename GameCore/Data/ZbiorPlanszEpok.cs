@@ -87,7 +87,7 @@ public static class ZbiorPlanszEpok
             e1,e2
         };
 
-        return new PlanszaEpoki(Epoka.EpokaII)
+        return new PlanszaEpoki(Epoka.EpokaI)
         {
             Pola = pola
         };
@@ -170,7 +170,7 @@ public static class ZbiorPlanszEpok
             e1,e2,e3,e4,e5,e6
         };
 
-        return new PlanszaEpoki(Epoka.EpokaI)
+        return new PlanszaEpoki(Epoka.EpokaII)
         {
             Pola = pola
         };
