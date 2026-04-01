@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
+using System.Text.Json;
 
 class Program
 {
@@ -16,6 +17,14 @@ class Program
         var result = runner.PlayGame(agent1, agent2);
 
         PrintResult(result);
+
+        var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
+        var resultsDir = Path.Combine(projectDir, "Results");
+        Directory.CreateDirectory(resultsDir);
+        var fileName = $"match_{DateTime.Now:yyyyMMdd_HHmmss}_{result.MatchId}.json";
+        var fullPath = Path.Combine(resultsDir, fileName);
+
+        ResultWriter.Save(result, fullPath);
     }
 
     static void PrintResult(MatchResult result)

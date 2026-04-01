@@ -2,10 +2,13 @@
 
 public class RandomAgent : IAgent
 {
-    private readonly Random random = new Random();
+    private readonly IRandom random;
 
-    public string Name => "Random";
-
+    public string Name { get; set; } = "Random";
+    public RandomAgent(IRandom random)
+    {
+        this.random = random;
+    }
     public Ruch DecideMove(Gra gra)
     {
         var ruchy = gra.DostepneRuchy(); // Pobierz wszystkie dostępne 

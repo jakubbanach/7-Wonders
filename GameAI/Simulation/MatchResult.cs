@@ -11,10 +11,10 @@ public class MatchResult
     public string? Winner { get; }
     public TypZwyciestwa TypZwyciestwa { get; }
 
-    public int Turns;
+    public int Turns { get; }
 
-    public int Agent1Score;
-    public int Agent2Score;
+    public int Agent1Score { get; }
+    public int Agent2Score { get; }
     public IReadOnlyList<MoveLog> Moves { get; }
 
     public MatchResult(

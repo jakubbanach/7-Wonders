@@ -12,6 +12,10 @@
 		<ProjectReference Include="..\GameAI\GameAI.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Results\" />
+	</ItemGroup>
+
     <!--<ItemGroup>
 	    <Compile Include="..\7 Wonders\Assets\Scripts\Core\**\*.cs" Link="Core\%(RecursiveDir)%(Filename)%(Extension)" />
     </ItemGroup>

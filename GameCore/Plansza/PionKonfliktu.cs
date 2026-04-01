@@ -17,6 +17,16 @@ public class PionKonfliktu
 
     public void Przesun(int iloscPol)
     {
+        if (Pozycja + iloscPol > MaksymalnaPozycja && iloscPol > 0)
+        {
+            Pozycja = MaksymalnaPozycja;
+            return;
+        }
+        if (Pozycja - iloscPol < -MaksymalnaPozycja && iloscPol < 0)
+        {
+            Pozycja = -MaksymalnaPozycja;
+            return;
+        }
         Pozycja += iloscPol;
     }
 

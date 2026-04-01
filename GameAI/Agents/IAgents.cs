@@ -1,6 +1,6 @@
 ﻿public interface IAgent
 {
-    string Name { get; }
+    string Name { get; set;}
 
     Ruch DecideMove(Gra gra);
 }

@@ -95,10 +95,9 @@ public class Gra
             {
                 Console.WriteLine("Koniec gry! Przechodzimy do podsumowania wyników.");
                 // dopisac logike podsumowania wynikow
+                ZakonczGre();
                 return;
             }
-            //var planszaEpokiNew = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1);
-            //planszaEpoki.ZmienPlansze(planszaEpokiNew);
             planszaEpoki = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1);
         }
         // czy tutaj nie dać logiki wykonania ponownego ruchu - efekt RozegrajTurePonownie
@@ -181,6 +180,13 @@ public class Gra
         if (stanGry.CzyZakonczona)
             return true;
         return false;
+    }
+
+    public void ZakonczGre()
+    {
+        stanGry.CzyZwyciestwoMilitarne(gracze, planszaKonfliktu.PionKonfliktu.PobierzPozycje());
+        stanGry.CzyZwyciestwoNaukowe(gracze);
+        stanGry.CzyZwyciestwoPunktowe(gracze, planszaKonfliktu);
     }
 
     public Epoka Epoka => planszaEpoki.Epoka;

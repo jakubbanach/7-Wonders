@@ -14,7 +14,9 @@ public class GameRunner
     {
         int seed = random.Next();
         // TODO: dodac seed do Gra.StworzNowaGre() i przekazywac go do MatchResult.FromGame() zeby mozna bylo odtworzyc gre
-        var gra = Gra.StworzNowaGre();
+        var gra = Gra.StworzNowaGre(seed);
+        a1.Name = gra.Gracze[0].Nazwa;
+        a2.Name = gra.Gracze[1].Nazwa;
 
         var log = new List<MoveLog>();
 
@@ -25,9 +27,10 @@ public class GameRunner
 
             var ruch = currentAgent.DecideMove(gra.Clone());
 
-            log.Add(new MoveLog(currentAgent.Name, ruch));
+            // ewenetualnie currentAgent
+            log.Add(new MoveLog(gra.AktywnyGracz.Nazwa, ruch));
 
-            Console.WriteLine($"Agent {currentAgent.Name} wykonuje ruch: {ruch.TypRuchu} z kartą {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
+            Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z kartą {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
 
             // karta z clone() jest inna instancja niz karta z gra.DostepneKarty(), wiec trzeba porownywac po nazwie, a nie po 
 

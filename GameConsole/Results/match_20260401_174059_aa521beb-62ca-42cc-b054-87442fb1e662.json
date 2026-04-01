@@ -1,0 +1,373 @@
+{
+  "MatchId": "aa521beb-62ca-42cc-b054-87442fb1e662",
+  "Seed": 143337951,
+  "Agent1Name": "Gracz 1",
+  "Agent2Name": "Gracz 2",
+  "Winner": "Gracz 1",
+  "TypZwyciestwa": 3,
+  "Turns": 60,
+  "Agent1Score": 54,
+  "Agent2Score": 25,
+  "Moves": [
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Kamienio\u0142om",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Wytw\u00F3rnia Papirusu",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujCud",
+      "Karta": "Huta Szk\u0142a",
+      "KartaCudu": "Pireus"
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Wie\u017Ca Stra\u017Cnicza",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Apteka",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujCud",
+      "Karta": "Wycinka",
+      "KartaCudu": "Sfinks"
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Magazyn Kamienia",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Sk\u0142adowisko Kamienia",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "O\u0142tarz",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Zielarnia",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Sk\u0142ad Drewna",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujCud",
+      "Karta": "Teatr",
+      "KartaCudu": "Biblioteka Aleksandryjska"
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Z\u0142o\u017Ca Gliny",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "\u0141a\u017Anie",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Tawerna",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Magazyn Gliny",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Warsztat",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Palisada",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Skryptorium",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Stajnie",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujCud",
+      "Karta": "Tartak",
+      "KartaCudu": "Piramida Cheopsa"
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Plac Apelowy",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "M\u00F3wnica",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Gmach S\u0105du",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Koszary",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Suszarnia Papirusu",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujCud",
+      "Karta": "Pos\u0105g",
+      "KartaCudu": "Circus Maximus"
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Browar",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Szko\u0142a",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Cegielnia",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Mury Obronne",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Urz\u0105d celny",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujCud",
+      "Karta": "Kamienio\u0142om Stokowy",
+      "KartaCudu": "\u015Awi\u0105tynia Artemidy W Efezie"
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Stadniny",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Karawanseraj",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Tor Strzelecki",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Akwedukt",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Biblioteka",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Forum",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "\u015Awi\u0105tynia",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Machiny Obl\u0119\u017Cnicze",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Akademia",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Siedziba Trybuna",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Pracownia Naukowa",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Panteon",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujCud",
+      "Karta": "Uniwersytet",
+      "KartaCudu": "Kolos Rodyjski"
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Obelisk",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Cech Lichwiarzy",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Cech Budowniczych",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Cyrk",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Towarzystwo Naukowe",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Cech Armator\u00F3w",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Latarnia Morska",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Arsena\u0142",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Zbrojownia",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "Arena",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Ogrody",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Izba Handlowa",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": "M\u00F3wnica",
+      "KartaCudu": null
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": "Port",
+      "KartaCudu": null
+    }
+  ]
+}
