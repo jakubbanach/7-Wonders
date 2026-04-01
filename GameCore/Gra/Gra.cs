@@ -49,12 +49,12 @@ public class Gra
         return new Gra(this);
     }
 
-    public static Gra StworzNowaGre(string nazwa1="Gracz 1", string nazwa2="Gracz 2")
+    public static Gra StworzNowaGre(string nazwa1 = "Gracz 1", string nazwa2 = "Gracz 2", IRandom random = null)
     {
         var gracze = InicjalizacjaGraczy(nazwa1, nazwa2);
-        var planszaKonfliktu = InicjalizacjaPlanszy(gracze);
-        var planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaI);
-        var cuda = InicjalizacjaKartCudow();
+        var planszaKonfliktu = InicjalizacjaPlanszy(gracze, random);
+        var planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaI, random);
+        var cuda = InicjalizacjaKartCudow(random);
         PrzydzielenieCudow(gracze, cuda);
 
         return new Gra(
@@ -64,7 +64,7 @@ public class Gra
             new StanGry());
     }
 
-    public void WykonajRuch(Ruch ruchNew)
+    public void WykonajRuch(Ruch ruchNew, IRandom random)
     {
         var karta = ZnajdzDostepnaKarte(ruchNew.KartaDoZagrania.Nazwa);
 
@@ -98,7 +98,7 @@ public class Gra
                 ZakonczGre();
                 return;
             }
-            planszaEpoki = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1);
+            planszaEpoki = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1, random);
         }
         // czy tutaj nie dać logiki wykonania ponownego ruchu - efekt RozegrajTurePonownie
         ZmienTure(); 
@@ -206,32 +206,33 @@ public class Gra
             new Gracz(nazwa2)
         };
     }
-    private static PlanszaKonfliktu InicjalizacjaPlanszy(Gracz[] gracze)
+    private static PlanszaKonfliktu InicjalizacjaPlanszy(Gracz[] gracze, IRandom random)
     {
         var pionKonfliktu = new PionKonfliktu(0);
         var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu
-            .OrderBy(x => Guid.NewGuid())
+            .OrderBy(x => random?.Next())
             .Take(5)
             .ToList();
-        var strefy = ZbiorStref.Strefy.ToList();
+        var strefy = ZbiorStref.Strefy.Select(k => k.Clone()).ToList();
 
         return new PlanszaKonfliktu(pionKonfliktu, zetonyPostepu, strefy, gracze);
     }
-    private static PlanszaEpoki UtworzPlanszeEpoki(Epoka epoka)
+    private static PlanszaEpoki UtworzPlanszeEpoki(Epoka epoka, IRandom random)
     {
         var taliaKart = epoka switch
         {
-            Epoka.EpokaI => ZbiorKart.TaliaEpokiI,
-            Epoka.EpokaII => ZbiorKart.TaliaEpokiII,
-            Epoka.EpokaIII => ZbiorKart.TaliaEpokiIII,
+            Epoka.EpokaI => ZbiorKart.TaliaEpokiI.Select(k => k.Clone()).ToList(),
+            Epoka.EpokaII => ZbiorKart.TaliaEpokiII.Select(k => k.Clone()).ToList(),
+            Epoka.EpokaIII => ZbiorKart.TaliaEpokiIII.Select(k => k.Clone()).ToList(),
             _ => throw new ArgumentException("Nieznana epoka")
         };
-        return ZbiorPlanszEpok.Utworz(epoka, taliaKart.ToList());
+        return ZbiorPlanszEpok.Utworz(epoka, taliaKart.ToList(), random);
     }
-    private static List<KartaCudu> InicjalizacjaKartCudow()
+    private static List<KartaCudu> InicjalizacjaKartCudow(IRandom random)
     {
-        return ZbiorKart.TaliaKartyCudow
-            .OrderBy(x => Guid.NewGuid())
+        var zbior = ZbiorKart.TaliaKartyCudow.Select(k => k.Clone()).ToList();
+        return zbior
+            .OrderBy(x => random.Next())
             .Take(8) // 4 w pierwszej fazie wyboru, 4 w drugiej fazie wyboru
             .ToList();
     }

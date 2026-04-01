@@ -7,6 +7,7 @@ using Xunit.Abstractions;
 public  class TestyPlanszyEpok
 {
     private readonly ITestOutputHelper _output;
+    private IRandom random = new RandomAdapter(12345);
 
     public TestyPlanszyEpok(ITestOutputHelper output)
     {
@@ -15,11 +16,12 @@ public  class TestyPlanszyEpok
     [Fact]  
     public void Test_InicjalizacjaPlanszyEpokiI()
     {
+        
         var taliaKart = ZbiorKart.TaliaEpokiI
             .OrderBy(x => System.Guid.NewGuid())
             .Take(20)
             .ToList();
-        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart);
+        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart, random);
         _output.WriteLine("Dostępne karty na planszy Epoki I:");
         foreach (var pole in planszaEpokiI.DostepneKarty)
         {
@@ -38,7 +40,7 @@ public  class TestyPlanszyEpok
             .OrderBy(x => System.Guid.NewGuid())
             .Take(20)
             .ToList();
-        var planszaEpokiII = ZbiorPlanszEpok.Utworz(Epoka.EpokaII, taliaKart);
+        var planszaEpokiII = ZbiorPlanszEpok.Utworz(Epoka.EpokaII, taliaKart, random);
         _output.WriteLine("Dostępne karty na planszy Epoki II:");
         foreach (var pole in planszaEpokiII.DostepneKarty)
         {
@@ -61,7 +63,7 @@ public  class TestyPlanszyEpok
         {
             kartaEpoki.OznaczJakoNiezagrana();
         }
-        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart);
+        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart, random);
         var gracz = new Gracz("TestowyGracz");
         var przeciwnik = new Gracz("Przeciwnik");
         var dostepneKarty = planszaEpokiI.DostepneKarty.ToList();
@@ -97,7 +99,7 @@ public  class TestyPlanszyEpok
             .OrderBy(x => System.Guid.NewGuid())
             .Take(20)
             .ToList();
-        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart);
+        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart, random);
         var kartaDoZnaleziona = taliaKart[0];
         var poleZnaleziona = planszaEpokiI.ZnajdzPole(kartaDoZnaleziona);
         Assert.NotNull(poleZnaleziona);
@@ -208,7 +210,7 @@ public  class TestyPlanszyEpok
             .OrderBy(x => System.Guid.NewGuid())
             .Take(20)
             .ToList();
-        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart);
+        var planszaEpokiI = ZbiorPlanszEpok.Utworz(Epoka.EpokaI, taliaKart, random);
         _output.WriteLine("Plansza Epoki I:");
         _output.WriteLine(ZbiorPlanszEpok.PlanszaDoStringa(planszaEpokiI));
     }

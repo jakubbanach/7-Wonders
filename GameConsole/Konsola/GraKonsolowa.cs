@@ -14,12 +14,14 @@ public class GraKonsolowa
     private Gracz aktywnyGracz;
     private Gracz przeciwnik => gracze.First(g => g != aktywnyGracz);
     private StanGry stanGry = new StanGry();
+    private IRandom random = new RandomAdapter(12345);
+
 
     public GraKonsolowa()
     {
         gracze = InicjalizacjaGraczy();
         planszaKonfliktu = InicjalizacjaPlanszy();
-        planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaI);
+        planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaI, random);
         aktywnyGracz = gracze[0];
     }
 
@@ -65,7 +67,7 @@ public class GraKonsolowa
         //RozegrajEpoke(planszaEpoki);
         //Console.WriteLine("Koniec epoki!");
 
-        planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaII);
+        planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaII, random);
         Console.WriteLine("Plansza Epoki II:");
         ZbiorPlanszEpok.WypiszPlansze(planszaEpoki);
         Console.WriteLine("Naciœnij dowolny klawisz, aby kontynuowaæ grê...");
@@ -73,7 +75,7 @@ public class GraKonsolowa
         RozegrajEpoke(planszaEpoki);
         Console.WriteLine("Koniec epoki!");
 
-        planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaIII);
+        planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaIII, random);
         Console.WriteLine("Plansza Epoki III:");
         ZbiorPlanszEpok.WypiszPlansze(planszaEpoki);
         Console.WriteLine("Naciœnij dowolny klawisz, aby kontynuowaæ grê...");
@@ -104,7 +106,7 @@ public class GraKonsolowa
         return ZbiorKart.TaliaKartyCudow.ToList();
     }
 
-    PlanszaEpoki UtworzPlanszeEpoki(Epoka epoka)
+    PlanszaEpoki UtworzPlanszeEpoki(Epoka epoka, IRandom random)
     {
         var taliaKart = epoka switch
         {
@@ -113,7 +115,7 @@ public class GraKonsolowa
             Epoka.EpokaIII => ZbiorKart.TaliaEpokiIII,
             _ => throw new ArgumentException("Nieznana epoka")
         };
-        return ZbiorPlanszEpok.Utworz(epoka, taliaKart.ToList());
+        return ZbiorPlanszEpok.Utworz(epoka, taliaKart.ToList(), random);
     }
 
     TypRuchu WybierzRuch(Karta karta)

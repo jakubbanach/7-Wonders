@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -33,6 +33,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\GameCore\GameCore.csproj" />
+		<ProjectReference Include="..\GameAI\GameAI.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

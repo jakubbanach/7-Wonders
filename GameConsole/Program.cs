@@ -8,13 +8,14 @@ class Program
     {
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
+        int seed = 12345;
 
-        var agent1 = new RandomAgent();
-        var agent2 = new RandomAgent();
-
-        var runner = new GameRunner(seed: 12345);
-
-        var result = runner.PlayGame(agent1, agent2);
+        var runner = new GameRunner(
+            seed: seed,
+            agent1Factory: r => new RandomAgent(r),
+            agent2Factory: r => new RandomAgent(r)
+        );
+        var result = runner.PlayGame();
 
         PrintResult(result);
 

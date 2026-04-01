@@ -4,17 +4,37 @@ using System.Linq;
 using System.Text;
 public class GameRunner
 {
-    private readonly Random random;
+    public int Seed { get; }
 
-    public GameRunner(int seed)
+    private readonly IRandom gameRandom;
+    private readonly IRandom agent1Random;
+    private readonly IRandom agent2Random;
+
+    private readonly Func<IRandom, IAgent> agent1Factory;
+    private readonly Func<IRandom, IAgent> agent2Factory;
+
+    public GameRunner(
+        int seed,
+        Func<IRandom, IAgent> agent1Factory,
+        Func<IRandom, IAgent> agent2Factory)
     {
-        random = new Random(seed);
+        Seed = seed;
+        var master = new Random(seed);
+
+        gameRandom = new RandomAdapter(master.Next());
+        agent1Random = new RandomAdapter(master.Next());
+        agent2Random = new RandomAdapter(master.Next());
+
+        this.agent1Factory = agent1Factory; 
+        this.agent2Factory = agent2Factory;
     }
-    public MatchResult PlayGame(IAgent a1, IAgent a2)
+    public MatchResult PlayGame()
     {
-        int seed = random.Next();
+        var a1 = agent1Factory(agent1Random);
+        var a2 = agent2Factory(agent2Random);
+
         // TODO: dodac seed do Gra.StworzNowaGre() i przekazywac go do MatchResult.FromGame() zeby mozna bylo odtworzyc gre
-        var gra = Gra.StworzNowaGre(seed);
+        var gra = Gra.StworzNowaGre(random: gameRandom);
         a1.Name = gra.Gracze[0].Nazwa;
         a2.Name = gra.Gracze[1].Nazwa;
 
@@ -22,7 +42,7 @@ public class GameRunner
 
         while (!gra.StanGry.CzyZakonczona)
         {
-            Console.WriteLine($"\nAktywny gracz: {gra.AktywnyGracz.Nazwa}, Epoka: {gra.Epoka}, Pozycja konfliktu: {gra.PozycjaKonfliktu}");
+            //Console.WriteLine($"\nAktywny gracz: {gra.AktywnyGracz.Nazwa}, Epoka: {gra.Epoka}, Pozycja konfliktu: {gra.PozycjaKonfliktu}");
             var currentAgent = gra.AktywnyGracz == gra.Gracze[0] ? a1 : a2;
 
             var ruch = currentAgent.DecideMove(gra.Clone());
@@ -30,16 +50,22 @@ public class GameRunner
             // ewenetualnie currentAgent
             log.Add(new MoveLog(gra.AktywnyGracz.Nazwa, ruch));
 
-            Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z kartą {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
+            //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z kartą {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
 
-            // karta z clone() jest inna instancja niz karta z gra.DostepneKarty(), wiec trzeba porownywac po nazwie, a nie po 
-
-            gra.WykonajRuch(ruch);
+            gra.WykonajRuch(ruch, gameRandom);
         }
 
-        return MatchResult.FromGame(gra, a1, a2, log, seed);
+        return MatchResult.FromGame(gra, a1, a2, log, Seed);
     }
-    public MatchResult ReplayGame(int seed, IAgent a1, IAgent a2)
-        { return PlayGame(a1, a2); }
+    public MatchResult ReplayGame()
+    {
+        var replayRunner = new GameRunner(
+            Seed,
+            agent1Factory,
+            agent2Factory
+        );
+
+        return replayRunner.PlayGame();
+    }
 
 }
