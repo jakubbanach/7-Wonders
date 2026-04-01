@@ -239,7 +239,14 @@ public class Gra
     }
     private static List<KartaCudu> InicjalizacjaKartCudow(IRandom random)
     {
-        var zbior = ZbiorKart.TaliaKartyCudow.Select(k => k.Clone()).ToList();
+        var zbior = ZbiorKart.TaliaKartyCudow.Select(k => k.Clone());
+        foreach (var karta in zbior)
+        {
+            if (karta is KartaCudu kartaCudu)
+            {
+                kartaCudu.OznaczJakoNiezagrana();
+            }
+        }
         return zbior
             .OrderBy(x => random.Next())
             .Take(8) // 4 w pierwszej fazie wyboru, 4 w drugiej fazie wyboru

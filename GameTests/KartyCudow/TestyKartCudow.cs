@@ -13,7 +13,7 @@ public class TestyKartCudow
     //    var surowce = new Dictionary<Surowiec, int>
     //    {
     //        { Surowiec.Drewno, 2 },
-    //        { Surowiec.Kamieñ, 3 }
+    //        { Surowiec.Kamieï¿½, 3 }
     //    };
     //    var efekt = new Efekt(
     //        TypEfektu.Surowiec, 
@@ -27,7 +27,7 @@ public class TestyKartCudow
     //    var kartaCudu = new KartaCudu("Wielki Mur", new Dictionary<Surowiec, int>
     //    {
     //        { Surowiec.Drewno, 2 },
-    //        { Surowiec.Kamieñ, 1 }
+    //        { Surowiec.Kamieï¿½, 1 }
     //    }, new List<Efekt> { efekt });
 
     //    //kartaCudu.Zagraj(surowce);
@@ -52,7 +52,7 @@ public class TestyKartCudow
         var kartaCudu = new KartaCudu("Wielki Mur", new Dictionary<Surowiec, int>
         {
             { Surowiec.Drewno, 2 },
-            { Surowiec.Kamieñ, 1 }
+            { Surowiec.KamieÅ„, 1 }
         }, new List<Efekt> { efekt });
 
         //kartaCudu.Zagraj(surowce);
@@ -78,11 +78,14 @@ public class TestyKartCudow
         var kartaCudu = new KartaCudu("Wielki Mur", new Dictionary<Surowiec, int>
         {
             { Surowiec.Drewno, 2 },
-            { Surowiec.Kamieñ, 1 }
+            { Surowiec.KamieÅ„, 1 }
         }, new List<Efekt> { efekt });
 
         //kartaCudu.Zagraj(surowce);
         Assert.False(kartaCudu.CzyZagrana);
+
+        // powrot do stanu cudu sprzed gry
+        kartaCudu.OznaczJakoNiezagrana();
     }
     //[Fact]
     //public void Test_KartaCudu_DopelnienieMonet()
@@ -104,7 +107,7 @@ public class TestyKartCudow
     //    var kartaCudu = new KartaCudu("Wielki Mur", new Dictionary<Surowiec, int>
     //    {
     //        { Surowiec.Drewno, 2 },
-    //        { Surowiec.Kamieñ, 1 }
+    //        { Surowiec.Kamieï¿½, 1 }
     //    }, new List<Efekt> { efekt });
 
     //    //kartaCudu.Zagraj(surowce);
@@ -124,9 +127,9 @@ public class TestyKartCudow
         var kartaCudu = new KartaCudu("Wielki Mur", new Dictionary<Surowiec, int>
         {
             { Surowiec.Drewno, 2 },
-            { Surowiec.Kamieñ, 1 }
+            { Surowiec.KamieÅ„, 1 }
         }, new List<Efekt> { efekt });
         var kosztString = kartaCudu.WypiszKoszt();
-        Assert.Equal("2xDrewno + 1xKamieñ", kosztString);
+        Assert.Equal("2xDrewno + 1xKamieÅ„", kosztString);
     }
 }

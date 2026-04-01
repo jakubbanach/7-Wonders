@@ -85,6 +85,8 @@ public class TestyGracza
         _output.WriteLine("Koszt karty: " + kartaCudu.WypiszKoszt());
         gracz.ZbudujCud(karta, przeciwnik, kartaCudu);
         Assert.True(kartaCudu.CzyZagrana);
+        // powrot do stanu cudu sprzed gry
+        kartaCudu.OznaczJakoNiezagrana();
     }
     [Fact]
     public void TestEfektow()
@@ -118,6 +120,8 @@ public class TestyGracza
         gracz.ZbudujCud(karta, przeciwnik, kartaCudu);
         _output.WriteLine("Surowce gracza po zbudowaniu: " + string.Join(", ", gracz.Surowce.Select(s => $"{s.Key}:{s.Value}")));
         Assert.True(kartaCudu.CzyZagrana);
+        // powrot do stanu cudu sprzed gry
+        kartaCudu.OznaczJakoNiezagrana();
     }
     [Fact]
     public void ZbudujKarteCudu_Nie_Mozna_Kupic_Karty()

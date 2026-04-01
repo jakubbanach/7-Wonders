@@ -373,6 +373,9 @@ public class TestyEfektowNaGraczu
         efekt.ZastosujEfekt(gracz, przeciwnik);
 
         Assert.Equal(7 + 2, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe 7 + 2 monety za każdą z kart cudu
+
+        // powrot do stanu cudu sprzed gry
+        kartaCudu.OznaczJakoNiezagrana();
     }
     [Fact]
     public void Efekt_MonetyZaKarty_Cuda_PrzeciwnikMaWiecejKart()
@@ -388,6 +391,8 @@ public class TestyEfektowNaGraczu
         przeciwnik.DodajKarteCudu(drugaKartaCudu);
         przeciwnik.DodajKarteCudu(trzeciaKartaCudu);
 
+        przeciwnik.PobierzKartyCudu().ForEach(k => k.OznaczJakoZagrana());
+
         var efekt = new Efekt(
             TypEfektu.MonetyZaKarty, 
             tekst: "Cuda", 
@@ -396,6 +401,11 @@ public class TestyEfektowNaGraczu
         efekt.ZastosujEfekt(gracz, przeciwnik);
 
         Assert.Equal(7 + 4, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe 7 + 2 monety za każdą z 2 kart cudu przeciwnika
+
+        // powrot do stanu cudu sprzed gry
+        kartaCudu.OznaczJakoNiezagrana();
+        drugaKartaCudu.OznaczJakoNiezagrana();
+        trzeciaKartaCudu.OznaczJakoNiezagrana();
     }
     [Fact]
     public void Efekt_MonetyZaKarty_Kolor()
@@ -680,5 +690,8 @@ public class TestyEfektowNaGraczu
         Assert.Equal(2, plansza.PionKonfliktu.PobierzPozycje());
         Assert.Equal("Strefa 1 dla A", plansza.PobierzStrefeDlaPozycji(plansza.PionKonfliktu.PobierzPozycje()).Nazwa);
         Assert.Equal(3, gracz.PunktyZwyciestwa);
+
+        // powrót do stanu cudu sprzed gry
+        kartaCudu.OznaczJakoNiezagrana();
     }
 }

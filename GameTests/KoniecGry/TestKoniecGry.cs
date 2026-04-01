@@ -266,6 +266,12 @@ public class TestKoniecGry
 
         Assert.Equal(9, stanGry.GetPunktyGracza1());
         Assert.Equal(8, stanGry.GetPunktyGracza2());
+
+        // powrot do stanu cudu sprzed gry
+        foreach (var kartaCudu in cuda)
+        {
+            kartaCudu.OznaczJakoNiezagrana();
+        }
     }
     [Fact]
     public void Test_ZliczaniePunktow_Efekty3()
@@ -348,17 +354,14 @@ public class TestKoniecGry
         Assert.Equal(7, stanGry.GetPunktyGracza2());
     }
     [Fact]
-    public void Test_Zwyciestwo_Punktowe_WarunekDodatkowy()
+    public void Test_Zwyciestwo_Punktowe_WarunekDodatkowy() // TODO: SPRAWDZIC KARTY
     {
-        var pionKonfliktu = new PionKonfliktu(0);
-        var zetonyPostepu = ZbiorZetonowPostepu.ZetonyPostepu;
-        var wybraneZetony = zetonyPostepu.OrderBy(x => Guid.NewGuid()).Take(5).ToList();
-        var strefy = ZbiorStref.Strefy.ToList();
-
-        var gracze = new[] { new Gracz("GraczA"), new Gracz("GraczB") };
-        var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze);
-
-        var stanGry = new StanGry();
+        IRandom random = new RandomAdapter(12345);
+        var gra = Gra.StworzNowaGre(random: random);
+        var gracze = gra.Gracze;
+        var plansza = gra.PlanszaKonfliktu;
+        var pionKonfliktu = gra.PlanszaKonfliktu.PionKonfliktu;
+        var stanGry = gra.StanGry;
 
         var nazwyKartGracza0 = new[] { "Kamieniołom", "Wytwórnia Papirusu", "Warsztat", "Ołtarz", "Łaźnie" };
         var nazwyKartGracza1 = new[] { "Glinianka", "Huta Szkła", "Apteka", "Garnizon", "Skryptorium", "Teatr", "Biblioteka" };
@@ -390,7 +393,7 @@ public class TestKoniecGry
 
         stanGry.CzyZwyciestwoPunktowe(gracze, plansza);
         Assert.True(stanGry.CzyZakonczona);
-        Assert.Equal(gracze[0], stanGry.Zwyciezca);
+        Assert.Equal(gracze[0].Nazwa, stanGry.Zwyciezca.Nazwa);
         Assert.Equal(TypZwyciestwa.Punktowe, stanGry.TypZwyciestwa);
 
         _output.WriteLine($"Punkty Gracza 1: {stanGry.GetPunktyGracza1()}");
