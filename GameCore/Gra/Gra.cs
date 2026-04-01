@@ -109,7 +109,7 @@ public class Gra
 
         foreach (var karta in karty)
         {
-            if(!karta.CzyWidoczna || karta.CzyOdrzucona || karta.CzyZagrana)
+            if(karta.CzyWidoczna || karta.CzyOdrzucona || karta.CzyZagrana)
                 continue;
             // budowa karty
             var budowaKarty = AktywnyGracz.CzyMoznaZbudowacKarte(karta, Przeciwnik);

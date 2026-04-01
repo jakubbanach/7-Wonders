@@ -25,7 +25,7 @@ public  class TestyPlanszyEpok
         {
             _output.WriteLine(pole.Karta!.Nazwa);
         }
-        Assert.Equal(2, planszaEpokiI.DostepneKarty.Count());
+        Assert.Equal(6, planszaEpokiI.DostepneKarty.Count());
         foreach (var pole in planszaEpokiI.WidoczneKarty)
         {
             _output.WriteLine($"Karta: {pole.Karta!.Nazwa}, Czy dostępna: {pole.CzyDostepna}");
@@ -44,7 +44,7 @@ public  class TestyPlanszyEpok
         {
             _output.WriteLine(pole.Karta!.Nazwa);
         }
-        Assert.Equal(6, planszaEpokiII.DostepneKarty.Count());
+        Assert.Equal(2, planszaEpokiII.DostepneKarty.Count());
         foreach (var pole in planszaEpokiII.WidoczneKarty)
         {
             _output.WriteLine($"Karta: {pole.Karta!.Nazwa}, Czy dostępna: {pole.CzyDostepna}");
@@ -87,7 +87,7 @@ public  class TestyPlanszyEpok
         {
             _output.WriteLine(pole.Karta!.Nazwa);
         }
-        Assert.Equal(2, planszaEpokiI.DostepneKarty.ToList().Count());
+        Assert.Equal(5, planszaEpokiI.DostepneKarty.ToList().Count());
     }
 
     //[Fact]

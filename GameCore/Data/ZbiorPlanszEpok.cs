@@ -14,13 +14,96 @@ public static class ZbiorPlanszEpok
             _ => throw new ArgumentException("Nieznana epoka")
         };
     }
-
     private static PlanszaEpoki InicjalizujPlanszeEpokiI(List<Karta> talia)
     {
         var karty = talia
             .OrderBy(x => System.Guid.NewGuid())
             .Take(20)
             .ToList();
+
+        foreach (var karta in karty)
+        {
+            karta.OznaczJakoNiezagrana();
+        }
+
+        // WARSTWA 1 – 6 odkrytych
+        var a1 = new PoleKarty(karty[0], false);
+        var a2 = new PoleKarty(karty[1], false);
+        var a3 = new PoleKarty(karty[2], false);
+        var a4 = new PoleKarty(karty[3], false);
+        var a5 = new PoleKarty(karty[4], false);
+        var a6 = new PoleKarty(karty[5], false);
+
+        // WARSTWA 2 – 5 zakrytych
+        var b1 = new PoleKarty(karty[6], true);
+        var b2 = new PoleKarty(karty[7], true);
+        var b3 = new PoleKarty(karty[8], true);
+        var b4 = new PoleKarty(karty[9], true);
+        var b5 = new PoleKarty(karty[10], true);
+
+        //zale¿noœci WARSTWA 2 -> WARSTWA 1
+        b1.BlokujacePola.AddRange(new List<PoleKarty> { a1, a2 });
+        b2.BlokujacePola.AddRange(new List<PoleKarty> { a2, a3 });
+        b3.BlokujacePola.AddRange(new List<PoleKarty> { a3, a4 });
+        b4.BlokujacePola.AddRange(new List<PoleKarty> { a4, a5 });
+        b5.BlokujacePola.AddRange(new List<PoleKarty> { a5, a6 });
+
+        // WARSTWA 3 – 4 odkryte
+        var c1 = new PoleKarty(karty[11], false);
+        var c2 = new PoleKarty(karty[12], false);
+        var c3 = new PoleKarty(karty[13], false);
+        var c4 = new PoleKarty(karty[14], false);
+
+        //zale¿noœci WARSTWA 3 -> WARSTWA 2
+        c1.BlokujacePola.AddRange(new List<PoleKarty> { b1, b2 });
+        c2.BlokujacePola.AddRange(new List<PoleKarty> { b2, b3 });
+        c3.BlokujacePola.AddRange(new List<PoleKarty> { b3, b4 });
+        c4.BlokujacePola.AddRange(new List<PoleKarty> { b4, b5 });
+
+        // WARSTWA 4 – 3 zakryte
+        var d1 = new PoleKarty(karty[15], true);
+        var d2 = new PoleKarty(karty[16], true);
+        var d3 = new PoleKarty(karty[17], true);
+
+        //zale¿noœci WARSTWA 4 -> WARSTWA 3
+        d1.BlokujacePola.AddRange(new List<PoleKarty> { c1, c2 });
+        d2.BlokujacePola.AddRange(new List<PoleKarty> { c2, c3 });
+        d3.BlokujacePola.AddRange(new List<PoleKarty> { c3, c4 });
+
+        // WARSTWA 5 – 2 odkryte
+        var e1 = new PoleKarty(karty[18], false);
+        var e2 = new PoleKarty(karty[19], false);
+
+        //zale¿noœci WARSTWA 5 -> WARSTWA 4
+        e1.BlokujacePola.AddRange(new List<PoleKarty> { d1, d2 });
+        e2.BlokujacePola.AddRange(new List<PoleKarty> { d2, d3 });
+
+        var pola = new List<PoleKarty>()
+        {
+            a1,a2,a3,a4,a5,a6,
+            b1,b2,b3,b4,b5,
+            c1,c2,c3,c4,
+            d1,d2,d3,
+            e1,e2
+        };
+
+        return new PlanszaEpoki(Epoka.EpokaII)
+        {
+            Pola = pola
+        };
+    }
+
+    private static PlanszaEpoki InicjalizujPlanszeEpokiII(List<Karta> talia)
+    {
+        var karty = talia
+            .OrderBy(x => System.Guid.NewGuid())
+            .Take(20)
+            .ToList();
+
+        foreach (var karta in karty)
+        {
+            karta.OznaczJakoNiezagrana();
+        }
         // WARSTWA 1 – 2 odkryte
         var a1 = new PoleKarty(karty[0], false);
         var a2 = new PoleKarty(karty[1], false);
@@ -93,80 +176,6 @@ public static class ZbiorPlanszEpok
         };
     }
 
-    private static PlanszaEpoki InicjalizujPlanszeEpokiII(List<Karta> talia)
-    {
-        var karty = talia
-            .OrderBy(x => System.Guid.NewGuid())
-            .Take(20)
-            .ToList();
-
-        // WARSTWA 1 – 6 odkrytych
-        var a1 = new PoleKarty(karty[0], false);
-        var a2 = new PoleKarty(karty[1], false);
-        var a3 = new PoleKarty(karty[2], false);
-        var a4 = new PoleKarty(karty[3], false);
-        var a5 = new PoleKarty(karty[4], false);
-        var a6 = new PoleKarty(karty[5], false);
-
-        // WARSTWA 2 – 5 zakrytych
-        var b1 = new PoleKarty(karty[6], true);
-        var b2 = new PoleKarty(karty[7], true);
-        var b3 = new PoleKarty(karty[8], true);
-        var b4 = new PoleKarty(karty[9], true);
-        var b5 = new PoleKarty(karty[10], true);
-
-        //zale¿noœci WARSTWA 2 -> WARSTWA 1
-        b1.BlokujacePola.AddRange(new List<PoleKarty> { a1, a2 });
-        b2.BlokujacePola.AddRange(new List<PoleKarty> { a2, a3 });
-        b3.BlokujacePola.AddRange(new List<PoleKarty> { a3, a4 });
-        b4.BlokujacePola.AddRange(new List<PoleKarty> { a4, a5 });
-        b5.BlokujacePola.AddRange(new List<PoleKarty> { a5, a6 });
-
-        // WARSTWA 3 – 4 odkryte
-        var c1 = new PoleKarty(karty[11], false);
-        var c2 = new PoleKarty(karty[12], false);
-        var c3 = new PoleKarty(karty[13], false);
-        var c4 = new PoleKarty(karty[14], false);
-
-        //zale¿noœci WARSTWA 3 -> WARSTWA 2
-        c1.BlokujacePola.AddRange(new List<PoleKarty> { b1, b2 });
-        c2.BlokujacePola.AddRange(new List<PoleKarty> { b2, b3 });
-        c3.BlokujacePola.AddRange(new List<PoleKarty> { b3, b4 });
-        c4.BlokujacePola.AddRange(new List<PoleKarty> { b4, b5 });
-
-        // WARSTWA 4 – 3 zakryte
-        var d1 = new PoleKarty(karty[15], true);
-        var d2 = new PoleKarty(karty[16], true);
-        var d3 = new PoleKarty(karty[17], true);
-
-        //zale¿noœci WARSTWA 4 -> WARSTWA 3
-        d1.BlokujacePola.AddRange(new List<PoleKarty> { c1, c2 });
-        d2.BlokujacePola.AddRange(new List<PoleKarty> { c2, c3 });
-        d3.BlokujacePola.AddRange(new List<PoleKarty> { c3, c4 });
-
-        // WARSTWA 5 – 2 odkryte
-        var e1 = new PoleKarty(karty[18], false);
-        var e2 = new PoleKarty(karty[19], false);
-
-        //zale¿noœci WARSTWA 5 -> WARSTWA 4
-        e1.BlokujacePola.AddRange(new List<PoleKarty> { d1, d2 });
-        e2.BlokujacePola.AddRange(new List<PoleKarty> { d2, d3 });
-
-        var pola = new List<PoleKarty>()
-        {
-            a1,a2,a3,a4,a5,a6,
-            b1,b2,b3,b4,b5,
-            c1,c2,c3,c4,
-            d1,d2,d3,
-            e1,e2
-        };
-
-        return new PlanszaEpoki(Epoka.EpokaII)
-        {
-            Pola = pola
-        };
-    }
-
     private static PlanszaEpoki InicjalizujPlanszeEpokiIII(List<Karta> talia)
     {
         // TODO: 3 karty Gildii + 17 kart z 3 epoki (razem 20 kart)
@@ -174,6 +183,11 @@ public static class ZbiorPlanszEpok
             .OrderBy(x => System.Guid.NewGuid())
             .Take(20)
             .ToList();
+
+        foreach (var karta in karty)
+        {
+            karta.OznaczJakoNiezagrana();
+        }
 
         //var kartyGildii
 
@@ -264,8 +278,8 @@ public static class ZbiorPlanszEpok
 
         int[] uklad = plansza.Epoka switch
         {
-            Epoka.EpokaI => new[] { 2, 3, 4, 5, 6 },
-            Epoka.EpokaII => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaI => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaII => new[] { 2, 3, 4, 5, 6 },
             Epoka.EpokaIII => new[] { 2, 3, 4, 2, 4, 3, 2 },
             _ => throw new ArgumentOutOfRangeException()
         };
@@ -310,8 +324,8 @@ public static class ZbiorPlanszEpok
         int maxSzerokosc = 11;
         int[] uklad = plansza.Epoka switch
         {
-            Epoka.EpokaI => new[] { 2, 3, 4, 5, 6 },
-            Epoka.EpokaII => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaI => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaII => new[] { 2, 3, 4, 5, 6 },
             Epoka.EpokaIII => new[] { 2, 3, 4, 2, 4, 3, 2 },
             _ => throw new ArgumentOutOfRangeException()
         };

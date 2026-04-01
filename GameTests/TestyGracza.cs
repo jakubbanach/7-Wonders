@@ -139,7 +139,7 @@ public class TestyGracza
         );
         gracz.DodajKarteCudu(kartaCudu);
         var ex = Assert.Throws<InvalidOperationException>(() => gracz.ZbudujCud(karta, przeciwnik, kartaCudu));
-        Assert.Equal("Nie można zbudować cudu.", ex.Message);
+        Assert.Equal("Nie można zbudować tego cudu.", ex.Message);
         
         _output.WriteLine("Surowce gracza:");
         _output.WriteLine(
