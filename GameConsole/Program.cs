@@ -8,7 +8,37 @@ class Program
     {
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
+        //SimulationRunnerFunction();
+        GameRunnerFunction();
+    }
+
+    static void SimulationRunnerFunction()
+    {
         int seed = 12345;
+        int games = 80; // tutaj jest jakis blad
+
+        var simulationRunner = new SimulationRunner(
+            seed,
+            games,
+            r => new RandomAgent(r),
+            r => new RandomAgent(r)
+        );
+
+        var result = simulationRunner.Run();
+
+        Console.WriteLine($"Total games: {result.TotalGames}");
+        Console.WriteLine($"Agent1 wins: {result.Agent1Wins}, avg points: {result.Agent1AveragePoints:F2}");
+        Console.WriteLine($"Agent2 wins: {result.Agent2Wins}, avg points: {result.Agent2AveragePoints:F2}");
+
+        Console.WriteLine("Victory types count:");
+        foreach (var kvp in result.VictoryTypeCounts)
+        {
+            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+        }
+    }
+    static void GameRunnerFunction()
+    {
+        int seed = 12424;
 
         var runner = new GameRunner(
             seed: seed,

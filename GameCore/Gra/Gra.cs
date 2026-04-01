@@ -153,6 +153,8 @@ public class Gra
             // odrzucenie karty
             wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.OdrzucKarte));
             // budowa cudu
+            if (!CzyLiczbaZbudowanychCudowMniejsza7())
+                continue;
             foreach (var kartaCudu in kartyCudow)
             {
                 var budowaCudu = AktywnyGracz.CzyMoznaZbudowacCud(karta, Przeciwnik, kartaCudu);
@@ -163,6 +165,13 @@ public class Gra
             }
         }
         return wynik;
+    }
+
+    public bool CzyLiczbaZbudowanychCudowMniejsza7()
+    {
+        var cudaAktywnegoGracza = AktywnyGracz.PobierzZbudowaneKartyCudow().Count;
+        var cudaPrzeciwnika = Przeciwnik.PobierzZbudowaneKartyCudow().Count;
+        return cudaAktywnegoGracza + cudaPrzeciwnika < 7;
     }
 
     public bool CzyKoniecEpoki()

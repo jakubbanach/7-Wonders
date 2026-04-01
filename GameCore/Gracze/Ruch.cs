@@ -31,7 +31,7 @@ public class Ruch
                 break;
             case TypRuchu.ZbudujCud:
                 // TODO: Implementacja wyboru karty cudu
-                KartaCudu Cud = Gracz.KartyCudow[0]; //Gracz.WybierzNiezbudowanyCud();
+                //KartaCudu Cud = Gracz.KartyCudow[0]; //Gracz.WybierzNiezbudowanyCud();
                 if (KartaCudu == null)
                 {
                     Console.WriteLine("Nie mo¿na zbudowaæ cudu bez wybranej karty cudu.");
