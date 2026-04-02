@@ -100,8 +100,30 @@ public class Gra
                 return;
             }
             planszaEpoki = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1, random);
+
+            // dla uproszczenia na razie gracz ktory konczyl epoke, nie bedzie rozpoczynal kolejnej epoki, ale mozna to zmienic w przyszlosci
+            ZmienTure();
+            return;
         }
-        // czy tutaj nie dac logiki wykonania ponownego ruchu - efekt RozegrajTurePonownie
+
+        // sprawdzamy czy efekt karty cudu pozwala na rozegranie kolejnej tury
+        if (ruch.TypRuchu == TypRuchu.ZbudujCud && ruch.KartaCudu != null)
+        {
+            // sprawdzamy czy lista efektow karty cudu zawiera efekt pozwalajacy na rozegranie kolejnej tury
+            var czyPonownaTura = ruch.KartaCudu.Efekty.Select(e => e.TypEfektu).Contains(TypEfektu.RozegrajTurePonownie);
+            var czyZaBudoweCuduRozegrajTurePonownie = AktywnyGracz.Efekty.Select(e => e.TypEfektu).Contains(TypEfektu.ZaBudoweCuduRozegrajTurePonownie);
+            //if (czyPonownaTura || czyZaBudoweCuduRozegrajTurePonownie)
+            if (czyPonownaTura)
+            {
+                Console.WriteLine("Efekt karty cudu: Rozegraj ture ponownie! Aktywny gracz wykonuje kolejny ruch.");
+                return;
+            }
+            if (czyZaBudoweCuduRozegrajTurePonownie)
+            {
+                Console.WriteLine("Efekt karty cudu: Za budowe cudu rozegrj ture ponownie! Aktywny gracz wykonuje kolejny ruch.");
+                return;
+            }
+        }
         ZmienTure(); 
     }
 
