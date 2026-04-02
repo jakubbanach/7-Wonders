@@ -26,7 +26,7 @@ public class KartaCudu : KartaBazowa
         return new KartaCudu(this);
     }
 
-    public void OznaczJakoNiezagrana() // przydatne do resetowania stanu kart po zakoñczeniu gry
+    public void OznaczJakoNiezagrana() // przydatne do resetowania stanu kart po zakonczeniu gry
     {
         CzyZagrana = false;
     }
@@ -52,7 +52,7 @@ public class KartaCudu : KartaBazowa
     {
         if (Efekty == null || Efekty.Count == 0)
         {
-            return "Brak efektów";
+            return "Brak efektow";
         }
 
         if (poZagraniu)
@@ -62,7 +62,7 @@ public class KartaCudu : KartaBazowa
                 .Select(e => e.Wypisz())
                 .ToList();
             return efektyList.Count == 0
-                ? "Brak efektów"
+                ? "Brak efektow"
                 : string.Join(", ", efektyList);
         }
 

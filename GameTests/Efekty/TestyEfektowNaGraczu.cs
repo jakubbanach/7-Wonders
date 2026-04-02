@@ -21,7 +21,7 @@ public class TestyEfektowNaGraczu
         efekt.ZastosujEfekt(gracz);
         Assert.Equal(2, gracz.WypiszLiczbeSurowca(Surowiec.Drewno));
         Assert.Equal(1, gracz.WypiszLiczbeSurowca(Surowiec.Glina));
-        Assert.Equal(0, gracz.WypiszLiczbeSurowca(Surowiec.Kamień));
+        Assert.Equal(0, gracz.WypiszLiczbeSurowca(Surowiec.Kamien));
         Assert.Equal(7, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe monety
     }
 
@@ -33,7 +33,7 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.WyborSurowca,
-            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 } }
+            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 } }
         );
 
         var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Stajnie"); 
@@ -54,7 +54,7 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.WyborSurowca,
-            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 } }
+            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 } }
         );
 
         var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Biblioteka"); 
@@ -80,7 +80,7 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.WyborSurowca, 
-            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }}
+            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 }}
         );
 
         // Symulacja wyboru najlepszego surowca do danej karty
@@ -112,11 +112,11 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.WyborSurowca, 
-            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }}
+            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 }}
         );
 
         // Symulacja wyboru najlepszego surowca do danej karty
-        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Posąg"); // koszt: 2 glina
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Posag"); // koszt: 2 glina
         _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {karta.WypiszKoszt()})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt przed efektem: {koszt}");
@@ -129,11 +129,11 @@ public class TestyEfektowNaGraczu
         Assert.Equal(0, koszt);
 
         gracz.DodajEfekt(efekt);
-        // silnik nic nie powinien wybierać, bo gracz ma już wystarczająco surowca, żeby zbudować kartę
+        // silnik nic nie powinien wybierac, bo gracz ma juz wystarczająco surowca, zeby zbudowac karte
 
         koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt po zastosowaniu efektu: {koszt}");
-        Assert.Equal(0, koszt); // drewno teraz jest darmowe (więc płacimy za 2 surowce)
+        Assert.Equal(0, koszt); // drewno teraz jest darmowe (więc placimy za 2 surowce)
     }
     [Fact]
     public void Efekt_WyborSurowca_NadmiarPosiadanychSurowcow_Monety()
@@ -143,7 +143,7 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.WyborSurowca, 
-            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }}
+            new Dictionary<Surowiec, int> {{ Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 }}
         );
 
         // Symulacja wyboru najlepszego surowca do danej karty
@@ -175,12 +175,12 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.ZmianaCenySurowca,
-            surowiec: Surowiec.Kamień, 
-            wartość: 1
+            surowiec: Surowiec.Kamien, 
+            wartosc: 1
         );
 
         // Symulacja wyboru najlepszego surowca do danej karty
-        var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Łaźnie"); // koszt: 1 kamien
+        var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Laznie"); // koszt: 1 kamien
         _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {karta.WypiszKoszt()})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt przed efektem: {koszt}");
@@ -200,13 +200,13 @@ public class TestyEfektowNaGraczu
 
         var efektZmiana = new Efekt(
             TypEfektu.ZmianaCenySurowca,
-            surowiec: Surowiec.Kamień, 
-            wartość: 1
+            surowiec: Surowiec.Kamien, 
+            wartosc: 1
         );
 
         var efektWybor = new Efekt(
             TypEfektu.WyborSurowca,
-            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 } }
+            new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 } }
         );
 
         var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Biblioteka"); // koszt: 1 drewno, 1 kamien, 1 szklo
@@ -215,7 +215,7 @@ public class TestyEfektowNaGraczu
         _output.WriteLine($"Koszt przed efektem: {koszt}");
         Assert.Equal(6, koszt);
 
-        przeciwnik.DodajSurowiec(Surowiec.Kamień, 1);
+        przeciwnik.DodajSurowiec(Surowiec.Kamien, 1);
 
         // Koszt się zwiększa o 1, ponieważ przeciwnik ma więcej drewna
         koszt = karta.ObliczKoszt(gracz, przeciwnik);
@@ -226,12 +226,12 @@ public class TestyEfektowNaGraczu
 
         koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt po zastosowaniu efektu zmiany ceny: {koszt}");
-        Assert.Equal(5, koszt); // kamień jest za 1 (więc płacimy za 2 surowce i 1 za kamień)
+        Assert.Equal(5, koszt); // Kamien jest za 1 (więc płacimy za 2 surowce i 1 za Kamien)
 
         gracz.DodajEfekt(efektWybor);
         koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt po zastosowaniu efektu wyboru surowca: {koszt}");
-        Assert.Equal(3, koszt); // drewno jest darmowe, więc płacimy tylko za drewno i szkło
+        Assert.Equal(3, koszt); // drewno jest darmowe, więc placimy tylko za drewno i Szklo
     }
 
     [Fact]
@@ -243,7 +243,7 @@ public class TestyEfektowNaGraczu
         var efekt = new Efekt(TypEfektu.MonetyPrzeciwnikaZaMaterialy);
 
         // Symulacja wyboru najlepszego surowca do danej karty
-        var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Łaźnie"); // koszt: 1 kamien
+        var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Laznie"); // koszt: 1 kamien
         _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {karta.WypiszKoszt()})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt przed efektem: {koszt}");
@@ -265,7 +265,7 @@ public class TestyEfektowNaGraczu
         var efekt = new Efekt(TypEfektu.MonetyPrzeciwnikaZaMaterialy);
 
         // Symulacja wyboru najlepszego surowca do danej karty
-        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Karawanseraj"); // koszt: 2 monety, 1 szkło, 1 papirus
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Karawanseraj"); // koszt: 2 monety, 1 Szklo, 1 papirus
         karta.OznaczJakoNiezagrana(); // Upewniamy się, że karta jest niezagrana, aby można było ją zbudować
         _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {karta.WypiszKoszt()})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik);
@@ -286,7 +286,7 @@ public class TestyEfektowNaGraczu
         Gracz gracz = new Gracz("TestowyGracz");
         var efekt = new Efekt(
             TypEfektu.PunktyZwyciestwa,
-            wartość: 5
+            wartosc: 5
         );
         efekt.ZastosujEfekt(gracz);
         Assert.Equal(5, gracz.PunktyZwyciestwa);
@@ -297,7 +297,7 @@ public class TestyEfektowNaGraczu
         Gracz gracz = new Gracz("TestowyGracz");
         var efekt = new Efekt(
             TypEfektu.Monety,
-            wartość: 3
+            wartosc: 3
         );
         efekt.ZastosujEfekt(gracz);
         Assert.Equal(10, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe 7 + 3 z efektu
@@ -309,7 +309,7 @@ public class TestyEfektowNaGraczu
         Gracz przeciwnik = new Gracz("Przeciwnik");
         var efekt = new Efekt(
             TypEfektu.PrzeciwnikOdkladaMonety,
-            wartość: 2
+            wartosc: 2
         );
         efekt.ZastosujEfekt(gracz, przeciwnik);
         Assert.Equal(7 - 2, przeciwnik.WypiszLiczbeSurowca(Surowiec.Monety)); // Przeciwnik traci monety;
@@ -327,7 +327,7 @@ public class TestyEfektowNaGraczu
         var plansza = new PlanszaKonfliktu(pionKonfliktu, wybraneZetony, strefy, gracze: new[] { gracz, przeciwnik });
         var efekt = new Efekt(
             TypEfektu.PunktyMilitarne,
-            wartość: 2
+            wartosc: 2
         );
         efekt.ZastosujEfekt(gracz, przeciwnik, plansza);
         Assert.Equal(2, plansza.PionKonfliktu.PobierzPozycje());
@@ -349,10 +349,10 @@ public class TestyEfektowNaGraczu
         Gracz gracz = new Gracz("TestowyGracz");
         var efekt = new Efekt(
             TypEfektu.SymbolNaukowy,
-            symbolNaukowy: SymbolNaukowy.Koło
+            symbolNaukowy: SymbolNaukowy.Kolo
         );
         efekt.ZastosujEfekt(gracz);
-        Assert.Contains(SymbolNaukowy.Koło, gracz.SymboleNaukowe);
+        Assert.Contains(SymbolNaukowy.Kolo, gracz.SymboleNaukowe);
     }
     [Fact]
     public void Efekt_MonetyZaKarty_Cuda()
@@ -368,7 +368,7 @@ public class TestyEfektowNaGraczu
         var efekt = new Efekt(
             TypEfektu.MonetyZaKarty, 
             tekst: "Cuda", 
-            wartość: 2
+            wartosc: 2
         );
         efekt.ZastosujEfekt(gracz, przeciwnik);
 
@@ -396,7 +396,7 @@ public class TestyEfektowNaGraczu
         var efekt = new Efekt(
             TypEfektu.MonetyZaKarty, 
             tekst: "Cuda", 
-            wartość: 2
+            wartosc: 2
         );
         efekt.ZastosujEfekt(gracz, przeciwnik);
 
@@ -414,7 +414,7 @@ public class TestyEfektowNaGraczu
         Gracz przeciwnik = new Gracz("Przeciwnik");
         var talia = ZbiorKart.TaliaEpokiII;
 
-        var zolteKarty = talia.Where(k => k.KolorKarty == KolorKarty.Żółty).Take(3).ToList();
+        var zolteKarty = talia.Where(k => k.KolorKarty == KolorKarty.Zolty).Take(3).ToList();
         gracz.DodajMonety(10); // Dodajemy trochę monet, żeby gracz mógł zbudować karty
         foreach (var karta in zolteKarty)
         {
@@ -425,15 +425,15 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.MonetyZaKarty, 
-            tekst: "Żółty", 
-            wartość: 1
+            tekst: "Zolty", 
+            wartosc: 1
         );
 
         var monetyPrzed = gracz.WypiszLiczbeSurowca(Surowiec.Monety);
         efekt.ZastosujEfekt(gracz, przeciwnik);
 
-        Assert.Equal(3, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Żółty));
-        Assert.Equal(monetyPrzed + 3, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 3 monety za każdą z 3 żółtych kart
+        Assert.Equal(3, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Zolty));
+        Assert.Equal(monetyPrzed + 3, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 3 monety za każdą z 3 Zoltych kart
     }
     [Fact]
     public void Efekt_MonetyZaKarty_Kolor_PrzeciwnikMaWiecejKart()
@@ -461,7 +461,7 @@ public class TestyEfektowNaGraczu
         var efekt = new Efekt(
             TypEfektu.MonetyZaKarty, 
             tekst: "Zielony", 
-            wartość: 1
+            wartosc: 1
         );
 
         var monetyPrzed = gracz.WypiszLiczbeSurowca(Surowiec.Monety);
@@ -478,7 +478,7 @@ public class TestyEfektowNaGraczu
         Gracz przeciwnik = new Gracz("Przeciwnik");
         var talia = ZbiorKart.TaliaEpokiII;
 
-        var karty = talia.Where(k => k.KolorKarty == KolorKarty.Brązowy).Take(3).ToList().Concat
+        var karty = talia.Where(k => k.KolorKarty == KolorKarty.Brazowy).Take(3).ToList().Concat
             (talia.Where(k => k.KolorKarty == KolorKarty.Szary).Take(2)).ToList();
         gracz.DodajMonety(10); // Dodajemy trochę monet, żeby gracz mógł zbudować karty
         foreach (var karta in karty)
@@ -489,16 +489,16 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.MonetyZaKarty,
-            tekst: "Brązowy i Szary",
-            wartość: 1
+            tekst: "Brazowy i Szary",
+            wartosc: 1
         );
 
         var monetyPrzed = gracz.WypiszLiczbeSurowca(Surowiec.Monety);
         efekt.ZastosujEfekt(gracz, przeciwnik);
 
-        Assert.Equal(3, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Brązowy));
+        Assert.Equal(3, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Brazowy));
         Assert.Equal(2, gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Szary));
-        Assert.Equal(monetyPrzed + 5, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 5 monety za każdą z kart brązowych i szarych
+        Assert.Equal(monetyPrzed + 5, gracz.WypiszLiczbeSurowca(Surowiec.Monety)); // Początkowe + 5 monety za każdą z kart Brazowych i szarych
     }
 
     [Fact]
@@ -509,11 +509,11 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.MniejMaterialowNaNiebieskieKarty, 
-            wartość: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
+            wartosc: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
         );
 
         // Symulacja wyboru najlepszego surowca do danej karty
-        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Gmach Sądu"); // koszt: 2 drewno, 1 szkło (niebieska karta)
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Gmach Sadu"); // koszt: 2 drewno, 1 Szklo (niebieska karta)
         _output.WriteLine($"Testowana karta: {karta.Nazwa}, Kolor: {karta.KolorKarty} (Koszt: {karta.WypiszKoszt()})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
         _output.WriteLine($"Koszt przed efektem: {koszt}");
@@ -533,20 +533,20 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.MniejMaterialowNaNiebieskieKarty, 
-            wartość: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
+            wartosc: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
         );
 
         // Symulacja wyboru najlepszego surowca do danej karty
-        var karta = ZbiorKart.TaliaEpokiIII.First(k => k.Nazwa == "Pałac"); // koszt: 1 drewno, 1 glina, 1 kamień, 2 szkło (niebieska karta)
+        var karta = ZbiorKart.TaliaEpokiIII.First(k => k.Nazwa == "Palac"); // koszt: 1 drewno, 1 glina, 1 Kamien, 2 Szklo (niebieska karta)
         _output.WriteLine($"Testowana karta: {karta.Nazwa}, Kolor: {karta.KolorKarty} (Koszt: {karta.WypiszKoszt()})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt przed efektem: {koszt}");
         Assert.Equal(10, koszt);
 
         gracz.DodajSurowiec(Surowiec.Drewno, 1);
-        przeciwnik.DodajSurowiec(Surowiec.Szkło, 2);
+        przeciwnik.DodajSurowiec(Surowiec.Szklo, 2);
         koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
-        _output.WriteLine($"Koszt po dodaniu surowców efektu: {koszt}");
+        _output.WriteLine($"Koszt po dodaniu surowcow efektu: {koszt}");
         Assert.Equal(12, koszt);
 
         gracz.DodajEfekt(efekt);
@@ -563,11 +563,11 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.MniejMaterialowNaNiebieskieKarty, 
-            wartość: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
+            wartosc: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
         );
 
         // Symulacja wyboru najlepszego surowca do danej karty
-        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Świątynia"); // koszt: 1 drewno, 1 papier (niebieska karta)
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Swiatynia"); // koszt: 1 drewno, 1 papier (niebieska karta)
         _output.WriteLine($"Testowana karta: {karta.Nazwa}, Kolor: {karta.KolorKarty} (Koszt: {karta.WypiszKoszt()})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik, karta);
         _output.WriteLine($"Koszt przed efektem: {koszt}");
@@ -592,11 +592,11 @@ public class TestyEfektowNaGraczu
 
         var efekt = new Efekt(
             TypEfektu.MniejMaterialowNaCuda,
-            wartość: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
+            wartosc: 2 // oznacza że nie są brane 2 najdroższe surowce do kosztu karty, ale tylko jeśli karta jest niebieska
         );
 
         // Symulacja wyboru najlepszego surowca do danej karty
-        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Gmach Sądu"); // koszt: 3 glina, 1 szkło (niebieska karta)
+        var karta = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Gmach Sadu"); // koszt: 3 glina, 1 Szklo (niebieska karta)
         var kartaCudu = ZbiorKart.TaliaKartyCudow.First(k => k.Nazwa == "Kolos Rodyjski");
         
         karta.OznaczJakoNiezagrana();
@@ -618,12 +618,12 @@ public class TestyEfektowNaGraczu
         koszt = kartaCudu.ObliczKoszt(gracz, przeciwnik, kartaCudu: kartaCudu);
         _output.WriteLine($"Koszt po dodaniu 1x gliny przeciwnikowi: {koszt}");
 
-        Assert.Equal(5, koszt); //zostanie koszt za 1 glinę (2+1) i 1 szkło (2)
-        przeciwnik.DodajSurowiec(Surowiec.Szkło, 2);
+        Assert.Equal(5, koszt); //zostanie koszt za 1 glinę (2+1) i 1 Szklo (2)
+        przeciwnik.DodajSurowiec(Surowiec.Szklo, 2);
 
         koszt = kartaCudu.ObliczKoszt(gracz, przeciwnik, kartaCudu: kartaCudu);
-        _output.WriteLine($"Koszt po dodaniu jeszcze 2x szkła przeciwnikowi: {koszt}");
-        Assert.Equal(6, koszt); //zostanie koszt za 2 gliny (2+1), bo szkło jest droższe przez przeciwnika (2+2)
+        _output.WriteLine($"Koszt po dodaniu jeszcze 2x szkla przeciwnikowi: {koszt}");
+        Assert.Equal(6, koszt); //zostanie koszt za 2 gliny (2+1), bo Szklo jest droższe przez przeciwnika (2+2)
     }
 
     [Fact]
@@ -684,7 +684,7 @@ public class TestyEfektowNaGraczu
         gracz.DodajEfekt(efekt);
         gracz.DodajKarteCudu(kartaCudu);
         gracz.DodajSurowiec(Surowiec.Glina, 3);
-        gracz.DodajSurowiec(Surowiec.Szkło, 1);
+        gracz.DodajSurowiec(Surowiec.Szklo, 1);
         gracz.ZbudujCud(czerwonaKarta[0], przeciwnik, kartaCudu, plansza);
 
         Assert.Equal(2, plansza.PionKonfliktu.PobierzPozycje());

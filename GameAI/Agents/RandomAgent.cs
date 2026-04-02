@@ -11,8 +11,8 @@ public class RandomAgent : IAgent
     }
     public Ruch DecideMove(Gra gra)
     {
-        var ruchy = gra.DostepneRuchy(); // Pobierz wszystkie dostępne 
-        //Console.WriteLine($"Dostępne ruchy: {ruchy.Count}");
+        var ruchy = gra.DostepneRuchy(); // Pobierz wszystkie dostepne 
+        //Console.WriteLine($"Dostepne ruchy: {ruchy.Count}");
         //foreach (var ruch in ruchy)
         //{
         //    Console.WriteLine($"Ruch: {ruch.TypRuchu}, Karta: {ruch.KartaDoZagrania?.Nazwa}, KartaCudu: {ruch.KartaCudu?.Nazwa}");

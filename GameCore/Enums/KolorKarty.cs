@@ -1,10 +1,10 @@
 public enum KolorKarty
 {
-    Br¹zowy, // Surowiec
+    Brazowy, // Surowiec
     Szary, // Dobro
     Niebieski, // Budynek Cywilny
     Zielony, // Budynek Naukowy
-    ¯ó³ty, // Budynek Handlowy
+    Zolty, // Budynek Handlowy
     Czerwony, // Budynek Wojskowy
     Fioletowy // Gildia
 }

@@ -1,9 +1,9 @@
 public enum Surowiec
 {
     Glina,
-    Kamieñ,
+    Kamien,
     Drewno,
-    Szk³o,
+    Szklo,
     Papirus,
     Monety
 }

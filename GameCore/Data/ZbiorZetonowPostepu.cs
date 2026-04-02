@@ -18,15 +18,15 @@ public static class ZbiorZetonowPostepu
                 "Rolnictwo",
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety, wartoœæ: 6),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartoœæ: 4),
+                    new Efekt(TypEfektu.Monety, wartosc: 6),
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 4),
                 }
             ),
             new ZetonPostepu(
                 "Filozofia",
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartoœæ: 7)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 7)
                 }
             ),
             new ZetonPostepu(
@@ -54,22 +54,22 @@ public static class ZbiorZetonowPostepu
                 "Architektura",
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MniejMaterialowNaCuda, wartoœæ: 2)
+                    new Efekt(TypEfektu.MniejMaterialowNaCuda, wartosc: 2)
                 }
             ),
             new ZetonPostepu(
                 "Budownictwo",
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MniejMaterialowNaNiebieskieKarty, wartoœæ: 2)
+                    new Efekt(TypEfektu.MniejMaterialowNaNiebieskieKarty, wartosc: 2)
                 }
             ),
             new ZetonPostepu(
                 "Urbanistyka",
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety, wartoœæ: 6),
-                    new Efekt(TypEfektu.MonetyZaBudoweZBialymSymbolem, wartoœæ: 4),
+                    new Efekt(TypEfektu.Monety, wartosc: 6),
+                    new Efekt(TypEfektu.MonetyZaBudoweZBialymSymbolem, wartosc: 4),
                 }
             ),
             new ZetonPostepu(

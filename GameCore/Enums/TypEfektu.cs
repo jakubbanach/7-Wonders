@@ -21,7 +21,7 @@ public enum TypEfektu
     KoniecGry3PunktyZaZetonPostepu,
     MniejMaterialowNaNiebieskieKarty, // 2 wybrane surowce przez gracza
     MniejMaterialowNaCuda, // 2 wybrane surowce przez gracza
-    MonetyZaBudoweZBialymSymbolem, // za ka¿d¹ budowê 4 monety
-    MonetyPrzeciwnikaZaMaterialy, // przeciwnik p³aci wszystkie monety za surowce do gracza zamiast do banku
-    ZaBudoweCuduRozegrajTurePonownie // po zagraniu karty cudu gracz rozgrywa turê ponownie
+    MonetyZaBudoweZBialymSymbolem, // za kazda budowe 4 monety
+    MonetyPrzeciwnikaZaMaterialy, // przeciwnik placi wszystkie monety za surowce do gracza zamiast do banku
+    ZaBudoweCuduRozegrajTurePonownie // po zagraniu karty cudu gracz rozgrywa ture ponownie
 }

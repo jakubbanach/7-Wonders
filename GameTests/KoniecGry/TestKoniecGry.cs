@@ -81,7 +81,7 @@ public class TestKoniecGry
 
         foreach (var symbol in Enum.GetValues<SymbolNaukowy>())
         {
-            if (symbol == SymbolNaukowy.Koło || symbol == SymbolNaukowy.Globus) // Pomijamy jeden symbol, aby nie osiągnąć zwycięstwa
+            if (symbol == SymbolNaukowy.Kolo || symbol == SymbolNaukowy.Globus) // Pomijamy jeden symbol, aby nie osiągnąć zwycięstwa
                 continue;
             gracze[0].SymboleNaukowe.Add(symbol);
         }
@@ -184,7 +184,7 @@ public class TestKoniecGry
         Gracz przeciwnik = new Gracz("Przeciwnik");
         var gracze = new[] { gracz, przeciwnik };
 
-        var zolteKarty = ZbiorKart.TaliaEpokiII.Where(k => k.KolorKarty == KolorKarty.Żółty).Take(3).ToList();
+        var zolteKarty = ZbiorKart.TaliaEpokiII.Where(k => k.KolorKarty == KolorKarty.Zolty).Take(3).ToList();
         gracz.DodajMonety(20);
         przeciwnik.DodajMonety(20);
         foreach (var karta in zolteKarty)
@@ -203,13 +203,13 @@ public class TestKoniecGry
 
         var efekt = new Efekt(
             TypEfektu.PunktyZaKarty,
-            tekst: "Żółty",
-            wartość: 1
+            tekst: "Zolty",
+            wartosc: 1
         );
         var efekt2 = new Efekt(
             TypEfektu.PunktyZaKarty,
             tekst: "Zielony",
-            wartość: 1
+            wartosc: 1
         );
         gracz.DodajEfekt(efekt);
         przeciwnik.DodajEfekt(efekt2);
@@ -250,12 +250,12 @@ public class TestKoniecGry
         var efekt = new Efekt(
             TypEfektu.PunktyZaKarty,
             tekst: "Monety",
-            wartość: 1
+            wartosc: 1
         );
         var efekt2 = new Efekt(
             TypEfektu.PunktyZaKarty,
             tekst: "Cuda",
-            wartość: 2
+            wartosc: 2
         );
         gracz.DodajEfekt(efekt);
         przeciwnik.DodajEfekt(efekt2);
@@ -312,8 +312,8 @@ public class TestKoniecGry
         
         var stanGry = new StanGry();
         
-        var nazwyKartGracza0 = new[] { "Kamieniołom", "Tawerna", "Wytwórnia Papirusu", "Warsztat", "Ołtarz", "Łaźnie" };
-        var nazwyKartGracza1 = new[] { "Glinianka", "Huta Szkła", "Apteka", "Garnizon", "Skryptorium", "Teatr" };
+        var nazwyKartGracza0 = new[] { "Kamieniolom", "Tawerna", "Wytwornia Papirusu", "Warsztat", "Oltarz", "Laznie" };
+        var nazwyKartGracza1 = new[] { "Glinianka", "Huta Szkla", "Apteka", "Garnizon", "Skryptorium", "Teatr" };
 
         foreach (var nazwaKarty in nazwyKartGracza0)
         {
@@ -363,8 +363,8 @@ public class TestKoniecGry
         var pionKonfliktu = gra.PlanszaKonfliktu.PionKonfliktu;
         var stanGry = gra.StanGry;
 
-        var nazwyKartGracza0 = new[] { "Kamieniołom", "Wytwórnia Papirusu", "Warsztat", "Ołtarz", "Łaźnie" };
-        var nazwyKartGracza1 = new[] { "Glinianka", "Huta Szkła", "Apteka", "Garnizon", "Skryptorium", "Teatr", "Biblioteka" };
+        var nazwyKartGracza0 = new[] { "Kamieniolom", "Wytwornia Papirusu", "Warsztat", "Oltarz", "Laznie" };
+        var nazwyKartGracza1 = new[] { "Glinianka", "Huta Szkla", "Apteka", "Garnizon", "Skryptorium", "Teatr", "Biblioteka" };
 
         foreach (var nazwaKarty in nazwyKartGracza0)
         {
@@ -419,8 +419,8 @@ public class TestKoniecGry
 
         var stanGry = new StanGry();
 
-        var nazwyKartGracza0 = new[] { "Kamieniołom", "Tawerna", "Wytwórnia Papirusu", "Warsztat", "Ołtarz" };
-        var nazwyKartGracza1 = new[] { "Glinianka", "Huta Szkła", "Apteka", "Garnizon", "Skryptorium", "Teatr" };
+        var nazwyKartGracza0 = new[] { "Kamieniolom", "Tawerna", "Wytwornia Papirusu", "Warsztat", "Oltarz" };
+        var nazwyKartGracza1 = new[] { "Glinianka", "Huta Szkla", "Apteka", "Garnizon", "Skryptorium", "Teatr" };
 
         foreach (var nazwaKarty in nazwyKartGracza0)
         {

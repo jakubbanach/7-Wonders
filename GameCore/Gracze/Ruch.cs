@@ -34,7 +34,7 @@ public class Ruch
                 //KartaCudu Cud = Gracz.KartyCudow[0]; //Gracz.WybierzNiezbudowanyCud();
                 if (KartaCudu == null)
                 {
-                    Console.WriteLine("Nie mo¿na zbudowaæ cudu bez wybranej karty cudu.");
+                    Console.WriteLine("Nie mozna zbudowac cudu bez wybranej karty cudu.");
                     return;
                 }
                 if (Gracz.PobierzKartyCudu().FirstOrDefault(c => c.Nazwa == KartaCudu.Nazwa) == null)

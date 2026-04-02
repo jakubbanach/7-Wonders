@@ -52,7 +52,7 @@ public class TestyKartCudow
         var kartaCudu = new KartaCudu("Wielki Mur", new Dictionary<Surowiec, int>
         {
             { Surowiec.Drewno, 2 },
-            { Surowiec.Kamień, 1 }
+            { Surowiec.Kamien, 1 }
         }, new List<Efekt> { efekt });
 
         //kartaCudu.Zagraj(surowce);
@@ -78,7 +78,7 @@ public class TestyKartCudow
         var kartaCudu = new KartaCudu("Wielki Mur", new Dictionary<Surowiec, int>
         {
             { Surowiec.Drewno, 2 },
-            { Surowiec.Kamień, 1 }
+            { Surowiec.Kamien, 1 }
         }, new List<Efekt> { efekt });
 
         //kartaCudu.Zagraj(surowce);
@@ -127,9 +127,9 @@ public class TestyKartCudow
         var kartaCudu = new KartaCudu("Wielki Mur", new Dictionary<Surowiec, int>
         {
             { Surowiec.Drewno, 2 },
-            { Surowiec.Kamień, 1 }
+            { Surowiec.Kamien, 1 }
         }, new List<Efekt> { efekt });
         var kosztString = kartaCudu.WypiszKoszt();
-        Assert.Equal("2xDrewno + 1xKamień", kosztString);
+        Assert.Equal("2xDrewno + 1xKamien", kosztString);
     }
 }

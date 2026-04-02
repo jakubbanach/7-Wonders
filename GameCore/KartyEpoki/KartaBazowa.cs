@@ -127,7 +127,7 @@ public abstract class KartaBazowa
     {
         if (kartaCudu != null && karta != null)
         {
-            throw new ArgumentException("Nie można podać jednocześnie karty i karty cudu.");
+            throw new ArgumentException("Nie mozna podac jednocześnie karty i karty cudu.");
         }
         
         Dictionary<Surowiec, int> kosztZKarty = Koszt;
@@ -156,9 +156,9 @@ public abstract class KartaBazowa
         int kosztMonet = 0;
 
         var brakujaceSurowce = ObliczBrakujaceSurowce(posiadaneSurowce, kosztZKarty);
-        // zastosowanie efektów zmiany ceny surowca
+        // zastosowanie efektow zmiany ceny surowca
         ZastosowanieEfektowWyboruSurowca(efektyWyboruSurowca, brakujaceSurowce, przeciwnikSurowce, efektyGracza);
-        // zastosowanie efektów mniej materiałów na niebieskie karty i cuda
+        // zastosowanie efektow mniej materialow na niebieskie karty i cuda
         if (karta != null)
             ZastosujMniejMaterialow(brakujaceSurowce, przeciwnikSurowce, efektyGracza, karta: karta);
         else if (kartaCudu != null)

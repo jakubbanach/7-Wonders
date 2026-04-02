@@ -49,7 +49,7 @@ public class TestyGracza
     {
         var gracz = new Gracz("TestowyGracz");
         var przeciwnik = new Gracz("Przeciwnik");
-        var karta = ZbiorKart.TaliaEpokiI.Where(k => k.Nazwa == "Składowisko Kamienia").First();
+        var karta = ZbiorKart.TaliaEpokiI.Where(k => k.Nazwa == "Skladowisko Kamienia").First();
         karta.OznaczJakoNiezagrana();
         _output.WriteLine("Koszt karty: " + karta.WypiszKoszt());
         gracz.ZbudujKarte(karta, przeciwnik);
@@ -66,7 +66,7 @@ public class TestyGracza
         Assert.Equal("Piramida Cheopsa", gracz.WypiszKartyCudu());
         gracz.DodajKarteCudu(ZbiorKart.TaliaKartyCudow.Skip(1).First());
         _output.WriteLine(gracz.WypiszKartyCudu());
-        Assert.Equal("Piramida Cheopsa, Wiszące Ogrody Semiramidy", gracz.WypiszKartyCudu());
+        Assert.Equal("Piramida Cheopsa, Wiszace Ogrody Semiramidy", gracz.WypiszKartyCudu());
     }
     [Fact]
     public void ZbudujKarteCudu_Wystarczajace_Surowce()
@@ -143,7 +143,7 @@ public class TestyGracza
         );
         gracz.DodajKarteCudu(kartaCudu);
         var ex = Assert.Throws<InvalidOperationException>(() => gracz.ZbudujCud(karta, przeciwnik, kartaCudu));
-        Assert.Equal("Nie można zbudować tego cudu.", ex.Message);
+        Assert.Equal("Nie mozna zbudowac tego cudu.", ex.Message);
         
         _output.WriteLine("Surowce gracza:");
         _output.WriteLine(

@@ -68,7 +68,7 @@ public class Gra
     {
         var karta = ZnajdzDostepnaKarte(ruchNew.KartaDoZagrania.Nazwa);
 
-        //Console.WriteLine($"Dostępne karty: {string.Join(", ", DostepneKarty().Select(k => k.Nazwa))}");
+        //Console.WriteLine($"Dostepne karty: {string.Join(", ", DostepneKarty().Select(k => k.Nazwa))}");
         //Console.WriteLine($"Wybrana karta: {karta.Nazwa}");
 
         var kartaCudu = ruchNew.KartaCudu == null ? null : ZnajdzKarteCudu(ruchNew.KartaCudu.Nazwa);
@@ -80,13 +80,13 @@ public class Gra
         var poleKarty = planszaEpoki.ZnajdzPole(karta);
         if (poleKarty == null)
         {
-            Console.WriteLine("Nie można znaleźć karty na planszy epoki!");
+            Console.WriteLine("Nie mozna znalezc karty na planszy epoki!");
             return;
         }
         planszaEpoki.UsunPole(poleKarty);
         if (CzyKoniecGry())
         {
-            Console.WriteLine("Gra zakończona!");
+            Console.WriteLine("Gra zakonczona!");
             return;
         }
         if (CzyKoniecEpoki())
@@ -94,14 +94,14 @@ public class Gra
             //Console.WriteLine("Koniec epoki! Przechodzimy do kolejnej epoki.");
             if (planszaEpoki.Epoka == Epoka.EpokaIII)
             {
-                Console.WriteLine("Koniec gry! Przechodzimy do podsumowania wyników.");
+                //Console.WriteLine("Koniec gry! Przechodzimy do podsumowania wynikow.");
                 // dopisac logike podsumowania wynikow
                 ZakonczGre();
                 return;
             }
             planszaEpoki = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1, random);
         }
-        // czy tutaj nie dać logiki wykonania ponownego ruchu - efekt RozegrajTurePonownie
+        // czy tutaj nie dac logiki wykonania ponownego ruchu - efekt RozegrajTurePonownie
         ZmienTure(); 
     }
 
@@ -129,7 +129,7 @@ public class Gra
             .ToList();
         if (!karty.Any())
         {
-            Console.WriteLine("Brak dostępnych kart na planszy epoki!");
+            Console.WriteLine("Brak dostepnych kart na planszy epoki!");
             return new List<Karta>();
         }
         return karty;

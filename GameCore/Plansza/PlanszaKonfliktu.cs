@@ -83,11 +83,11 @@ public class PlanszaKonfliktu
         {
             if (nowaStrefa.LiczbaTraconychMonet > 0)
             {
-                Console.WriteLine($"{gracz.Nazwa} traci {nowaStrefa.LiczbaTraconychMonet} monet z powodu wejœcia na strefê {nowaStrefa.Nazwa}!");
+                //Console.WriteLine($"{gracz.Nazwa} traci {nowaStrefa.LiczbaTraconychMonet} monet z powodu wejscia na strefe {nowaStrefa.Nazwa}!");
                 if (gracz == Gracze[0])
-                    Gracze[1].DodajMonety(-nowaStrefa.LiczbaTraconychMonet); // Przekazujemy karê przeciwnikowi
+                    Gracze[1].DodajMonety(-nowaStrefa.LiczbaTraconychMonet); // Przekazujemy kare przeciwnikowi
                 else
-                    Gracze[0].DodajMonety(-nowaStrefa.LiczbaTraconychMonet); // Przekazujemy karê przeciwnikowi
+                    Gracze[0].DodajMonety(-nowaStrefa.LiczbaTraconychMonet); // Przekazujemy kare przeciwnikowi
             }
 
             nowaStrefa.UzyjStrefy();

@@ -50,7 +50,7 @@ public class GameRunner
             // ewenetualnie currentAgent
             log.Add(new MoveLog(gra.AktywnyGracz.Nazwa, ruch));
 
-            //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z kartą {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
+            //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z karta {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
 
             gra.WykonajRuch(ruch, gameRandom);
         }

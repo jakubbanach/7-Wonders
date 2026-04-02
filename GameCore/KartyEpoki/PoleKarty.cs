@@ -9,7 +9,7 @@ public class PoleKarty
     public Karta? Karta { get; set; }
     public bool CzyZakryta { get; private set; }
 
-    // karty, które MUSZĄ zniknąć, aby ta była dostępna
+    // karty, ktore MUSZA zniknac, aby ta byla dostepna
     public List<PoleKarty> BlokujacePola { get; set; }
 
     public PoleKarty(Karta karta, bool czyZakryta)

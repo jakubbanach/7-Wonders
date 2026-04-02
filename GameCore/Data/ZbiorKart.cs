@@ -29,27 +29,27 @@ public static class ZbiorKart
                 {
                     new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 } })
                 },
-                KolorKarty.Brązowy
+                KolorKarty.Brazowy
             ),
             new Karta(
-                "Złoża Gliny",
+                "Zloza Gliny",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 } })
                 },
-                KolorKarty.Brązowy
+                KolorKarty.Brazowy
             ),
             new Karta(
-                "Składowisko Kamienia",
+                "Skladowisko Kamienia",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 } })
+                    new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 } })
                 },
-                KolorKarty.Brązowy
+                KolorKarty.Brazowy
             ),
             new Karta(
                 "Glinianka",
@@ -59,40 +59,40 @@ public static class ZbiorKart
                 {
                     new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 } })
                 },
-                KolorKarty.Brązowy
+                KolorKarty.Brazowy
             ),
             new Karta(
-                "Skład Drewna",
+                "Sklad Drewna",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 } })
                 },
-                KolorKarty.Brązowy
+                KolorKarty.Brazowy
             ),
             new Karta(
-                "Kamieniołom",
+                "Kamieniolom",
                 Epoka.EpokaI,
                 null,
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 } })
+                    new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 } })
                 },
-                KolorKarty.Brązowy
+                KolorKarty.Brazowy
             ),
             new Karta(
-                "Huta Szkła",
+                "Huta Szkla",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Szkło, 1 } })
+                    new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Szklo, 1 } })
                 },
                 KolorKarty.Szary
             ),
             new Karta(
-                "Wytwórnia Papirusu",
+                "Wytwornia Papirusu",
                 Epoka.EpokaI,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 1 } },
                 new List<Efekt>
@@ -107,10 +107,10 @@ public static class ZbiorKart
                 null,
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety,wartość: 4),
+                    new Efekt(TypEfektu.Monety,wartosc: 4),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Wazon")
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Magazyn Kamienia",
@@ -118,9 +118,9 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Kamień,wartość: 1)
+                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Kamien,wartosc: 1)
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Magazyn Drewna",
@@ -128,9 +128,9 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Drewno,wartość: 1)
+                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Drewno,wartosc: 1)
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Magazyn Gliny",
@@ -138,9 +138,9 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Glina,wartość: 1)
+                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Glina,wartosc: 1)
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Skryptorium",
@@ -149,18 +149,18 @@ public static class ZbiorKart
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Pismo),
-                    new Efekt(TypEfektu.BialySymbol,tekst: "Księga")
+                    new Efekt(TypEfektu.BialySymbol,tekst: "Ksiega")
                 },
                 KolorKarty.Zielony
             ),
             new Karta(
                 "Apteka",
                 Epoka.EpokaI,
-                new Dictionary<Surowiec, int> { { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Koło),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 1)
+                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Kolo),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 1)
                 },
                 KolorKarty.Zielony
             ),
@@ -170,8 +170,8 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Moździerz),
-                    new Efekt(TypEfektu.BialySymbol,tekst: "Zębatka")
+                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Mozdzierz),
+                    new Efekt(TypEfektu.BialySymbol,tekst: "Zebatka")
                 },
                 KolorKarty.Zielony
             ),
@@ -181,8 +181,8 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Liczydło),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 1)
+                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Liczydlo),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 1)
                 },
                 KolorKarty.Zielony
             ),
@@ -192,7 +192,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 1),
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 1),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Miecz")
                 },
                 KolorKarty.Czerwony
@@ -203,18 +203,18 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 1),
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 1),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Mur")
                 },
                 KolorKarty.Czerwony
             ),
             new Karta(
-                "Wieża Strażnicza",
+                "Wieza Straznicza",
                 Epoka.EpokaI,
                 null,
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 1)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 1)
                 },
                 KolorKarty.Czerwony
             ),
@@ -224,7 +224,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 1),
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 1),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Podkowa")
                 },
                 KolorKarty.Czerwony
@@ -235,30 +235,30 @@ public static class ZbiorKart
                 null,
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 3),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 3),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Maska")
                 },
                 KolorKarty.Niebieski
             ),
             new Karta(
-                "Łaźnie",
+                "Laznie",
                 Epoka.EpokaI,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 3),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 3),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Kropla")
                 },
                 KolorKarty.Niebieski
             ),
             new Karta(
-                "Ołtarz",
+                "Oltarz",
                 Epoka.EpokaI,
                 null,
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 3),
-                    new Efekt(TypEfektu.BialySymbol,tekst: "Księżyc")
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 3),
+                    new Efekt(TypEfektu.BialySymbol,tekst: "Ksiezyc")
                 },
                 KolorKarty.Niebieski
             )
@@ -270,14 +270,14 @@ public static class ZbiorKart
         var talia = new List<Karta>
         {
             new Karta(
-            "Kamieniołom Stokowy",
+            "Kamieniolom Stokowy",
             Epoka.EpokaII,
             new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 } },
             new List<Efekt>
             {
-                new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 } })
+                new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 } })
             },
-            KolorKarty.Brązowy
+            KolorKarty.Brazowy
             ),
             new Karta(
             "Cegielnia",
@@ -287,7 +287,7 @@ public static class ZbiorKart
             {
                 new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 } })
             },
-            KolorKarty.Brązowy
+            KolorKarty.Brazowy
             ),
             new Karta(
             "Tartak",
@@ -297,15 +297,15 @@ public static class ZbiorKart
             {
                 new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 } })
             },
-            KolorKarty.Brązowy
+            KolorKarty.Brazowy
             ),
             new Karta(
-                "Pracownia Wyrobu Szkła",
+                "Pracownia Wyrobu Szkla",
                 Epoka.EpokaII,
                 null,
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Szkło, 1 } })
+                    new Efekt(TypEfektu.Surowiec,new Dictionary<Surowiec, int> { { Surowiec.Szklo, 1 } })
                 },
                 KolorKarty.Szary
             ),
@@ -322,25 +322,25 @@ public static class ZbiorKart
             new Karta(
                 "Karawanseraj",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Monety, 2 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.WyborSurowca, new Dictionary<Surowiec, int> { 
-                        { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }
+                        { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 }
                     })
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
-                "Urząd celny",
+                "Urzad celny",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 4 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Papirus,wartość: 1),
-                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Szkło,wartość: 1)
+                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Papirus,wartosc: 1),
+                    new Efekt(TypEfektu.ZmianaCenySurowca,surowiec: Surowiec.Szklo,wartosc: 1)
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Browar",
@@ -348,10 +348,10 @@ public static class ZbiorKart
                 null,
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety,wartość: 6),
+                    new Efekt(TypEfektu.Monety,wartosc: 6),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Beczka")
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Forum",
@@ -360,19 +360,19 @@ public static class ZbiorKart
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.WyborSurowca, new Dictionary<Surowiec, int> {
-                        { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 }
+                        { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 }
                     })
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Labolatorium",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Szkło, 2 }, { Surowiec.Drewno, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Szklo, 2 }, { Surowiec.Drewno, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Liczydło),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 1),
+                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Liczydlo),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 1),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Lampa")
                 },
                 KolorKarty.Zielony
@@ -380,23 +380,23 @@ public static class ZbiorKart
             new Karta(
                 "Biblioteka",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Pismo),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 2)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 2)
                 },
                 KolorKarty.Zielony,
-                darmowaBudowa: "Księga"
+                darmowaBudowa: "Ksiega"
             ),
             new Karta(
-                "Szkoła",
+                "Szkola",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Koło),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 1),
+                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Kolo),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 1),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Harfa")
                 },
                 KolorKarty.Zielony
@@ -404,33 +404,33 @@ public static class ZbiorKart
             new Karta(
                 "Ambulatorium",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamień, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamien, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Moździerz),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 2)
+                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Mozdzierz),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 2)
                 },
                 KolorKarty.Zielony,
-                darmowaBudowa: "Zębatka"
+                darmowaBudowa: "Zebatka"
             ),
             new Karta(
                 "Mury Obronne",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 2)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 2)
                 },
                 KolorKarty.Czerwony
             ),
             new Karta(
                 "Plac Apelowy",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 2),
-                    new Efekt(TypEfektu.BialySymbol,tekst: "Hełm")
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 2),
+                    new Efekt(TypEfektu.BialySymbol,tekst: "Helm")
                 },
                 KolorKarty.Czerwony
             ),
@@ -440,7 +440,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 3 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 1)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 1)
                 },
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Miecz"
@@ -451,7 +451,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Drewno, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 1)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 1)
                 },
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Podkowa"
@@ -459,65 +459,65 @@ public static class ZbiorKart
             new Karta(
                 "Tor Strzelecki",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 2),
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 2),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Strzelnica")
                 },
                 KolorKarty.Czerwony
             ),
             new Karta(
-                "Gmach Sądu",
+                "Gmach Sadu",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 5)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 5)
                 },
                 KolorKarty.Niebieski
             ),
             new Karta(
                 "Akwedukt",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 3 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 3 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 5)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 5)
                 },
                 KolorKarty.Niebieski,
                 darmowaBudowa: "Kropla"
             ),
             new Karta(
-                "Mównica",
+                "Mownica",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Drewno, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 4),
-                    new Efekt(TypEfektu.BialySymbol,tekst: "Sąd")
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 4),
+                    new Efekt(TypEfektu.BialySymbol,tekst: "Sad")
                 },
                 KolorKarty.Niebieski
             ),
             new Karta(
-                "Świątynia",
+                "Swiatynia",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 4),
-                    new Efekt(TypEfektu.BialySymbol,tekst: "Słońce")
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 4),
+                    new Efekt(TypEfektu.BialySymbol,tekst: "Slonce")
                 },
                 KolorKarty.Niebieski,
-                darmowaBudowa: "Księżyc"
+                darmowaBudowa: "Ksiezyc"
             ),
             new Karta(
-                "Posąg",
+                "Posag",
                 Epoka.EpokaII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 4),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 4),
                     new Efekt(TypEfektu.BialySymbol,tekst: "Kolumna")
                 },
                 KolorKarty.Niebieski,
@@ -533,64 +533,64 @@ public static class ZbiorKart
             new Karta(
                 "Cech Lichwiarzy",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Drewno, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Drewno, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Monety", wartość: 1)
+                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Monety", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
             ),
             new Karta(
                 "Cech Budowniczych",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Cuda", wartość: 2)
+                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Cuda", wartosc: 2)
                 },
                 KolorKarty.Fioletowy
             ),
             new Karta(
                 "Gildia Kupiecka",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Żółty", wartość: 1),
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Żółty", wartość: 1)
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Zolty", wartosc: 1),
+                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Zolty", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
             ),
             new Karta(
-                "Stowarzyszenie Urzędników",
+                "Stowarzyszenie Urzednikow",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Niebieski", wartość: 1),
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Niebieski", wartość: 1)
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Niebieski", wartosc: 1),
+                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Niebieski", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
             ),
             new Karta(
-                "Cech Armatorów",
+                "Cech Armatorow",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Brązowy i Szary", wartość: 1),
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Brązowy i Szary", wartość: 1),
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Brazowy i Szary", wartosc: 1),
+                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Brazowy i Szary", wartosc: 1),
                 },
                 KolorKarty.Fioletowy
             ),
             new Karta(
-                "Gildia Strategów",
+                "Gildia Strategow",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Czerwony", wartość: 1),
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Czerwony", wartość: 1)
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Czerwony", wartosc: 1),
+                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Czerwony", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
             ),
@@ -600,8 +600,8 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Drewno, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Zielony", wartość: 1),
-                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Zielony", wartość: 1)
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Zielony", wartosc: 1),
+                    new Efekt(TypEfektu.PunktyZaKarty, tekst: "Zielony", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
             ),
@@ -611,36 +611,36 @@ public static class ZbiorKart
             new Karta(
                 "Latarnia Morska",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3),
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Żółty", wartość: 1)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3),
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Zolty", wartosc: 1)
                 },
-                KolorKarty.Żółty,
+                KolorKarty.Zolty,
                 darmowaBudowa: "Wazon"
             ),
             new Karta(
                 "Port",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3),
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Brązowy", wartość: 2)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3),
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Brazowy", wartosc: 2)
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Arena",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 }, { Surowiec.Drewno, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3),
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Cuda", wartość: 2)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3),
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Cuda", wartosc: 2)
                 },
-                KolorKarty.Żółty,
+                KolorKarty.Zolty,
                 darmowaBudowa: "Beczka"
             ),
             new Karta(
@@ -649,52 +649,52 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Papirus, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3),
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Szary", wartość: 3)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3),
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Szary", wartosc: 3)
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Zbrojownia",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3),
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Czerwony", wartość: 1)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3),
+                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Czerwony", wartosc: 1)
                 },
-                KolorKarty.Żółty
+                KolorKarty.Zolty
             ),
             new Karta(
                 "Akademia",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szklo, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.ZegarSłoneczny),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 3)
+                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.ZegarSloneczny),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 3)
                 },
                 KolorKarty.Zielony
             ),
             new Karta(
                 "Pracownia Naukowa",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.ZegarSłoneczny),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 3)
+                    new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.ZegarSloneczny),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 3)
                 },
                 KolorKarty.Zielony
             ),
             new Karta(
                 "Uniwersytet",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Globus),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 2)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 2)
                 },
                 KolorKarty.Zielony,
                 darmowaBudowa: "Harfa"
@@ -702,11 +702,11 @@ public static class ZbiorKart
             new Karta(
                 "Ambulatorium",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Papirus, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Papirus, 2 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.SymbolNaukowy,symbolNaukowy: SymbolNaukowy.Globus),
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 2)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 2)
                 },
                 KolorKarty.Zielony,
                 darmowaBudowa: "Lampa"
@@ -714,32 +714,32 @@ public static class ZbiorKart
             new Karta(
                 "Cyrk",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamień, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamien, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 2)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 2)
                 },
                 KolorKarty.Czerwony,
-                darmowaBudowa: "Hełm"
+                darmowaBudowa: "Helm"
             ),
             new Karta(
                 "Fortyfikacje",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 2)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 2)
                 },
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Mur"
             ),
             new Karta(
-                "Arsenał",
+                "Arsenal",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 3 }, { Surowiec.Drewno, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 3)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 3)
                 },
                 KolorKarty.Czerwony
             ),
@@ -749,17 +749,17 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Monety, 8 }},
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 3)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 3)
                 },
                 KolorKarty.Czerwony
             ),
             new Karta(
-                "Machiny Oblężnicze",
+                "Machiny Obleznicze",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 3 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 3 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne,wartość: 2)
+                    new Efekt(TypEfektu.PunktyMilitarne,wartosc: 2)
                 },
                 KolorKarty.Czerwony,
                 darmowaBudowa: "Strzelnica"
@@ -767,41 +767,41 @@ public static class ZbiorKart
             new Karta(
                 "Obelisk",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 5)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 5)
                 },
                 KolorKarty.Niebieski
             ),
             new Karta(
                 "Budynek Senatu",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamień, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Kamien, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 5)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 5)
                 },
                 KolorKarty.Niebieski,
-                darmowaBudowa: "Sąd"
+                darmowaBudowa: "Sad"
             ),
             new Karta(
-                "Mównica",
+                "Mownica",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 3 }, { Surowiec.Drewno, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 3 }, { Surowiec.Drewno, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 7)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 7)
                 },
                 KolorKarty.Niebieski
             ),
             new Karta(
-                "Pałac",
+                "Palac",
                 Epoka.EpokaIII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szklo, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 7)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 7)
                 },
                 KolorKarty.Niebieski
             ),
@@ -811,10 +811,10 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Papirus, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 6)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 6)
                 },
                 KolorKarty.Niebieski,
-                darmowaBudowa: "Słońce"
+                darmowaBudowa: "Slonce"
             ),
             new Karta(
                 "Ogrody",
@@ -822,7 +822,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Drewno, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa,wartość: 6)
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 6)
                 },
                 KolorKarty.Niebieski,
                 darmowaBudowa: "Kolumna"
@@ -837,124 +837,124 @@ public static class ZbiorKart
         {
             new KartaCudu(
                 "Piramida Cheopsa",
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 3 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 3 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 9)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 9)
                 }
             ),
             new KartaCudu(
-                "Wiszące Ogrody Semiramidy",
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                "Wiszace Ogrody Semiramidy",
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety, wartość: 6),
+                    new Efekt(TypEfektu.Monety, wartosc: 6),
                     new Efekt(TypEfektu.RozegrajTurePonownie),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3)
                 }
             ),
             new KartaCudu(
-                "Świątynia Artemidy W Efezie",
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                "Światynia Artemidy W Efezie",
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Kamien, 1 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety,wartość: 12),
+                    new Efekt(TypEfektu.Monety,wartosc: 12),
                     new Efekt(TypEfektu.RozegrajTurePonownie)
                 }
             ),
             new KartaCudu(
                 "Sfinks",
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Szkło, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Szklo, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety,wartość: 6),
+                    new Efekt(TypEfektu.Monety,wartosc: 6),
                     new Efekt(TypEfektu.RozegrajTurePonownie)
                 }
             ),
             new KartaCudu(
                 "Latarnia Morska Na Faros",
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Kamień, 1 }, { Surowiec.Papirus, 2 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Kamien, 1 }, { Surowiec.Papirus, 2 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.WyborSurowca, surowce: new Dictionary<Surowiec, int>
                     {
                         { Surowiec.Drewno, 1 },
                         { Surowiec.Glina, 1 },
-                        { Surowiec.Kamień, 1 }
+                        { Surowiec.Kamien, 1 }
                     }),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 4)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 4)
                 }
             ),
             new KartaCudu(
                 "Kolos Rodyjski",
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 3 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 3 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.PunktyMilitarne, wartość: 2),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
+                    new Efekt(TypEfektu.PunktyMilitarne, wartosc: 2),
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3)
                 }
             ),
             new KartaCudu(
                 "Via Appia",
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Glina, 2 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Glina, 2 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety, wartość: 3),
-                    new Efekt(TypEfektu.PrzeciwnikOdkladaMonety, wartość: 3),
+                    new Efekt(TypEfektu.Monety, wartosc: 3),
+                    new Efekt(TypEfektu.PrzeciwnikOdkladaMonety, wartosc: 3),
                     new Efekt(TypEfektu.RozegrajTurePonownie),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3)
                 }
             ),
             new KartaCudu(
                 "Pireus",
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Kamień, 1 }, { Surowiec.Glina, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Kamien, 1 }, { Surowiec.Glina, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.WyborSurowca, surowce: new Dictionary<Surowiec, int>
                     {
                         { Surowiec.Papirus, 1 },
-                        { Surowiec.Szkło, 1 }
+                        { Surowiec.Szklo, 1 }
                     }),
                     new Efekt(TypEfektu.RozegrajTurePonownie),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 2)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 2)
                 }
             ),
             new KartaCudu(
                 "Mauzoleum W Halikarnasie",
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szkło, 2 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Szklo, 2 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.DarmowaBudowlaZOdrzuconychKart),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 2)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 2)
                 }
             ),
             new KartaCudu(
                 "Circus Maximus",
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 2 }, { Surowiec.Drewno, 1 }, { Surowiec.Szkło, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Drewno, 1 }, { Surowiec.Szklo, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.OdlozKartePrzeciwnika, tekst: "Szary"),
-                    new Efekt(TypEfektu.PunktyMilitarne, wartość: 1),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
+                    new Efekt(TypEfektu.PunktyMilitarne, wartosc: 1),
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3)
                 }
             ),
             new KartaCudu(
-                "Posąg Zeusa W Olimpii",
-                new Dictionary<Surowiec, int> { { Surowiec.Kamień, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 2 } },
+                "Posag Zeusa W Olimpii",
+                new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.OdlozKartePrzeciwnika, tekst: "Brązowy"),
-                    new Efekt(TypEfektu.PunktyMilitarne, wartość: 1),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 3)
+                    new Efekt(TypEfektu.OdlozKartePrzeciwnika, tekst: "Brazowy"),
+                    new Efekt(TypEfektu.PunktyMilitarne, wartosc: 1),
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 3)
                 }
             ),
             new KartaCudu(
                 "Biblioteka Aleksandryjska",
-                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 3 }, { Surowiec.Szkło, 1 }, { Surowiec.Papirus, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Drewno, 3 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.Wylosuj3ZetonyPostepu),
-                    new Efekt(TypEfektu.PunktyZwyciestwa, wartość: 4)
+                    new Efekt(TypEfektu.PunktyZwyciestwa, wartosc: 4)
                 }
             ),
         };

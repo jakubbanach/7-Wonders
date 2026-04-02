@@ -14,7 +14,7 @@ public class TestyKartEpok
         var surowce = new Dictionary<Surowiec, int>
         {
             { Surowiec.Drewno, 2 },
-            { Surowiec.Kamieñ, 1 }
+            { Surowiec.Kamien, 1 }
         };
         var efekt = new Efekt(
             TypEfektu.Surowiec, 
@@ -27,8 +27,8 @@ public class TestyKartEpok
         var kartaEpoki = new Karta("Warsztat", Epoka.EpokaI, new Dictionary<Surowiec, int>
         {
             { Surowiec.Drewno, 2 },
-            { Surowiec.Kamieñ, 1 }
-        }, new List<Efekt> { efekt }, KolorKarty.Br¹zowy);
+            { Surowiec.Kamien, 1 }
+        }, new List<Efekt> { efekt }, KolorKarty.Brazowy);
         // Symulacja budowy karty
         bool moznaZbudowac = true;
         foreach (var koszt in kartaEpoki.Koszt)
@@ -78,7 +78,7 @@ public class TestyKartEpok
 
         var efekt = new Efekt(
             TypEfektu.MonetyZaBudoweZBialymSymbolem, 
-            wartoœæ: 4
+            wartosc: 4
         );
         gracz.DodajEfekt(efekt);
 
@@ -95,15 +95,15 @@ public class TestyKartEpok
         var kartaEpoki = new Karta("TEEEEST", Epoka.EpokaI, new Dictionary<Surowiec, int>
         {
             { Surowiec.Monety, 2 },
-            { Surowiec.Szk³o, 1 },
+            { Surowiec.Szklo, 1 },
             { Surowiec.Papirus, 1 }
-        }, new List<Efekt>(), KolorKarty.Br¹zowy);
+        }, new List<Efekt>(), KolorKarty.Brazowy);
         var gracz = new Gracz("TestowyGracz");
         var przeciwnik = new Gracz("Przeciwnik");
         var koszt = kartaEpoki.ObliczKoszt(gracz, przeciwnik);
         Assert.Equal(6, koszt);
         
-        przeciwnik.DodajSurowiec(Surowiec.Szk³o, 1);
+        przeciwnik.DodajSurowiec(Surowiec.Szklo, 1);
         koszt = kartaEpoki.ObliczKoszt(gracz, przeciwnik);
         Assert.Equal(7, koszt);
     }
@@ -116,7 +116,7 @@ public class TestyKartEpok
         var koszt = kartaEpoki.ObliczKoszt(gracz, przeciwnik);
         Assert.Equal(8, koszt);
         
-        gracz.DodajSurowiec(Surowiec.Kamieñ, 2);
+        gracz.DodajSurowiec(Surowiec.Kamien, 2);
         przeciwnik.DodajSurowiec(Surowiec.Glina, 1);
         koszt = kartaEpoki.ObliczKoszt(gracz, przeciwnik);
         Assert.Equal(5, koszt);
@@ -130,7 +130,7 @@ public class TestyKartEpok
         var koszt = kartaEpoki.ObliczKoszt(przeciwnik, gracz);
         Assert.Equal(6, koszt);
         
-        gracz.DodajSurowiec(Surowiec.Kamieñ, 2);
+        gracz.DodajSurowiec(Surowiec.Kamien, 2);
         przeciwnik.DodajSurowiec(Surowiec.Glina, 1);
         koszt = kartaEpoki.ObliczKoszt(przeciwnik, gracz);
         Assert.Equal(12, koszt);
@@ -144,7 +144,7 @@ public class TestyKartEpok
         var koszt = kartaEpoki.ObliczKoszt(przeciwnik, gracz);
         Assert.Equal(6, koszt);
         
-        gracz.DodajSurowiec(Surowiec.Kamieñ, 2);
+        gracz.DodajSurowiec(Surowiec.Kamien, 2);
         przeciwnik.DodajSurowiec(Surowiec.Glina, 1);
         koszt = kartaEpoki.ObliczKoszt(przeciwnik, gracz);
         Assert.Equal(12, koszt);
@@ -155,19 +155,19 @@ public class TestyKartEpok
         var kartaEpoki = new Karta("TEEEEST", Epoka.EpokaI, new Dictionary<Surowiec, int>
         {
             { Surowiec.Monety, 2 },
-            { Surowiec.Szk³o, 1 },
+            { Surowiec.Szklo, 1 },
             { Surowiec.Papirus, 1 }
-        }, new List<Efekt>(), KolorKarty.Br¹zowy);
+        }, new List<Efekt>(), KolorKarty.Brazowy);
         var gracz = new Gracz("TestowyGracz");
         var przeciwnik = new Gracz("Przeciwnik");
-        przeciwnik.DodajSurowiec(Surowiec.Szk³o, 1);
+        przeciwnik.DodajSurowiec(Surowiec.Szklo, 1);
         gracz.DodajMonety(-1); // Usuniêcie monet, aby karta by³a darmowa
         _output.WriteLine($"Karta: {kartaEpoki.Nazwa}, Koszt: {string.Join(", ", kartaEpoki.Koszt.Select(k => $"{k.Key}: {k.Value}"))}");
 
         var ex = Assert.Throws<InvalidOperationException>(() => gracz.ZbudujKarte(kartaEpoki,przeciwnik));
 
         // Opcjonalnie sprawdzenie komunikatu
-        Assert.Equal("Nie mo¿na zbudowaæ tej karty.", ex.Message);
+        Assert.Equal("Nie mozna zbudowac tej karty.", ex.Message);
     }
 
 }

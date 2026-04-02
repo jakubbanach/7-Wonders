@@ -2,9 +2,9 @@ public enum SymbolNaukowy
 {
     Globus,
     Waga,
-    ZegarS≥oneczny,
-    Moüdzierz,
-    Liczyd≥o,
+    ZegarSloneczny,
+    Mozdzierz,
+    Liczydlo,
     Pismo,
-    Ko≥o,
+    Kolo,
 }

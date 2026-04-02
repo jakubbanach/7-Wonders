@@ -55,8 +55,8 @@ public class Gracz
     {
         DodajSurowiec(Surowiec.Drewno, 0);
         DodajSurowiec(Surowiec.Glina, 0);
-        DodajSurowiec(Surowiec.Kamieñ, 0);
-        DodajSurowiec(Surowiec.Szk³o, 0);
+        DodajSurowiec(Surowiec.Kamien, 0);
+        DodajSurowiec(Surowiec.Szklo, 0);
         DodajSurowiec(Surowiec.Papirus, 0);
         DodajMonety(7);
         //DodajSurowiec(Surowiec.Monety, 7);
@@ -117,7 +117,7 @@ public class Gracz
 
     public List<Karta> PobierzZbudowaneKarty()
     {
-        // Implementacja pobierania dostêpnych kart
+        // Implementacja pobierania dostepnych kart
         return ZbudowaneKarty;
     }
 
@@ -161,7 +161,7 @@ public class Gracz
 
     public List<KartaCudu> PobierzZbudowaneKartyCudow()
     {
-        // Implementacja pobierania zagranych kart cudów
+        // Implementacja pobierania zagranych kart cudow
         return KartyCudow.Where(k => k.CzyZagrana).ToList();
     }
 
@@ -170,14 +170,14 @@ public class Gracz
         if (karta.CzyZagrana || karta.CzyOdrzucona)
             return new WynikBudowy { MoznaZagrac = false, Koszt = 0, CzyDarmowaBudowa = false };        
 
-        //obs³uga darmowej budowy -> bialy symbol
+        //obsluga darmowej budowy -> bialy symbol
         if (!string.IsNullOrEmpty(karta.DarmowaBudowa))
         {
             foreach (var bialySymbol in BialeSymbole)
             {
                 if (bialySymbol == karta.DarmowaBudowa)
                 {
-                    // TODO: Uwzglêdniæ efekt kiedy gracz dostaje monety za budowê karty z bia³ym symbolem
+                    // TODO: Uwzglednic efekt kiedy gracz dostaje monety za budowe karty z bialym symbolem
 
                     // CZY DODAWAC TUTAJ MONETY
                     return new WynikBudowy { MoznaZagrac = true, Koszt = 0, CzyDarmowaBudowa = true };
@@ -199,7 +199,7 @@ public class Gracz
         if (wynikBudowy.MoznaZagrac)
         {
             DodajMonety(-wynikBudowy.Koszt);
-            if (wynikBudowy.CzyDarmowaBudowa) // obs³uga efektu darmowej budowy z bia³ym symbolem
+            if (wynikBudowy.CzyDarmowaBudowa) // obsluga efektu darmowej budowy z bialym symbolem
             {
                 var efektMonetyZaBudoweZBialymSymbolem = Efekty.FirstOrDefault(e => e.TypEfektu == TypEfektu.MonetyZaBudoweZBialymSymbolem);
                 if (efektMonetyZaBudoweZBialymSymbolem != null)
@@ -225,7 +225,7 @@ public class Gracz
 
         else
         {
-            throw new InvalidOperationException("Nie mo¿na zbudowaæ tej karty.");
+            throw new InvalidOperationException("Nie mozna zbudowac tej karty.");
         }
     }
 
@@ -239,7 +239,7 @@ public class Gracz
         int monety = 2;
 
         int liczbaZoltychKart = ZbudowaneKarty
-            .Count(k => k.KolorKarty == KolorKarty.¯ó³ty);
+            .Count(k => k.KolorKarty == KolorKarty.Zolty);
 
         monety += liczbaZoltychKart;
 
@@ -290,7 +290,7 @@ public class Gracz
 
         else
         {
-            throw new InvalidOperationException("Nie mo¿na zbudowaæ tego cudu.");
+            throw new InvalidOperationException("Nie mozna zbudowac tego cudu.");
         }
     }
 
@@ -315,9 +315,9 @@ public class Gracz
             .Select(k => k.WypiszEfekty(poZagraniu: true))
             .Concat(PobierzZbudowaneKartyCudow().
                 Select(k => k.WypiszEfekty(poZagraniu: true)))
-            .Where(e => e != "Brak efektów"));
+            .Where(e => e != "Brak efektow"));
         return $"Gracz: {Nazwa}\n" +
-            $"Karty Cudów: \n\t{kartyCuduOpis}\n" +
+            $"Karty Cudow: \n\t{kartyCuduOpis}\n" +
             $"Surowce: {surowceOpis}\n" +
             $"Zbudowane Karty: {kartyOpis}\n" +
             $"Zbudowane Cuda: {zbudowaneKartyCuduOpis}\n" +

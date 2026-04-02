@@ -9,11 +9,11 @@ public class Efekt
     public string Tekst { get; protected set; }
     public SymbolNaukowy SymbolNaukowy { get; protected set; }
     public Surowiec Surowiec { get; protected set; }
-    public Efekt(TypEfektu typEfektu, Dictionary<Surowiec, int> surowce = null, int wartoœæ = 0, string tekst = "", SymbolNaukowy symbolNaukowy=0,Surowiec surowiec=0)
+    public Efekt(TypEfektu typEfektu, Dictionary<Surowiec, int> surowce = null, int wartosc = 0, string tekst = "", SymbolNaukowy symbolNaukowy=0,Surowiec surowiec=0)
     {
         TypEfektu = typEfektu;
         Surowce = surowce ?? new Dictionary<Surowiec, int>();
-        Wartosc = wartoœæ;
+        Wartosc = wartosc;
         Tekst = tekst;
         SymbolNaukowy = symbolNaukowy;
         Surowiec = surowiec;
@@ -36,7 +36,7 @@ public class Efekt
 
     public override string ToString()
     {
-        return $"Efekt: {TypEfektu}, Surowce: {string.Join(", ", Surowce)}, Wartoœæ: {Wartosc}, Tekst: {Tekst}";
+        return $"Efekt: {TypEfektu}, Surowce: {string.Join(", ", Surowce)}, Wartosc: {Wartosc}, Tekst: {Tekst}";
     }
 
     public void ZastosujEfekt(Gracz gracz, Gracz? przeciwnik = null, PlanszaKonfliktu? planszaKonfliktu = null, Karta? karta = null)
@@ -62,7 +62,7 @@ public class Efekt
                     if (karta != null && karta.KolorKarty == KolorKarty.Czerwony && 
                         gracz.Efekty.Any(e => e.TypEfektu == TypEfektu.DodatkoweMilitariaZaCzerwoneKarty))
                     {
-                        wartoscDoDodania += 1; // Dodaj 1 punkt militarny za ka¿d¹ czerwon¹ kartê
+                        wartoscDoDodania += 1; // Dodaj 1 punkt militarny za kazda czerwona karte
                     }
                     planszaKonfliktu.PrzesunPion(wartoscDoDodania, gracz);
                 }
@@ -78,7 +78,7 @@ public class Efekt
                 {
                     "Monety" => g => g.WypiszLiczbeSurowca(Surowiec.Monety) / 3,
                     "Cuda" => g => g.KartyCudow.Where(k => k.CzyZagrana).Count(),
-                    "Br¹zowy i Szary" => g => g.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Br¹zowy || k.KolorKarty == KolorKarty.Szary),
+                    "Brazowy i Szary" => g => g.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Brazowy || k.KolorKarty == KolorKarty.Szary),
                     _ => g => g.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst)
                 };
 
@@ -102,12 +102,12 @@ public class Efekt
                 }
                 break;
             case TypEfektu.WybierzZetonPostepu:
-                // jakoœ daæ graczowi wybór ¿etonu postêpu
-                // wybrany ¿eton dodajemy do gracza
+                // jakos dac graczowi wybor zetonu postepu
+                // wybrany zeton dodajemy do gracza
                 // do implementacji w mechanice tury
                 break;
             default:
-                // Inne typy efektów do implementacji
+                // Inne typy efektow do implementacji
                 break;
         }
     }
@@ -119,9 +119,9 @@ public class Efekt
             case TypEfektu.Surowiec:
                 return string.Join(" + ", Surowce.Select(s => $"{s.Value}x{s.Key}"));
             case TypEfektu.WyborSurowca:
-                return $"Wybór - {string.Join(" lub ", Surowce.Select(s => $"{s.Value}x{s.Key}"))}";
+                return $"Wybor - {string.Join(" lub ", Surowce.Select(s => $"{s.Value}x{s.Key}"))}";
             case TypEfektu.PunktyZwyciestwa:
-                return $"{Wartosc} Punkty Zwyciêstwa";
+                return $"{Wartosc} Punkty Zwyciestwa";
             case TypEfektu.Monety:
                 return $"{Wartosc} Monet";
             case TypEfektu.PunktyMilitarne:
@@ -133,23 +133,23 @@ public class Efekt
             case TypEfektu.SymbolNaukowy:
                 return $"SN - {SymbolNaukowy}";
             case TypEfektu.MonetyZaKarty:
-                return $"{Wartosc} monet za ka¿d¹ kartê {Tekst}";
+                return $"{Wartosc} monet za kazda karte {Tekst}";
             case TypEfektu.PunktyZaKarty:
                 if (Tekst == "Monety")
                 {
-                    return $"{Wartosc} punktów za ka¿de 3 monety u gracza co ma ich wiêcej";
+                    return $"{Wartosc} punktow za kazde 3 monety u gracza co ma ich wiecej";
                 }
-                return $"{Wartosc} punktów za ka¿d¹ kartê {Tekst} u gracza co ma ich wiêcej";
+                return $"{Wartosc} punktow za kazda karte {Tekst} u gracza co ma ich wiecej";
             case TypEfektu.RozegrajTurePonownie:
-                return "Rozegraj turê ponownie";
+                return "Rozegraj ture ponownie";
             case TypEfektu.PrzeciwnikOdkladaMonety:
-                return $"Przeciwnik odk³ada {Wartosc} monet";
+                return $"Przeciwnik odklada {Wartosc} monet";
             case TypEfektu.DarmowaBudowlaZOdrzuconychKart:
-                return "Mo¿esz zbudowaæ darmowo budowlê z odrzuconych kart";
+                return "Mozesz zbudowac darmowo budowle z odrzuconych kart";
             case TypEfektu.OdlozKartePrzeciwnika:
-                return $"Odk³adasz 1 {Tekst} kartê przeciwnika";
+                return $"Odkladasz 1 {Tekst} karte przeciwnika";
             case TypEfektu.Wylosuj3ZetonyPostepu:
-                return "Wylosuj 3 ¿etony postêpu";
+                return "Wylosuj 3 zetony postepu";
             default:
                 return TypEfektu.ToString();
         }

@@ -50,7 +50,7 @@ public class Karta : KartaBazowa
         CzyOdrzucona = true;
     }
 
-    public void OznaczJakoNiezagrana() // przydatne do resetowania stanu kart po zakoñczeniu gry
+    public void OznaczJakoNiezagrana() // przydatne do resetowania stanu kart po zakonczeniu gry
     {
         CzyZagrana = false;
     }
@@ -82,7 +82,7 @@ public class Karta : KartaBazowa
     {
         if (Efekty == null || Efekty.Count == 0)
         {
-            return "Brak efektów";
+            return "Brak efektow";
         }
 
         if (poZagraniu)
@@ -92,7 +92,7 @@ public class Karta : KartaBazowa
                 .Select(e => e.Wypisz())
                 .ToList();
             return efektyList.Count == 0
-                ? "Brak efektów"
+                ? "Brak efektow"
                 : string.Join(", ", efektyList);
         }
         

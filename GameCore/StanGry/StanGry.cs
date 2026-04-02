@@ -90,7 +90,7 @@ public class StanGry
                 efekt.ZastosujEfekt(gracz);
             }
         }
-        PunktyZwyciestwa(gracze); //powinny to być PZ z niebiebieskich kart
+        PunktyZwyciestwa(gracze); //powinny to byc PZ z niebiebieskich kart
 
         if (PunktyGracza1 > PunktyGracza2)
             ZakonczGre(gracze[0], TypZwyciestwa.Punktowe);
@@ -167,7 +167,7 @@ public class StanGry
                     {
                         "Monety" => g => g.WypiszLiczbeSurowca(Surowiec.Monety) / 3,
                         "Cuda" => g => g.KartyCudow.Where(k  => k.CzyZagrana).Count(),
-                        "Brązowy i Szary" => g => g.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Brązowy || k.KolorKarty == KolorKarty.Szary),
+                        "Brazowy i Szary" => g => g.ZbudowaneKarty.Count(k => k.KolorKarty == KolorKarty.Brazowy || k.KolorKarty == KolorKarty.Szary),
                         _ => g => g.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == efekt.Tekst)
                     };
 

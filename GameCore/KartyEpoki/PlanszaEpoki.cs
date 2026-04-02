@@ -99,7 +99,7 @@ public class PlanszaEpoki
             wynik.AppendLine();
         }
 
-        wynik.AppendLine("[D] Dostêpna | [X] Zakryta | [O] Odkryta | [-] Puste pole");
+        wynik.AppendLine("[D] Dostepna | [X] Zakryta | [O] Odkryta | [-] Puste pole");
         return wynik.ToString();
     }
 }
