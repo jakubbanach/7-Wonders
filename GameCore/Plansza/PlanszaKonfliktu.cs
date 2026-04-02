@@ -55,6 +55,14 @@ public class PlanszaKonfliktu
 
     public Strefa PobierzStrefeDlaPozycji(int pozycja)
     {
+        if(pozycja < -9)
+        {
+            pozycja = -9;
+        }
+        else if(pozycja > 9)
+        {
+            pozycja = 9;
+        }
         return _mapaStref
             .First(m => pozycja >= m.start && pozycja < m.end)
             .strefa;

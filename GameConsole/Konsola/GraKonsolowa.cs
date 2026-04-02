@@ -59,13 +59,13 @@ public class GraKonsolowa
 
         Gracz aktywnyGracz = gracz1;
 
-        //Console.WriteLine("Plansza Epoki I:");
+        Console.WriteLine("Plansza Epoki I:");
 
-        //ZbiorPlanszEpok.WypiszPlansze(planszaEpoki);
-        //Console.WriteLine("Naciœnij dowolny klawisz, aby rozpocz¹æ grê...");
-        //Console.ReadKey();
-        //RozegrajEpoke(planszaEpoki);
-        //Console.WriteLine("Koniec epoki!");
+        ZbiorPlanszEpok.WypiszPlansze(planszaEpoki);
+        Console.WriteLine("Naciœnij dowolny klawisz, aby rozpocz¹æ grê...");
+        Console.ReadKey();
+        RozegrajEpoke(planszaEpoki);
+        Console.WriteLine("Koniec epoki!");
 
         planszaEpoki = UtworzPlanszeEpoki(Epoka.EpokaII, random);
         Console.WriteLine("Plansza Epoki II:");

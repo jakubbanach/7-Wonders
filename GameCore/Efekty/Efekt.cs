@@ -19,6 +19,21 @@ public class Efekt
         Surowiec = surowiec;
     }
 
+    private Efekt(Efekt efekt)
+    {
+        TypEfektu = efekt.TypEfektu;
+        Surowce = new Dictionary<Surowiec, int>(efekt.Surowce);
+        Wartosc = efekt.Wartosc;
+        Tekst = efekt.Tekst;
+        SymbolNaukowy = efekt.SymbolNaukowy;
+        Surowiec = efekt.Surowiec;
+    }
+
+    public Efekt Clone()
+    {
+        return new Efekt(this);
+    }
+
     public override string ToString()
     {
         return $"Efekt: {TypEfektu}, Surowce: {string.Join(", ", Surowce)}, Wartoœæ: {Wartosc}, Tekst: {Tekst}";

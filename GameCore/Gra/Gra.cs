@@ -74,6 +74,7 @@ public class Gra
         var kartaCudu = ruchNew.KartaCudu == null ? null : ZnajdzKarteCudu(ruchNew.KartaCudu.Nazwa);
 
         Ruch ruch = new Ruch(AktywnyGracz, Przeciwnik, karta, ruchNew.TypRuchu, kartaCudu);
+        //Console.WriteLine($"Ruch wykonuje Aktywny gracz: {AktywnyGracz.Nazwa}, Przeciwnik: {Przeciwnik.Nazwa}");
         ruch.Wykonaj(planszaKonfliktu);
 
         var poleKarty = planszaEpoki.ZnajdzPole(karta);
@@ -90,7 +91,7 @@ public class Gra
         }
         if (CzyKoniecEpoki())
         {
-            Console.WriteLine("Koniec epoki! Przechodzimy do kolejnej epoki.");
+            //Console.WriteLine("Koniec epoki! Przechodzimy do kolejnej epoki.");
             if (planszaEpoki.Epoka == Epoka.EpokaIII)
             {
                 Console.WriteLine("Koniec gry! Przechodzimy do podsumowania wyników.");
@@ -139,6 +140,7 @@ public class Gra
         var wynik = new List<Ruch>();
         var karty = DostepneKarty();
         var kartyCudow = AktywnyGracz.KartyCudow;
+        //Console.WriteLine($"Aktywny gracz: {AktywnyGracz.Nazwa}, Przeciwnik: {Przeciwnik.Nazwa}");
 
         foreach (var karta in karty)
         {
@@ -155,8 +157,8 @@ public class Gra
             // budowa cudu
             foreach (var kartaCudu in kartyCudow)
             {
-                //if (!CzyLiczbaZbudowanychCudowMniejsza7())
-                //    continue;
+                if (!CzyLiczbaZbudowanychCudowMniejsza7())
+                    continue;
                 var budowaCudu = AktywnyGracz.CzyMoznaZbudowacCud(karta, Przeciwnik, kartaCudu);
                 if (budowaCudu.MoznaZagrac)
                 {

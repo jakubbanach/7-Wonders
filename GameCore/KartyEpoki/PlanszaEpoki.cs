@@ -65,8 +65,8 @@ public class PlanszaEpoki
     {
         return Epoka switch
         {
-            Epoka.EpokaI => new[] { 2, 3, 4, 5, 6 },
-            Epoka.EpokaII => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaI => new[] { 6, 5, 4, 3, 2 },
+            Epoka.EpokaII => new[] { 2, 3, 4, 5, 6 },
             Epoka.EpokaIII => new[] { 2, 3, 4, 2, 4, 3, 2 },
             _ => throw new ArgumentOutOfRangeException()
         };

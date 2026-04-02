@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class ZetonPostepu
 {
@@ -9,5 +10,15 @@ public class ZetonPostepu
     {
         Nazwa = nazwa;
         Efekty = efekty;
+    }
+
+    private ZetonPostepu(ZetonPostepu zeton)
+    {
+        Nazwa = zeton.Nazwa;
+        Efekty = Efekty.Select(e => e.Clone()).ToList();
+    }
+    public ZetonPostepu Clone()
+    {
+        return new ZetonPostepu(this);
     }
 }
