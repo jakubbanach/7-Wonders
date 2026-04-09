@@ -9,6 +9,8 @@ public class Efekt
     public string Tekst { get; protected set; }
     public SymbolNaukowy SymbolNaukowy { get; protected set; }
     public Surowiec Surowiec { get; protected set; }
+
+    // TODO: ogarnac SymbolNaukowy i Surowiec, zeby nie przyjmowaly zawsze wartosci domyslnych (odpowiednio Globus i Glina)
     public Efekt(TypEfektu typEfektu, Dictionary<Surowiec, int> surowce = null, int wartosc = 0, string tekst = "", SymbolNaukowy symbolNaukowy=0,Surowiec surowiec=0)
     {
         TypEfektu = typEfektu;

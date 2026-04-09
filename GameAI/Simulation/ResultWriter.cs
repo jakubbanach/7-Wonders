@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 public static class ResultWriter
 {
@@ -13,6 +14,7 @@ public static class ResultWriter
             WriteIndented = true
         };
 
+        options.Converters.Add(new JsonStringEnumConverter());
         var json = JsonSerializer.Serialize(result, options);
 
         File.WriteAllText(path, json);
