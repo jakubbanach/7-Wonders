@@ -86,7 +86,7 @@ public class Gra
         planszaEpoki.UsunPole(poleKarty);
         if (CzyKoniecGry())
         {
-            Console.WriteLine("Gra zakonczona!");
+            // Console.WriteLine("Gra zakonczona!");
             return;
         }
         if (CzyKoniecEpoki())
@@ -112,15 +112,8 @@ public class Gra
             // sprawdzamy czy lista efektow karty cudu zawiera efekt pozwalajacy na rozegranie kolejnej tury
             var czyPonownaTura = ruch.KartaCudu.Efekty.Select(e => e.TypEfektu).Contains(TypEfektu.RozegrajTurePonownie);
             var czyZaBudoweCuduRozegrajTurePonownie = AktywnyGracz.Efekty.Select(e => e.TypEfektu).Contains(TypEfektu.ZaBudoweCuduRozegrajTurePonownie);
-            //if (czyPonownaTura || czyZaBudoweCuduRozegrajTurePonownie)
-            if (czyPonownaTura)
+            if (czyPonownaTura || czyZaBudoweCuduRozegrajTurePonownie)
             {
-                Console.WriteLine("Efekt karty cudu: Rozegraj ture ponownie! Aktywny gracz wykonuje kolejny ruch.");
-                return;
-            }
-            if (czyZaBudoweCuduRozegrajTurePonownie)
-            {
-                Console.WriteLine("Efekt karty cudu: Za budowe cudu rozegrj ture ponownie! Aktywny gracz wykonuje kolejny ruch.");
                 return;
             }
         }

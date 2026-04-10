@@ -35,6 +35,22 @@ public class SimulationRunner
 
             var result = runner.PlayGame();
             results.Add(result);
+            switch (result.TypZwyciestwa)
+            {
+                case TypZwyciestwa.Militarne:
+                    Console.WriteLine($"Game {i + 1}/{games} ended with a Military victory. Seed: {result.Seed}");
+                    break;
+                case TypZwyciestwa.Naukowe:
+                    Console.WriteLine($"Game {i + 1}/{games} ended with a Scientific victory. Seed: {result.Seed}");
+                    break;
+                case TypZwyciestwa.Brak:
+                    Console.WriteLine($"Game {i + 1}/{games} ended with no victory (Tie). Seed: {result.Seed}");
+                    break;
+            }
+            if (result.Agent1Score == 0 || result.Agent2Score == 0)
+            {
+                Console.WriteLine($"Game {i + 1}/{games} had a zero score. Seed: {result.Seed}");
+            }
         }
 
         return Summarize(results);
@@ -57,6 +73,10 @@ public class SimulationRunner
             TotalGames = results.Count,
             Agent1Wins = winsA1,
             Agent2Wins = winsA2,
+            Agent1MaxPoints = results.Max(r => r.Agent1Score),
+            Agent2MaxPoints = results.Max(r => r.Agent2Score),
+            Agent1MinPoints = results.Min(r => r.Agent1Score),
+            Agent2MinPoints = results.Min(r => r.Agent2Score),
             Agent1AveragePoints = avgA1Points,
             Agent2AveragePoints = avgA2Points,
             VictoryTypeCounts = typeCounts,

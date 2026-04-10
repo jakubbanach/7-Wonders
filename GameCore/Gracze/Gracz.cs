@@ -71,6 +71,10 @@ public class Gracz
         if (Surowce.ContainsKey(Surowiec.Monety))
         {
             Surowce[Surowiec.Monety] += ilosc;
+            if (Surowce[Surowiec.Monety] < 0)
+            {
+                Surowce[Surowiec.Monety] = 0; // Zapobiega ujemnym monetom
+            }
         }
         else
         {
@@ -177,9 +181,6 @@ public class Gracz
             {
                 if (bialySymbol == karta.DarmowaBudowa)
                 {
-                    // TODO: Uwzglednic efekt kiedy gracz dostaje monety za budowe karty z bialym symbolem
-
-                    // CZY DODAWAC TUTAJ MONETY
                     return new WynikBudowy { MoznaZagrac = true, Koszt = 0, CzyDarmowaBudowa = true };
                 }
             }

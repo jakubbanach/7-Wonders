@@ -15,7 +15,7 @@ class Program
     static void SimulationRunnerFunction()
     {
         int seed = 12345;
-        int games = 1000; // tutaj jest jakis blad
+        int games = 5000;
 
         var simulationRunner = new SimulationRunner(
             seed,
@@ -27,6 +27,8 @@ class Program
         var result = simulationRunner.Run();
 
         Console.WriteLine($"Total games: {result.TotalGames}");
+        Console.WriteLine($"Agent1 max points: {result.Agent1MaxPoints}, min points: {result.Agent1MinPoints}");
+        Console.WriteLine($"Agent2 max points: {result.Agent2MaxPoints}, min points: {result.Agent2MinPoints}");
         Console.WriteLine($"Agent1 wins: {result.Agent1Wins}, avg points: {result.Agent1AveragePoints:F2}");
         Console.WriteLine($"Agent2 wins: {result.Agent2Wins}, avg points: {result.Agent2AveragePoints:F2}");
 
@@ -38,7 +40,7 @@ class Program
     }
     static void GameRunnerFunction()
     {
-        int seed = 12345;
+        int seed = 12408;
 
         var runner = new GameRunner(
             seed: seed,

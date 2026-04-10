@@ -88,6 +88,36 @@ public class TestyKartEpok
         Assert.Contains(kartaEpoki, gracz.PobierzZbudowaneKarty());
         Assert.Equal(4, gracz.Surowce[Surowiec.Monety]);
     }
+    [Fact]
+    public void Test_DarmowaBudowa_BialySymbol_Efekt_MonetyZaBudoweZBialymSymbolem_Budowa2Kart()
+    {
+        var kartaDoKupienia = ZbiorKart.TaliaEpokiII.First(k => k.Nazwa == "Szkola"); // Karta z bia³ym symbolem "Harfa"
+        var kartaDarmowa = ZbiorKart.TaliaEpokiIII.First(k => k.Nazwa == "Uniwersytet"); // Karta do kupienia za bialy symbol "Harfa"
+        var gracz = new Gracz("TestowyGracz");
+        var przeciwnik = new Gracz("Przeciwnik");
+        kartaDoKupienia.OznaczJakoNiezagrana();
+        kartaDarmowa.OznaczJakoNiezagrana();
+
+        gracz.DodajMonety(-7); // Usuniêcie monet, aby karta by³a darmowa
+        // Budowa pierwszej karty, która da graczowi bia³y symbol "Harfa"
+        gracz.DodajSurowiec(Surowiec.Drewno, 1);
+        gracz.DodajSurowiec(Surowiec.Papirus, 2);
+
+        var efekt = new Efekt(
+            TypEfektu.MonetyZaBudoweZBialymSymbolem, 
+            wartosc: 4
+        );
+        gracz.DodajEfekt(efekt);
+
+        Assert.Equal(0, gracz.Surowce[Surowiec.Monety]);
+
+        gracz.ZbudujKarte(kartaDoKupienia, przeciwnik);
+        Assert.Contains(kartaDoKupienia, gracz.PobierzZbudowaneKarty());
+
+        gracz.ZbudujKarte(kartaDarmowa, przeciwnik);
+        Assert.Contains(kartaDarmowa, gracz.PobierzZbudowaneKarty());
+        Assert.Equal(4, gracz.Surowce[Surowiec.Monety]);
+    }
 
     [Fact]
     public void Test_Koszt_SurowcePrzeciwnika()
