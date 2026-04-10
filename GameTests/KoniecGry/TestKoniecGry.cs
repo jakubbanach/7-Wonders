@@ -66,7 +66,7 @@ public class TestKoniecGry
             gracze[0].SymboleNaukowe.Add(symbol);
         }
 
-        stanGry.CzyZwyciestwoNaukowe(gracze);
+        stanGry.CzyZwyciestwoNaukowe(gracze, null);
 
         Assert.True(stanGry.CzyZakonczona);
         Assert.Equal(gracze[0], stanGry.Zwyciezca);
@@ -86,7 +86,7 @@ public class TestKoniecGry
             gracze[0].SymboleNaukowe.Add(symbol);
         }
 
-        stanGry.CzyZwyciestwoNaukowe(gracze);
+        stanGry.CzyZwyciestwoNaukowe(gracze, null);
 
         Assert.False(stanGry.CzyZakonczona);
         Assert.Equal(TypZwyciestwa.Brak, stanGry.TypZwyciestwa);

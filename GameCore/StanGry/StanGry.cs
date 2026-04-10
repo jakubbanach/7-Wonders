@@ -40,28 +40,31 @@ public class StanGry
     public void CzyZwyciestwoMilitarne(Gracz[] gracze, int pozycjaPionu)
     {
         if (pozycjaPionu >= 9)
+        {
+            PoliczPunkty(gracze, null);
             ZakonczGre(gracze[0], TypZwyciestwa.Militarne);
+        }
 
         if (pozycjaPionu <= -9)
+        {
+            PoliczPunkty(gracze, null);
             ZakonczGre(gracze[1], TypZwyciestwa.Militarne);
+        }
     }
 
-    public void CzyZwyciestwoNaukowe(Gracz[] gracze)
+    public void CzyZwyciestwoNaukowe(Gracz[] gracze, PlanszaKonfliktu planszaKonfliktu)
     {
         foreach (var gracz in gracze)
             if (gracz.SymboleNaukowe.Distinct().Count() >= 6)
             {
+                PoliczPunkty(gracze, planszaKonfliktu);
                 ZakonczGre(gracz, TypZwyciestwa.Naukowe);
             }
     }
 
     public void CzyZwyciestwoPunktowe(Gracz[] gracze, PlanszaKonfliktu planszaKonfliktu)
     {
-        int pozycjaPionu = planszaKonfliktu.PionKonfliktu.PobierzPozycje();
-        PunktyPrzewagaMilitarna(gracze, planszaKonfliktu.PobierzStrefeDlaPozycji(pozycjaPionu), pozycjaPionu);
-        PunktyMonety(gracze);
-        PunktyZwyciestwa(gracze);
-        PunktyEfekty(gracze);
+        PoliczPunkty(gracze, planszaKonfliktu);
 
         if (PunktyGracza1 > PunktyGracza2)
             ZakonczGre(gracze[0], TypZwyciestwa.Punktowe);
@@ -69,6 +72,18 @@ public class StanGry
             ZakonczGre(gracze[1], TypZwyciestwa.Punktowe);
         else // remis, brak zwyciestwa punktowego -> TODO
             CzyZwyciestwoRemis(gracze);
+    }
+    public void PoliczPunkty(Gracz[] gracze, PlanszaKonfliktu planszaKonfliktu)
+    {
+
+        if (planszaKonfliktu != null)
+        {
+            int pozycjaPionu = planszaKonfliktu.PionKonfliktu.PobierzPozycje();
+            PunktyPrzewagaMilitarna(gracze, planszaKonfliktu.PobierzStrefeDlaPozycji(pozycjaPionu), pozycjaPionu);
+        }
+        PunktyMonety(gracze);
+        PunktyZwyciestwa(gracze);
+        PunktyEfekty(gracze);
     }
 
     public void CzyZwyciestwoRemis(Gracz[] gracze)

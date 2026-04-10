@@ -202,7 +202,7 @@ public class Gra
     public bool CzyKoniecGry()
     {
         stanGry.CzyZwyciestwoMilitarne(gracze, planszaKonfliktu.PionKonfliktu.PobierzPozycje());
-        stanGry.CzyZwyciestwoNaukowe(gracze);
+        stanGry.CzyZwyciestwoNaukowe(gracze, planszaKonfliktu);
         if (stanGry.CzyZakonczona)
             return true;
         return false;
@@ -211,7 +211,7 @@ public class Gra
     public void ZakonczGre()
     {
         stanGry.CzyZwyciestwoMilitarne(gracze, planszaKonfliktu.PionKonfliktu.PobierzPozycje());
-        stanGry.CzyZwyciestwoNaukowe(gracze);
+        stanGry.CzyZwyciestwoNaukowe(gracze, planszaKonfliktu);
         stanGry.CzyZwyciestwoPunktowe(gracze, planszaKonfliktu);
     }
 

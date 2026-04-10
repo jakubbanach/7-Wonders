@@ -8,8 +8,8 @@ class Program
     {
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
-        //SimulationRunnerFunction();
-        GameRunnerFunction();
+        SimulationRunnerFunction();
+        //GameRunnerFunction();
     }
 
     static void SimulationRunnerFunction()
@@ -40,7 +40,7 @@ class Program
     }
     static void GameRunnerFunction()
     {
-        int seed = 12408;
+        int seed = 12605;
 
         var runner = new GameRunner(
             seed: seed,

@@ -149,7 +149,7 @@ public class GraKonsolowa
         Ruch ruch = new Ruch(aktywnyGracz, przeciwnik, karta, typRuchu);
         ruch.Wykonaj(planszaKonfliktu);
         stanGry.CzyZwyciestwoMilitarne(gracze, planszaKonfliktu.PionKonfliktu.PobierzPozycje());
-        stanGry.CzyZwyciestwoNaukowe(gracze);
+        stanGry.CzyZwyciestwoNaukowe(gracze, planszaKonfliktu);
         if (stanGry.CzyZakonczona)
         {
             Console.WriteLine("Gra zakoñczona!");
