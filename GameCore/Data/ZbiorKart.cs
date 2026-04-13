@@ -448,7 +448,7 @@ public static class ZbiorKart
             new Karta(
                 "Stadniny",
                 Epoka.EpokaII,
-                new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Drewno, 1 } },
+                new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 } },
                 new List<Efekt>
                 {
                     new Efekt(TypEfektu.PunktyMilitarne,wartosc: 1)
@@ -556,7 +556,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Drewno, 1 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Zolty", wartosc: 1),
+                    new Efekt(TypEfektu.MonetyZaKartyWiecejWMiescie, tekst: "Zolty", wartosc: 1),
                     new Efekt(TypEfektu.PunktyZaKarty, tekst: "Zolty", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
@@ -567,7 +567,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Niebieski", wartosc: 1),
+                    new Efekt(TypEfektu.MonetyZaKartyWiecejWMiescie, tekst: "Niebieski", wartosc: 1),
                     new Efekt(TypEfektu.PunktyZaKarty, tekst: "Niebieski", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
@@ -578,7 +578,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 1 }, { Surowiec.Kamien, 1 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Brazowy i Szary", wartosc: 1),
+                    new Efekt(TypEfektu.MonetyZaKartyWiecejWMiescie, tekst: "Brazowy i Szary", wartosc: 1),
                     new Efekt(TypEfektu.PunktyZaKarty, tekst: "Brazowy i Szary", wartosc: 1),
                 },
                 KolorKarty.Fioletowy
@@ -589,7 +589,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Kamien, 2 }, { Surowiec.Glina, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Czerwony", wartosc: 1),
+                    new Efekt(TypEfektu.MonetyZaKartyWiecejWMiescie, tekst: "Czerwony", wartosc: 1),
                     new Efekt(TypEfektu.PunktyZaKarty, tekst: "Czerwony", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
@@ -600,7 +600,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Glina, 2 }, { Surowiec.Drewno, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.MonetyZaKarty, tekst: "Zielony", wartosc: 1),
+                    new Efekt(TypEfektu.MonetyZaKartyWiecejWMiescie, tekst: "Zielony", wartosc: 1),
                     new Efekt(TypEfektu.PunktyZaKarty, tekst: "Zielony", wartosc: 1)
                 },
                 KolorKarty.Fioletowy
@@ -867,7 +867,7 @@ public static class ZbiorKart
                 new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Glina, 1 }, { Surowiec.Szklo, 2 } },
                 new List<Efekt>
                 {
-                    new Efekt(TypEfektu.Monety,wartosc: 6),
+                    new Efekt(TypEfektu.PunktyZwyciestwa,wartosc: 6),
                     new Efekt(TypEfektu.RozegrajTurePonownie)
                 }
             ),

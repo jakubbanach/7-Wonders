@@ -9,6 +9,7 @@ public enum TypEfektu
     BialySymbol,
     SymbolNaukowy,
     MonetyZaKarty,
+    MonetyZaKartyWiecejWMiescie,
     PunktyZaKarty,
     DarmowaBudowlaZOdrzuconychKart,
     Wylosuj3ZetonyPostepu,

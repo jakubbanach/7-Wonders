@@ -14,7 +14,7 @@ public class GraKonsolowa
     private Gracz aktywnyGracz;
     private Gracz przeciwnik => gracze.First(g => g != aktywnyGracz);
     private StanGry stanGry = new StanGry();
-    private IRandom random = new RandomAdapter(12345);
+    private IRandom random = new RandomAdapter(12605);
 
 
     public GraKonsolowa()
@@ -27,17 +27,37 @@ public class GraKonsolowa
 
     public void PrzydzielanieKartCudow()
     {
-        List<KartaCudu> kartyCudow = InicjalizacjaKartCudow();
+        List<KartaCudu> zbior = InicjalizacjaKartCudow();
         // Przydzielanie kart cudów do graczy -> hardkodowane dla testów
-        gracze[0].DodajKarteCudu(kartyCudow[0]);
-        gracze[0].DodajKarteCudu(kartyCudow[2]);
-        gracze[0].DodajKarteCudu(kartyCudow[4]);
-        gracze[0].DodajKarteCudu(kartyCudow[10]);
+        //gracze[0].DodajKarteCudu(kartyCudow[0]);
+        //gracze[0].DodajKarteCudu(kartyCudow[2]);
+        //gracze[0].DodajKarteCudu(kartyCudow[4]);
+        //gracze[0].DodajKarteCudu(kartyCudow[10]);
 
-        gracze[1].DodajKarteCudu(kartyCudow[5]);
-        gracze[1].DodajKarteCudu(kartyCudow[6]);
-        gracze[1].DodajKarteCudu(kartyCudow[7]);
-        gracze[1].DodajKarteCudu(kartyCudow[9]);
+        //gracze[1].DodajKarteCudu(kartyCudow[5]);
+        //gracze[1].DodajKarteCudu(kartyCudow[6]);
+        //gracze[1].DodajKarteCudu(kartyCudow[7]);
+        //gracze[1].DodajKarteCudu(kartyCudow[9]);
+        foreach (var karta in zbior)
+        {
+            if (karta is KartaCudu kartaCudu)
+            {
+                kartaCudu.OznaczJakoNiezagrana();
+            }
+        }
+        var kartyCudow = zbior
+            .OrderBy(x => random.Next())
+            .Take(8) // 4 w pierwszej fazie wyboru, 4 w drugiej fazie wyboru
+            .ToList();
+
+        for (int i = 0; i < 4; i++)
+        {
+            gracze[0].KartyCudow.Add(kartyCudow[i]);
+        }
+        for (int i = 4; i < 8; i++)
+        {
+            gracze[1].KartyCudow.Add(kartyCudow[i]);
+        }
     }
 
     public void Start()

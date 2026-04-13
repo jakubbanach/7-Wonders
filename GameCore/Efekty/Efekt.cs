@@ -76,6 +76,16 @@ public class Efekt
                 gracz.DodajSymbolNaukowy(SymbolNaukowy);
                 break;
             case TypEfektu.MonetyZaKarty:
+                Func<Gracz, int> licznikKartGracza = Tekst switch
+                {
+                    "Cuda" => g => g.KartyCudow.Where(k => k.CzyZagrana).Count(),
+                    _ => g => g.ZbudowaneKarty.Count(k => k.KolorKarty.ToString() == Tekst)
+                };
+
+                int liczbaKart = licznikKartGracza(gracz);
+                gracz.DodajMonety(Wartosc * liczbaKart);
+                break;
+            case TypEfektu.MonetyZaKartyWiecejWMiescie:
                 Func<Gracz, int> licznikKart = Tekst switch
                 {
                     "Monety" => g => g.WypiszLiczbeSurowca(Surowiec.Monety) / 3,
@@ -136,6 +146,12 @@ public class Efekt
                 return $"SN - {SymbolNaukowy}";
             case TypEfektu.MonetyZaKarty:
                 return $"{Wartosc} monet za kazda karte {Tekst}";
+            case TypEfektu.MonetyZaKartyWiecejWMiescie:
+                 if (Tekst == "Monety")
+                {
+                    return $"{Wartosc} monet za kazde 3 monety u gracza co ma ich wiecej";
+                }
+                return $"{Wartosc} monet za kazda karte {Tekst} u gracza co ma ich wiecej";
             case TypEfektu.PunktyZaKarty:
                 if (Tekst == "Monety")
                 {

@@ -8,8 +8,8 @@ class Program
     {
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
-        SimulationRunnerFunction();
-        //GameRunnerFunction();
+        //SimulationRunnerFunction();
+        GameRunnerFunction();
     }
 
     static void SimulationRunnerFunction()
