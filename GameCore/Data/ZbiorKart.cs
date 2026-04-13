@@ -854,7 +854,7 @@ public static class ZbiorKart
                 }
             ),
             new KartaCudu(
-                "Światynia Artemidy W Efezie",
+                "Swiatynia Artemidy W Efezie",
                 new Dictionary<Surowiec, int> { { Surowiec.Drewno, 1 }, { Surowiec.Kamien, 1 }, { Surowiec.Szklo, 1 }, { Surowiec.Papirus, 1 } },
                 new List<Efekt>
                 {

@@ -40,7 +40,7 @@ class Program
     }
     static void GameRunnerFunction()
     {
-        int seed = 12439;
+        int seed = 15065;
 
         var runner = new GameRunner(
             seed: seed,
