@@ -102,10 +102,12 @@ public class StanGry
 
             foreach (var efekt in niebieskieEfekty)
             {
-                efekt.ZastosujEfekt(gracz);
+                if (gracz == gracze[0])
+                    PunktyGracza1 += efekt.Wartosc;
+                else
+                    PunktyGracza2 += efekt.Wartosc;
             }
         }
-        PunktyZwyciestwa(gracze); //powinny to byc PZ z niebiebieskich kart
 
         if (PunktyGracza1 > PunktyGracza2)
             ZakonczGre(gracze[0], TypZwyciestwa.Punktowe);

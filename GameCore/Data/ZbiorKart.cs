@@ -700,7 +700,7 @@ public static class ZbiorKart
                 darmowaBudowa: "Harfa"
             ),
             new Karta(
-                "Ambulatorium",
+                "Obserwatorium",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamien, 1 }, { Surowiec.Papirus, 2 } },
                 new List<Efekt>
@@ -786,7 +786,7 @@ public static class ZbiorKart
                 darmowaBudowa: "Sad"
             ),
             new Karta(
-                "Mownica",
+                "Ratusz",
                 Epoka.EpokaIII,
                 new Dictionary<Surowiec, int> { { Surowiec.Kamien, 3 }, { Surowiec.Drewno, 2 } },
                 new List<Efekt>
