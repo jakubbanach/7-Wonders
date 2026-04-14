@@ -159,7 +159,7 @@ public class Gracz
         ZetonyPostepu.Add(zeton);
         foreach (var efekt in zeton.Efekty)
         {
-            Console.WriteLine($"Zeton postepu '{zeton.Nazwa}' dodaje efekt: {efekt.Wypisz()}");
+            //Console.WriteLine($"Zeton postepu '{zeton.Nazwa}' dodaje efekt: {efekt.Wypisz()}");
             efekt.ZastosujEfekt(this, null);
             DodajEfekt(efekt);
         }

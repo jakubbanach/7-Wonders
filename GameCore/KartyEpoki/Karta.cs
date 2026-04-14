@@ -49,6 +49,10 @@ public class Karta : KartaBazowa
     {
         CzyOdrzucona = true;
     }
+    public void OznaczJakoNieodrzucona()
+    {
+        CzyOdrzucona = false;
+    }
 
     public void OznaczJakoNiezagrana() // przydatne do resetowania stanu kart po zakonczeniu gry
     {
@@ -76,7 +80,7 @@ public class Karta : KartaBazowa
         {
             kosztList.Add($"{surowiec.Value}x{surowiec.Key}");
         }
-        return string.Join(" + ", kosztList);
+        return string.Join(", ", kosztList);
     }
     public string WypiszEfekty(bool poZagraniu = false)
     {
@@ -102,5 +106,9 @@ public class Karta : KartaBazowa
     public string WypiszOpis()
     {
         return $"{Nazwa,-20} | {KolorKarty,-9} | Koszt: {WypiszKoszt(),-6} | {WypiszEfekty()}";
+    }
+    public override string ToString()
+    {
+        return WypiszOpis();
     }
 }

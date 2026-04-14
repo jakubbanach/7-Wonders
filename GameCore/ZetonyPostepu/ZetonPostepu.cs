@@ -21,4 +21,9 @@ public class ZetonPostepu
     {
         return new ZetonPostepu(this);
     }
+
+    public override string ToString()
+    {
+        return Nazwa + (Efekty != null && Efekty.Count > 0 ? $" ({string.Join(", ", Efekty.Select(e => e.Wypisz()))})" : "");
+    }
 }

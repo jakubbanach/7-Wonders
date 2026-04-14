@@ -182,10 +182,17 @@ public static class ZbiorPlanszEpok
     {
         // TODO: 3 karty Gildii + 17 kart z 3 epoki (razem 20 kart)
         talia.Shuffle(random);
-
-        var karty = talia
-            .Take(20)
+        var kartyGildii = talia
+            .Where(k => k.KolorKarty == KolorKarty.Fioletowy)
+            .Take(3)
             .ToList();
+
+        var kartyEpoki = talia
+            .Where(k => k.KolorKarty != KolorKarty.Fioletowy)
+            .Take(17)
+            .ToList();
+
+        var karty = kartyGildii.Concat(kartyEpoki).ToList();
 
         foreach (var karta in karty)
         {

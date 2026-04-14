@@ -244,6 +244,7 @@ public class TestyEfektowNaGraczu
 
         // Symulacja wyboru najlepszego surowca do danej karty
         var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Laznie"); // koszt: 1 kamien
+        karta.OznaczJakoNiezagrana(); // Upewniamy się, że karta jest niezagrana, aby można było ją zbudować
         _output.WriteLine($"Testowana karta: {karta.Nazwa} (Koszt: {karta.WypiszKoszt()})");
         var koszt = karta.ObliczKoszt(gracz, przeciwnik);
         _output.WriteLine($"Koszt przed efektem: {koszt}");

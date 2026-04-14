@@ -49,12 +49,12 @@ public class GameRunner
             var ruch = currentAgent.WybierzRuch(gra.Clone());
 
             // ewenetualnie currentAgent
-            log.Add(new MoveLog(gra.AktywnyGracz.Nazwa, ruch));
+            var moveLog = new MoveLog(gra.AktywnyGracz.Nazwa, ruch);
 
             //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z karta {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
-
-            var resolver = new AgentDecisionResolver(currentAgent);
+            var resolver = new AgentDecisionResolver(currentAgent, moveLog);
             gra.WykonajRuch(ruch, resolver, gameRandom);
+            log.Add(moveLog);
         }
 
         return MatchResult.FromGame(gra, a1, a2, log, Seed);

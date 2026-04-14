@@ -79,8 +79,6 @@ public class Gra
         Ruch ruch = new Ruch(AktywnyGracz, Przeciwnik, karta, ruchNew.TypRuchu, kartaCudu);
         ruch.Wykonaj(this, planszaKonfliktu);
 
-        //RozpatrzDodatkoweEfektyKarty(karta, kartaCudu, resolver, random);
-
         currentResolver = null;
         currentRandom = null;
         
@@ -125,7 +123,7 @@ public class Gra
 
     public void Efekt_Losuj3Zetony()
     {
-        Console.WriteLine("Efekt: Wylosuj 3 zetony postepu");
+        //Console.WriteLine("Efekt: Wylosuj 3 zetony postepu");
         if (currentResolver == null)
         {
             Console.WriteLine("Brak resolvera do losowania zetonu postepu!");
@@ -154,11 +152,11 @@ public class Gra
         var wybor = currentResolver.Resolve(this.Clone(), decyzja);
 
         AktywnyGracz.DodajZetonPostepu(wybor);
-        Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} losuje zeton postepu {wybor.Nazwa}");
+        //Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} losuje zeton postepu {wybor.Nazwa}");
     }
     public void Efekt_WybierzZetonPostepu()
     {
-        Console.WriteLine("Efekt: Wybierz 1 zeton postepu");
+        //Console.WriteLine("Efekt: Wybierz 1 zeton postepu");
         if (currentResolver == null)
         {
             Console.WriteLine("Brak resolvera do wyboru zetonu postepu!");
@@ -185,11 +183,11 @@ public class Gra
 
         AktywnyGracz.DodajZetonPostepu(wybor);
         planszaKonfliktu.UsunZetonPostepu(wybor);
-        Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} wybiera zeton postepu {wybor.Nazwa}");
+        //Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} wybiera zeton postepu {wybor.Nazwa}");
     }
     public void Efekt_OdlozKartePrzeciwnika(string kolorOdkladanejKarty)
     {
-        Console.WriteLine($"Efekt: Odloz karte przeciwnika o kolorze {kolorOdkladanejKarty}");
+        //Console.WriteLine($"Efekt: Odloz karte przeciwnika o kolorze {kolorOdkladanejKarty}");
         if (currentResolver == null)
         {
             Console.WriteLine("Brak resolvera do wyboru karty przeciwnika!");
@@ -202,9 +200,9 @@ public class Gra
             .Where(k => k.KolorKarty == kolorKarty)
             .ToList();
 
-        if (!kartyPrzeciwnika.Any())
+        if (kartyPrzeciwnika.Count == 0)
         {
-            Console.WriteLine("Przeciwnik nie ma kart do odlozenia o wymaganym kolorze!");
+            //Console.WriteLine("Przeciwnik nie ma kart do odlozenia o wymaganym kolorze!");
             return;
         }
 
@@ -221,11 +219,11 @@ public class Gra
         }
 
         Przeciwnik.UsunKarte(wybor);
-        Console.WriteLine($"Przeciwnik odklada karte {wybor.Nazwa}");
+        //Console.WriteLine($"Przeciwnik odklada karte {wybor.Nazwa}");
     }
     public void Efekt_DarmowaBudowla()
     {
-        Console.WriteLine("Efekt: Darmowa budowla z odrzuconych kart");
+        //Console.WriteLine("Efekt: Darmowa budowla z odrzuconych kart");
         if (currentResolver == null)
         {
             Console.WriteLine("Brak resolvera do wyboru darmowej budowli!");
@@ -234,20 +232,20 @@ public class Gra
         var odrzuconeKarty = StosKartOdrzuconych.ToList();
         if (!odrzuconeKarty.Any())
         {
-            Console.WriteLine("Brak odrzuconych kart do wyboru darmowej budowli!");
+            // Console.WriteLine("Brak odrzuconych kart do wyboru darmowej budowli!");
             return;
         }
 
         var decyzja = new DecyzjaKontekst<Karta>(
-            TypEfektu.OdlozKartePrzeciwnika,
+            TypEfektu.DarmowaBudowlaZOdrzuconychKart,
             odrzuconeKarty
         );
 
         var kartaDoDodania = currentResolver.Resolve(this.Clone(), decyzja);
 
-        Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} wybiera karte {kartaDoDodania.Nazwa} do darmowej budowy");
-        // TODO: rozpatrzyc jakos efekty zgrabnie
+        //Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} wybiera karte {kartaDoDodania.Nazwa} do darmowej budowy");
         kartaDoDodania.OznaczJakoZagrana();
+        kartaDoDodania.OznaczJakoNieodrzucona();
         UsunZeStosuOdrzuconych(kartaDoDodania);
         AktywnyGracz.ZbudowaneKarty.Add(kartaDoDodania);
 

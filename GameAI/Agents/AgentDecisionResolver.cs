@@ -1,18 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 public class AgentDecisionResolver : IDecisionResolver
 {
     private readonly IAgent agent;
+    private readonly MoveLog moveLog;
 
-    public AgentDecisionResolver(IAgent agent)
+    public AgentDecisionResolver(IAgent agent, MoveLog moveLog)
     {
         this.agent = agent;
+        this.moveLog = moveLog;
     }
 
-    public T Resolve<T>(Gra gra, DecyzjaKontekst<T> decyzja)
+    public T Resolve<T>(Gra gra, DecyzjaKontekst<T> kontekst)
     {
-        return agent.WybierzAkcjePosrednia(gra, decyzja);
+        var wybor = agent.WybierzAkcjePosrednia(gra, kontekst);
+
+        moveLog.Decisions.Add(new DecisionLog
+        {
+            TypDecyzji = kontekst.Efekt.ToString(),
+            Opcje = kontekst.Opcje.Select(o => o!.ToString()!).ToList(),
+            Wybor = wybor!.ToString()!
+        });
+
+        return wybor;
     }
 }
