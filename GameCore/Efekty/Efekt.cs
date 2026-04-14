@@ -41,7 +41,7 @@ public class Efekt
         return $"Efekt: {TypEfektu}, Surowce: {string.Join(", ", Surowce)}, Wartosc: {Wartosc}, Tekst: {Tekst}";
     }
 
-    public void ZastosujEfekt(Gracz gracz, Gracz? przeciwnik = null, PlanszaKonfliktu? planszaKonfliktu = null, Karta? karta = null)
+    public void ZastosujEfekt(Gracz gracz, Gracz? przeciwnik = null, PlanszaKonfliktu? planszaKonfliktu = null, Karta? karta = null, Gra gra = null)
     {
         switch (TypEfektu)
         {
@@ -73,7 +73,12 @@ public class Efekt
                 gracz.DodajBialySymbol(Tekst);
                 break;
             case TypEfektu.SymbolNaukowy:
-                gracz.DodajSymbolNaukowy(SymbolNaukowy);
+                bool duplikat = gracz.DodajSymbolNaukowy(SymbolNaukowy);
+
+                if (duplikat && gra != null)
+                {
+                    gra.Efekt_WybierzZetonPostepu();
+                }
                 break;
             case TypEfektu.MonetyZaKarty:
                 Func<Gracz, int> licznikKartGracza = Tekst switch
@@ -99,27 +104,24 @@ public class Efekt
 
                 gracz.DodajMonety(Wartosc * Math.Max(n1, n2));
                 break;
-            //case TypEfektu.DarmowaBudowlaZOdrzuconychKart: -> do implementacji w mechanice tury
-            case TypEfektu.Wylosuj3ZetonyPostepu:
-                // do implementacji w mechanice tury
-                break;
-            case TypEfektu.OdlozKartePrzeciwnika:
-                // do implementacji w mechanice tury
-                break;
-            //case TypEfektu.RozegrajTurePonownie: -> do implementacji w mechanice tury
             case TypEfektu.PrzeciwnikOdkladaMonety:
                 if (przeciwnik != null)
                 {
                     przeciwnik.DodajMonety(-Wartosc);
                 }
                 break;
-            case TypEfektu.WybierzZetonPostepu:
-                // jakos dac graczowi wybor zetonu postepu
-                // wybrany zeton dodajemy do gracza
-                // do implementacji w mechanice tury
+            case TypEfektu.Wylosuj3ZetonyPostepu:
+                gra.Efekt_Losuj3Zetony();
+                break;
+
+            case TypEfektu.OdlozKartePrzeciwnika:
+                gra.Efekt_OdlozKartePrzeciwnika(Tekst);
+                break;
+
+            case TypEfektu.DarmowaBudowlaZOdrzuconychKart:
+                gra.Efekt_DarmowaBudowla();
                 break;
             default:
-                // Inne typy efektow do implementacji
                 break;
         }
     }

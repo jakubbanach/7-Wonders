@@ -95,6 +95,11 @@ public class PlanszaKonfliktu
         }
     }
 
+    public void UsunZetonPostepu(ZetonPostepu zeton)
+    {
+        ZetonyPostepu.Remove(zeton);
+    }
+
     public string WypiszStan()
     {
         return $"Pion konfliktu na pozycji: {PionKonfliktu.PobierzPozycje()}\n" +

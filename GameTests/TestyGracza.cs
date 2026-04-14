@@ -93,6 +93,7 @@ public class TestyGracza
     {
         var gracz = new Gracz("TestowyGracz");
         var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Warsztat");
+        karta.OznaczJakoNiezagrana();
         gracz.ZbudujKarte(karta, new Gracz("Przeciwnik"));
         Assert.Contains(TypEfektu.SymbolNaukowy, gracz.PobierzEfekty().Select(e => e.TypEfektu));
         Assert.Contains(TypEfektu.PunktyZwyciestwa, gracz.PobierzEfekty().Select(e => e.TypEfektu));

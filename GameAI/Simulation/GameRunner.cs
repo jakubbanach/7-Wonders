@@ -44,15 +44,17 @@ public class GameRunner
         {
             //Console.WriteLine($"\nAktywny gracz: {gra.AktywnyGracz.Nazwa}, Epoka: {gra.Epoka}, Pozycja konfliktu: {gra.PozycjaKonfliktu}");
             var currentAgent = gra.AktywnyGracz == gra.Gracze[0] ? a1 : a2;
+            
 
-            var ruch = currentAgent.DecideMove(gra.Clone());
+            var ruch = currentAgent.WybierzRuch(gra.Clone());
 
             // ewenetualnie currentAgent
             log.Add(new MoveLog(gra.AktywnyGracz.Nazwa, ruch));
 
             //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z karta {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
 
-            gra.WykonajRuch(ruch, gameRandom);
+            var resolver = new AgentDecisionResolver(currentAgent);
+            gra.WykonajRuch(ruch, resolver, gameRandom);
         }
 
         return MatchResult.FromGame(gra, a1, a2, log, Seed);

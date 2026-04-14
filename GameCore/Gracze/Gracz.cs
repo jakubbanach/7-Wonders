@@ -117,6 +117,8 @@ public class Gracz
     public void UsunKarte(Karta karta)
     {
         ZbudowaneKarty.Remove(karta);
+        karta.OznaczJakoNiezagrana();
+        karta.OznaczJakoOdrzucona();
     }
 
     public List<Karta> PobierzZbudowaneKarty()
@@ -140,9 +142,13 @@ public class Gracz
         Efekty.Remove(efekt);
     }
 
-    public void DodajSymbolNaukowy(SymbolNaukowy symbol)
+    public bool DodajSymbolNaukowy(SymbolNaukowy symbol)
     {
+        bool duplikat = SymboleNaukowe.Contains(symbol);
+
         SymboleNaukowe.Add(symbol);
+
+        return duplikat;
     }
     public void DodajBialySymbol(string symbol)
     {
@@ -151,6 +157,12 @@ public class Gracz
     public void DodajZetonPostepu(ZetonPostepu zeton)
     {
         ZetonyPostepu.Add(zeton);
+        foreach (var efekt in zeton.Efekty)
+        {
+            Console.WriteLine($"Zeton postepu '{zeton.Nazwa}' dodaje efekt: {efekt.Wypisz()}");
+            efekt.ZastosujEfekt(this, null);
+            DodajEfekt(efekt);
+        }
     }
 
     public void DodajPunktyZwyciestwa(int punkty)
@@ -191,7 +203,7 @@ public class Gracz
         return new WynikBudowy { MoznaZagrac = koszt <= monety, Koszt = koszt, CzyDarmowaBudowa = false };
     }
 
-    public void ZbudujKarte(Karta karta, Gracz przeciwnik, PlanszaKonfliktu planszaKonfliktu=null)
+    public void ZbudujKarte(Karta karta, Gracz przeciwnik, PlanszaKonfliktu planszaKonfliktu=null, Gra gra = null)
     {
         if (karta == null)
             throw new ArgumentNullException(nameof(karta));
@@ -210,8 +222,12 @@ public class Gracz
             }
             if (przeciwnik.Efekty.Any(e => e.TypEfektu == TypEfektu.MonetyPrzeciwnikaZaMaterialy))
             {
-                var kosztSurowcaMonety = karta.Koszt.TryGetValue(Surowiec.Monety, out var kosztMonet) ? kosztMonet : 0;
-                przeciwnik.DodajMonety(wynikBudowy.Koszt - kosztSurowcaMonety);
+                if (karta.Koszt != null)
+                {
+                    var kosztSurowcaMonety = karta.Koszt.TryGetValue(Surowiec.Monety, out var kosztMonet) ? kosztMonet : 0;
+                    przeciwnik.DodajMonety(wynikBudowy.Koszt - kosztSurowcaMonety);
+                }
+                
             }
             karta.OznaczJakoZagrana();
 
@@ -219,7 +235,7 @@ public class Gracz
 
             foreach (var efekt in karta.Efekty)
             {
-                efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu, karta);
+                efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu, karta, gra);
                 DodajEfekt(efekt);
             }
         }
@@ -230,12 +246,13 @@ public class Gracz
         }
     }
 
-    public void OdrzucKarte(Karta karta)
+    public void OdrzucKarte(Karta karta, Gra gra)
     {
         if (karta == null)
             throw new ArgumentNullException(nameof(karta));
 
         karta.OznaczJakoOdrzucona();
+        gra.OdrzucKarte(karta);
 
         int monety = 2;
 
@@ -260,7 +277,7 @@ public class Gracz
 
         return new WynikBudowy { MoznaZagrac = koszt <= monety, Koszt = koszt, CzyDarmowaBudowa = false };
     }
-    public void ZbudujCud(Karta karta, Gracz przeciwnik, KartaCudu kartaCudu, PlanszaKonfliktu planszaKonfliktu=null)
+    public void ZbudujCud(Karta karta, Gracz przeciwnik, KartaCudu kartaCudu, PlanszaKonfliktu planszaKonfliktu=null, Gra gra = null)
     {
         if (karta == null)
             throw new ArgumentNullException(nameof(karta));
@@ -275,8 +292,11 @@ public class Gracz
             //chyba potrzebne?
             if (przeciwnik.Efekty.Any(e => e.TypEfektu == TypEfektu.MonetyPrzeciwnikaZaMaterialy))
             {
-                var kosztSurowcaMonety = karta.Koszt.TryGetValue(Surowiec.Monety, out var kosztMonet) ? kosztMonet : 0;
-                przeciwnik.DodajMonety(wynikBudowy.Koszt - kosztSurowcaMonety);
+                if (karta.Koszt != null)
+                {
+                    var kosztSurowcaMonety = karta.Koszt.TryGetValue(Surowiec.Monety, out var kosztMonet) ? kosztMonet : 0;
+                    przeciwnik.DodajMonety(wynikBudowy.Koszt - kosztSurowcaMonety);
+                }
             }
 
             kartaCudu.OznaczJakoZagrana();
@@ -284,7 +304,7 @@ public class Gracz
 
             foreach (var efekt in kartaCudu.Efekty)
             {
-                efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu);
+                efekt.ZastosujEfekt(this, przeciwnik, planszaKonfliktu, gra: gra);
                 DodajEfekt(efekt);
             }
         }

@@ -9,6 +9,9 @@ public class Gra
     private readonly PlanszaKonfliktu planszaKonfliktu;
     private PlanszaEpoki planszaEpoki;
     private readonly StanGry stanGry;
+    private IDecisionResolver? currentResolver;
+    private IRandom? currentRandom;
+    private List<Karta> stosKartOdrzuconych = new List<Karta>();
 
     private int idAktywnegoGracza = 0;
 
@@ -32,6 +35,7 @@ public class Gra
 
     public Gracz Przeciwnik =>
         gracze.First(g => g != AktywnyGracz);
+    public IReadOnlyList<Karta> StosKartOdrzuconych => stosKartOdrzuconych;
 
     private Gra(Gra gra)
     {
@@ -64,19 +68,22 @@ public class Gra
             new StanGry());
     }
 
-    public void WykonajRuch(Ruch ruchNew, IRandom random)
+    public void WykonajRuch(Ruch ruchNew, IDecisionResolver resolver, IRandom random)
     {
+        currentResolver = resolver;
+        currentRandom = random;
         var karta = ZnajdzDostepnaKarte(ruchNew.KartaDoZagrania.Nazwa);
-
-        //Console.WriteLine($"Dostepne karty: {string.Join(", ", DostepneKarty().Select(k => k.Nazwa))}");
-        //Console.WriteLine($"Wybrana karta: {karta.Nazwa}");
 
         var kartaCudu = ruchNew.KartaCudu == null ? null : ZnajdzKarteCudu(ruchNew.KartaCudu.Nazwa);
 
         Ruch ruch = new Ruch(AktywnyGracz, Przeciwnik, karta, ruchNew.TypRuchu, kartaCudu);
-        //Console.WriteLine($"Ruch wykonuje Aktywny gracz: {AktywnyGracz.Nazwa}, Przeciwnik: {Przeciwnik.Nazwa}");
-        ruch.Wykonaj(planszaKonfliktu);
+        ruch.Wykonaj(this, planszaKonfliktu);
 
+        //RozpatrzDodatkoweEfektyKarty(karta, kartaCudu, resolver, random);
+
+        currentResolver = null;
+        currentRandom = null;
+        
         var poleKarty = planszaEpoki.ZnajdzPole(karta);
         if (poleKarty == null)
         {
@@ -86,16 +93,12 @@ public class Gra
         planszaEpoki.UsunPole(poleKarty);
         if (CzyKoniecGry())
         {
-            // Console.WriteLine("Gra zakonczona!");
             return;
         }
         if (CzyKoniecEpoki())
         {
-            //Console.WriteLine("Koniec epoki! Przechodzimy do kolejnej epoki.");
             if (planszaEpoki.Epoka == Epoka.EpokaIII)
             {
-                //Console.WriteLine("Koniec gry! Przechodzimy do podsumowania wynikow.");
-                // dopisac logike podsumowania wynikow
                 ZakonczGre();
                 return;
             }
@@ -118,6 +121,151 @@ public class Gra
             }
         }
         ZmienTure(); 
+    }
+
+    public void Efekt_Losuj3Zetony()
+    {
+        Console.WriteLine("Efekt: Wylosuj 3 zetony postepu");
+        if (currentResolver == null)
+        {
+            Console.WriteLine("Brak resolvera do losowania zetonu postepu!");
+            return;
+        }
+        if (currentRandom == null)
+        {
+            Console.WriteLine("Brak generatora losowego do losowania zetonu postepu!");
+            return;
+        }
+        var zetonyNaPlanszy = planszaKonfliktu.ZetonyPostepu;
+        var pozostale = ZbiorZetonowPostepu.ZetonyPostepu
+            .Where(z => !zetonyNaPlanszy.Any(zp => zp.Nazwa == z.Nazwa))
+            .ToList();
+
+        var wylosowane = pozostale
+            .OrderBy(_ => currentRandom.Next(int.MaxValue))
+            .Take(3)
+            .ToList();
+
+        var decyzja = new DecyzjaKontekst<ZetonPostepu>(
+            TypEfektu.Wylosuj3ZetonyPostepu,
+            wylosowane
+        );
+
+        var wybor = currentResolver.Resolve(this.Clone(), decyzja);
+
+        AktywnyGracz.DodajZetonPostepu(wybor);
+        Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} losuje zeton postepu {wybor.Nazwa}");
+    }
+    public void Efekt_WybierzZetonPostepu()
+    {
+        Console.WriteLine("Efekt: Wybierz 1 zeton postepu");
+        if (currentResolver == null)
+        {
+            Console.WriteLine("Brak resolvera do wyboru zetonu postepu!");
+            return;
+        }
+        if (!planszaKonfliktu.ZetonyPostepu.Any())
+        {
+            Console.WriteLine("Brak zetonow postepu na planszy!");
+            return;
+        }
+        var zetonyNaPlanszy = planszaKonfliktu.ZetonyPostepu;
+
+        var decyzja = new DecyzjaKontekst<ZetonPostepu>(
+            TypEfektu.WybierzZetonPostepu,
+            zetonyNaPlanszy
+        );
+
+        var wybor = currentResolver.Resolve(this.Clone(), decyzja);
+        if (wybor == null)
+        {
+            Console.WriteLine("Resolver nie zwrocil wyboru zetonu postepu!");
+            return;
+        }
+
+        AktywnyGracz.DodajZetonPostepu(wybor);
+        planszaKonfliktu.UsunZetonPostepu(wybor);
+        Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} wybiera zeton postepu {wybor.Nazwa}");
+    }
+    public void Efekt_OdlozKartePrzeciwnika(string kolorOdkladanejKarty)
+    {
+        Console.WriteLine($"Efekt: Odloz karte przeciwnika o kolorze {kolorOdkladanejKarty}");
+        if (currentResolver == null)
+        {
+            Console.WriteLine("Brak resolvera do wyboru karty przeciwnika!");
+            return;
+        }
+        // mozliwe tylko do odlozenia karta szara lub brazowa, wiec sprawdzamy tylko te karty
+        var kolorKarty = kolorOdkladanejKarty == "Szary" ? KolorKarty.Szary : KolorKarty.Brazowy;
+
+        var kartyPrzeciwnika = Przeciwnik.ZbudowaneKarty
+            .Where(k => k.KolorKarty == kolorKarty)
+            .ToList();
+
+        if (!kartyPrzeciwnika.Any())
+        {
+            Console.WriteLine("Przeciwnik nie ma kart do odlozenia o wymaganym kolorze!");
+            return;
+        }
+
+        var decyzja = new DecyzjaKontekst<Karta>(
+            TypEfektu.OdlozKartePrzeciwnika,
+            kartyPrzeciwnika
+        );
+
+        var wybor = currentResolver?.Resolve(this.Clone(), decyzja);
+        if (wybor == null)
+        {
+            Console.WriteLine("Resolver nie zwrocil wyboru karty przeciwnika!");
+            return;
+        }
+
+        Przeciwnik.UsunKarte(wybor);
+        Console.WriteLine($"Przeciwnik odklada karte {wybor.Nazwa}");
+    }
+    public void Efekt_DarmowaBudowla()
+    {
+        Console.WriteLine("Efekt: Darmowa budowla z odrzuconych kart");
+        if (currentResolver == null)
+        {
+            Console.WriteLine("Brak resolvera do wyboru darmowej budowli!");
+            return;
+        }
+        var odrzuconeKarty = StosKartOdrzuconych.ToList();
+        if (!odrzuconeKarty.Any())
+        {
+            Console.WriteLine("Brak odrzuconych kart do wyboru darmowej budowli!");
+            return;
+        }
+
+        var decyzja = new DecyzjaKontekst<Karta>(
+            TypEfektu.OdlozKartePrzeciwnika,
+            odrzuconeKarty
+        );
+
+        var kartaDoDodania = currentResolver.Resolve(this.Clone(), decyzja);
+
+        Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} wybiera karte {kartaDoDodania.Nazwa} do darmowej budowy");
+        // TODO: rozpatrzyc jakos efekty zgrabnie
+        kartaDoDodania.OznaczJakoZagrana();
+        UsunZeStosuOdrzuconych(kartaDoDodania);
+        AktywnyGracz.ZbudowaneKarty.Add(kartaDoDodania);
+
+        foreach (var efekt in kartaDoDodania.Efekty)
+        {
+            efekt.ZastosujEfekt(AktywnyGracz, Przeciwnik, planszaKonfliktu, kartaDoDodania, this);
+            AktywnyGracz.DodajEfekt(efekt);
+        }
+    }
+
+    public void OdrzucKarte(Karta karta)
+    {
+        stosKartOdrzuconych.Add(karta);
+    }
+
+    public void UsunZeStosuOdrzuconych(Karta karta)
+    {
+        stosKartOdrzuconych.Remove(karta);
     }
 
     private Karta ZnajdzDostepnaKarte(string nazwa)

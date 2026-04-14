@@ -19,15 +19,15 @@ public class Ruch
         KartaCudu = kartaCudu;
     }
 
-    public void Wykonaj(PlanszaKonfliktu? planszaKonfliktu = null)
+    public void Wykonaj(Gra? gra = null, PlanszaKonfliktu? planszaKonfliktu = null)
     {
         switch (TypRuchu)
         {
             case TypRuchu.ZbudujKarte:
-                Gracz.ZbudujKarte(KartaDoZagrania, Przeciwnik, planszaKonfliktu);
+                Gracz.ZbudujKarte(KartaDoZagrania, Przeciwnik, planszaKonfliktu, gra);
                 break;
             case TypRuchu.OdrzucKarte:
-                Gracz.OdrzucKarte(KartaDoZagrania);
+                Gracz.OdrzucKarte(KartaDoZagrania, gra);
                 break;
             case TypRuchu.ZbudujCud:
                 // TODO: Implementacja wyboru karty cudu
@@ -42,7 +42,7 @@ public class Ruch
                     Console.WriteLine($"Gracz nie posiada karty cudu: {KartaCudu.Nazwa}");
                     return;
                 }
-                Gracz.ZbudujCud(KartaDoZagrania, Przeciwnik, KartaCudu, planszaKonfliktu);
+                Gracz.ZbudujCud(KartaDoZagrania, Przeciwnik, KartaCudu, planszaKonfliktu, gra);
                 break;
             default:
                 Console.WriteLine("Nieznany typ ruchu.");

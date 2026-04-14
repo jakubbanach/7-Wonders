@@ -2,5 +2,6 @@
 {
     string Name { get; set;}
 
-    Ruch DecideMove(Gra gra);
+    Ruch WybierzRuch(Gra gra);
+    T WybierzAkcjePosrednia<T>(Gra gra, DecyzjaKontekst<T> decyzja);
 }

@@ -9,11 +9,11 @@ public class RandomAgent : IAgent
     {
         this.random = random;
     }
-    public Ruch DecideMove(Gra gra)
+    public Ruch WybierzRuch(Gra gra)
     {
         var ruchy = gra.DostepneRuchy(); // Pobierz wszystkie dostepne 
         //Console.WriteLine($"Agent {Name} decyduje się na ruch...");
-		//Console.WriteLine($"Dostepne ruchy: {ruchy.Count}");
+        //Console.WriteLine($"Dostepne ruchy: {ruchy.Count}");
         //foreach (var ruch in ruchy)
         //{
         //    Console.WriteLine($"Ruch: {ruch.TypRuchu}, Karta: {ruch.KartaDoZagrania?.Nazwa}, KartaCudu: {ruch.KartaCudu?.Nazwa}");
@@ -23,5 +23,9 @@ public class RandomAgent : IAgent
         //Console.WriteLine($"Pozycja konfliktu: {gra.Gracze[1].WypiszStan()}");
         //Console.WriteLine($"Plansza do stringa\n {gra.PlanszaEpoki.PlanszaDoStringa()}");
         return ruchy[random.Next(ruchy.Count)];
+    }
+    public T WybierzAkcjePosrednia<T>(Gra gra, DecyzjaKontekst<T> decyzja)
+    {
+        return decyzja.Opcje[random.Next(decyzja.Opcje.Count)];
     }
 }

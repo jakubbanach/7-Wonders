@@ -15,7 +15,7 @@ public class ZetonPostepu
     private ZetonPostepu(ZetonPostepu zeton)
     {
         Nazwa = zeton.Nazwa;
-        Efekty = Efekty.Select(e => e.Clone()).ToList();
+        Efekty = zeton.Efekty.Select(e => e.Clone()).ToList();
     }
     public ZetonPostepu Clone()
     {

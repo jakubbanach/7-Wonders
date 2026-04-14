@@ -394,7 +394,7 @@ public class TestyEfektowNaGraczu
         przeciwnik.PobierzKartyCudu().ForEach(k => k.OznaczJakoZagrana());
 
         var efekt = new Efekt(
-            TypEfektu.MonetyZaKarty, 
+            TypEfektu.MonetyZaKartyWiecejWMiescie, 
             tekst: "Cuda", 
             wartosc: 2
         );
@@ -459,7 +459,7 @@ public class TestyEfektowNaGraczu
         }
 
         var efekt = new Efekt(
-            TypEfektu.MonetyZaKarty, 
+            TypEfektu.MonetyZaKartyWiecejWMiescie, 
             tekst: "Zielony", 
             wartosc: 1
         );
@@ -488,7 +488,7 @@ public class TestyEfektowNaGraczu
         }
 
         var efekt = new Efekt(
-            TypEfektu.MonetyZaKarty,
+            TypEfektu.MonetyZaKartyWiecejWMiescie,
             tekst: "Brazowy i Szary",
             wartosc: 1
         );

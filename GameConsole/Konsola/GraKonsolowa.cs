@@ -167,7 +167,7 @@ public class GraKonsolowa
         TypRuchu typRuchu = WybierzRuch(karta);
 
         Ruch ruch = new Ruch(aktywnyGracz, przeciwnik, karta, typRuchu);
-        ruch.Wykonaj(planszaKonfliktu);
+        ruch.Wykonaj(planszaKonfliktu: planszaKonfliktu);
         stanGry.CzyZwyciestwoMilitarne(gracze, planszaKonfliktu.PionKonfliktu.PobierzPozycje());
         stanGry.CzyZwyciestwoNaukowe(gracze, planszaKonfliktu);
         if (stanGry.CzyZakonczona)
