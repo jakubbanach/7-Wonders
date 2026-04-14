@@ -1,0 +1,4055 @@
+{
+  "MatchId": "3c4f5881-3e40-4671-b476-e3fce57301cd",
+  "Seed": 12379,
+  "Agent1Name": "Gracz 1",
+  "Agent2Name": "Gracz 2",
+  "Winner": "Gracz 1",
+  "TypZwyciestwa": "Punktowe",
+  "Turns": 60,
+  "Agent1Score": 52,
+  "Agent2Score": 24,
+  "Agent1Cards": [
+    {
+      "Epoka": "EpokaI",
+      "KolorKarty": "Zolty",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Magazyn Drewna",
+      "Koszt": {
+        "Monety": 3
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "ZmianaCenySurowca",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Drewno"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaI",
+      "KolorKarty": "Zolty",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Tawerna",
+      "Koszt": null,
+      "Efekty": [
+        {
+          "TypEfektu": "Monety",
+          "Surowce": {},
+          "Wartosc": 4,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "BialySymbol",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "Wazon",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaI",
+      "KolorKarty": "Zielony",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Skryptorium",
+      "Koszt": {
+        "Monety": 2
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "SymbolNaukowy",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Pismo",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "BialySymbol",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "Ksiega",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaI",
+      "KolorKarty": "Szary",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Huta Szkla",
+      "Koszt": {
+        "Monety": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "Surowiec",
+          "Surowce": {
+            "Szklo": 1
+          },
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaII",
+      "KolorKarty": "Czerwony",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Plac Apelowy",
+      "Koszt": {
+        "Glina": 2,
+        "Szklo": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyMilitarne",
+          "Surowce": {},
+          "Wartosc": 2,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "BialySymbol",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "Helm",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaII",
+      "KolorKarty": "Niebieski",
+      "DarmowaBudowa": "Kropla",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Akwedukt",
+      "Koszt": {
+        "Kamien": 3
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 5,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaII",
+      "KolorKarty": "Niebieski",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Gmach Sadu",
+      "Koszt": {
+        "Drewno": 2,
+        "Szklo": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 5,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaII",
+      "KolorKarty": "Zielony",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Szkola",
+      "Koszt": {
+        "Drewno": 1,
+        "Papirus": 2
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "SymbolNaukowy",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Kolo",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "BialySymbol",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "Harfa",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaII",
+      "KolorKarty": "Czerwony",
+      "DarmowaBudowa": "Miecz",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Koszary",
+      "Koszt": {
+        "Monety": 3
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyMilitarne",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaIII",
+      "KolorKarty": "Zolty",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Port",
+      "Koszt": {
+        "Drewno": 1,
+        "Szklo": 1,
+        "Papirus": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "MonetyZaKarty",
+          "Surowce": {},
+          "Wartosc": 2,
+          "Tekst": "Brazowy",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaIII",
+      "KolorKarty": "Zolty",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Zbrojownia",
+      "Koszt": {
+        "Kamien": 2,
+        "Szklo": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "MonetyZaKarty",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "Czerwony",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaIII",
+      "KolorKarty": "Niebieski",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Palac",
+      "Koszt": {
+        "Glina": 1,
+        "Kamien": 1,
+        "Drewno": 1,
+        "Szklo": 2
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 7,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    }
+  ],
+  "Agent1BuildWonders": [
+    {
+      "CzyZagrana": true,
+      "Nazwa": "Biblioteka Aleksandryjska",
+      "Koszt": {
+        "Drewno": 3,
+        "Szklo": 1,
+        "Papirus": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "Wylosuj3ZetonyPostepu",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 4,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "CzyZagrana": true,
+      "Nazwa": "Posag Zeusa W Olimpii",
+      "Koszt": {
+        "Kamien": 1,
+        "Drewno": 1,
+        "Glina": 1,
+        "Papirus": 2
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "OdlozKartePrzeciwnika",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "Brazowy",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyMilitarne",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "CzyZagrana": true,
+      "Nazwa": "Pireus",
+      "Koszt": {
+        "Drewno": 2,
+        "Kamien": 1,
+        "Glina": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "WyborSurowca",
+          "Surowce": {
+            "Papirus": 1,
+            "Szklo": 1
+          },
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "RozegrajTurePonownie",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 2,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "CzyZagrana": true,
+      "Nazwa": "Piramida Cheopsa",
+      "Koszt": {
+        "Kamien": 3,
+        "Papirus": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 9,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    }
+  ],
+  "Agent1Resources": {
+    "Drewno": 0,
+    "Glina": 0,
+    "Kamien": 0,
+    "Szklo": 1,
+    "Papirus": 0,
+    "Monety": 13
+  },
+  "Agent2Cards": [
+    {
+      "Epoka": "EpokaI",
+      "KolorKarty": "Brazowy",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Sklad Drewna",
+      "Koszt": {
+        "Monety": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "Surowiec",
+          "Surowce": {
+            "Drewno": 1
+          },
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaI",
+      "KolorKarty": "Zielony",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Apteka",
+      "Koszt": {
+        "Szklo": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "SymbolNaukowy",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Kolo",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaI",
+      "KolorKarty": "Czerwony",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Wieza Straznicza",
+      "Koszt": null,
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyMilitarne",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaII",
+      "KolorKarty": "Brazowy",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Tartak",
+      "Koszt": {
+        "Monety": 2
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "Surowiec",
+          "Surowce": {
+            "Drewno": 2
+          },
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaII",
+      "KolorKarty": "Szary",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Suszarnia Papirusu",
+      "Koszt": null,
+      "Efekty": [
+        {
+          "TypEfektu": "Surowiec",
+          "Surowce": {
+            "Papirus": 1
+          },
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaI",
+      "KolorKarty": "Brazowy",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Skladowisko Kamienia",
+      "Koszt": {
+        "Monety": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "Surowiec",
+          "Surowce": {
+            "Kamien": 1
+          },
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaIII",
+      "KolorKarty": "Fioletowy",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Cech Lichwiarzy",
+      "Koszt": {
+        "Kamien": 2,
+        "Drewno": 2
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyZaKarty",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "Monety",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaIII",
+      "KolorKarty": "Zielony",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Pracownia Naukowa",
+      "Koszt": {
+        "Drewno": 2,
+        "Szklo": 1,
+        "Papirus": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "SymbolNaukowy",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "ZegarSloneczny",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaIII",
+      "KolorKarty": "Zielony",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Akademia",
+      "Koszt": {
+        "Kamien": 1,
+        "Drewno": 1,
+        "Szklo": 2
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "SymbolNaukowy",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "ZegarSloneczny",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "Epoka": "EpokaIII",
+      "KolorKarty": "Zolty",
+      "DarmowaBudowa": "",
+      "CzyWidoczna": false,
+      "CzyOdrzucona": false,
+      "CzyZagrana": true,
+      "Nazwa": "Izba Handlowa",
+      "Koszt": {
+        "Papirus": 2
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "MonetyZaKarty",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "Szary",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    }
+  ],
+  "Agent2BuildWonders": [
+    {
+      "CzyZagrana": true,
+      "Nazwa": "Circus Maximus",
+      "Koszt": {
+        "Kamien": 2,
+        "Drewno": 1,
+        "Szklo": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "OdlozKartePrzeciwnika",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "Szary",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyMilitarne",
+          "Surowce": {},
+          "Wartosc": 1,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "CzyZagrana": true,
+      "Nazwa": "Via Appia",
+      "Koszt": {
+        "Kamien": 2,
+        "Glina": 2,
+        "Papirus": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "Monety",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PrzeciwnikOdkladaMonety",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "RozegrajTurePonownie",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 3,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    },
+    {
+      "CzyZagrana": true,
+      "Nazwa": "Mauzoleum W Halikarnasie",
+      "Koszt": {
+        "Glina": 2,
+        "Szklo": 2,
+        "Papirus": 1
+      },
+      "Efekty": [
+        {
+          "TypEfektu": "DarmowaBudowlaZOdrzuconychKart",
+          "Surowce": {},
+          "Wartosc": 0,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        },
+        {
+          "TypEfektu": "PunktyZwyciestwa",
+          "Surowce": {},
+          "Wartosc": 2,
+          "Tekst": "",
+          "SymbolNaukowy": "Globus",
+          "Surowiec": "Glina"
+        }
+      ]
+    }
+  ],
+  "Agent2Resources": {
+    "Drewno": 4,
+    "Glina": 0,
+    "Kamien": 1,
+    "Szklo": 0,
+    "Papirus": 1,
+    "Monety": 7
+  },
+  "Moves": [
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Magazyn Drewna",
+        "Koszt": {
+          "Monety": 3
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "ZmianaCenySurowca",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Drewno"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Wycinka",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Drewno": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Zielarnia",
+        "Koszt": {
+          "Monety": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Mozdzierz",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Zebatka",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 1,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujCud",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Kamieniolom",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Kamien": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": {
+        "CzyZagrana": false,
+        "Nazwa": "Circus Maximus",
+        "Koszt": {
+          "Kamien": 2,
+          "Drewno": 1,
+          "Szklo": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "OdlozKartePrzeciwnika",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Szary",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "SurowceGracza": {
+        "Drewno": 1,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujCud",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Szary",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Wytwornia Papirusu",
+        "Koszt": {
+          "Monety": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Papirus": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": {
+        "CzyZagrana": false,
+        "Nazwa": "Biblioteka Aleksandryjska",
+        "Koszt": {
+          "Drewno": 3,
+          "Szklo": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Wylosuj3ZetonyPostepu",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 4,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 1,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 1
+      },
+      "Decisions": [
+        {
+          "TypDecyzji": "Wylosuj3ZetonyPostepu",
+          "Opcje": [
+            "Architektura (MniejMaterialowNaCuda)",
+            "Rolnictwo (6 Monet, 4 Punkty Zwyciestwa)",
+            "Teologia (ZaBudoweCuduRozegrajTurePonownie)"
+          ],
+          "Wybor": "Rolnictwo (6 Monet, 4 Punkty Zwyciestwa)"
+        }
+      ]
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Oltarz",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Ksiezyc",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 1,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 1
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Tawerna",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "Monety",
+            "Surowce": {},
+            "Wartosc": 4,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Wazon",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 1,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 3
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Sklad Drewna",
+        "Koszt": {
+          "Monety": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Drewno": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 1,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 3
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujCud",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Palisada",
+        "Koszt": {
+          "Monety": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Mur",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": {
+        "CzyZagrana": false,
+        "Nazwa": "Pireus",
+        "Koszt": {
+          "Drewno": 2,
+          "Kamien": 1,
+          "Glina": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "WyborSurowca",
+            "Surowce": {
+              "Papirus": 1,
+              "Szklo": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "RozegrajTurePonownie",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 2
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Zloza Gliny",
+        "Koszt": {
+          "Monety": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Glina": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 2
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Glinianka",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Glina": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 2
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 8
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Skryptorium",
+        "Koszt": {
+          "Monety": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Pismo",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Ksiega",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 8
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Warsztat",
+        "Koszt": {
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Liczydlo",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Laznie",
+        "Koszt": {
+          "Kamien": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Kropla",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Apteka",
+        "Koszt": {
+          "Szklo": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Kolo",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Stajnie",
+        "Koszt": {
+          "Drewno": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Podkowa",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Skladowisko Kamienia",
+        "Koszt": {
+          "Monety": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Kamien": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 14
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Szary",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Huta Szkla",
+        "Koszt": {
+          "Monety": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Szklo": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 14
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Wieza Straznicza",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 13
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujCud",
+      "Karta": {
+        "Epoka": "EpokaI",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Magazyn Gliny",
+        "Koszt": {
+          "Monety": 3
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "ZmianaCenySurowca",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": {
+        "CzyZagrana": false,
+        "Nazwa": "Posag Zeusa W Olimpii",
+        "Koszt": {
+          "Kamien": 1,
+          "Drewno": 1,
+          "Glina": 1,
+          "Papirus": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "OdlozKartePrzeciwnika",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Brazowy",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 13
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": [
+        {
+          "TypDecyzji": "OdlozKartePrzeciwnika",
+          "Opcje": [
+            "Wycinka              | Brazowy   | Koszt: 0      | 1xDrewno",
+            "Sklad Drewna         | Brazowy   | Koszt: 1xMonety | 1xDrewno"
+          ],
+          "Wybor": "Wycinka              | Brazowy   | Koszt: 0      | 1xDrewno"
+        }
+      ]
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Tartak",
+        "Koszt": {
+          "Monety": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Drewno": 2
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 2,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Labolatorium",
+        "Koszt": {
+          "Szklo": 2,
+          "Drewno": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Liczydlo",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Lampa",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Szary",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Suszarnia Papirusu",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Papirus": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Plac Apelowy",
+        "Koszt": {
+          "Glina": 2,
+          "Szklo": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Helm",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Tor Strzelecki",
+        "Koszt": {
+          "Kamien": 1,
+          "Drewno": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Strzelnica",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "Kropla",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Akwedukt",
+        "Koszt": {
+          "Kamien": 3
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 5,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "Podkowa",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Stadniny",
+        "Koszt": {
+          "Glina": 1,
+          "Drewno": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 0
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Cegielnia",
+        "Koszt": {
+          "Monety": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Glina": 2
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 0
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 8
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "Ksiezyc",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Swiatynia",
+        "Koszt": {
+          "Drewno": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 4,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Slonce",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 8
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "Zebatka",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Ambulatorium",
+        "Koszt": {
+          "Glina": 2,
+          "Kamien": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Mozdzierz",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 10
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujCud",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Mury Obronne",
+        "Koszt": {
+          "Kamien": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": {
+        "CzyZagrana": false,
+        "Nazwa": "Mauzoleum W Halikarnasie",
+        "Koszt": {
+          "Glina": 2,
+          "Szklo": 2,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "DarmowaBudowlaZOdrzuconychKart",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 10
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 8
+      },
+      "Decisions": [
+        {
+          "TypDecyzji": "DarmowaBudowlaZOdrzuconychKart",
+          "Opcje": [
+            "Zielarnia            | Zielony   | Koszt: 2xMonety | SN - Mozdzierz, Zebatka",
+            "Oltarz               | Niebieski | Koszt: 0      | 3 Punkty Zwyciestwa, Ksiezyc",
+            "Zloza Gliny          | Brazowy   | Koszt: 1xMonety | 1xGlina",
+            "Glinianka            | Brazowy   | Koszt: 0      | 1xGlina",
+            "Warsztat             | Zielony   | Koszt: 1xPapirus | SN - Liczydlo, 1 Punkty Zwyciestwa",
+            "Laznie               | Niebieski | Koszt: 1xKamien | 3 Punkty Zwyciestwa, Kropla",
+            "Stajnie              | Czerwony  | Koszt: 1xDrewno | 1 Punkty Militarne, Podkowa",
+            "Skladowisko Kamienia | Brazowy   | Koszt: 1xMonety | 1xKamien",
+            "Labolatorium         | Zielony   | Koszt: 2xSzklo, 1xDrewno | SN - Liczydlo, 1 Punkty Zwyciestwa, Lampa",
+            "Tor Strzelecki       | Czerwony  | Koszt: 1xKamien, 1xDrewno, 1xPapirus | 2 Punkty Militarne, Strzelnica",
+            "Stadniny             | Czerwony  | Koszt: 1xGlina, 1xDrewno | 1 Punkty Militarne",
+            "Cegielnia            | Brazowy   | Koszt: 2xMonety | 2xGlina",
+            "Swiatynia            | Niebieski | Koszt: 1xDrewno, 1xPapirus | 4 Punkty Zwyciestwa, Slonce",
+            "Ambulatorium         | Zielony   | Koszt: 2xGlina, 1xKamien | SN - Mozdzierz, 2 Punkty Zwyciestwa"
+          ],
+          "Wybor": "Skladowisko Kamienia | Brazowy   | Koszt: 1xMonety | 1xKamien"
+        }
+      ]
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Gmach Sadu",
+        "Koszt": {
+          "Drewno": 2,
+          "Szklo": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 5,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 8
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 0
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "Ksiega",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Biblioteka",
+        "Koszt": {
+          "Kamien": 1,
+          "Drewno": 1,
+          "Szklo": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Pismo",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 0
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "Maska",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Posag",
+        "Koszt": {
+          "Glina": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 4,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Kolumna",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 2
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Karawanseraj",
+        "Koszt": {
+          "Monety": 2,
+          "Szklo": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "WyborSurowca",
+            "Surowce": {
+              "Drewno": 1,
+              "Glina": 1,
+              "Kamien": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 2
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Szkola",
+        "Koszt": {
+          "Drewno": 1,
+          "Papirus": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Kolo",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Harfa",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Brazowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Kamieniolom Stokowy",
+        "Koszt": {
+          "Monety": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Kamien": 2
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "Miecz",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Koszary",
+        "Koszt": {
+          "Monety": 3
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujCud",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Szary",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Pracownia Wyrobu Szkla",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "Surowiec",
+            "Surowce": {
+              "Szklo": 1
+            },
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": {
+        "CzyZagrana": false,
+        "Nazwa": "Via Appia",
+        "Koszt": {
+          "Kamien": 2,
+          "Glina": 2,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "Monety",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PrzeciwnikOdkladaMonety",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "RozegrajTurePonownie",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 3
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaII",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Browar",
+        "Koszt": null,
+        "Efekty": [
+          {
+            "TypEfektu": "Monety",
+            "Surowce": {},
+            "Wartosc": 6,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "BialySymbol",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "Beczka",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 3
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 0
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Fioletowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Gildia Strategow",
+        "Koszt": {
+          "Kamien": 2,
+          "Glina": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "MonetyZaKartyWiecejWMiescie",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "Czerwony",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZaKarty",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "Czerwony",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 0
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 5
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Fioletowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Cech Lichwiarzy",
+        "Koszt": {
+          "Kamien": 2,
+          "Drewno": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZaKarty",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "Monety",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 5
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Port",
+        "Koszt": {
+          "Drewno": 1,
+          "Szklo": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "MonetyZaKarty",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "Brazowy",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 3
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Fioletowy",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Cech Budowniczych",
+        "Koszt": {
+          "Kamien": 2,
+          "Glina": 1,
+          "Drewno": 1,
+          "Szklo": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZaKarty",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "Cuda",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 3
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 3
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "Harfa",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Uniwersytet",
+        "Koszt": {
+          "Glina": 1,
+          "Szklo": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 3
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 5
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Siedziba Trybuna",
+        "Koszt": {
+          "Monety": 8
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 5
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 8
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Zbrojownia",
+        "Koszt": {
+          "Kamien": 2,
+          "Szklo": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "MonetyZaKarty",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "Czerwony",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 8
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 7
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Arsenal",
+        "Koszt": {
+          "Glina": 3,
+          "Drewno": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 7
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "Helm",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Cyrk",
+        "Koszt": {
+          "Glina": 2,
+          "Kamien": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 9
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Pracownia Naukowa",
+        "Koszt": {
+          "Drewno": 2,
+          "Szklo": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "ZegarSloneczny",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 9
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Czerwony",
+        "DarmowaBudowa": "Mur",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Fortyfikacje",
+        "Koszt": {
+          "Kamien": 2,
+          "Glina": 1,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyMilitarne",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Ratusz",
+        "Koszt": {
+          "Kamien": 3,
+          "Drewno": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 7,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 16
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Palac",
+        "Koszt": {
+          "Glina": 1,
+          "Kamien": 1,
+          "Drewno": 1,
+          "Szklo": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 7,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 16
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 8
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Akademia",
+        "Koszt": {
+          "Kamien": 1,
+          "Drewno": 1,
+          "Szklo": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "ZegarSloneczny",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 8
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "Decisions": [
+        {
+          "TypDecyzji": "WybierzZetonPostepu",
+          "Opcje": [
+            "Urbanistyka (6 Monet, MonetyZaBudoweZBialymSymbolem)",
+            "Filozofia (7 Punkty Zwyciestwa)",
+            "Prawo (SN - Waga)",
+            "Budownictwo (MniejMaterialowNaNiebieskieKarty)",
+            "Strategia (DodatkoweMilitariaZaCzerwoneKarty)"
+          ],
+          "Wybor": "Prawo (SN - Waga)"
+        }
+      ]
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zielony",
+        "DarmowaBudowa": "Lampa",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Obserwatorium",
+        "Koszt": {
+          "Kamien": 1,
+          "Papirus": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "SymbolNaukowy",
+            "Surowce": {},
+            "Wartosc": 0,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 10
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 2
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "Kolumna",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Ogrody",
+        "Koszt": {
+          "Glina": 2,
+          "Drewno": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 6,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 2
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 16
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "ZbudujCud",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "Wazon",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Latarnia Morska",
+        "Koszt": {
+          "Glina": 2,
+          "Szklo": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "MonetyZaKarty",
+            "Surowce": {},
+            "Wartosc": 1,
+            "Tekst": "Zolty",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": {
+        "CzyZagrana": false,
+        "Nazwa": "Piramida Cheopsa",
+        "Koszt": {
+          "Kamien": 3,
+          "Papirus": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 9,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 16
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 4
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Niebieski",
+        "DarmowaBudowa": "Slonce",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Panteon",
+        "Koszt": {
+          "Glina": 1,
+          "Drewno": 1,
+          "Papirus": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 6,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 4
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 1",
+      "TypRuchu": "OdrzucKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "Beczka",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Arena",
+        "Koszt": {
+          "Glina": 1,
+          "Kamien": 1,
+          "Drewno": 1
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "MonetyZaKarty",
+            "Surowce": {},
+            "Wartosc": 2,
+            "Tekst": "Cuda",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 7
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 6
+      },
+      "Decisions": []
+    },
+    {
+      "Agent": "Gracz 2",
+      "TypRuchu": "ZbudujKarte",
+      "Karta": {
+        "Epoka": "EpokaIII",
+        "KolorKarty": "Zolty",
+        "DarmowaBudowa": "",
+        "CzyWidoczna": false,
+        "CzyOdrzucona": false,
+        "CzyZagrana": false,
+        "Nazwa": "Izba Handlowa",
+        "Koszt": {
+          "Papirus": 2
+        },
+        "Efekty": [
+          {
+            "TypEfektu": "PunktyZwyciestwa",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          },
+          {
+            "TypEfektu": "MonetyZaKarty",
+            "Surowce": {},
+            "Wartosc": 3,
+            "Tekst": "Szary",
+            "SymbolNaukowy": "Globus",
+            "Surowiec": "Glina"
+          }
+        ]
+      },
+      "KartaCudu": null,
+      "SurowceGracza": {
+        "Drewno": 4,
+        "Glina": 0,
+        "Kamien": 1,
+        "Szklo": 0,
+        "Papirus": 1,
+        "Monety": 6
+      },
+      "SurowcePrzeciwnika": {
+        "Drewno": 0,
+        "Glina": 0,
+        "Kamien": 0,
+        "Szklo": 1,
+        "Papirus": 0,
+        "Monety": 13
+      },
+      "Decisions": []
+    }
+  ]
+}

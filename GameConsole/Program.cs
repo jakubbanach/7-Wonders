@@ -9,6 +9,7 @@ class Program
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
         //SimulationRunnerFunction();
+        //MultipleGameRunnerFunction();
         GameRunnerFunction();
     }
 
@@ -38,9 +39,35 @@ class Program
             Console.WriteLine($"{kvp.Key}: {kvp.Value}");
         }
     }
-    static void GameRunnerFunction()
+    static void MultipleGameRunnerFunction()
     {
         int seed = 12370;
+
+        for (int i = 0; i < 10; i++)
+        {
+            var runner = new GameRunner(
+                seed: seed,
+                agent1Factory: r => new RandomAgent(r),
+                agent2Factory: r => new RandomAgent(r)
+            );
+            var result = runner.PlayGame();
+
+            PrintResult(result);
+
+            var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
+            var resultsDir = Path.Combine(projectDir, "Results");
+            Directory.CreateDirectory(resultsDir);
+            var fileName = $"match_{DateTime.Now:yyyyMMdd_HHmmss}_{result.MatchId}.json";
+            var fullPath = Path.Combine(resultsDir, fileName);
+
+            ResultWriter.Save(result, fullPath);
+            // Increment seed for next game to get different results
+            seed++;
+        }
+    }
+    static void GameRunnerFunction()
+    {
+        int seed = 13023;
 
         var runner = new GameRunner(
             seed: seed,

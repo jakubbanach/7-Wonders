@@ -16,7 +16,7 @@ public static class ZbiorStref
                 "Zwyciestwo B",
                 1,
                 0,
-                100000,
+                10,
                 false,
                 false
             ),
@@ -80,7 +80,7 @@ public static class ZbiorStref
                 "Zwyciestwo A",
                 1,
                 0,
-                100000,
+                10,
                 false,
                 false
             ),

@@ -42,12 +42,14 @@ public class StanGry
         if (pozycjaPionu >= 9)
         {
             PoliczPunkty(gracze, null);
+            PunktyGracza1 += 10; // dodatkowe punkty za zwyciestwo militarne
             ZakonczGre(gracze[0], TypZwyciestwa.Militarne);
         }
 
         if (pozycjaPionu <= -9)
         {
             PoliczPunkty(gracze, null);
+            PunktyGracza2 += 10; // dodatkowe punkty za zwyciestwo militarne
             ZakonczGre(gracze[1], TypZwyciestwa.Militarne);
         }
     }

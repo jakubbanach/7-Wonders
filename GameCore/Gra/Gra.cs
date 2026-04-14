@@ -156,7 +156,7 @@ public class Gra
     }
     public void Efekt_WybierzZetonPostepu()
     {
-        //Console.WriteLine("Efekt: Wybierz 1 zeton postepu");
+        Console.WriteLine($"Efekt: Wybierz 1 zeton postepu z {planszaKonfliktu.ZetonyPostepu.Count} dostepnych");
         if (currentResolver == null)
         {
             Console.WriteLine("Brak resolvera do wyboru zetonu postepu!");
