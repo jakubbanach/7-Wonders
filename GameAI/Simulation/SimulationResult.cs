@@ -13,6 +13,6 @@ public class SimulationResult
     public double Agent2AveragePoints { get; set; }
     //public HeuristicWeights Agent1Weights { get; set; }
     //public HeuristicWeights Agent2Weights { get; set; }
-    public Dictionary<TypZwyciestwa, int> VictoryTypeCounts { get; set; }
+    public Dictionary<(string, TypZwyciestwa), int> VictoryTypeCounts { get; set; }
     public List<MatchResult> MatchResults { get; set; }
 }

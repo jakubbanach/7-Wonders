@@ -77,7 +77,7 @@ public class HeuristicAgent : IAgent
                 var karta = (Karta)(object)opcja;
                 foreach (var efekt in karta.Efekty)
                 {
-                    efekt.ZastosujEfekt(gracz, przeciwnik, symulacja.PlanszaKonfliktu, karta, symulacja);
+                    efekt.ZastosujEfekt(gracz, przeciwnik, symulacja.PlanszaKonfliktu, karta, symulacja,decisionResolver: decyzja.resolver);
                     gracz.DodajEfekt(efekt);
                 }
                 break;

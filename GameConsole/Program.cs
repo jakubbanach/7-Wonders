@@ -8,9 +8,9 @@ class Program
     {
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
-        //SimulationRunnerFunction();
+        SimulationRunnerFunction();
         //HeuristicRunnerFunction();
-        HeuristicGameRunner();
+        //HeuristicGameRunner();
         //MultipleGameRunnerFunction();
         //GameRunnerFunction();
     }
@@ -18,27 +18,38 @@ class Program
     static void SimulationRunnerFunction()
     {
         int seed = 1;
-        int games = 10000;
+        int games = 1000;
 
-        var simulationRunner = new SimulationRunner(
-            seed,
-            games,
-            r => new RandomAgent(r),
-            r => new RandomAgent(r)
-        );
-
-        var result = simulationRunner.Run();
-
-        Console.WriteLine($"Total games: {result.TotalGames}");
-        Console.WriteLine($"Agent1 max points: {result.Agent1MaxPoints}, min points: {result.Agent1MinPoints}");
-        Console.WriteLine($"Agent2 max points: {result.Agent2MaxPoints}, min points: {result.Agent2MinPoints}");
-        Console.WriteLine($"Agent1 wins: {result.Agent1Wins}, avg points: {result.Agent1AveragePoints:F2}");
-        Console.WriteLine($"Agent2 wins: {result.Agent2Wins}, avg points: {result.Agent2AveragePoints:F2}");
-
-        Console.WriteLine("Victory types count:");
-        foreach (var kvp in result.VictoryTypeCounts)
+        var agents = new List<(string Name, Func<IRandom, IAgent> Factory)>
         {
-            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+            ("RandomAgent", r => new RandomAgent(r)),
+            ("HeuristicAgent (Military)", r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)),
+            ("HeuristicAgent (Balanced)", r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r))
+        };
+        for (int i = 0; i < agents.Count; i++)
+        {
+            for (int j = 0; j < agents.Count; j++)
+            {
+                Console.WriteLine($"Running simulation: {agents[i].Name} vs {agents[j].Name}");
+                var simulationRunner = new SimulationRunner(
+                    seed,
+                    games,
+                    agents[i].Factory,
+                    agents[j].Factory
+                );
+                var result = simulationRunner.Run();
+                Console.WriteLine($"Total games: {result.TotalGames}");
+                Console.WriteLine($"Agent1 max points: {result.Agent1MaxPoints}, min points: {result.Agent1MinPoints}");
+                Console.WriteLine($"Agent2 max points: {result.Agent2MaxPoints}, min points: {result.Agent2MinPoints}");
+                Console.WriteLine($"Agent1 wins: {result.Agent1Wins}, avg points: {result.Agent1AveragePoints:F2}");
+                Console.WriteLine($"Agent2 wins: {result.Agent2Wins}, avg points: {result.Agent2AveragePoints:F2}");
+                Console.WriteLine("Victory types count:");
+                foreach (var kvp in result.VictoryTypeCounts)
+                {
+                    Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+                }
+                Console.WriteLine(new string('-', 50));
+            }
         }
     }
     static void HeuristicRunnerFunction()
@@ -127,13 +138,13 @@ class Program
 
         PrintResult(result);
 
-        //var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
-        //var resultsDir = Path.Combine(projectDir, "Results");
-        //Directory.CreateDirectory(resultsDir);
-        //var fileName = $"match_{DateTime.Now:yyyyMMdd_HHmmss}_{result.MatchId}.json";
-        //var fullPath = Path.Combine(resultsDir, fileName);
+        var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
+        var resultsDir = Path.Combine(projectDir, "Results");
+        Directory.CreateDirectory(resultsDir);
+        var fileName = $"match_{DateTime.Now:yyyyMMdd_HHmmss}_{result.MatchId}.json";
+        var fullPath = Path.Combine(resultsDir, fileName);
 
-        //ResultWriter.Save(result, fullPath);
+        ResultWriter.Save(result, fullPath);
     }
 
     static void PrintResult(MatchResult result)

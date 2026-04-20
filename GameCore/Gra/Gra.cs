@@ -46,6 +46,9 @@ public class Gra
         planszaKonfliktu = gra.planszaKonfliktu.Clone();
         planszaEpoki = gra.planszaEpoki.Clone();
         stanGry = gra.stanGry.Clone();
+        stosKartOdrzuconych = gra.stosKartOdrzuconych
+            .Select(k => k.Clone())
+            .ToList();
     }
 
     public Gra Clone()
@@ -120,9 +123,13 @@ public class Gra
         ZmienTure(); 
     }
 
-    public void Efekt_Losuj3Zetony()
+    public void Efekt_Losuj3Zetony(IDecisionResolver? resolver = null)
     {
         //Console.WriteLine("Efekt: Wylosuj 3 zetony postepu");
+        if (resolver != null)
+        {
+            currentResolver = resolver;
+        }
         if (currentResolver == null)
         {
             Console.WriteLine("Brak resolvera do losowania zetonu postepu!");
@@ -145,7 +152,8 @@ public class Gra
 
         var decyzja = new DecyzjaKontekst<ZetonPostepu>(
             TypEfektu.Wylosuj3ZetonyPostepu,
-            wylosowane
+            wylosowane,
+            decisionResolver: currentResolver
         );
 
         var wybor = currentResolver.Resolve(this.Clone(), decyzja);
@@ -153,9 +161,13 @@ public class Gra
         AktywnyGracz.DodajZetonPostepu(wybor);
         //Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} losuje zeton postepu {wybor.Nazwa}");
     }
-    public void Efekt_WybierzZetonPostepu()
+    public void Efekt_WybierzZetonPostepu(IDecisionResolver? resolver = null)
     {
         //Console.WriteLine($"Efekt: Wybierz 1 zeton postepu z {planszaKonfliktu.ZetonyPostepu.Count} dostepnych");
+        if (resolver != null)
+        {
+            currentResolver = resolver;
+        }
         if (currentResolver == null)
         {
             Console.WriteLine("Brak resolvera do wyboru zetonu postepu!");
@@ -170,7 +182,8 @@ public class Gra
 
         var decyzja = new DecyzjaKontekst<ZetonPostepu>(
             TypEfektu.WybierzZetonPostepu,
-            zetonyNaPlanszy
+            zetonyNaPlanszy,
+            decisionResolver: currentResolver
         );
 
         var wybor = currentResolver.Resolve(this.Clone(), decyzja);
@@ -207,7 +220,8 @@ public class Gra
 
         var decyzja = new DecyzjaKontekst<Karta>(
             TypEfektu.OdlozKartePrzeciwnika,
-            kartyPrzeciwnika
+            kartyPrzeciwnika,
+            decisionResolver: currentResolver
         );
 
         var wybor = currentResolver?.Resolve(this.Clone(), decyzja);
@@ -237,7 +251,8 @@ public class Gra
 
         var decyzja = new DecyzjaKontekst<Karta>(
             TypEfektu.DarmowaBudowlaZOdrzuconychKart,
-            odrzuconeKarty
+            odrzuconeKarty,
+            decisionResolver: currentResolver
         );
 
         var kartaDoDodania = currentResolver.Resolve(this.Clone(), decyzja);

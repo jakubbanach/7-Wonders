@@ -41,7 +41,8 @@ public class Efekt
         return $"Efekt: {TypEfektu}, Surowce: {string.Join(", ", Surowce)}, Wartosc: {Wartosc}, Tekst: {Tekst}";
     }
 
-    public void ZastosujEfekt(Gracz gracz, Gracz? przeciwnik = null, PlanszaKonfliktu? planszaKonfliktu = null, Karta? karta = null, Gra gra = null)
+    public void ZastosujEfekt(Gracz gracz, Gracz? przeciwnik = null, PlanszaKonfliktu? planszaKonfliktu = null, 
+        Karta? karta = null, Gra gra = null, IDecisionResolver? decisionResolver = null)
     {
         switch (TypEfektu)
         {
@@ -77,7 +78,7 @@ public class Efekt
 
                 if (duplikat && gra != null)
                 {
-                    gra.Efekt_WybierzZetonPostepu();
+                    gra.Efekt_WybierzZetonPostepu(decisionResolver);
                 }
                 break;
             case TypEfektu.MonetyZaKarty:
@@ -111,7 +112,7 @@ public class Efekt
                 }
                 break;
             case TypEfektu.Wylosuj3ZetonyPostepu:
-                gra.Efekt_Losuj3Zetony();
+                gra.Efekt_Losuj3Zetony(decisionResolver);
                 break;
 
             case TypEfektu.OdlozKartePrzeciwnika:

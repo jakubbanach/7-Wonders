@@ -35,18 +35,18 @@ public class SimulationRunner
 
             var result = runner.PlayGame();
             results.Add(result);
-            switch (result.TypZwyciestwa)
-            {
-                case TypZwyciestwa.Militarne:
-                    Console.WriteLine($"Game {i + 1}/{games} ended with a Military victory. Seed: {result.Seed}");
-                    break;
-                case TypZwyciestwa.Naukowe:
-                    Console.WriteLine($"Game {i + 1}/{games} ended with a Scientific victory. Seed: {result.Seed}");
-                    break;
-                case TypZwyciestwa.Brak:
-                    Console.WriteLine($"Game {i + 1}/{games} ended with no victory (Tie). Seed: {result.Seed}");
-                    break;
-            }
+            // switch (result.TypZwyciestwa)
+            // {
+            //     case TypZwyciestwa.Militarne:
+            //         Console.WriteLine($"Game {i + 1}/{games} ended with a Military victory. Seed: {result.Seed}");
+            //         break;
+            //     case TypZwyciestwa.Naukowe:
+            //         Console.WriteLine($"Game {i + 1}/{games} ended with a Scientific victory. Seed: {result.Seed}");
+            //         break;
+            //     case TypZwyciestwa.Brak:
+            //         Console.WriteLine($"Game {i + 1}/{games} ended with no victory (Tie). Seed: {result.Seed}");
+            //         break;
+            // }
             if (result.Agent1Score == 0 || result.Agent2Score == 0)
             {
                 Console.WriteLine($"Game {i + 1}/{games} had a zero score. Seed: {result.Seed}");
@@ -69,7 +69,7 @@ public class SimulationRunner
         var avgA2Points = results.Average(r => r.Agent2Score);
 
         var typeCounts = results
-            .GroupBy(r => r.TypZwyciestwa)
+            .GroupBy(r => (r.Winner, r.TypZwyciestwa))
             .ToDictionary(g => g.Key, g => g.Count());
 
         return new SimulationResult
