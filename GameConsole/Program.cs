@@ -67,7 +67,7 @@ class Program
     }
     static void GameRunnerFunction()
     {
-        int seed = 13023;
+        int seed = 8988;
 
         var runner = new GameRunner(
             seed: seed,

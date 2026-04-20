@@ -51,6 +51,10 @@ public class SimulationRunner
             {
                 Console.WriteLine($"Game {i + 1}/{games} had a zero score. Seed: {result.Seed}");
             }
+            if (result.Agent1Score > 90 || result.Agent2Score > 90)
+            {
+                Console.WriteLine($"Game {i + 1}/{games} had an unusually high score. Seed: {result.Seed}");
+            }
         }
 
         return Summarize(results);

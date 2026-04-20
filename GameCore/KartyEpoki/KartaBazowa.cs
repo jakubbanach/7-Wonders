@@ -43,19 +43,21 @@ public abstract class KartaBazowa
     {
         foreach (var efekt in efektyWyboruSurowca)
         {
-            var najlepszy = brakujaceSurowce
+            var kandydaci = brakujaceSurowce
                 .Where(kv =>
                     kv.Value > 0 &&
-                    efekt.Surowce.ContainsKey(kv.Key))
-                .OrderByDescending(kv =>
-                    ObliczKosztJednegoSurowca(
-                        kv.Key,
-                        przeciwnikSurowce,
-                        efektyGracza))
-                .FirstOrDefault();
+                    efekt.Surowce.ContainsKey(kv.Key));
 
-            if (najlepszy.Key != default)
+            if (kandydaci.Any())
             {
+                var najlepszy = kandydaci
+                    .OrderByDescending(kv =>
+                        ObliczKosztJednegoSurowca(
+                            kv.Key,
+                            przeciwnikSurowce,
+                            efektyGracza))
+                    .First();
+
                 brakujaceSurowce[najlepszy.Key]--;
             }
         }

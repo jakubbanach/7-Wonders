@@ -49,7 +49,7 @@ public class GameRunner
             var ruch = currentAgent.WybierzRuch(gra.Clone());
 
             // ewenetualnie currentAgent
-            var moveLog = new MoveLog(gra.AktywnyGracz.Nazwa, ruch);
+            var moveLog = new MoveLog(gra.AktywnyGracz.Nazwa, ruch, gra.DostepneKarty());
 
             //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z karta {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
             var resolver = new AgentDecisionResolver(currentAgent, moveLog);
