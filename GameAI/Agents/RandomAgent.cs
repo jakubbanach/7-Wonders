@@ -11,17 +11,7 @@ public class RandomAgent : IAgent
     }
     public Ruch WybierzRuch(Gra gra)
     {
-        var ruchy = gra.DostepneRuchy(); // Pobierz wszystkie dostepne 
-        //Console.WriteLine($"Agent {Name} decyduje się na ruch...");
-        //Console.WriteLine($"Dostepne ruchy: {ruchy.Count}");
-        //foreach (var ruch in ruchy)
-        //{
-        //    Console.WriteLine($"Ruch: {ruch.TypRuchu}, Karta: {ruch.KartaDoZagrania?.Nazwa}, KartaCudu: {ruch.KartaCudu?.Nazwa}");
-        //}
-        //Console.WriteLine($"Stan planszy");
-        //Console.WriteLine($"Pozycja konfliktu: {gra.Gracze[0].WypiszStan()}");
-        //Console.WriteLine($"Pozycja konfliktu: {gra.Gracze[1].WypiszStan()}");
-        //Console.WriteLine($"Plansza do stringa\n {gra.PlanszaEpoki.PlanszaDoStringa()}");
+        var ruchy = gra.DostepneRuchy();
         return ruchy[random.Next(ruchy.Count)];
     }
     public T WybierzAkcjePosrednia<T>(Gra gra, DecyzjaKontekst<T> decyzja)

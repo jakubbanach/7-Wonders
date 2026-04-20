@@ -26,7 +26,7 @@ public class PlanszaKonfliktu
     private PlanszaKonfliktu(PlanszaKonfliktu plansza)
     {
         PionKonfliktu = plansza.PionKonfliktu.Clone();
-        ZetonyPostepu = plansza.ZetonyPostepu;
+        ZetonyPostepu = plansza.ZetonyPostepu.Select(z => z.Clone()).ToList();
         Strefy = plansza.Strefy.Select(s => s.Clone()).ToList();
         ObecnaStrefa = Strefy.First(s => s.Nazwa == plansza.ObecnaStrefa.Nazwa);
         ZbudujMapeStref();
@@ -71,7 +71,7 @@ public class PlanszaKonfliktu
     public void PrzesunPion(int ile, Gracz gracz)
     {
         int poprzednia = PionKonfliktu.PobierzPozycje();
-        if (gracz == Gracze[0])
+        if (gracz.Nazwa == Gracze[0].Nazwa)
             PionKonfliktu.Przesun(ile);
         else
             PionKonfliktu.Przesun(-ile);
@@ -84,7 +84,7 @@ public class PlanszaKonfliktu
             if (nowaStrefa.LiczbaTraconychMonet > 0)
             {
                 //Console.WriteLine($"{gracz.Nazwa} traci {nowaStrefa.LiczbaTraconychMonet} monet z powodu wejscia na strefe {nowaStrefa.Nazwa}!");
-                if (gracz == Gracze[0])
+                if (gracz.Nazwa == Gracze[0].Nazwa)
                     Gracze[1].DodajMonety(-nowaStrefa.LiczbaTraconychMonet); // Przekazujemy kare przeciwnikowi
                 else
                     Gracze[0].DodajMonety(-nowaStrefa.LiczbaTraconychMonet); // Przekazujemy kare przeciwnikowi

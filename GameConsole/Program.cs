@@ -8,7 +8,9 @@ class Program
     {
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
-        SimulationRunnerFunction();
+        //SimulationRunnerFunction();
+        //HeuristicRunnerFunction();
+        HeuristicGameRunner();
         //MultipleGameRunnerFunction();
         //GameRunnerFunction();
     }
@@ -22,6 +24,32 @@ class Program
             seed,
             games,
             r => new RandomAgent(r),
+            r => new RandomAgent(r)
+        );
+
+        var result = simulationRunner.Run();
+
+        Console.WriteLine($"Total games: {result.TotalGames}");
+        Console.WriteLine($"Agent1 max points: {result.Agent1MaxPoints}, min points: {result.Agent1MinPoints}");
+        Console.WriteLine($"Agent2 max points: {result.Agent2MaxPoints}, min points: {result.Agent2MinPoints}");
+        Console.WriteLine($"Agent1 wins: {result.Agent1Wins}, avg points: {result.Agent1AveragePoints:F2}");
+        Console.WriteLine($"Agent2 wins: {result.Agent2Wins}, avg points: {result.Agent2AveragePoints:F2}");
+
+        Console.WriteLine("Victory types count:");
+        foreach (var kvp in result.VictoryTypeCounts)
+        {
+            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+        }
+    }
+    static void HeuristicRunnerFunction()
+    {
+        int seed = 1;
+        int games = 1000;
+
+        var simulationRunner = new SimulationRunner(
+            seed,
+            games,
+            r => new HeuristicAgent(HeuristicWeightPresets.Military(),r),
             r => new RandomAgent(r)
         );
 
@@ -85,6 +113,27 @@ class Program
         var fullPath = Path.Combine(resultsDir, fileName);
 
         ResultWriter.Save(result, fullPath);
+    }
+    static void HeuristicGameRunner()
+    {
+        int seed = 837;
+
+        var runner = new GameRunner(
+            seed: seed,
+            agent1Factory: r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r),
+            agent2Factory: r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)
+        );
+        var result = runner.PlayGame();
+
+        PrintResult(result);
+
+        //var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
+        //var resultsDir = Path.Combine(projectDir, "Results");
+        //Directory.CreateDirectory(resultsDir);
+        //var fileName = $"match_{DateTime.Now:yyyyMMdd_HHmmss}_{result.MatchId}.json";
+        //var fullPath = Path.Combine(resultsDir, fileName);
+
+        //ResultWriter.Save(result, fullPath);
     }
 
     static void PrintResult(MatchResult result)

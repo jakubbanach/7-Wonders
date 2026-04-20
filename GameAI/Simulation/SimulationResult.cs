@@ -11,6 +11,8 @@ public class SimulationResult
     public int Agent2MinPoints { get; set; }
     public double Agent1AveragePoints { get; set; }
     public double Agent2AveragePoints { get; set; }
+    //public HeuristicWeights Agent1Weights { get; set; }
+    //public HeuristicWeights Agent2Weights { get; set; }
     public Dictionary<TypZwyciestwa, int> VictoryTypeCounts { get; set; }
     public List<MatchResult> MatchResults { get; set; }
 }
