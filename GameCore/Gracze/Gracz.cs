@@ -315,6 +315,10 @@ public class Gracz
         }
     }
 
+    public override string ToString()
+    {
+        return Nazwa;
+    }
 
     public string WypiszStan()
     {

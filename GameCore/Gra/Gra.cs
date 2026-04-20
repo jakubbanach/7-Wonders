@@ -102,8 +102,7 @@ public class Gra
             }
             planszaEpoki = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1, random);
 
-            // dla uproszczenia na razie gracz ktory konczyl epoke, nie bedzie rozpoczynal kolejnej epoki, ale mozna to zmienic w przyszlosci
-            ZmienTure();
+            WybierzKtoZaczynaKolejnaEpoke(resolver);
             return;
         }
 
@@ -156,7 +155,7 @@ public class Gra
     }
     public void Efekt_WybierzZetonPostepu()
     {
-        Console.WriteLine($"Efekt: Wybierz 1 zeton postepu z {planszaKonfliktu.ZetonyPostepu.Count} dostepnych");
+        //Console.WriteLine($"Efekt: Wybierz 1 zeton postepu z {planszaKonfliktu.ZetonyPostepu.Count} dostepnych");
         if (currentResolver == null)
         {
             Console.WriteLine("Brak resolvera do wyboru zetonu postepu!");
@@ -255,7 +254,36 @@ public class Gra
             AktywnyGracz.DodajEfekt(efekt);
         }
     }
+    private void WybierzKtoZaczynaKolejnaEpoke(IDecisionResolver resolver)
+    {
+        var decydujacy = UstalGraczaDecydujacego();
 
+        var opcje = gracze.ToList();
+
+        var decyzja = new DecyzjaKontekst<Gracz>(
+            TypEfektu.WybierzGraczaRozpoczynajacegoEpoke,
+            opcje,
+            decydujacy
+        );
+
+        var wybrany = resolver.Resolve(this.Clone(), decyzja);
+
+        idAktywnegoGracza = Array.IndexOf(gracze, wybrany);
+    }
+    private Gracz UstalGraczaDecydujacego()
+    {
+        var pozycjaKonfliktu = planszaKonfliktu.PionKonfliktu.PobierzPozycje();
+        if (pozycjaKonfliktu > 0)
+        {
+            return gracze[1]; // terytorium gracza 2
+        }
+        if (pozycjaKonfliktu < 0)
+        {
+            return gracze[0];
+        }
+
+        return gracze[idAktywnegoGracza];
+    }
     public void OdrzucKarte(Karta karta)
     {
         stosKartOdrzuconych.Add(karta);

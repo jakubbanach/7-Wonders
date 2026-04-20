@@ -8,15 +8,15 @@ class Program
     {
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
-        //SimulationRunnerFunction();
+        SimulationRunnerFunction();
         //MultipleGameRunnerFunction();
-        GameRunnerFunction();
+        //GameRunnerFunction();
     }
 
     static void SimulationRunnerFunction()
     {
-        int seed = 12345;
-        int games = 5000;
+        int seed = 1;
+        int games = 10000;
 
         var simulationRunner = new SimulationRunner(
             seed,

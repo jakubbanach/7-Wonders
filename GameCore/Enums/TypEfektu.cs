@@ -24,5 +24,7 @@ public enum TypEfektu
     MniejMaterialowNaCuda, // 2 wybrane surowce przez gracza
     MonetyZaBudoweZBialymSymbolem, // za kazda budowe 4 monety
     MonetyPrzeciwnikaZaMaterialy, // przeciwnik placi wszystkie monety za surowce do gracza zamiast do banku
-    ZaBudoweCuduRozegrajTurePonownie // po zagraniu karty cudu gracz rozgrywa ture ponownie
+    ZaBudoweCuduRozegrajTurePonownie, // po zagraniu karty cudu gracz rozgrywa ture ponownie
+    // Inne efekty
+    WybierzGraczaRozpoczynajacegoEpoke
 }
