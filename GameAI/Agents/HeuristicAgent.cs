@@ -40,9 +40,8 @@ public class HeuristicAgent : IAgent
         symulacja.WykonajRuch(ruch, resolver, random);
         return OcenStan(symulacja, gracz);
     }
-    private double OcenStan(Gra gra, Gracz aktywnyGracz)
+    private double OcenStan(Gra gra, Gracz gracz)
     {
-        var gracz = gra.Gracze.First(g => g.Nazwa == aktywnyGracz.Nazwa);
         var przeciwnik = gra.Gracze.First(g => g != gracz);
 
         double score = 0;

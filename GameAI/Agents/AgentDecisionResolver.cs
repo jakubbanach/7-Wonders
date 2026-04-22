@@ -18,12 +18,15 @@ public class AgentDecisionResolver : IDecisionResolver
     {
         var wybor = agent.WybierzAkcjePosrednia(gra, kontekst);
 
-        moveLog.Decisions.Add(new DecisionLog
+        if (moveLog != null)
         {
-            TypDecyzji = kontekst.Efekt.ToString(),
-            Opcje = kontekst.Opcje.Select(o => o!.ToString()!).ToList(),
-            Wybor = wybor!.ToString()!
-        });
+            moveLog.Decisions.Add(new DecisionLog
+            {
+                TypDecyzji = kontekst.Efekt.ToString(),
+                Opcje = kontekst.Opcje.Select(o => o!.ToString()!).ToList(),
+                Wybor = wybor!.ToString()!
+            });
+        }
 
         return wybor;
     }

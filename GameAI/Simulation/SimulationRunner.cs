@@ -8,15 +8,18 @@ public class SimulationRunner
     private readonly Func<IRandom, IAgent> agent2Factory;
     private readonly int games;
     private readonly int seed;
+    private readonly SimulationMode mode;
 
     public SimulationRunner(
         int seed,
         int games,
+        SimulationMode mode,
         Func<IRandom, IAgent> agent1Factory,
         Func<IRandom, IAgent> agent2Factory)
     {
         this.seed = seed;
         this.games = games;
+        this.mode = mode;
         this.agent1Factory = agent1Factory;
         this.agent2Factory = agent2Factory;
     }
@@ -33,7 +36,7 @@ public class SimulationRunner
                 agent2Factory: agent2Factory
             );
 
-            var result = runner.PlayGame();
+            var result = runner.PlayGame(mode);
             results.Add(result);
             // switch (result.TypZwyciestwa)
             // {
@@ -69,8 +72,18 @@ public class SimulationRunner
         var avgA2Points = results.Average(r => r.Agent2Score);
 
         var typeCounts = results
-            .GroupBy(r => (r.Winner, r.TypZwyciestwa))
-            .ToDictionary(g => g.Key, g => g.Count());
+            .GroupBy(r => new
+            {
+                Agent = r.Winner ?? "Remis",
+                Typ = r.TypZwyciestwa
+            })
+            .Select(g => new VictoryTypeStat
+            {
+                Agent = g.Key.Agent,
+                TypZwyciestwa = g.Key.Typ,
+                Liczba = g.Count()
+            })
+            .ToList();
 
         return new SimulationResult
         {

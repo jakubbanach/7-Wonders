@@ -24,8 +24,12 @@ class Program
         {
             ("RandomAgent", r => new RandomAgent(r)),
             ("HeuristicAgent (Military)", r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)),
-            ("HeuristicAgent (Balanced)", r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r))
+            ("HeuristicAgent (Balanced)", r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r)),
+            ("MCTS Agent", r => new MctsAgent(r))
         };
+
+        //var simulationResults = new List<SimulationResult>();
+
         for (int i = 0; i < agents.Count; i++)
         {
             for (int j = 0; j < agents.Count; j++)
@@ -34,6 +38,7 @@ class Program
                 var simulationRunner = new SimulationRunner(
                     seed,
                     games,
+                    SimulationMode.Tournament,
                     agents[i].Factory,
                     agents[j].Factory
                 );
@@ -46,22 +51,37 @@ class Program
                 Console.WriteLine("Victory types count:");
                 foreach (var kvp in result.VictoryTypeCounts)
                 {
-                    Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+                    Console.WriteLine($"{kvp.Agent},{kvp.TypZwyciestwa}: {kvp.Liczba}");
                 }
                 Console.WriteLine(new string('-', 50));
+                //simulationResults.Add(result);
             }
         }
+        //var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
+        //var resultsDir = Path.Combine(projectDir, "Simulations");
+        //Directory.CreateDirectory(resultsDir);
+        //var fileName = $"agent_simulation_{DateTime.Now:yyyyMMdd_HHmmss}.json";
+        //var fullPath = Path.Combine(resultsDir, fileName);
+
+        //foreach (var result in simulationResults)
+        //{
+        //    result.PrepareForSerialization();
+        //}
+
+        //ResultWriter.Save(simulationResults, fullPath);
     }
     static void HeuristicRunnerFunction()
     {
         int seed = 1;
-        int games = 1000;
+        int games = 100;
 
         var simulationRunner = new SimulationRunner(
             seed,
             games,
-            r => new HeuristicAgent(HeuristicWeightPresets.Military(),r),
-            r => new RandomAgent(r)
+            SimulationMode.Tournament,
+            //r => new HeuristicAgent(HeuristicWeightPresets.Military(),r),
+            r => new RandomAgent(r),
+            r => new MctsAgent(r)
         );
 
         var result = simulationRunner.Run();
@@ -75,21 +95,21 @@ class Program
         Console.WriteLine("Victory types count:");
         foreach (var kvp in result.VictoryTypeCounts)
         {
-            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+            Console.WriteLine($"{kvp.Agent},{kvp.TypZwyciestwa}: {kvp.Liczba}");
         }
     }
     static void MultipleGameRunnerFunction()
     {
-        int seed = 12370;
+        int seed = 1;
 
         for (int i = 0; i < 10; i++)
         {
             var runner = new GameRunner(
                 seed: seed,
-                agent1Factory: r => new RandomAgent(r),
+                agent1Factory: r => new MctsAgent(r),
                 agent2Factory: r => new RandomAgent(r)
             );
-            var result = runner.PlayGame();
+            var result = runner.PlayGame(SimulationMode.Debug);
 
             PrintResult(result);
 
@@ -110,10 +130,10 @@ class Program
 
         var runner = new GameRunner(
             seed: seed,
-            agent1Factory: r => new RandomAgent(r),
+            agent1Factory: r => new MctsAgent(r),
             agent2Factory: r => new RandomAgent(r)
         );
-        var result = runner.PlayGame();
+        var result = runner.PlayGame(SimulationMode.Debug);
 
         PrintResult(result);
 
@@ -134,7 +154,7 @@ class Program
             agent1Factory: r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r),
             agent2Factory: r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)
         );
-        var result = runner.PlayGame();
+        var result = runner.PlayGame(SimulationMode.Debug);
 
         PrintResult(result);
 

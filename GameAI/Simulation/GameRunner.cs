@@ -28,7 +28,7 @@ public class GameRunner
         this.agent1Factory = agent1Factory; 
         this.agent2Factory = agent2Factory;
     }
-    public MatchResult PlayGame()
+    public MatchResult PlayGame(SimulationMode mode)
     {
         var a1 = agent1Factory(agent1Random);
         var a2 = agent2Factory(agent2Random);
@@ -49,7 +49,9 @@ public class GameRunner
             var ruch = currentAgent.WybierzRuch(gra.Clone());
 
             // ewenetualnie currentAgent
-            var moveLog = new MoveLog(gra.AktywnyGracz.Nazwa, ruch, gra.DostepneKarty());
+            MoveLog? moveLog = null;
+            if (mode == SimulationMode.Debug)
+                moveLog = new MoveLog(gra.AktywnyGracz.Nazwa, ruch, gra.DostepneKarty());
 
             //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z karta {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
             var resolver = new AgentDecisionResolver(currentAgent, moveLog);
@@ -59,7 +61,7 @@ public class GameRunner
 
         return MatchResult.FromGame(gra, a1, a2, log, Seed);
     }
-    public MatchResult ReplayGame()
+    public MatchResult ReplayGame(SimulationMode mode)
     {
         var replayRunner = new GameRunner(
             Seed,
@@ -67,7 +69,7 @@ public class GameRunner
             agent2Factory
         );
 
-        return replayRunner.PlayGame();
+        return replayRunner.PlayGame(mode);
     }
 
 }

@@ -7,11 +7,11 @@ public class WyborKartKonsola : IWyborKarty
     {
         if (dostepne.Count == 0)
         {
-            throw new InvalidOperationException("Brak dostêpnych kart do wyboru.");
+            throw new InvalidOperationException("Brak dostepnych kart do wyboru.");
         }
         while (true)
         {
-            Console.WriteLine("Dostêpne karty:");
+            Console.WriteLine("Dostepne karty:");
             int index = 0;
             foreach (var pole in dostepne)
             {
@@ -23,14 +23,14 @@ public class WyborKartKonsola : IWyborKarty
                 index++;
             }
 
-            Console.Write("Wybierz kartê: ");
+            Console.Write("Wybierz karte: ");
             if (int.TryParse(Console.ReadLine(), out int wybor) &&
                 wybor >= 0 && wybor < dostepne.Count)
             {
                 return wybor;
             }
 
-            Console.WriteLine("Nieprawid³owy wybór.");
+            Console.WriteLine("Nieprawidlowy wybor.");
         }
     }
 }

@@ -333,7 +333,7 @@ public class Gra
             .ToList();
         if (!karty.Any())
         {
-            Console.WriteLine("Brak dostepnych kart na planszy epoki!");
+            // Console.WriteLine("Brak dostepnych kart na planszy epoki!");
             return new List<Karta>();
         }
         return karty;

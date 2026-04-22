@@ -21,7 +21,7 @@ public class MatchResult
     public List<Karta> Agent2Cards { get; }
     public List<KartaCudu> Agent2BuildWonders { get; }
     public Dictionary<Surowiec, int> Agent2Resources { get; }
-    public IReadOnlyList<MoveLog> Moves { get; }
+    public IReadOnlyList<MoveLog>? Moves { get; }
 
     public MatchResult(
         Guid matchId,
