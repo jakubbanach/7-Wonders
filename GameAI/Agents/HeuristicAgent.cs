@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 public class HeuristicAgent : IAgent
@@ -44,7 +45,14 @@ public class HeuristicAgent : IAgent
     {
         var przeciwnik = gra.Gracze.First(g => g != gracz);
 
+        var graczRes = gracz.Surowce;
+        var przeciwnikRes = przeciwnik.Surowce;
+
+        // Szybki helper do wyciągania wartości ze słownika
+        int GetV(Dictionary<Surowiec, int> d, Surowiec s) => d.GetValueOrDefault(s, 0);
+
         double score = 0;
+
         var punktyZwyciestwaDiff = gracz.PunktyZwyciestwa - przeciwnik.PunktyZwyciestwa;
         var kartyCudowDiff = gracz.PobierzZbudowaneKartyCudow().Count - przeciwnik.PobierzZbudowaneKartyCudow().Count;
         var monetyDiff = gracz.Monety() - przeciwnik.Monety();
@@ -56,14 +64,25 @@ public class HeuristicAgent : IAgent
         score += symboleNaukoweDiff * weights.SymboleNaukowe;
         
         var pionKonfliktu = gra.PozycjaKonfliktu;
-        if (gracz.Nazwa == gra.Gracze[0].Nazwa)
-        {
-            score += pionKonfliktu * weights.Wojsko;
-        }
-        else
-        {
-            score -= pionKonfliktu * weights.Wojsko;
-        }
+        double wojskoScore = (gracz == gra.Gracze[0]) ? pionKonfliktu : -pionKonfliktu;
+        score += wojskoScore * weights.Wojsko;
+
+        int GetCount(Gracz g, Surowiec s) => g.Surowce.Count(x => x.Key == s);
+
+        var brazowe = new[] { Surowiec.Drewno, Surowiec.Glina, Surowiec.Kamien };
+        var szare = new[] { Surowiec.Papirus, Surowiec.Szklo };
+
+        score += brazowe.Sum(s => GetV(graczRes, s) - GetV(przeciwnikRes, s)) * weights.SurowceBrazowe;
+        score += szare.Sum(s => GetV(graczRes, s) - GetV(przeciwnikRes, s)) * weights.SurowceSzare;
+
+        // Monopol
+        score += brazowe.Concat(szare).Count(s => GetV(graczRes, s) > 0 && GetV(przeciwnikRes, s) == 0) * weights.MonopolBonus;
+
+        var gildieDiff = (gracz.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Fioletowy) -
+                        przeciwnik.PobierzZbudowaneKarty().Count(k => k.KolorKarty == KolorKarty.Fioletowy));
+
+        score += gildieDiff * weights.SynergiaGildii;
+
         return score;
     }
     public double OcenOpcje<T>(Gra gra, DecyzjaKontekst<T> decyzja, T opcja)

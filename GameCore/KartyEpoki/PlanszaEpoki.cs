@@ -23,6 +23,15 @@ public class PlanszaEpoki
     {
         return new PlanszaEpoki(this);
     }
+    public void CopyFrom(PlanszaEpoki source)
+    {
+        Epoka = source.Epoka;
+
+        Pola.Clear();
+
+        for (int i = 0; i < source.Pola.Count; i++)
+            Pola.Add(source.Pola[i].Clone());
+    }
 
     public IEnumerable<PoleKarty> DostepneKarty =>
         Pola.Where(p => p.CzyDostepna && p.Karta != null);
@@ -34,6 +43,21 @@ public class PlanszaEpoki
 
     public IEnumerable<PoleKarty> WidoczneKarty =>
         Pola.Where(p => !p.CzyZakryta);
+
+    private IEnumerable<PoleKarty> ZakryteKarty =>
+        Pola.Where(p => p.CzyZakryta);
+
+    public void PotasujZakryteKarty(IRandom random)
+    {
+        var zakryte = ZakryteKarty.ToList();
+        for (int i = zakryte.Count - 1; i > 0; i--)
+        {
+            int j = random.Next(i + 1);
+            var temp = zakryte[i].Karta;
+            zakryte[i].Karta = zakryte[j].Karta;
+            zakryte[j].Karta = temp;
+        }
+    }
 
     public void ZmienPlansze(PlanszaEpoki nowaPlansza)
     {

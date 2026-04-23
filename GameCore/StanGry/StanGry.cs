@@ -36,7 +36,14 @@ public class StanGry
     {
         return new StanGry(this);
     }
-
+    public void CopyFrom(StanGry source)
+    {
+        CzyZakonczona = source.CzyZakonczona;
+        TypZwyciestwa = source.TypZwyciestwa;
+        Zwyciezca = source.Zwyciezca;
+        PunktyGracza1 = source.PunktyGracza1;
+        PunktyGracza2 = source.PunktyGracza2;
+    }
     public void CzyZwyciestwoMilitarne(Gracz[] gracze, int pozycjaPionu)
     {
         if (pozycjaPionu >= 9)

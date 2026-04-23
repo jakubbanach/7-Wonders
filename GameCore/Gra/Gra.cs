@@ -55,6 +55,31 @@ public class Gra
     {
         return new Gra(this);
     }
+    public void CopyFrom(Gra source)
+    {
+        idAktywnegoGracza = source.idAktywnegoGracza;
+
+        for (int i = 0; i < source.gracze.Length; i++)
+            gracze[i].CopyFrom(source.gracze[i]);
+
+        planszaKonfliktu.CopyFrom(source.planszaKonfliktu);
+        planszaEpoki.CopyFrom(source.planszaEpoki);
+        stanGry.CopyFrom(source.stanGry);
+
+        stosKartOdrzuconych.Clear();
+
+        for (int i = 0; i < source.stosKartOdrzuconych.Count; i++)
+        {
+            if (i < stosKartOdrzuconych.Count)
+                stosKartOdrzuconych[i] = source.stosKartOdrzuconych[i].Clone();
+            else
+                stosKartOdrzuconych.Add(source.stosKartOdrzuconych[i].Clone());
+        }
+
+        stosKartOdrzuconych.RemoveRange(
+            source.stosKartOdrzuconych.Count,
+            stosKartOdrzuconych.Count - source.stosKartOdrzuconych.Count);
+    }
 
     public static Gra StworzNowaGre(string nazwa1 = "Gracz 1", string nazwa2 = "Gracz 2", IRandom random = null)
     {
@@ -326,6 +351,10 @@ public class Gra
         idAktywnegoGracza = (idAktywnegoGracza + 1) % gracze.Length;
     }
 
+    public void PotasujZakryteKarty(IRandom random)
+    {
+        planszaEpoki.PotasujZakryteKarty(random);
+    }
     public IReadOnlyList<Karta> DostepneKarty()
     {
         var karty = planszaEpoki.DostepneKarty
@@ -338,10 +367,10 @@ public class Gra
         }
         return karty;
     }
-
+    private readonly List<Ruch> _listaRuchowBuffer = new List<Ruch>(32);
     public IReadOnlyList<Ruch> DostepneRuchy()
     {
-        var wynik = new List<Ruch>();
+        _listaRuchowBuffer.Clear();
         var karty = DostepneKarty();
         var kartyCudow = AktywnyGracz.KartyCudow;
         //Console.WriteLine($"Aktywny gracz: {AktywnyGracz.Nazwa}, Przeciwnik: {Przeciwnik.Nazwa}");
@@ -354,10 +383,10 @@ public class Gra
             var budowaKarty = AktywnyGracz.CzyMoznaZbudowacKarte(karta, Przeciwnik);
             if (budowaKarty.MoznaZagrac)
             {
-                wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.ZbudujKarte));
+                _listaRuchowBuffer.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.ZbudujKarte));
             }
             // odrzucenie karty
-            wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.OdrzucKarte));
+            _listaRuchowBuffer.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.OdrzucKarte));
             // budowa cudu
             foreach (var kartaCudu in kartyCudow)
             {
@@ -366,11 +395,11 @@ public class Gra
                 var budowaCudu = AktywnyGracz.CzyMoznaZbudowacCud(karta, Przeciwnik, kartaCudu);
                 if (budowaCudu.MoznaZagrac)
                 {
-                    wynik.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.ZbudujCud, kartaCudu));
+                    _listaRuchowBuffer.Add(new Ruch(AktywnyGracz, Przeciwnik, karta, TypRuchu.ZbudujCud, kartaCudu));
                 }
             }
         }
-        return wynik;
+        return _listaRuchowBuffer;
     }
 
     public bool CzyLiczbaZbudowanychCudowMniejsza7()

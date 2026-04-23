@@ -38,6 +38,27 @@ public class PlanszaKonfliktu
         return new PlanszaKonfliktu(this);
     }
 
+    public void CopyFrom(PlanszaKonfliktu source)
+    {
+        PionKonfliktu = source.PionKonfliktu.Clone();
+
+        ZetonyPostepu.Clear();
+        for (int i = 0; i < source.ZetonyPostepu.Count; i++)
+            ZetonyPostepu.Add(source.ZetonyPostepu[i].Clone());
+
+        Strefy.Clear();
+        for (int i = 0; i < source.Strefy.Count; i++)
+            Strefy.Add(source.Strefy[i].Clone());
+
+        ZbudujMapeStref();
+
+        ObecnaStrefa = Strefy
+            .First(s => s.Nazwa == source.ObecnaStrefa.Nazwa);
+
+        for (int i = 0; i < Gracze.Length; i++)
+            Gracze[i].CopyFrom(source.Gracze[i]);
+    }
+
     private void ZbudujMapeStref()
     {
         _mapaStref = new List<(int, int, Strefa)>();

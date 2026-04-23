@@ -7,6 +7,8 @@ public class MatchResult
     public int Seed { get; }
     public string Agent1Name { get; }
     public string Agent2Name { get; }
+    public IAgent? Agent1 { get; }
+    public IAgent? Agent2 { get; }
 
     public string? Winner { get; }
     public TypZwyciestwa TypZwyciestwa { get; }
@@ -28,6 +30,8 @@ public class MatchResult
         int seed,
         string agent1,
         string agent2,
+        IAgent? agent1Instance,
+        IAgent? agent2Instance,
         string? winner,
         TypZwyciestwa typZwyciestwa,
         int turns,
@@ -45,6 +49,8 @@ public class MatchResult
         Seed = seed;
         Agent1Name = agent1;
         Agent2Name = agent2;
+        Agent1 = agent1Instance;
+        Agent2 = agent2Instance;
         Winner = winner;
         TypZwyciestwa = typZwyciestwa;
         Turns = turns;
@@ -70,6 +76,8 @@ public class MatchResult
             seed,
             a1.Name,
             a2.Name,
+            a1,
+            a2,
             winner,
             stan.TypZwyciestwa,
             moves.Count,

@@ -30,6 +30,7 @@ public class SimulationRunner
 
         for (int i = 0; i < games; i++)
         {
+            //Console.WriteLine($"Starting game {i + 1}/{games} with seed {seed + i}...");
             var runner = new GameRunner(
                 seed: seed + i,
                 agent1Factory: agent1Factory,

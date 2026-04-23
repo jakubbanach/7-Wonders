@@ -8,23 +8,26 @@ class Program
     {
         //GraKonsolowa graKonsolowa = new GraKonsolowa();
         //graKonsolowa.Start();
+        //MultipleGameRunnerFunction();
         SimulationRunnerFunction();
         //HeuristicRunnerFunction();
         //HeuristicGameRunner();
-        //MultipleGameRunnerFunction();
         //GameRunnerFunction();
+        //GeneticAlgorithmRunnerFunction();
     }
 
     static void SimulationRunnerFunction()
     {
-        int seed = 1;
-        int games = 1000;
+        int seed = 12345;
+        int games = 20;
 
         var agents = new List<(string Name, Func<IRandom, IAgent> Factory)>
         {
-            ("RandomAgent", r => new RandomAgent(r)),
-            ("HeuristicAgent (Military)", r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)),
-            ("HeuristicAgent (Balanced)", r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r)),
+            //("RandomAgent", r => new RandomAgent(r)),
+            //("HeuristicAgent (Military)", r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)),
+            //("HeuristicAgent (Balanced)", r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r)),
+            ("HeuristicAgent (GeneticPersonal)", r => new HeuristicAgent(HeuristicWeightPresets.Personal(), r)),
+            ("HeuristicAgent (GeneticDouble)", r => new HeuristicAgent(HeuristicWeightPresets.GeneticDouble(), r)),
             ("MCTS Agent", r => new MctsAgent(r))
         };
 
@@ -34,6 +37,7 @@ class Program
         {
             for (int j = 0; j < agents.Count; j++)
             {
+                if (i == j) continue; // Skip self-play for now
                 Console.WriteLine($"Running simulation: {agents[i].Name} vs {agents[j].Name}");
                 var simulationRunner = new SimulationRunner(
                     seed,
@@ -100,14 +104,14 @@ class Program
     }
     static void MultipleGameRunnerFunction()
     {
-        int seed = 1;
+        int seed = 1000;
 
         for (int i = 0; i < 10; i++)
         {
             var runner = new GameRunner(
                 seed: seed,
-                agent1Factory: r => new MctsAgent(r),
-                agent2Factory: r => new RandomAgent(r)
+                agent1Factory: r => new HeuristicAgent(HeuristicWeightPresets.Personal(), r),
+                agent2Factory: r => new HeuristicAgent(HeuristicWeightPresets.GeneticDouble(), r)
             );
             var result = runner.PlayGame(SimulationMode.Debug);
 
@@ -166,7 +170,18 @@ class Program
 
         ResultWriter.Save(result, fullPath);
     }
+    static void GeneticAlgorithmRunnerFunction()
+    {
+        int seed = 1000;
+        IRandom masterRng = new RandomAdapter(seed);
 
+        Console.WriteLine("Rozpoczynam trening ewolucyjny...");
+
+        var em = new EvolutionManager(masterRng, popSize: 20);
+        em.UruchomEwolucje(generacje: 40);
+
+        Console.WriteLine("Ewolucja zakończona. Najlepsze wagi zapisane.");
+    }
     static void PrintResult(MatchResult result)
     {
         Console.WriteLine($"MatchId: {result.MatchId}");

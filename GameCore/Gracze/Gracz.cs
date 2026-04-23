@@ -51,6 +51,39 @@ public class Gracz
         return new Gracz(this);
     }
 
+    public void CopyFrom(Gracz source)
+    {
+        Nazwa = source.Nazwa;
+
+        PunktyZwyciestwa = source.PunktyZwyciestwa;
+
+        Surowce.Clear();
+        foreach (var kv in source.Surowce)
+            Surowce[kv.Key] = kv.Value;
+
+        SymboleNaukowe.Clear();
+        SymboleNaukowe.AddRange(source.SymboleNaukowe);
+
+        BialeSymbole.Clear();
+        BialeSymbole.AddRange(source.BialeSymbole);
+
+        KartyCudow.Clear();
+        for (int i = 0; i < source.KartyCudow.Count; i++)
+            KartyCudow.Add(source.KartyCudow[i].Clone());
+
+        ZbudowaneKarty.Clear();
+        for (int i = 0; i < source.ZbudowaneKarty.Count; i++)
+            ZbudowaneKarty.Add(source.ZbudowaneKarty[i].Clone());
+
+        Efekty.Clear();
+        for (int i = 0; i < source.Efekty.Count; i++)
+            Efekty.Add(source.Efekty[i].Clone());
+
+        ZetonyPostepu.Clear();
+        for (int i = 0; i < source.ZetonyPostepu.Count; i++)
+            ZetonyPostepu.Add(source.ZetonyPostepu[i].Clone());
+    }
+
     private void InicjalizujSurowce()
     {
         DodajSurowiec(Surowiec.Drewno, 0);

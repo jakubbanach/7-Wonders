@@ -8,6 +8,8 @@ public class MctsAgent : IAgent
     public int Iterations { get; set; } = 300;
 
     private readonly IRandom random;
+    private MctsNode? currentRoot;
+    //private Gra simulationGame;
 
     public MctsAgent(IRandom random)
     {
@@ -18,16 +20,18 @@ public class MctsAgent : IAgent
     {
         if (gra == null) throw new ArgumentNullException(nameof(gra));
 
-        var rootPlayerName = gra.AktywnyGracz.Nazwa;
         var root = new MctsNode(gra.Clone(), null);
 
         if (!root.NieprzetestowaneRuchy.Any() && !root.Dzieci.Any())
             throw new InvalidOperationException("MCTS nie znalazl zadnego legalnego ruchu.");
 
         for (int i = 0; i < Iterations; i++)
-            RunIteration(root, rootPlayerName);
+            RunIteration(root, gra.AktywnyGracz.Nazwa);
 
-        return NajlepszyRuch(root);
+        var najlepszy = NajlepszyRuch(root);
+        root = root.Dzieci.FirstOrDefault(c => c.Ruch == najlepszy);
+
+        return najlepszy;
     }
 
     public T WybierzAkcjePosrednia<T>(Gra gra, DecyzjaKontekst<T> decyzja)
@@ -42,6 +46,7 @@ public class MctsAgent : IAgent
     {
         var node = Select(root);
         node = Expand(node);
+        //var winner = Simulate(node.Gra, simulationGame);
         var winner = Simulate(node.Gra);
         Backpropagate(node, winner, rootPlayerName);
     }
@@ -78,20 +83,23 @@ public class MctsAgent : IAgent
         return child;
     }
 
+    //Gracz Simulate(Gra gra, Gra simulationGame)
     Gracz Simulate(Gra gra)
     {
-        var simulation = gra;
+        var simulationGame = gra.Clone();
+        //simulationGame.CopyFrom(gra);
         var randomAgent = new RandomAgent(random);
         var decisionResolver = new SimulationDecisionResolver(randomAgent);
+        simulationGame.PotasujZakryteKarty(random);
 
-        while (!simulation.CzyKoniecGry())
+        while (!simulationGame.CzyKoniecGry())
         {
-            var ruch = randomAgent.WybierzRuch(simulation);
-            simulation.WykonajRuch(ruch, decisionResolver, random);
+            var ruch = randomAgent.WybierzRuch(simulationGame);
+            simulationGame.WykonajRuch(ruch, decisionResolver, random);
         }
 
-        simulation.ZakonczGre();
-        return simulation.StanGry.Zwyciezca;
+        simulationGame.ZakonczGre();
+        return simulationGame.StanGry.Zwyciezca;
     }
 
     void Backpropagate(MctsNode node, Gracz winner, string rootPlayerName)
@@ -109,15 +117,24 @@ public class MctsAgent : IAgent
 
     MctsNode BestUcbChild(MctsNode node)
     {
-        const double C = 1.4;
+        const double C = 1.414;
+        MctsNode best = null;
+        double bestValue = double.MinValue;
+        double logNodeVisits = Math.Log(node.Wizyty + 1);
 
-        return node.Dzieci
-            .OrderByDescending(child =>
-                child.Wizyty == 0
-                    ? double.PositiveInfinity
-                    : (child.Wygrane / (double)child.Wizyty) +
-                      C * Math.Sqrt(Math.Log(node.Wizyty + 1) / child.Wizyty))
-            .First();
+        foreach (var child in node.Dzieci)
+        {
+            double ucb;
+            if (child.Wizyty == 0) ucb = double.MaxValue;
+            else ucb = (child.Wygrane / child.Wizyty) + C * Math.Sqrt(logNodeVisits / child.Wizyty);
+
+            if (ucb > bestValue)
+            {
+                bestValue = ucb;
+                best = child;
+            }
+        }
+        return best;
     }
 
     Ruch NajlepszyRuch(MctsNode root)
@@ -136,4 +153,19 @@ public class MctsAgent : IAgent
 
         throw new InvalidOperationException("MCTS nie znalazl zadnego ruchu.");
     }
+
+    //private MctsNode? ZnajdzNowyKorzen(Gra aktualnaGra, Ruch ostatniRuchPrzeciwnika)
+    //{
+    //    if (currentRoot == null) return null;
+
+    //    // Szukamy wśród dzieci starego korzenia tego, który powstał przez 'ostatniRuchPrzeciwnika'
+    //    var potencjalnyNowyKorzen = currentRoot.Dzieci
+    //        .FirstOrDefault(child => child.Ruch != null && child.Ruch.Equals(ostatniRuchPrzeciwnika));
+
+    //    // Opcjonalnie: sprawdź, czy stan gry faktycznie się zgadza (sanity check)
+    //    // if (potencjalnyNowyKorzen != null && !SaTakieSame(potencjalnyNowyKorzen.Gra, aktualnaGra)) 
+    //    //    return null; 
+
+    //    return potencjalnyNowyKorzen;
+    //}
 }
