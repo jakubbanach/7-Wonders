@@ -346,7 +346,7 @@ public class Gra
             .First(k => k.Nazwa == nazwa);
     }
 
-    private void ZmienTure()
+    public void ZmienTure()
     {
         idAktywnegoGracza = (idAktywnegoGracza + 1) % gracze.Length;
     }

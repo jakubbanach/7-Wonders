@@ -24,7 +24,7 @@ public class TestyAI
             r => new RandomAgent(r)
         );
 
-        var result1 = runner1.PlayGame();
+        var result1 = runner1.PlayGame(SimulationMode.Debug);
 
         _output.WriteLine($"Agent 1 Score: {result1.Agent1Score}");
         _output.WriteLine($"Agent 2 Score: {result1.Agent2Score}");
@@ -35,7 +35,7 @@ public class TestyAI
             r => new RandomAgent(r)
         );
 
-        var result2 = runner2.PlayGame();
+        var result2 = runner2.PlayGame(SimulationMode.Debug);
 
         Console.WriteLine(result1.Agent1Score == result2.Agent1Score);
         Console.WriteLine(result1.Agent2Score == result2.Agent2Score);
