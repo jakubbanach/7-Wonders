@@ -6,14 +6,81 @@ class Program
 {
     static void Main(string[] args)
     {
-        //GraKonsolowa graKonsolowa = new GraKonsolowa();
-        //graKonsolowa.Start();
-        //MultipleGameRunnerFunction();
+        if (args.Length > 0 && string.Equals(args[0], "export-data", StringComparison.OrdinalIgnoreCase))
+        {
+            ExportTrainingDataFunction(args.Skip(1).ToArray());
+            return;
+        }
+
         SimulationRunnerFunction();
         //HeuristicRunnerFunction();
         //HeuristicGameRunner();
         //GameRunnerFunction();
         //GeneticAlgorithmRunnerFunction();
+    }
+
+    static void ExportTrainingDataFunction(string[] args)
+    {
+        int seed = 12345;
+        int games = 20;
+        string agent1Name = "heuristic-personal";
+        string agent2Name = "mcts";
+
+        for (int i = 0; i < args.Length; i++)
+        {
+            switch (args[i])
+            {
+                case "--seed" when i + 1 < args.Length:
+                    seed = int.Parse(args[++i]);
+                    break;
+                case "--games" when i + 1 < args.Length:
+                    games = int.Parse(args[++i]);
+                    break;
+                case "--agent1" when i + 1 < args.Length:
+                    agent1Name = args[++i];
+                    break;
+                case "--agent2" when i + 1 < args.Length:
+                    agent2Name = args[++i];
+                    break;
+            }
+        }
+
+        var agentFactories = BuildAgentFactories();
+        if (!agentFactories.TryGetValue(agent1Name, out var agent1Factory))
+            throw new ArgumentException($"Unknown agent1: {agent1Name}");
+        if (!agentFactories.TryGetValue(agent2Name, out var agent2Factory))
+            throw new ArgumentException($"Unknown agent2: {agent2Name}");
+
+        var simulationRunner = new SimulationRunner(
+            seed,
+            games,
+            SimulationMode.Debug,
+            agent1Factory,
+            agent2Factory);
+
+        var result = simulationRunner.Run();
+        var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
+        var resultsDir = Path.GetFullPath(Path.Combine(projectDir, "Results"));
+        Directory.CreateDirectory(resultsDir);
+
+        var fileName = $"training_{DateTime.Now:yyyyMMdd_HHmmss}.json";
+        var fullPath = Path.Combine(resultsDir, fileName);
+        ResultWriter.Save(result, fullPath);
+
+        Console.WriteLine($"Training data saved to: {fullPath}");
+    }
+
+    static Dictionary<string, Func<IRandom, IAgent>> BuildAgentFactories()
+    {
+        return new Dictionary<string, Func<IRandom, IAgent>>(StringComparer.OrdinalIgnoreCase)
+        {
+            ["random"] = r => new RandomAgent(r),
+            ["mcts"] = r => new MctsAgent(r),
+            ["heuristic-personal"] = r => new HeuristicAgent(HeuristicWeightPresets.Personal(), r),
+            ["heuristic-double"] = r => new HeuristicAgent(HeuristicWeightPresets.GeneticDouble(), r),
+            ["heuristic-balanced"] = r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r),
+            ["heuristic-military"] = r => new HeuristicAgent(HeuristicWeightPresets.Military(), r),
+        };
     }
 
     static void SimulationRunnerFunction()

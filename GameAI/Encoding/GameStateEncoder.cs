@@ -43,6 +43,148 @@ public static class GameStateEncoder
         return buffer.ToArray();
     }
 
+    public static GamePolicyEncoding EncodePolicy(Gra gra)
+    {
+        if (gra == null)
+            throw new ArgumentNullException(nameof(gra));
+
+        return new GamePolicyEncoding(
+            Encode(gra),
+            ActionSpace.ActionNames,
+            EncodeActionMask(gra));
+    }
+
+    public static int GetActionIndex(Gra gra, Ruch ruch)
+    {
+        if (gra == null)
+            throw new ArgumentNullException(nameof(gra));
+        if (ruch == null)
+            throw new ArgumentNullException(nameof(ruch));
+
+        var slotIndex = ZnajdzIndeksPola(gra.PlanszaEpoki.Pola, ruch.KartaDoZagrania);
+        if (slotIndex < 0)
+            return -1;
+
+        if (ruch.TypRuchu == TypRuchu.ZbudujCud && ruch.KartaCudu != null)
+        {
+            var wonderIdx = ActionSpace.FindWonderIndex(gra.AktywnyGracz.KartyCudow, ruch.KartaCudu.Nazwa);
+            return wonderIdx >= 0 ? ActionSpace.GetActionIndex(slotIndex, ruch.TypRuchu, wonderIdx) : -1;
+        }
+
+        return ActionSpace.GetActionIndex(slotIndex, ruch.TypRuchu);
+    }
+
+    /// <summary>
+    /// Koduje subdecyzje dla danego typu efektu z ustalona dimensionalnoscia.
+    /// </summary>
+    public static DecisionEncoding EncodeSubdecision(Gra gra, TypEfektu efekt)
+    {
+        if (efekt == TypEfektu.WybierzZetonPostepu || efekt == TypEfektu.Wylosuj3ZetonyPostepu)
+        {
+            return EncodeTokenChoice(gra);
+        }
+
+        if (efekt == TypEfektu.OdlozKartePrzeciwnika)
+            return EncodeEnemyCardChoice(gra);
+
+        if (efekt == TypEfektu.DarmowaBudowlaZOdrzuconychKart)
+            return EncodeDiscardedCardChoice(gra);
+
+        if (efekt == TypEfektu.WybierzGraczaRozpoczynajacegoEpoke)
+            return EncodePlayerChoice(gra);
+
+        return EncodeBinaryChoice(Array.Empty<string>());
+    }
+
+    private static DecisionEncoding EncodePlayerChoice(Gra gra)
+    {
+        var options = gra.Gracze.Select(gracz => gracz.Nazwa).ToArray();
+        if (options.Length == 0)
+            options = Array.Empty<string>();
+
+        var legalMask = new float[ActionSpace.NumPlayers];
+        for (int i = 0; i < options.Length && i < legalMask.Length; i++)
+            legalMask[i] = 1f;
+
+        return new DecisionEncoding("WybierzGraczaRozpoczynajacegoEpoke", options, legalMask, null);
+    }
+
+    private static DecisionEncoding EncodeTokenChoice(Gra gra)
+    {
+        float[] legalMask = new float[ActionSpace.NumProgressTokens];
+        var dostepneWGrze = gra.PlanszaKonfliktu.ZetonyPostepu.Select(z => z.Nazwa).ToHashSet();
+
+        for (int i = 0; i < ProgressTokenCatalog.Length; i++)
+            legalMask[i] = dostepneWGrze.Contains(ProgressTokenCatalog[i]) ? 1f : 0f;
+
+        return new DecisionEncoding("WybierzZeton", ProgressTokenCatalog, legalMask, null);
+    }
+
+    private static DecisionEncoding EncodeEnemyCardChoice(Gra gra)
+    {
+        float[] legalMask = new float[ActionSpace.NumCards];
+        var kartyPrzeciwnika = gra.Przeciwnik.ZbudowaneKarty.Select(k => k.Nazwa).ToHashSet();
+
+        for (int i = 0; i < CardCatalog.Length; i++)
+            legalMask[i] = kartyPrzeciwnika.Contains(CardCatalog[i]) ? 1f : 0f;
+
+        return new DecisionEncoding("ZniszczKarte", CardCatalog, legalMask, null);
+    }
+
+    private static DecisionEncoding EncodeDiscardedCardChoice(Gra gra)
+    {
+        float[] legalMask = new float[ActionSpace.NumCards];
+        var odrzucone = gra.StosKartOdrzuconych.Select(k => k.Nazwa).ToHashSet();
+
+        for (int i = 0; i < CardCatalog.Length; i++)
+            legalMask[i] = odrzucone.Contains(CardCatalog[i]) ? 1f : 0f;
+
+        return new DecisionEncoding("ZbudujZOdrzuconych", CardCatalog, legalMask, null);
+    }
+
+    private static DecisionEncoding EncodeBinaryChoice(string[] options)
+    {
+        float[] legalMask = CreateFilledMask(options.Length);
+        return new DecisionEncoding("Inne", options, legalMask, null);
+    }
+
+    public static DecisionEncoding EncodeDecision<T>(DecyzjaKontekst<T> decyzja)
+    {
+        if (decyzja == null)
+            throw new ArgumentNullException(nameof(decyzja));
+
+        var options = decyzja.Opcje
+            .Select(opcja => opcja?.ToString() ?? string.Empty)
+            .ToArray();
+
+        return new DecisionEncoding(
+            decyzja.Efekt.ToString(),
+            options,
+            CreateFilledMask(options.Length),
+            null);
+    }
+
+    public static DecisionEncoding EncodeDecision(DecisionLog decyzja)
+    {
+        if (decyzja == null)
+            throw new ArgumentNullException(nameof(decyzja));
+
+        var options = decyzja.Opcje.ToArray();
+        var choiceMask = new float[options.Length];
+        var chosenIndex = Array.FindIndex(options, option => string.Equals(option, decyzja.Wybor, StringComparison.Ordinal));
+
+        if (chosenIndex >= 0)
+        {
+            choiceMask[chosenIndex] = 1f;
+        }
+
+        return new DecisionEncoding(
+            decyzja.TypDecyzji,
+            options,
+            CreateFilledMask(options.Length),
+            choiceMask);
+    }
+
     private static void EncodeGlobalState(Gra gra, List<float> buffer)
     {
         var aktywnyGraczIndex = Array.IndexOf(gra.Gracze, gra.AktywnyGracz);
@@ -197,6 +339,7 @@ public static class GameStateEncoder
     private static void EncodeBoardSlot(PoleKarty pole, Gra gra, List<float> buffer)
     {
         var karta = pole.Karta;
+        var kartaNazwa = karta?.Nazwa;
         var kartaWidoczna = karta != null && !pole.CzyZakryta;
 
         buffer.Add(karta != null ? 1f : 0f);
@@ -216,7 +359,7 @@ public static class GameStateEncoder
         // kodowanie tylko gdy karta jest widoczna - w przeciwnym razie wszystkie cechy karty to 0
         foreach (var cardName in CardCatalog)
         {
-            buffer.Add(kartaWidoczna && string.Equals(karta!.Nazwa, cardName, StringComparison.Ordinal) ? 1f : 0f);
+            buffer.Add(kartaWidoczna && string.Equals(kartaNazwa, cardName, StringComparison.Ordinal) ? 1f : 0f);
         }
     }
 
@@ -244,6 +387,53 @@ public static class GameStateEncoder
         {
             buffer.Add(discardedCards.Contains(cardName) ? 1f : 0f);
         }
+    }
+
+    private static float[] EncodeActionMask(Gra gra)
+    {
+        var mask = new float[ActionSpace.TotalPrimaryActions];
+        var pola = gra.PlanszaEpoki.Pola;
+
+        foreach (var ruch in gra.DostepneRuchy())
+        {
+            var actionIndex = GetActionIndex(gra, ruch);
+
+            if (actionIndex >= 0)
+                mask[actionIndex] = 1f;
+        }
+
+        return mask;
+    }
+
+    private static int ZnajdzIndeksPola(IReadOnlyList<PoleKarty> pola, Karta karta)
+    {
+        for (int i = 0; i < pola.Count; i++)
+        {
+            var pole = pola[i];
+            if (pole.Karta == null)
+            {
+                continue;
+            }
+
+            if (ReferenceEquals(pole.Karta, karta) || string.Equals(pole.Karta.Nazwa, karta.Nazwa, StringComparison.Ordinal))
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private static float[] CreateFilledMask(int length)
+    {
+        var mask = new float[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            mask[i] = 1f;
+        }
+
+        return mask;
     }
 
     private static float Normalize(int value, float maxValue)

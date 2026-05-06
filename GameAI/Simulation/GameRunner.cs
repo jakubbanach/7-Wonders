@@ -44,6 +44,7 @@ public class GameRunner
         {
             //Console.WriteLine($"\nAktywny gracz: {gra.AktywnyGracz.Nazwa}, Epoka: {gra.Epoka}, Pozycja konfliktu: {gra.PozycjaKonfliktu}");
             var currentAgent = gra.AktywnyGracz == gra.Gracze[0] ? a1 : a2;
+            var policyEncoding = GameStateEncoder.EncodePolicy(gra);
             
 
             var ruch = currentAgent.WybierzRuch(gra.Clone());
@@ -52,6 +53,13 @@ public class GameRunner
             MoveLog? moveLog = null;
             if (mode == SimulationMode.Debug)
                 moveLog = new MoveLog(gra.AktywnyGracz.Nazwa, ruch, gra.DostepneKarty());
+
+            if (moveLog != null)
+            {
+                moveLog.State = policyEncoding.State;
+                moveLog.ActionMask = policyEncoding.ActionMask;
+                moveLog.ActionIndex = GameStateEncoder.GetActionIndex(gra, ruch);
+            }
 
             //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z karta {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");
             var resolver = new AgentDecisionResolver(currentAgent, moveLog);

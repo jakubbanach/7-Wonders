@@ -9,6 +9,9 @@ public class MoveLog
     public string Agent { get; set; } = null!;
     public string TypRuchu { get; set; } = null!;
     public string KartyDoWyboru { get; set; } = null!;
+    public float[]? State { get; set; }
+    public float[]? ActionMask { get; set; }
+    public int ActionIndex { get; set; } = -1;
     public Karta Karta { get; set; }
     public KartaCudu? KartaCudu { get; set; }
     public Dictionary<Surowiec, int> SurowceGracza { get; set; }
