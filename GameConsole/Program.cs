@@ -75,7 +75,7 @@ class Program
         var resultsDir = Path.GetFullPath(Path.Combine(projectDir, "Results"));
         Directory.CreateDirectory(resultsDir);
 
-        var fileName = $"training_{DateTime.Now:yyyyMMdd_HHmmss}.json";
+        var fileName = $"training_{DateTime.Now:yyyyMMdd_HHmmss}_{agent1Name}_vs_{agent2Name}_{games}_games.json";
         var fullPath = Path.Combine(resultsDir, fileName);
         ResultWriter.Save(result, fullPath);
 
@@ -131,10 +131,10 @@ class Program
     static void BenchmarkModelsFunction(string[] args)
     {
         int seed = 12345;
-        int games = 10;
-        string agent1Spec = "onnx:GameAI/Encoding/policy_network.onnx";
-        string agent2Spec = "heuristic-personal";
-        string outputName = $"benchmark_{DateTime.Now:yyyyMMdd_HHmmss}";
+        int games = 100;
+        string agent1Spec = "heuristic-personal";
+        string agent2Spec = "onnx2";
+        string outputName = $"benchmark_{DateTime.Now:yyyyMMdd_HHmmss}_{agent1Spec}_vs_{agent2Spec}";
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -230,7 +230,11 @@ class Program
             ["heuristic-military"] = r => new HeuristicAgent(HeuristicWeightPresets.Military(), r),
             ["onnx"] = r => new OnnxAgentConfiguration
             {
-                ModelPath = Path.Combine(AppContext.BaseDirectory, "policy_network.onnx")
+                ModelPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "GameAI/Encoding/onnx_models/policy_network_20_100.onnx")
+            }.CreateAgent(r),
+            ["onnx2"] = r => new OnnxAgentConfiguration
+            {
+                ModelPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "GameAI/Encoding/onnx_models/policy_network_20_100_2.onnx")
             }.CreateAgent(r),
         };
     }
