@@ -147,7 +147,7 @@ public class OnnxAgent : IAgent
         // Softmax
         var softmax = ComputeSoftmax(policyLogits);
 
-        // Sampling z rozkładu
+        // Sampling z rozkladu
         var actionIndex = SampleFromDistribution(softmax, random);
 
         // Dekodowanie akcji
@@ -156,7 +156,7 @@ public class OnnxAgent : IAgent
 
     public T WybierzAkcjePosrednia<T>(Gra gra, DecyzjaKontekst<T> decyzja)
     {
-        // Uproszczenie: losowy wybór z opcji
+        // Uproszczenie: losowy wybor z opcji
         if (decyzja.Opcje == null || decyzja.Opcje.Count == 0)
             throw new InvalidOperationException("No options available for subdecision");
 

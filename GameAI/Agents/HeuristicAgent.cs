@@ -48,7 +48,7 @@ public class HeuristicAgent : IAgent
         var graczRes = gracz.Surowce;
         var przeciwnikRes = przeciwnik.Surowce;
 
-        // Szybki helper do wyciągania wartości ze słownika
+        // Szybki helper do wyciagania wartosci ze slownika
         int GetV(Dictionary<Surowiec, int> d, Surowiec s) => d.GetValueOrDefault(s, 0);
 
         double score = 0;

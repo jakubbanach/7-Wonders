@@ -19,6 +19,20 @@ public static class ResultWriter
 
         File.WriteAllText(path, json);
     }
+
+    public static void Save(SimulationResult result, string path)
+    {
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true
+        };
+
+        options.Converters.Add(new JsonStringEnumConverter());
+        var json = JsonSerializer.Serialize(result, options);
+
+        File.WriteAllText(path, json);
+    }
+
     public static void Save(List<SimulationResult> results, string path)
     {
         var options = new JsonSerializerOptions

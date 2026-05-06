@@ -174,6 +174,8 @@ class HierarchicalPolicyNetwork(nn.Module):
         """
         logger.info(f"Exporting model to ONNX format: {output_path}")
 
+        device = next(self.parameters()).device
+
         class ExportWrapper(nn.Module):
             def __init__(self, base_model: "HierarchicalPolicyNetwork"):
                 super().__init__()
@@ -184,9 +186,9 @@ class HierarchicalPolicyNetwork(nn.Module):
                 return outputs['policy_masked_logits'], outputs['value']
 
         # Create dummy inputs matching expected shapes
-        dummy_state = torch.randn(1, self.state_dim)
-        dummy_action_mask = torch.ones(1, ActionSpace.TOTAL_PRIMARY_ACTIONS)
-        export_model = ExportWrapper(self)
+        dummy_state = torch.randn(1, self.state_dim, device=device)
+        dummy_action_mask = torch.ones(1, ActionSpace.TOTAL_PRIMARY_ACTIONS, device=device)
+        export_model = ExportWrapper(self).to(device)
 
         # Trace and export
         try:
@@ -296,6 +298,11 @@ class GameDataset(Dataset):
     def _ingest_payload(self, payload, source_name):
         if isinstance(payload, dict) and 'Moves' in payload:
             self._ingest_match_result(payload, source_name)
+            return
+
+        if isinstance(payload, dict) and 'MatchResults' in payload:
+            for match_idx, match_result in enumerate(payload.get('MatchResults') or []):
+                self._ingest_match_result(match_result, f"{source_name}::MatchResults[{match_idx}]")
             return
 
         if isinstance(payload, list):
