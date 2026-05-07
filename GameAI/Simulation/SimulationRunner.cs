@@ -98,7 +98,7 @@ public class SimulationRunner
             Agent1AveragePoints = avgA1Points,
             Agent2AveragePoints = avgA2Points,
             VictoryTypeCounts = typeCounts,
-            MatchResults = results
+            //MatchResults = results
         };
     }
 }

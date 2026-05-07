@@ -132,8 +132,8 @@ class Program
     {
         int seed = 12345;
         int games = 100;
-        string agent1Spec = "heuristic-personal";
-        string agent2Spec = "onnx2";
+        string agent1Spec = "heuristic-double";
+        string agent2Spec = "onnx3";
         string outputName = $"benchmark_{DateTime.Now:yyyyMMdd_HHmmss}_{agent1Spec}_vs_{agent2Spec}";
 
         for (int i = 0; i < args.Length; i++)
@@ -181,13 +181,14 @@ class Program
 
         ResultWriter.Save(result, summaryPath);
 
-        for (int i = 0; i < result.MatchResults.Count; i++)
-        {
-            var match = result.MatchResults[i];
-            var fileName = $"match_{i + 1:D4}_seed_{match.Seed}.json";
-            var matchPath = Path.Combine(matchesDir, fileName);
-            ResultWriter.Save(match, matchPath);
-        }
+        //TODO: dac opcje zapisu pojedynczych meczow, bo to moze byc bardzo duzo danych przy duzej liczbie gier
+        //for (int i = 0; i < result.MatchResults.Count; i++)
+        //{
+        //    var match = result.MatchResults[i];
+        //    var fileName = $"match_{i + 1:D4}_seed_{match.Seed}.json";
+        //    var matchPath = Path.Combine(matchesDir, fileName);
+        //    ResultWriter.Save(match, matchPath);
+        //}
 
         Console.WriteLine($"Benchmark saved to: {benchmarkDir}");
         Console.WriteLine($"Summary: {summaryPath}");
@@ -235,6 +236,10 @@ class Program
             ["onnx2"] = r => new OnnxAgentConfiguration
             {
                 ModelPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "GameAI/Encoding/onnx_models/policy_network_20_100_2.onnx")
+            }.CreateAgent(r),
+            ["onnx3"] = r => new OnnxAgentConfiguration
+            {
+                ModelPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "GameAI/Encoding/onnx_models/policy_network_50_200.onnx")
             }.CreateAgent(r),
         };
     }
