@@ -8,7 +8,7 @@ Definiuje hierarchiczny model sieci neuronowej:
 - Subdecision Heads (10, 73, 73 dla różnych typów decyzji)
 
 Wejście:
-  - State: ~390 floatów (pełny stan gry)
+  - State: ~1903 floatów (pełny stan gry)
   - Action Mask: 120 floatów (0/1 dla legalnych akcji)
 
 Wyjście:
@@ -48,7 +48,7 @@ class HierarchicalPolicyNetwork(nn.Module):
     4. Subdecision heads: dla każdego typu decyzji
     """
     
-    def __init__(self, state_dim: int = 390, hidden_dim: int = 256):
+    def __init__(self, state_dim: int = 1903, hidden_dim: int = 256):
         super().__init__()
         
         self.state_dim = state_dim

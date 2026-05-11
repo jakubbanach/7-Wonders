@@ -23,6 +23,7 @@ class Program
             ExportTrainingDataFunction(args.Skip(1).ToArray());
             return;
         }
+        //ExportTrainingDataFunction(args.Skip(1).ToArray());
         BenchmarkModelsFunction(args.Skip(1).ToArray());
         //SimulationRunnerFunction();
         //HeuristicRunnerFunction();
@@ -33,10 +34,12 @@ class Program
 
     static void ExportTrainingDataFunction(string[] args)
     {
-        int seed = 12345;
-        int games = 20;
-        string agent1Name = "heuristic-personal";
-        string agent2Name = "mcts";
+        int seed = 10000;
+        int games = 500;
+        string agent2Name = "heuristic-double";
+        string agent1Name = "onnx3";
+        bool minimal = true;
+        bool both = false;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -54,6 +57,12 @@ class Program
                 case "--agent2" when i + 1 < args.Length:
                     agent2Name = args[++i];
                     break;
+                case "--minimal-logs":
+                    minimal = true;
+                    break;
+                case "--both":
+                    both = true;
+                    break;
             }
         }
 
@@ -63,6 +72,7 @@ class Program
         if (!agentFactories.TryGetValue(agent2Name, out var agent2Factory))
             throw new ArgumentException($"Unknown agent2: {agent2Name}");
 
+        Console.WriteLine($"Starting training: {agent1Name} vs {agent2Name} ({games} gier{(minimal ? " - MINIMAL LOGS" : "")})");
         var simulationRunner = new SimulationRunner(
             seed,
             games,
@@ -70,12 +80,22 @@ class Program
             agent1Factory,
             agent2Factory);
 
-        var result = simulationRunner.Run();
+        var result = simulationRunner.Run(both: both);
+
+        //if (minimal)
+        //{
+        //    Console.WriteLine("Minimalizowanie logow dla economii pamięci...");
+        //    foreach (var match in result.MatchResults)
+        //    {
+        //        match.MinimalizeForTraining();
+        //    }
+        //}
+
         var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
         var resultsDir = Path.GetFullPath(Path.Combine(projectDir, "Results"));
         Directory.CreateDirectory(resultsDir);
 
-        var fileName = $"training_{DateTime.Now:yyyyMMdd_HHmmss}_{agent1Name}_vs_{agent2Name}_{games}_games.json";
+        var fileName = $"training_{DateTime.Now:yyyyMMdd_HHmmss}_{agent1Name}_vs_{agent2Name}_{games}_games{(minimal ? "_minimal" : "")}.json";
         var fullPath = Path.Combine(resultsDir, fileName);
         ResultWriter.Save(result, fullPath);
 
@@ -133,8 +153,9 @@ class Program
         int seed = 12345;
         int games = 100;
         string agent1Spec = "heuristic-double";
-        string agent2Spec = "onnx3";
+        string agent2Spec = "onnx_50_500";
         string outputName = $"benchmark_{DateTime.Now:yyyyMMdd_HHmmss}_{agent1Spec}_vs_{agent2Spec}";
+        bool minimal = false;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -155,6 +176,9 @@ class Program
                 case "--output" when i + 1 < args.Length:
                     outputName = args[++i];
                     break;
+                case "--minimal-logs":
+                    minimal = true;
+                    break;
             }
         }
 
@@ -162,7 +186,7 @@ class Program
         var agent2Factory = CreateAgentFactoryFromSpec(agent2Spec);
 
         Console.WriteLine($"Benchmarking: {agent1Spec} vs {agent2Spec}");
-        Console.WriteLine($"Games: {games}, seed: {seed}");
+        Console.WriteLine($"Games: {games}, seed: {seed}{(minimal ? " - MINIMAL LOGS" : "")}");
 
         var simulationRunner = new SimulationRunner(
             seed,
@@ -172,7 +196,17 @@ class Program
             agent2Factory);
 
         var result = simulationRunner.Run();
-        var benchmarkDir = GetBenchmarkOutputDirectory(outputName);
+
+        //if (minimal)
+        //{
+        //    Console.WriteLine("Minimalizowanie logów dla économii pamięci...");
+        //    foreach (var match in result.MatchResults)
+        //    {
+        //        match.MinimalizeForTraining();
+        //    }
+        //}
+
+        var benchmarkDir = GetBenchmarkOutputDirectory(outputName + (minimal ? "_minimal" : ""));
         Directory.CreateDirectory(benchmarkDir);
 
         var summaryPath = Path.Combine(benchmarkDir, "summary.json");
@@ -180,15 +214,6 @@ class Program
         Directory.CreateDirectory(matchesDir);
 
         ResultWriter.Save(result, summaryPath);
-
-        //TODO: dac opcje zapisu pojedynczych meczow, bo to moze byc bardzo duzo danych przy duzej liczbie gier
-        //for (int i = 0; i < result.MatchResults.Count; i++)
-        //{
-        //    var match = result.MatchResults[i];
-        //    var fileName = $"match_{i + 1:D4}_seed_{match.Seed}.json";
-        //    var matchPath = Path.Combine(matchesDir, fileName);
-        //    ResultWriter.Save(match, matchPath);
-        //}
 
         Console.WriteLine($"Benchmark saved to: {benchmarkDir}");
         Console.WriteLine($"Summary: {summaryPath}");
@@ -240,6 +265,10 @@ class Program
             ["onnx3"] = r => new OnnxAgentConfiguration
             {
                 ModelPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "GameAI/Encoding/onnx_models/policy_network_50_200.onnx")
+            }.CreateAgent(r),
+            ["onnx_50_500"] = r => new OnnxAgentConfiguration
+            {
+                ModelPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "GameAI/Encoding/onnx_models/policy_network_50_500.onnx")
             }.CreateAgent(r),
         };
     }

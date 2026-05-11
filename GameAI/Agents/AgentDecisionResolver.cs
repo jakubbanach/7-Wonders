@@ -6,9 +6,9 @@ using System.Text;
 public class AgentDecisionResolver : IDecisionResolver
 {
     private readonly IAgent agent;
-    private readonly MoveLog moveLog;
+    private readonly MoveLog? moveLog;
 
-    public AgentDecisionResolver(IAgent agent, MoveLog moveLog)
+    public AgentDecisionResolver(IAgent agent, MoveLog? moveLog = null)
     {
         this.agent = agent;
         this.moveLog = moveLog;
@@ -22,7 +22,7 @@ public class AgentDecisionResolver : IDecisionResolver
             ? fixedEncoding
             : GameStateEncoder.EncodeDecision(kontekst);
 
-        if (moveLog != null)
+        if (moveLog != null && moveLog.Decisions != null)
         {
             moveLog.Decisions.Add(new DecisionLog
             {

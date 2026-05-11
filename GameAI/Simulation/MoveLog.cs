@@ -6,17 +6,20 @@ using System.Text;
 using System.Text.Json;
 public class MoveLog
 {
+    // Pola wymagane do treningu
     public string Agent { get; set; } = null!;
-    public string TypRuchu { get; set; } = null!;
-    public string KartyDoWyboru { get; set; } = null!;
-    public float[]? State { get; set; }
-    public float[]? ActionMask { get; set; }
-    public int ActionIndex { get; set; } = -1;
-    public Karta Karta { get; set; }
-    public KartaCudu? KartaCudu { get; set; }
-    public Dictionary<Surowiec, int> SurowceGracza { get; set; }
-    public Dictionary<Surowiec, int> SurowcePrzeciwnika { get; set; }
-    public List<DecisionLog> Decisions { get; set; } = new List<DecisionLog>();
+    public float[]? State { get; set; }                    // POTRZEBNE: wejscie do modelu
+    public float[]? ActionMask { get; set; }              // POTRZEBNE: maska legalnych akcji
+    public int ActionIndex { get; set; } = -1;           // POTRZEBNE: cel treningu
+
+    // Pola informacyjne (mozna pominac dla --minimal-logs)
+    public string? TypRuchu { get; set; }                 // TODO: mozna usunac dla ekonomii
+    public string? KartyDoWyboru { get; set; }            // TODO: mozna usunac dla ekonomii
+    public Karta? Karta { get; set; }                     // TODO: DUZE - pomin dla --minimal-logs
+    public KartaCudu? KartaCudu { get; set; }             // TODO: mozna usunac dla ekonomii
+    public Dictionary<Surowiec, int>? SurowceGracza { get; set; }          // TODO: mozna usunac dla ekonomii
+    public Dictionary<Surowiec, int>? SurowcePrzeciwnika { get; set; }    // TODO: mozna usunac dla ekonomii
+    public List<DecisionLog>? Decisions { get; set; }     // TODO: subglowy - pomin na razie
 
 
     public MoveLog() { } // wymagany dla serializacji

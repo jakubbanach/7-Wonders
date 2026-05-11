@@ -24,9 +24,10 @@ public class SimulationRunner
         this.agent2Factory = agent2Factory;
     }
 
-    public SimulationResult Run()
+    public SimulationResult Run(bool both = false)
     {
         var results = new List<MatchResult>();
+        var reversedResults = new List<MatchResult>();
 
         for (int i = 0; i < games; i++)
         {
@@ -39,18 +40,6 @@ public class SimulationRunner
 
             var result = runner.PlayGame(mode);
             results.Add(result);
-            // switch (result.TypZwyciestwa)
-            // {
-            //     case TypZwyciestwa.Militarne:
-            //         Console.WriteLine($"Game {i + 1}/{games} ended with a Military victory. Seed: {result.Seed}");
-            //         break;
-            //     case TypZwyciestwa.Naukowe:
-            //         Console.WriteLine($"Game {i + 1}/{games} ended with a Scientific victory. Seed: {result.Seed}");
-            //         break;
-            //     case TypZwyciestwa.Brak:
-            //         Console.WriteLine($"Game {i + 1}/{games} ended with no victory (Tie). Seed: {result.Seed}");
-            //         break;
-            // }
             if (result.Agent1Score == 0 || result.Agent2Score == 0)
             {
                 Console.WriteLine($"Game {i + 1}/{games} had a zero score. Seed: {result.Seed}");
@@ -59,6 +48,31 @@ public class SimulationRunner
             {
                 Console.WriteLine($"Game {i + 1}/{games} had an unusually high score. Seed: {result.Seed}");
             }
+        }
+
+        if (both)
+        {
+            Console.WriteLine("Running reversed games...");
+            for (int i = 0; i < games; i++)
+            {
+                var reversedRunner = new GameRunner(
+                    seed: seed + i,
+                    agent1Factory: agent2Factory,
+                    agent2Factory: agent1Factory
+                );
+
+                var result = reversedRunner.PlayGame(mode);
+                reversedResults.Add(result);
+                if (result.Agent1Score == 0 || result.Agent2Score == 0)
+                {
+                    Console.WriteLine($"Game {i + 1}/{games} had a zero score. Seed: {result.Seed}");
+                }
+                if (result.Agent1Score > 100 || result.Agent2Score > 100)
+                {
+                    Console.WriteLine($"Game {i + 1}/{games} had an unusually high score. Seed: {result.Seed}");
+                }
+            }
+            results.AddRange(reversedResults);
         }
 
         return Summarize(results);

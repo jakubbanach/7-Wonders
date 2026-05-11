@@ -193,6 +193,7 @@ public static class ZbiorPlanszEpok
             .ToList();
 
         var karty = kartyGildii.Concat(kartyEpoki).ToList();
+        karty.Shuffle(random);
 
         foreach (var karta in karty)
         {
