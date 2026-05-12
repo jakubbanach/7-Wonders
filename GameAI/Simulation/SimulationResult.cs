@@ -5,6 +5,8 @@ using System.Text.Json.Serialization;
 public class SimulationResult
 {
     public int TotalGames { get; set; }
+    public long TotalElapsedMilliseconds { get; set; }
+    public double AverageGameElapsedMilliseconds { get; set; }
     public int Agent1Wins { get; set; }
     public int Agent2Wins { get; set; }
     public int Agent1MaxPoints { get; set; }
@@ -13,6 +15,7 @@ public class SimulationResult
     public int Agent2MinPoints { get; set; }
     public double Agent1AveragePoints { get; set; }
     public double Agent2AveragePoints { get; set; }
+    public List<MatchTimingStat> GameTimings { get; set; } = new List<MatchTimingStat>();
     //public HeuristicWeights Agent1Weights { get; set; }
     //public HeuristicWeights Agent2Weights { get; set; }
     public List<VictoryTypeStat> VictoryTypeCounts { get; set; }

@@ -23,12 +23,29 @@ public class PoleKarty
     {
         Karta = pole.Karta?.Clone();
         CzyZakryta = pole.CzyZakryta;
-        BlokujacePola = pole.BlokujacePola.Select(p => p.Clone()).ToList();
+        BlokujacePola = new List<PoleKarty>();
     }
 
-    public PoleKarty Clone()
+    public PoleKarty Clone(Dictionary<PoleKarty, PoleKarty>? contextMap = null)
     {
-        return new PoleKarty(this);
+        if (contextMap != null && contextMap.TryGetValue(this, out var existing))
+            return existing;
+
+        var cloned = new PoleKarty(this);
+        
+        if (contextMap != null)
+            contextMap[this] = cloned;
+
+        if (contextMap != null)
+        {
+            cloned.BlokujacePola = BlokujacePola.Select(bp => bp.Clone(contextMap)).ToList();
+        }
+        else
+        {
+            cloned.BlokujacePola = BlokujacePola.Select(p => p.Clone()).ToList();
+        }
+
+        return cloned;
     }
 
     public bool CzyDostepna =>

@@ -24,8 +24,8 @@ class Program
             return;
         }
         //ExportTrainingDataFunction(args.Skip(1).ToArray());
-        BenchmarkModelsFunction(args.Skip(1).ToArray());
-        //SimulationRunnerFunction();
+        //BenchmarkModelsFunction(args.Skip(1).ToArray());
+        SimulationRunnerFunction();
         //HeuristicRunnerFunction();
         //HeuristicGameRunner();
         //GameRunnerFunction();
@@ -283,16 +283,16 @@ class Program
     static void SimulationRunnerFunction()
     {
         int seed = 12345;
-        int games = 20;
+        int games = 10;
 
         var agents = new List<(string Name, Func<IRandom, IAgent> Factory)>
         {
             //("RandomAgent", r => new RandomAgent(r)),
             //("HeuristicAgent (Military)", r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)),
             //("HeuristicAgent (Balanced)", r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r)),
-            ("HeuristicAgent (GeneticPersonal)", r => new HeuristicAgent(HeuristicWeightPresets.Personal(), r)),
-            ("HeuristicAgent (GeneticDouble)", r => new HeuristicAgent(HeuristicWeightPresets.GeneticDouble(), r)),
-            ("MCTS Agent", r => new MctsAgent(r))
+            ("HeuristicAgent (GeneticPersonal)", CreateAgentFactoryFromSpec("heuristic-personal")),
+            //("HeuristicAgent (GeneticDouble)", CreateAgentFactoryFromSpec("heuristic-double")),
+            ("MCTSAgent", CreateAgentFactoryFromSpec("mcts")),
         };
 
         //var simulationResults = new List<SimulationResult>();
@@ -303,6 +303,8 @@ class Program
             {
                 if (i == j) continue; // Skip self-play for now
                 Console.WriteLine($"Running simulation: {agents[i].Name} vs {agents[j].Name}");
+                // reset instrumentation counters before run
+
                 var simulationRunner = new SimulationRunner(
                     seed,
                     games,
@@ -316,6 +318,8 @@ class Program
                 Console.WriteLine($"Agent2 max points: {result.Agent2MaxPoints}, min points: {result.Agent2MinPoints}");
                 Console.WriteLine($"Agent1 wins: {result.Agent1Wins}, avg points: {result.Agent1AveragePoints:F2}");
                 Console.WriteLine($"Agent2 wins: {result.Agent2Wins}, avg points: {result.Agent2AveragePoints:F2}");
+                Console.WriteLine($"Total elapsed: {TimeSpan.FromMilliseconds(result.TotalElapsedMilliseconds):g}");
+                Console.WriteLine($"Average game elapsed: {result.AverageGameElapsedMilliseconds:F0} ms");
                 Console.WriteLine("Victory types count:");
                 foreach (var kvp in result.VictoryTypeCounts)
                 {
@@ -359,6 +363,14 @@ class Program
         Console.WriteLine($"Agent2 max points: {result.Agent2MaxPoints}, min points: {result.Agent2MinPoints}");
         Console.WriteLine($"Agent1 wins: {result.Agent1Wins}, avg points: {result.Agent1AveragePoints:F2}");
         Console.WriteLine($"Agent2 wins: {result.Agent2Wins}, avg points: {result.Agent2AveragePoints:F2}");
+        Console.WriteLine($"Total elapsed: {TimeSpan.FromMilliseconds(result.TotalElapsedMilliseconds):g}");
+        Console.WriteLine($"Average game elapsed: {result.AverageGameElapsedMilliseconds:F0} ms");
+
+        Console.WriteLine("Per-game timings:");
+        foreach (var timing in result.GameTimings)
+        {
+            Console.WriteLine($"  Game {timing.GameNumber:00} | Seed {timing.Seed} | {timing.Agent1Name} vs {timing.Agent2Name} | Turns {timing.Turns} | {timing.ElapsedMilliseconds} ms");
+        }
 
         Console.WriteLine("Victory types count:");
         foreach (var kvp in result.VictoryTypeCounts)

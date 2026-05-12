@@ -6,32 +6,47 @@ public class MctsAgent : IAgent
 {
     public string Name { get; set; } = "MCTS";
     public int Iterations { get; set; } = 300;
+    public bool UseRootDeterminization { get; set; } = false;
+    public bool ReshuffleInRollout { get; set; } = true;
 
     private readonly IRandom random;
     private MctsNode? currentRoot;
-    //private Gra simulationGame;
+    private Gra? simulationGame;
+    private readonly RandomAgent rolloutAgent;
+    private readonly SimulationDecisionResolver rolloutResolver;
 
     public MctsAgent(IRandom random)
     {
         this.random = random;
+        rolloutAgent = new RandomAgent(random);
+        rolloutResolver = new SimulationDecisionResolver(rolloutAgent);
     }
 
     public Ruch WybierzRuch(Gra gra)
     {
         if (gra == null) throw new ArgumentNullException(nameof(gra));
 
-        var root = new MctsNode(gra.Clone(), null);
+        var rootGame = gra.Clone();
+        if (UseRootDeterminization)
+            rootGame.PotasujZakryteKarty(random);
+
+        var root = MctsNode.Create(rootGame, null);
 
         if (!root.NieprzetestowaneRuchy.Any() && !root.Dzieci.Any())
             throw new InvalidOperationException("MCTS nie znalazl zadnego legalnego ruchu.");
 
-        for (int i = 0; i < Iterations; i++)
-            RunIteration(root, gra.AktywnyGracz.Nazwa);
+        try
+        {
+            for (int i = 0; i < Iterations; i++)
+                RunIteration(root, gra.AktywnyGracz.Nazwa);
 
-        var najlepszy = NajlepszyRuch(root);
-        root = root.Dzieci.FirstOrDefault(c => c.Ruch == najlepszy);
-
-        return najlepszy;
+            var najlepszy = NajlepszyRuch(root);
+            return najlepszy;
+        }
+        finally
+        {
+            MctsNodePool.ReturnTree(root);
+        }
     }
 
     public T WybierzAkcjePosrednia<T>(Gra gra, DecyzjaKontekst<T> decyzja)
@@ -46,7 +61,6 @@ public class MctsAgent : IAgent
     {
         var node = Select(root);
         node = Expand(node);
-        //var winner = Simulate(node.Gra, simulationGame);
         var winner = Simulate(node.Gra);
         Backpropagate(node, winner, rootPlayerName);
     }
@@ -74,28 +88,34 @@ public class MctsAgent : IAgent
         node.NieprzetestowaneRuchy.RemoveAt(index);
 
         var newGame = node.Gra.Clone();
-        var resolver = new SimulationDecisionResolver(new RandomAgent(random));
-        newGame.WykonajRuch(move, resolver, random);
+        newGame.WykonajRuch(move, rolloutResolver, random);
 
-        var child = new MctsNode(newGame, node, move);
+        var child = MctsNode.Create(newGame, node, move);
         node.Dzieci.Add(child);
 
         return child;
     }
 
-    //Gracz Simulate(Gra gra, Gra simulationGame)
     Gracz Simulate(Gra gra)
     {
-        var simulationGame = gra.Clone();
-        //simulationGame.CopyFrom(gra);
-        var randomAgent = new RandomAgent(random);
-        var decisionResolver = new SimulationDecisionResolver(randomAgent);
-        simulationGame.PotasujZakryteKarty(random);
+        if (ReshuffleInRollout)
+        {
+            // Create a fresh simulation game for this rollout and reshuffle hidden cards.
+            var temp = gra.Clone();
+            temp.PotasujZakryteKarty(random);
+            simulationGame = temp;
+        }
+        else
+        {
+            // Reuse allocated simulation game for performance and copy current state into it.
+            simulationGame ??= gra.Clone();
+            simulationGame.CopyFrom(gra);
+        }
 
         while (!simulationGame.CzyKoniecGry())
         {
-            var ruch = randomAgent.WybierzRuch(simulationGame);
-            simulationGame.WykonajRuch(ruch, decisionResolver, random);
+            var ruch = rolloutAgent.WybierzRuch(simulationGame);
+            simulationGame.WykonajRuch(ruch, rolloutResolver, random);
         }
 
         simulationGame.ZakonczGre();

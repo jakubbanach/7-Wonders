@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 public class SimulationRunner
@@ -28,6 +29,8 @@ public class SimulationRunner
     {
         var results = new List<MatchResult>();
         var reversedResults = new List<MatchResult>();
+        var timings = new List<MatchTimingStat>();
+        var totalStopwatch = Stopwatch.StartNew();
 
         for (int i = 0; i < games; i++)
         {
@@ -38,8 +41,22 @@ public class SimulationRunner
                 agent2Factory: agent2Factory
             );
 
+            var gameStopwatch = Stopwatch.StartNew();
             var result = runner.PlayGame(mode);
+            gameStopwatch.Stop();
+
+            Console.WriteLine($"Finished game {i + 1}/{games} with seed {seed + i} in {gameStopwatch.ElapsedMilliseconds} ms");
             results.Add(result);
+            timings.Add(new MatchTimingStat
+            {
+                GameNumber = i + 1,
+                Seed = result.Seed,
+                Agent1Name = result.Agent1Name,
+                Agent2Name = result.Agent2Name,
+                Turns = result.Turns,
+                ElapsedMilliseconds = gameStopwatch.ElapsedMilliseconds,
+            });
+
             if (result.Agent1Score == 0 || result.Agent2Score == 0)
             {
                 Console.WriteLine($"Game {i + 1}/{games} had a zero score. Seed: {result.Seed}");
@@ -61,8 +78,21 @@ public class SimulationRunner
                     agent2Factory: agent1Factory
                 );
 
+                var gameStopwatch = Stopwatch.StartNew();
                 var result = reversedRunner.PlayGame(mode);
+                gameStopwatch.Stop();
+
                 reversedResults.Add(result);
+                timings.Add(new MatchTimingStat
+                {
+                    GameNumber = games + i + 1,
+                    Seed = result.Seed,
+                    Agent1Name = result.Agent1Name,
+                    Agent2Name = result.Agent2Name,
+                    Turns = result.Turns,
+                    ElapsedMilliseconds = gameStopwatch.ElapsedMilliseconds,
+                });
+
                 if (result.Agent1Score == 0 || result.Agent2Score == 0)
                 {
                     Console.WriteLine($"Game {i + 1}/{games} had a zero score. Seed: {result.Seed}");
@@ -75,10 +105,12 @@ public class SimulationRunner
             results.AddRange(reversedResults);
         }
 
-        return Summarize(results);
+        totalStopwatch.Stop();
+
+        return Summarize(results, timings, totalStopwatch.ElapsedMilliseconds);
     }
 
-    private SimulationResult Summarize(List<MatchResult> results)
+    private SimulationResult Summarize(List<MatchResult> results, List<MatchTimingStat> timings, long totalElapsedMilliseconds)
     {
         var winsA1 = results.Count(r => r.Winner == results[0].Agent1Name);
         var winsA2 = results.Count(r => r.Winner == results[0].Agent2Name);
@@ -103,6 +135,8 @@ public class SimulationRunner
         return new SimulationResult
         {
             TotalGames = results.Count,
+            TotalElapsedMilliseconds = totalElapsedMilliseconds,
+            AverageGameElapsedMilliseconds = timings.Count == 0 ? 0 : timings.Average(t => (double)t.ElapsedMilliseconds),
             Agent1Wins = winsA1,
             Agent2Wins = winsA2,
             Agent1MaxPoints = results.Max(r => r.Agent1Score),
@@ -111,6 +145,7 @@ public class SimulationRunner
             Agent2MinPoints = results.Min(r => r.Agent2Score),
             Agent1AveragePoints = avgA1Points,
             Agent2AveragePoints = avgA2Points,
+            GameTimings = timings,
             VictoryTypeCounts = typeCounts,
             //MatchResults = results
         };

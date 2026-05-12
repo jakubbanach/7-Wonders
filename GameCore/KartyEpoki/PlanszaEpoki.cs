@@ -16,7 +16,7 @@ public class PlanszaEpoki
     private PlanszaEpoki(PlanszaEpoki plansza)
     {
         Epoka = plansza.Epoka;
-        Pola = plansza.Pola.Select(p => p.Clone()).ToList();
+        Pola = ClonePola(plansza.Pola);
     }
 
     public PlanszaEpoki Clone()
@@ -26,11 +26,7 @@ public class PlanszaEpoki
     public void CopyFrom(PlanszaEpoki source)
     {
         Epoka = source.Epoka;
-
-        Pola.Clear();
-
-        for (int i = 0; i < source.Pola.Count; i++)
-            Pola.Add(source.Pola[i].Clone());
+        Pola = ClonePola(source.Pola);
     }
 
     public IEnumerable<PoleKarty> DostepneKarty =>
@@ -62,12 +58,12 @@ public class PlanszaEpoki
     public void ZmienPlansze(PlanszaEpoki nowaPlansza)
     {
         Epoka = nowaPlansza.Epoka;
-        Pola = nowaPlansza.Pola.Select(p => p.Clone()).ToList();
+        Pola = ClonePola(nowaPlansza.Pola);
     }
 
     public PoleKarty ZnajdzPole(Karta karta)
     {
-        return Pola.FirstOrDefault(p => p.Karta == karta);
+        return Pola.FirstOrDefault(p => p.Karta != null && p.Karta.Equals(karta));
     }
 
     public void UsunPole(PoleKarty pole)
@@ -125,5 +121,19 @@ public class PlanszaEpoki
 
         wynik.AppendLine("[D] Dostepna | [X] Zakryta | [O] Odkryta | [-] Puste pole");
         return wynik.ToString();
+    }
+
+    private static List<PoleKarty> ClonePola(IReadOnlyList<PoleKarty> sourcePola)
+    {
+        var map = new Dictionary<PoleKarty, PoleKarty>(sourcePola.Count);
+        var clonedPoles = new List<PoleKarty>(sourcePola.Count);
+
+        for (int i = 0; i < sourcePola.Count; i++)
+        {
+            var clonedPole = sourcePola[i].Clone(map);
+            clonedPoles.Add(clonedPole);
+        }
+
+        return clonedPoles;
     }
 }

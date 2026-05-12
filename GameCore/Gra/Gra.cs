@@ -43,7 +43,7 @@ public class Gra
         gracze = gra.gracze
             .Select(g => g.Clone())
             .ToArray();
-        planszaKonfliktu = gra.planszaKonfliktu.Clone();
+        planszaKonfliktu = gra.planszaKonfliktu.Clone(gracze);
         planszaEpoki = gra.planszaEpoki.Clone();
         stanGry = gra.stanGry.Clone();
         stosKartOdrzuconych = gra.stosKartOdrzuconych
@@ -62,7 +62,7 @@ public class Gra
         for (int i = 0; i < source.gracze.Length; i++)
             gracze[i].CopyFrom(source.gracze[i]);
 
-        planszaKonfliktu.CopyFrom(source.planszaKonfliktu);
+        planszaKonfliktu.CopyFrom(source.planszaKonfliktu, gracze);
         planszaEpoki.CopyFrom(source.planszaEpoki);
         stanGry.CopyFrom(source.stanGry);
 

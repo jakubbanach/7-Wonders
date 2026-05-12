@@ -24,13 +24,18 @@ public class PlanszaKonfliktu
     }
 
     private PlanszaKonfliktu(PlanszaKonfliktu plansza)
+        : this(plansza, plansza.Gracze.Select(g => g.Clone()).ToArray())
+    {
+    }
+
+    private PlanszaKonfliktu(PlanszaKonfliktu plansza, Gracz[] gracze)
     {
         PionKonfliktu = plansza.PionKonfliktu.Clone();
         ZetonyPostepu = plansza.ZetonyPostepu.Select(z => z.Clone()).ToList();
         Strefy = plansza.Strefy.Select(s => s.Clone()).ToList();
         ObecnaStrefa = Strefy.First(s => s.Nazwa == plansza.ObecnaStrefa.Nazwa);
         ZbudujMapeStref();
-        Gracze = plansza.Gracze.Select(g => g.Clone()).ToArray();
+        Gracze = gracze;
     }
 
     public PlanszaKonfliktu Clone()
@@ -38,7 +43,17 @@ public class PlanszaKonfliktu
         return new PlanszaKonfliktu(this);
     }
 
+    public PlanszaKonfliktu Clone(Gracz[] gracze)
+    {
+        return new PlanszaKonfliktu(this, gracze);
+    }
+
     public void CopyFrom(PlanszaKonfliktu source)
+    {
+        CopyFrom(source, source.Gracze.Select(g => g.Clone()).ToArray());
+    }
+
+    public void CopyFrom(PlanszaKonfliktu source, Gracz[] gracze)
     {
         PionKonfliktu = source.PionKonfliktu.Clone();
 
@@ -55,8 +70,7 @@ public class PlanszaKonfliktu
         ObecnaStrefa = Strefy
             .First(s => s.Nazwa == source.ObecnaStrefa.Nazwa);
 
-        for (int i = 0; i < Gracze.Length; i++)
-            Gracze[i].CopyFrom(source.Gracze[i]);
+        Gracze = gracze;
     }
 
     private void ZbudujMapeStref()
