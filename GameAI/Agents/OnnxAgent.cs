@@ -193,7 +193,7 @@ public class OnnxAgent : IAgent
         int actionType = actionIndex % ActionSpace.ActionsPerSlot;
 
         var pola = gra.PlanszaEpoki.Pola;
-        if (slotIndex >= pola.Count)
+        if (slotIndex >= pola.Count())
             throw new InvalidOperationException($"Invalid slot index: {slotIndex}");
 
         var karta = pola[slotIndex].Karta;

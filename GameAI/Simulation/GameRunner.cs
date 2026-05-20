@@ -51,7 +51,8 @@ public class GameRunner
 
             // ewenetualnie currentAgent
             MoveLog? moveLog = null;
-            if (mode == SimulationMode.Debug)
+            var forceLog = Environment.GetEnvironmentVariable("FORCE_LOG_DECISIONS") == "1";
+            if (mode == SimulationMode.Debug || forceLog)
                 moveLog = new MoveLog(gra.AktywnyGracz.Nazwa, ruch, gra.DostepneKarty());
 
             if (moveLog != null)
@@ -59,6 +60,9 @@ public class GameRunner
                 moveLog.State = policyEncoding.State;
                 moveLog.ActionMask = policyEncoding.ActionMask;
                 moveLog.ActionIndex = GameStateEncoder.GetActionIndex(gra, ruch);
+
+                if (currentAgent is IPolicyTargetProvider policyTargetProvider && policyTargetProvider.TryGetPolicyTarget(out var policyTarget))
+                    moveLog.PolicyTarget = policyTarget;
             }
 
             //Console.WriteLine($"Agent {gra.AktywnyGracz.Nazwa} wykonuje ruch: {ruch.TypRuchu} z karta {ruch.KartaDoZagrania.Nazwa ?? "Brak karty"}");

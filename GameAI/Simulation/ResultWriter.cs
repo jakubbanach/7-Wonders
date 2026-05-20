@@ -43,4 +43,23 @@ public static class ResultWriter
         var json = JsonSerializer.Serialize(results, options);
         File.WriteAllText(path, json);
     }
+
+    /// <summary>
+    /// Saves training data in binary .npz format (optimized for neural network training).
+    /// </summary>
+    public static void SaveBinaryTrainingData(List<MatchResult> matches, string path)
+    {
+        BinaryTrainingDataWriter.SaveTrainingDataNpz(matches, path);
+    }
+
+    /// <summary>
+    /// Saves training data in binary .npz format with explicit output path.
+    /// </summary>
+    public static void SaveBinaryTrainingDataNpz(SimulationResult result, string path)
+    {
+        if (result.MatchResults == null)
+            return;
+
+        BinaryTrainingDataWriter.SaveTrainingDataNpz(result.MatchResults, path);
+    }
 }

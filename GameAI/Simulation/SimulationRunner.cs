@@ -145,9 +145,9 @@ public class SimulationRunner
             Agent2MinPoints = results.Min(r => r.Agent2Score),
             Agent1AveragePoints = avgA1Points,
             Agent2AveragePoints = avgA2Points,
-            GameTimings = timings,
+            //GameTimings = timings,
             VictoryTypeCounts = typeCounts,
-            //MatchResults = results
+            MatchResults = results
         };
     }
 }

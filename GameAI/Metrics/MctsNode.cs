@@ -8,6 +8,9 @@ class MctsNode
     public List<MctsNode> Dzieci = null!;
 
     public Ruch? Ruch;
+    public int ActionIndex = -1;
+    public float PolicyPrior;
+    public float[]? PolicyPriors;
 
     public int Wizyty;
     public double Wygrane;
@@ -25,6 +28,9 @@ class MctsNode
         node.Gra = gra;
         node.Rodzic = rodzic;
         node.Ruch = ruch;
+        node.ActionIndex = -1;
+        node.PolicyPrior = 0f;
+        node.PolicyPriors = null;
         node.Wizyty = 0;
         node.Wygrane = 0;
         node.Dzieci = ListPool<MctsNode>.Rent();
@@ -67,6 +73,9 @@ static class MctsNodePool
         node.Gra = null!;
         node.Rodzic = null;
         node.Ruch = null;
+        node.ActionIndex = -1;
+        node.PolicyPrior = 0f;
+        node.PolicyPriors = null;
         node.Wizyty = 0;
         node.Wygrane = 0;
 

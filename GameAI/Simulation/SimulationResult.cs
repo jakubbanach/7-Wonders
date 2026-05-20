@@ -15,11 +15,11 @@ public class SimulationResult
     public int Agent2MinPoints { get; set; }
     public double Agent1AveragePoints { get; set; }
     public double Agent2AveragePoints { get; set; }
-    public List<MatchTimingStat> GameTimings { get; set; } = new List<MatchTimingStat>();
+    //public List<MatchTimingStat> GameTimings { get; set; } = new List<MatchTimingStat>();
     //public HeuristicWeights Agent1Weights { get; set; }
     //public HeuristicWeights Agent2Weights { get; set; }
     public List<VictoryTypeStat> VictoryTypeCounts { get; set; }
-    //public List<MatchResult> MatchResults { get; set; }
+    public List<MatchResult> MatchResults { get; set; }
 
     // używane w trakcie symulacji
     [JsonIgnore]

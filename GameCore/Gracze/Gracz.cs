@@ -149,6 +149,7 @@ public class Gracz
 
     public void UsunKarte(Karta karta)
     {
+        karta.Efekty.ForEach(e => UsunEfekt(e));
         ZbudowaneKarty.Remove(karta);
         karta.OznaczJakoNiezagrana();
         karta.OznaczJakoOdrzucona();
@@ -172,6 +173,13 @@ public class Gracz
 
     public void UsunEfekt(Efekt efekt)
     {
+        if (efekt.TypEfektu == TypEfektu.Surowiec)
+        {
+            foreach (var kv in efekt.Surowce)
+            {
+                DodajSurowiec(kv.Key, -kv.Value);
+            }
+        }
         Efekty.Remove(efekt);
     }
 

@@ -69,7 +69,7 @@ public class MctsAgent : IAgent
     {
         while (!node.Gra.CzyKoniecGry() &&
                node.NieprzetestowaneRuchy.Count == 0 &&
-               node.Dzieci.Any())
+               node.Dzieci.Count > 0)
         {
             node = BestUcbChild(node);
         }
@@ -101,6 +101,9 @@ public class MctsAgent : IAgent
         if (ReshuffleInRollout)
         {
             // Create a fresh simulation game for this rollout and reshuffle hidden cards.
+            //simulationGame ??= gra.Clone();
+            //simulationGame.CopyFrom(gra);         // reuse zamiast Clone
+            //simulationGame.PotasujZakryteKarty(random);
             var temp = gra.Clone();
             temp.PotasujZakryteKarty(random);
             simulationGame = temp;

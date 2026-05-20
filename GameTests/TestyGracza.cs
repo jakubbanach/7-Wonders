@@ -98,6 +98,31 @@ public class TestyGracza
         Assert.Contains(TypEfektu.SymbolNaukowy, gracz.PobierzEfekty().Select(e => e.TypEfektu));
         Assert.Contains(TypEfektu.PunktyZwyciestwa, gracz.PobierzEfekty().Select(e => e.TypEfektu));
     }
+
+    [Fact]
+    public void UsunKarte_Should_Remove_Card_And_Reverse_Resource_Effects()
+    {
+        var gracz = new Gracz("TestowyGracz");
+        var przeciwnik = new Gracz("Przeciwnik");
+        var karta = ZbiorKart.TaliaEpokiI.First(k => k.Nazwa == "Wycinka").Clone();
+
+        var poczatkoweDrewno = gracz.Surowce[Surowiec.Drewno];
+
+        gracz.ZbudujKarte(karta, przeciwnik);
+
+        Assert.Contains(karta, gracz.ZbudowaneKarty);
+        Assert.Equal(poczatkoweDrewno + 1, gracz.Surowce[Surowiec.Drewno]);
+        Assert.Contains(TypEfektu.Surowiec, gracz.PobierzEfekty().Select(e => e.TypEfektu));
+
+        gracz.UsunKarte(karta);
+
+        Assert.DoesNotContain(karta, gracz.ZbudowaneKarty);
+        Assert.Equal(poczatkoweDrewno, gracz.Surowce[Surowiec.Drewno]);
+        Assert.False(karta.CzyZagrana);
+        Assert.True(karta.CzyOdrzucona);
+        Assert.Empty(gracz.PobierzEfekty());
+    }
+
     [Fact]
     public void ZbudujKarteCudu_Brak_Niektorych_Surowcow()
     {

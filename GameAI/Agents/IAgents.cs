@@ -28,3 +28,8 @@ public interface IAgent
         return bestItems[random.Next(bestItems.Count)];
     }
 }
+
+public interface IPolicyTargetProvider
+{
+    bool TryGetPolicyTarget(out float[] policyTarget);
+}

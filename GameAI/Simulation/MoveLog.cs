@@ -11,6 +11,7 @@ public class MoveLog
     public float[]? State { get; set; }                    // POTRZEBNE: wejscie do modelu
     public float[]? ActionMask { get; set; }              // POTRZEBNE: maska legalnych akcji
     public int ActionIndex { get; set; } = -1;           // POTRZEBNE: cel treningu
+    public float[]? PolicyTarget { get; set; }           // POTRZEBNE: target policy z visit counts
 
     // Pola informacyjne (mozna pominac dla --minimal-logs)
     public string? TypRuchu { get; set; }                 // TODO: mozna usunac dla ekonomii
@@ -33,5 +34,6 @@ public class MoveLog
         KartaCudu = ruch.KartaCudu;
         SurowceGracza = ruch.Gracz.Surowce;
         SurowcePrzeciwnika = ruch.Przeciwnik.Surowce;
+        Decisions = new List<DecisionLog>();
     }
 }
