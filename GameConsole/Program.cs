@@ -116,7 +116,7 @@ class Program
         int seed = 12345;
         int games = 1000;
         string modelPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "GameAI/Encoding/onnx_models/policy_network_50_500.onnx");
-        string outputName = $"self_play_puct_{DateTime.Now:yyyyMMdd_HHmmss}";
+        string outputName = $"{DateTime.Now:yyyyMMdd_HHmmss}";
         bool minimal = true;
 
         for (int i = 0; i < args.Length; i++)
@@ -146,9 +146,10 @@ class Program
 
         modelPath = Path.GetFullPath(modelPath);
         var puctSpec = $"puct:{modelPath}";
-        var agentFactory = CreateAgentFactoryFromSpec(puctSpec);
+        //var agentFactory = CreateAgentFactoryFromSpec(puctSpec);
+        var agentFactory = CreateAgentFactoryFromSpec("mcts");
 
-        Console.WriteLine($"Starting self-play PUCT training");
+        Console.WriteLine($"Starting self-play MCTS training");
         Console.WriteLine($"Model: {modelPath}");
         Console.WriteLine($"Games: {games}, seed: {seed}{(minimal ? " - MINIMAL LOGS" : "")}");
 
@@ -162,7 +163,7 @@ class Program
         var result = simulationRunner.Run();
         if (minimal)
         {
-            Console.WriteLine("Minimalizowanie logow dla economii pamieci...");
+            //Console.WriteLine("Minimalizowanie logow dla economii pamieci...");
             foreach (var match in result.MatchResults)
             {
                 match.MinimalizeForTraining();
@@ -172,7 +173,7 @@ class Program
         var resultsDir = Path.GetFullPath(Path.Combine(projectDir, "Results"));
         Directory.CreateDirectory(resultsDir);
 
-        var fileName = $"{outputName}_{games}_games{(minimal ? "_minimal" : "")}.npz";
+        var fileName = $"mcts_{outputName}_{games}_games{(minimal ? "_minimal" : "")}.npz";
         var fullPath = Path.Combine(resultsDir, fileName);
         //ResultWriter.Save(result, fullPath);
         ResultWriter.SaveBinaryTrainingDataNpz(result, fullPath);
@@ -341,8 +342,10 @@ class Program
         {
             ["random"] = r => new RandomAgent(r),
             ["mcts"] = r => new MctsAgent(r),
+            ["ismcts"] = r => new ISMctsAgent(r),
             ["heuristic-personal"] = r => new HeuristicAgent(HeuristicWeightPresets.Personal(), r),
             ["heuristic-double"] = r => new HeuristicAgent(HeuristicWeightPresets.GeneticDouble(), r),
+            ["heuristic-double-new"] = r => new HeuristicAgent(HeuristicWeightPresets.GeneticDoubleNew(), r),
             ["heuristic-balanced"] = r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r),
             ["heuristic-military"] = r => new HeuristicAgent(HeuristicWeightPresets.Military(), r),
             ["onnx"] = r => new OnnxAgentConfiguration
@@ -381,8 +384,8 @@ class Program
 
     static void SimulationPuctTesting()
     {
-        int seed = 1000;
-        int games = 20;
+        int seed = 1;
+        int games = 100;
 
         var agents = new List<(string Name, Func<IRandom, IAgent> Factory)>
         {
@@ -456,17 +459,19 @@ class Program
     }
     static void SimulationRunnerFunction()
     {
-        int seed = 12000;
-        int games = 20;
+        int seed = 12345;
+        int games = 5000;
 
         var agents = new List<(string Name, Func<IRandom, IAgent> Factory)>
         {
             //("RandomAgent", r => new RandomAgent(r)),
             //("HeuristicAgent (Military)", r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)),
             //("HeuristicAgent (Balanced)", r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r)),
-            //("HeuristicAgent (GeneticPersonal)", CreateAgentFactoryFromSpec("heuristic-personal")),
+            ("HeuristicAgent (GeneticPersonal)", CreateAgentFactoryFromSpec("heuristic-personal")),
             ("HeuristicAgent (GeneticDouble)", CreateAgentFactoryFromSpec("heuristic-double")),
-            ("MCTSAgent", CreateAgentFactoryFromSpec("mcts")),
+            //("HeuristicAgent (GeneticDouble New)", CreateAgentFactoryFromSpec("heuristic-double-new")),
+            //("MCTSAgent", CreateAgentFactoryFromSpec("mcts")),
+            //("ISMCTSAgent", CreateAgentFactoryFromSpec("ismcts")),
             //("PUCTAgent", CreateAgentFactoryFromSpec("puct")),
             //("PUCTAgent Match", CreateAgentFactoryFromSpec("puct_match")),
             //("PUCTAgent Iter 2", CreateAgentFactoryFromSpec("puct_iter_2")),
@@ -478,7 +483,7 @@ class Program
         {
             for (int j = 0; j < agents.Count; j++)
             {
-                if (i == j) continue; // Skip self-play for now
+                //if (i == j) continue; // Skip self-play for now
                 Console.WriteLine($"Running simulation: {agents[i].Name} vs {agents[j].Name}");
                 // reset instrumentation counters before run
 
@@ -574,29 +579,31 @@ class Program
 
         var runner = new GameRunner(
             seed: seed,
-            agent1Factory: CreateAgentFactoryFromSpec("puct"),
-            agent2Factory: CreateAgentFactoryFromSpec("puct_latest")
+            //agent1Factory: CreateAgentFactoryFromSpec("puct"),
+            //agent2Factory: CreateAgentFactoryFromSpec("puct_latest")
+            agent1Factory: CreateAgentFactoryFromSpec("ismcts"),
+            agent2Factory: CreateAgentFactoryFromSpec("mcts")
         );
         var result = runner.PlayGame(SimulationMode.Debug);
 
         PrintResult(result);
 
-        var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
-        var resultsDir = Path.Combine(projectDir, "Results");
-        Directory.CreateDirectory(resultsDir);
-        var fileName = $"match_{DateTime.Now:yyyyMMdd_HHmmss}_{result.MatchId}.json";
-        var fullPath = Path.Combine(resultsDir, fileName);
+        //var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
+        //var resultsDir = Path.Combine(projectDir, "Results");
+        //Directory.CreateDirectory(resultsDir);
+        //var fileName = $"match_{DateTime.Now:yyyyMMdd_HHmmss}_{result.MatchId}.json";
+        //var fullPath = Path.Combine(resultsDir, fileName);
 
-        ResultWriter.Save(result, fullPath);
+        //ResultWriter.Save(result, fullPath);
     }
     static void HeuristicGameRunner()
     {
-        int seed = 837;
+        int seed = 12690;
 
         var runner = new GameRunner(
             seed: seed,
-            agent1Factory: r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r),
-            agent2Factory: r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)
+            agent1Factory: r => new HeuristicAgent(HeuristicWeightPresets.GeneticDoubleNew(), r),
+            agent2Factory: r => new HeuristicAgent(HeuristicWeightPresets.GeneticDouble(), r)
         );
         var result = runner.PlayGame(SimulationMode.Debug);
 

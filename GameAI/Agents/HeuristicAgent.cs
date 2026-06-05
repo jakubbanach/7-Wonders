@@ -109,6 +109,8 @@ public class HeuristicAgent : IAgent
                 przeciwnik.UsunKarte((Karta)(object)opcja);
                 break;
             case TypEfektu.WybierzGraczaRozpoczynajacegoEpoke:
+                // wybor gracza rozpoczynajacego to niech bedzie wybor tego co podemuje decyzje, bo to jest bardziej korzystne dla niego (w wiekszosci przypadkow)
+                //return gracz == symulacja.Gracze[0] ? 1 : -1;
                 return 0; // TODO: zobaczyc jak to ocenic heurystycznie
         }
         return OcenStan(symulacja, gracz);

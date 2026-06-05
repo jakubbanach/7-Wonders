@@ -5,8 +5,8 @@ using System.Linq;
 public class MctsAgent : IAgent
 {
     public string Name { get; set; } = "MCTS";
-    public int Iterations { get; set; } = 300;
-    public bool UseRootDeterminization { get; set; } = false;
+    public static int Iterations { get; set; } = 300;
+    public bool UseRootDeterminization { get; set; } = true;
     public bool ReshuffleInRollout { get; set; } = true;
 
     private readonly IRandom random;
@@ -14,6 +14,7 @@ public class MctsAgent : IAgent
     private Gra? simulationGame;
     private readonly RandomAgent rolloutAgent;
     private readonly SimulationDecisionResolver rolloutResolver;
+    private const double C = 1.414;
 
     public MctsAgent(IRandom random)
     {
@@ -27,7 +28,9 @@ public class MctsAgent : IAgent
         if (gra == null) throw new ArgumentNullException(nameof(gra));
 
         var rootGame = gra.Clone();
-        if (UseRootDeterminization)
+        bool hasHiddenCards = rootGame.PlanszaEpoki?.Pola.Any(p => p.CzyZakryta && p.Karta != null) == true;
+        // bez determinizacji agent moglby uzywac faktycznych przypisan zakrytych kart, ktorych gracz nie powinien znac
+        if (UseRootDeterminization || hasHiddenCards)
             rootGame.PotasujZakryteKarty(random);
 
         var root = MctsNode.Create(rootGame, null);
@@ -41,6 +44,10 @@ public class MctsAgent : IAgent
                 RunIteration(root, gra.AktywnyGracz.Nazwa);
 
             var najlepszy = NajlepszyRuch(root);
+            // wyczysc konsole
+            //Console.Clear();
+            //PrintTreeStats(root);
+            //MctsTreePrinter.Print(root, $"Ruch gracza: {gra.AktywnyGracz.Nazwa}");
             return najlepszy;
         }
         finally
@@ -61,7 +68,7 @@ public class MctsAgent : IAgent
     {
         var node = Select(root);
         node = Expand(node);
-        var winner = Simulate(node.Gra);
+        var winner = Simulate(node);
         Backpropagate(node, winner, rootPlayerName);
     }
 
@@ -83,8 +90,7 @@ public class MctsAgent : IAgent
             return node;
 
         int index = random.Next(node.NieprzetestowaneRuchy.Count);
-
-        var move = node.NieprzetestowaneRuchy[index];
+        Ruch move = node.NieprzetestowaneRuchy[index];
         node.NieprzetestowaneRuchy.RemoveAt(index);
 
         var newGame = node.Gra.Clone();
@@ -96,8 +102,10 @@ public class MctsAgent : IAgent
         return child;
     }
 
-    Gracz Simulate(Gra gra)
+    Gracz Simulate(MctsNode node)
     {
+        var gra = node.Gra;
+
         if (ReshuffleInRollout)
         {
             // Create a fresh simulation game for this rollout and reshuffle hidden cards.
@@ -115,6 +123,8 @@ public class MctsAgent : IAgent
             simulationGame.CopyFrom(gra);
         }
 
+        ZarejestrujDeterminizacje(node, simulationGame);
+
         while (!simulationGame.CzyKoniecGry())
         {
             var ruch = rolloutAgent.WybierzRuch(simulationGame);
@@ -122,7 +132,32 @@ public class MctsAgent : IAgent
         }
 
         simulationGame.ZakonczGre();
+        
         return simulationGame.StanGry.Zwyciezca;
+    }
+
+    void ZarejestrujDeterminizacje(MctsNode node, Gra deterGra)
+    {
+        var plansza = deterGra.PlanszaEpoki;
+        if (plansza == null) return;
+
+        node.ZakrytePola ??= new Dictionary<int, Dictionary<string, int>>();
+
+        for (int i = 0; i < plansza.Pola.Count; i++)
+        {
+            var pole = plansza.Pola[i];
+            if (!pole.CzyZakryta || pole.Karta == null) continue;
+
+            if (!node.ZakrytePola.TryGetValue(i, out var liczniki))
+            {
+                liczniki = new Dictionary<string, int>();
+                node.ZakrytePola[i] = liczniki;
+            }
+
+            string nazwa = pole.Karta.Nazwa;
+            liczniki.TryGetValue(nazwa, out int ile);
+            liczniki[nazwa] = ile + 1;
+        }
     }
 
     void Backpropagate(MctsNode node, Gracz winner, string rootPlayerName)
@@ -140,11 +175,11 @@ public class MctsAgent : IAgent
 
     MctsNode BestUcbChild(MctsNode node)
     {
-        const double C = 1.414;
         MctsNode best = null;
         double bestValue = double.MinValue;
         double logNodeVisits = Math.Log(node.Wizyty + 1);
 
+        // przejdz po dzieciach i wybierz tego z najwyższym UCB
         foreach (var child in node.Dzieci)
         {
             double ucb;
@@ -177,18 +212,38 @@ public class MctsAgent : IAgent
         throw new InvalidOperationException("MCTS nie znalazl zadnego ruchu.");
     }
 
-    //private MctsNode? ZnajdzNowyKorzen(Gra aktualnaGra, Ruch ostatniRuchPrzeciwnika)
-    //{
-    //    if (currentRoot == null) return null;
+    public static void PrintTreeStats(MctsNode root)
+    {
+        int totalNodes = 0;
+        int maxDepth = 0;
+        var nodesByDepth = new Dictionary<int, (int count, int totalVisits)>();
 
-    //    // Szukamy wśród dzieci starego korzenia tego, który powstał przez 'ostatniRuchPrzeciwnika'
-    //    var potencjalnyNowyKorzen = currentRoot.Dzieci
-    //        .FirstOrDefault(child => child.Ruch != null && child.Ruch.Equals(ostatniRuchPrzeciwnika));
+        var stack = new Stack<(MctsNode node, int depth)>();
+        stack.Push((root, 0));
 
-    //    // Opcjonalnie: sprawdź, czy stan gry faktycznie się zgadza (sanity check)
-    //    // if (potencjalnyNowyKorzen != null && !SaTakieSame(potencjalnyNowyKorzen.Gra, aktualnaGra)) 
-    //    //    return null; 
+        while (stack.Count > 0)
+        {
+            var (node, depth) = stack.Pop();
+            totalNodes++;
+            maxDepth = Math.Max(maxDepth, depth);
 
-    //    return potencjalnyNowyKorzen;
-    //}
+            if (!nodesByDepth.ContainsKey(depth))
+                nodesByDepth[depth] = (0, 0);
+            var (c, v) = nodesByDepth[depth];
+            nodesByDepth[depth] = (c + 1, v + node.Wizyty);
+
+            foreach (var child in node.Dzieci)
+                stack.Push((child, depth + 1));
+        }
+
+        Console.WriteLine($"\n── Tree stats ({Iterations} iteracji) ──");
+        Console.WriteLine($"Węzłów łącznie: {totalNodes}, max głębokość: {maxDepth}");
+        for (int d = 0; d <= maxDepth; d++)
+        {
+            var (count, visits) = nodesByDepth.GetValueOrDefault(d);
+            double avgVisits = count > 0 ? (double)visits / count : 0;
+            string bar = new string('█', Math.Min(count, 40));
+            Console.WriteLine($"  głęb {d}: {count,4} węzłów  śr.wizyt: {avgVisits,5:F1}  {bar}");
+        }
+    }
 }

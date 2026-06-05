@@ -45,7 +45,8 @@ public class SimulationRunner
             var result = runner.PlayGame(mode);
             gameStopwatch.Stop();
 
-            Console.WriteLine($"Finished game {i + 1}/{games} with seed {seed + i} in {gameStopwatch.ElapsedMilliseconds} ms");
+            //if (i == 0 || (i + 1) % 10 == 0)
+            //    Console.WriteLine($"Finished game {i + 1}/{games} with seed {seed + i} in {gameStopwatch.ElapsedMilliseconds} ms");
             results.Add(result);
             timings.Add(new MatchTimingStat
             {

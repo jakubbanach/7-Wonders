@@ -65,8 +65,8 @@ public static class HeuristicWeightPresets
         Wojsko = 5.0,
         SurowceBrazowe = 10.0,
         SurowceSzare = 10.0,
-        MonopolBonus = 20.0,
         SynergiaGildii = 5.0,
+        MonopolBonus = 20.0,
     };
     public static HeuristicWeights GeneticInt() => new HeuristicWeights()
     {
@@ -99,6 +99,18 @@ public static class HeuristicWeightPresets
         SurowceSzare = 10.936882555455375,
         SynergiaGildii = 11.692723024027758,
         MonopolBonus = 10.65803921765556
+    };
+    public static HeuristicWeights GeneticDoubleNew() => new HeuristicWeights()
+    {
+        PunktyZwyciestwa = 10,
+        Cuda = 13.755986060367894,
+        Monety = 5.748690194798954,
+        SymboleNaukowe = 5.637947514018951,
+        Wojsko = 15.426423339371764,
+        SurowceBrazowe = 17.26935163711633,
+        SurowceSzare = 13.902992859903254,
+        SynergiaGildii = 2.7041934610829657,
+        MonopolBonus = 5.981615548944854
     };
 
 }

@@ -46,9 +46,10 @@ public class EvolutionManager
 
             // Selekcja i Mutacja
             var posortowane = wyniki.OrderByDescending(x => x.wins).ToList();
-            _bestEver = posortowane[0].w;
+            if (posortowane[0].wins > (TreningowNaGen)) // Jeśli najlepszy ma więcej niż 50% wygranych, aktualizujemy bestEver
+                _bestEver = posortowane[0].w;
 
-            Console.WriteLine($"G:{g} | Best Wins: {posortowane[0].wins}/{TreningowNaGen} | PV: {_bestEver.PunktyZwyciestwa:F2} " +
+            Console.WriteLine($"G:{g} | Best Wins: {posortowane[0].wins}/{TreningowNaGen*2} | PV: {_bestEver.PunktyZwyciestwa:F2} " +
                 $"Mil: {_bestEver.Wojsko:F2} Mon: {_bestEver.Monety:F2} Cuda: {_bestEver.Cuda:F2} Symb: {_bestEver.SymboleNaukowe:F2} " +
                 $"Braz: {_bestEver.SurowceBrazowe:F2} Szare: {_bestEver.SurowceSzare:F2} Synergia: {_bestEver.SynergiaGildii:F2} Monopol: {_bestEver.MonopolBonus:F2}");
 
@@ -75,16 +76,25 @@ public class EvolutionManager
             else
                 przeciwnikFactory = r => new RandomAgent(r);
 
+            var rngSeed = _rng.Next();
             var runner = new GameRunner(
-                _rng.Next(),
+                rngSeed,
                 r => new HeuristicAgent(wagi, r),
                 przeciwnikFactory
             );
 
             var res = runner.PlayGame(SimulationMode.Tournament);
-            // Agent1 to heurystyczny!!!!
             if (res.Winner == res.Agent1Name) wins++;
-            //Console.WriteLine($"Trening {i + 1}/10 | Wagi: PV:{wagi.PunktyZwyciestwa:F1} Mil:{wagi.Wojsko:F1} Mon:{wagi.Monety:F1} Cuda:{wagi.Cuda:F1} Symb:{wagi.SymboleNaukowe:F1} | Winner: {res.Winner} | Wins: {wins}");
+
+            var runnerReverse = new GameRunner(
+                rngSeed,
+                przeciwnikFactory,
+                r => new HeuristicAgent(wagi, r)
+            );
+
+            var resReverse = runnerReverse.PlayGame(SimulationMode.Tournament);
+            // Agent1 to heurystyczny!!!!
+            if (resReverse.Winner == resReverse.Agent2Name) wins++;
         }
         return wins;
     }
@@ -108,7 +118,7 @@ public class EvolutionManager
         var projectDir = Path.Combine(AppContext.BaseDirectory, "..", "..", "..");
         var resultsDir = Path.Combine(projectDir, "Simulations");
         Directory.CreateDirectory(resultsDir);
-        var fullPath = Path.Combine(resultsDir, "best_heuristic_weights_20_double.json");
+        var fullPath = Path.Combine(resultsDir, "best_heuristic_weights_20_double_new.json");
 
         var options = new JsonSerializerOptions { WriteIndented = true };
         var json = JsonSerializer.Serialize(_bestEver, options);
