@@ -1,0 +1,118 @@
+@startuml
+skinparam classBackgroundColor #F8F8F8
+skinparam classAttributeIconSize 0
+skinparam classAttributeFontSize 18
+
+' może dodać coś jeszcze?
+class Gra {
+  + gracze : List<Gracz>
+  + planszaEpoki : PlanszaEpoki
+  + planszaKonfliktu : PlanszaKonfliktu
+  + stanGry : StanGry
+  ' + aktywnyGracz : Gracz
+  + stosKartOdrzuconych : List<Karta>
+  + CzyKoniecGry() : bool
+  + WykonajRuch(ruch : Ruch) : void
+  + Clone() : Gra
+}
+
+class Gracz {
+  + nazwa : string
+  + kartyCudu : List<KartaCudu>
+  + zbudowaneKarty : List<Karta>
+  + surowce : Dictionary<Surowiec, int>
+  + punktyZwyciestwa : int
+  + efekty : List<Efekt>
+  + symboleNaukowe : List<SymbolNaukowy>
+  + zetonyPostepu : List<ZetonPostepu>
+}
+
+class StanGry {
+  + czyZakonczona : bool
+  + typZwyciestwa : TypZwyciestwa
+  + zwyciezca : Gracz
+}
+
+class PlanszaEpoki {
+  + epoka : Epoka
+  + pola : List<PoleKarty>
+}
+
+class PoleKarty {
+  + karta : Karta
+  + czyZakryta : bool
+  + blokujacePola : List<PoleKarty>
+}
+
+class PlanszaKonfliktu {
+  + pion : PionKonfliktu
+  + strefy : List<Strefa>
+  + zetonyPostepu : List<ZetonPostepu>
+}
+
+class PionKonfliktu {
+  + pozycja : int
+  ' + PrzesunPion() : void
+}
+
+class Strefa {
+  + nazwa : string
+  + liczbaPol : int
+  + punkty : int
+  + traconeMonety : int
+  + czyZajeta : bool
+  + czyJuzUzyta : bool
+}
+
+abstract class KartaBazowa {
+  + nazwa : string
+  + koszt : Dictionary<Surowiec, int>
+  + efekty : List<Efekt>
+}
+
+class Karta {
+  + epoka : Epoka
+  + kolor : KolorKarty
+  + czyZagrana : bool
+  + czyOdrzucona : bool
+  + czyWidoczna : bool
+}
+
+class KartaCudu {
+  + czyZagrana : bool
+}
+
+class ZetonPostepu {
+  + nazwa : string
+  + efekty : List<Efekt>
+}
+
+' class Efekt {
+'   + typEfektu : TypEfektu
+'   + wartosc : int
+'   + surowce : Dictionary<Surowiec, int>
+'   + tekst : string
+' }
+
+KartaBazowa <|-- Karta
+KartaBazowa <|-- KartaCudu
+
+Gra "1" *-- "2" Gracz
+Gra "1" *-- "1" PlanszaEpoki
+Gra "1" *-- "1" PlanszaKonfliktu
+Gra "1" *-- "1" StanGry
+Gra "1" o-- "*" Karta
+
+Gracz "1" o-- "*" Karta
+Gracz "1" o-- "*" KartaCudu
+Gracz "1" o-- "*" ZetonPostepu
+
+PlanszaEpoki "1" *-- "*" PoleKarty
+PoleKarty "1" --> "1" Karta
+
+PlanszaKonfliktu "1" *-- "1" PionKonfliktu
+PlanszaKonfliktu "1" *-- "*" Strefa
+PlanszaKonfliktu "1" o-- "*" ZetonPostepu
+
+StanGry --> Gracz
+@enduml

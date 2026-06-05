@@ -1,0 +1,78 @@
+@startuml Simulation Tournament Model
+skinparam classBackgroundColor #F8F8F8
+skinparam classAttributeIconSize 0
+' skinparam classAttributeFontSize 16
+
+  class SimulationRunner {
+    + seed : int
+    + Uruchom() : SimulationResult
+  }
+
+  class GameRunner {
+    + seed : int
+    + RozegrajGre(tryb : SimulationMode) : MatchResult
+  }
+
+  class MatchResult {
+    + matchId : Guid
+    + seed : int
+    + agent1Nazwa : string
+    + agent2Nazwa : string
+    + zwyciezca : string?
+    + TypZwyciestwa : TypZwyciestwa
+    + tury : int
+    + agent1Wynik : int
+    + agent2Wynik : int
+    + ruchy : List<MoveLog>?
+  }
+
+  class MoveLog {
+    + agent : string
+    + stan : float[]?
+    + akcjaMaska : float[]?
+    + akcjaIndex : int
+    + politykaCel: float[]?
+    + decyzje : List<DecisionLog>?
+  }
+
+  class DecisionLog {
+    + typDecyzji : string
+    + opcje : List<string>
+    + wybor : string
+    + stan : float[]?
+  }
+
+  class SimulationResult {
+    + gry : int
+    + sredniCzasGry : double
+    + agent1Wygrane : int
+    + agent2Wygrane : int
+    + typowZwyciestw : List<VictoryTypeStat>
+    + wynikMeczu : List<MatchResult>
+  }
+
+  class VictoryTypeStat {
+    + agent : string
+    + wynik : string
+    + liczba : int
+  }
+
+  enum SimulationMode{
+    Turniej
+    Debug
+  }
+
+SimulationRunner "1" *-- "1" GameRunner : uruchamia
+SimulationRunner "1" o-- "1" SimulationResult : zwraca
+
+GameRunner ..> SimulationMode
+GameRunner ..> MatchResult : tworzy
+GameRunner ..> MoveLog : zapisuje
+
+MatchResult "1" *-- "*" MoveLog
+MoveLog "1" *-- "*" DecisionLog
+
+SimulationResult "1" *-- "*" MatchResult
+SimulationResult "1" *-- "*" VictoryTypeStat
+
+@enduml
