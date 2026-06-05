@@ -1,0 +1,5 @@
+matchup,agent1_name,agent2_name,total_games,agent1_wins,agent2_wins,agent1_avg,agent2_avg,agent1_max,agent1_min,agent2_max,agent2_min
+Personal vs Personal,Personal,Personal,5000,2815,2181,58.37,55.37,93,18,94,15
+Personal vs Genetic,Personal,Genetic,5000,2538,2459,56.68,54.83,95,13,92,16
+Genetic vs Personal,Genetic,Personal,5000,3023,1975,56.92,53.64,101,16,95,10
+Genetic vs Genetic,Genetic,Genetic,5000,2682,2317,55.5,53.41,96,15,94,13
