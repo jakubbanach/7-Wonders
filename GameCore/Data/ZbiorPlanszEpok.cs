@@ -4,6 +4,10 @@ using System.Linq;
 
 public static class ZbiorPlanszEpok
 {
+    public static List<Karta> PozostaleKartyEpokiI { get; private set; } = new List<Karta>();
+    public static List<Karta> PozostaleKartyEpokiII { get; private set; } = new List<Karta>();
+    public static List<Karta> PozostaleKartyEpokiIII { get; private set; } = new List<Karta>();
+
     public static PlanszaEpoki Utworz(Epoka epoka, List<Karta> talia, IRandom random)
     {
         return epoka switch
@@ -87,6 +91,8 @@ public static class ZbiorPlanszEpok
             d1,d2,d3,
             e1,e2
         };
+
+        PozostaleKartyEpokiI = talia.Skip(20).ToList();
 
         return new PlanszaEpoki(Epoka.EpokaI)
         {
@@ -172,6 +178,8 @@ public static class ZbiorPlanszEpok
             e1,e2,e3,e4,e5,e6
         };
 
+        PozostaleKartyEpokiII = talia.Skip(20).ToList();
+
         return new PlanszaEpoki(Epoka.EpokaII)
         {
             Pola = pola
@@ -186,6 +194,7 @@ public static class ZbiorPlanszEpok
             .Where(k => k.KolorKarty == KolorKarty.Fioletowy)
             .Take(3)
             .ToList();
+
 
         var kartyEpoki = talia
             .Where(k => k.KolorKarty != KolorKarty.Fioletowy)
@@ -276,6 +285,11 @@ public static class ZbiorPlanszEpok
             f1,f2,f3,
             g1,g2
         };
+
+        PozostaleKartyEpokiIII = talia
+            .Where(k => k.KolorKarty != KolorKarty.Fioletowy)
+            .Skip(17)
+            .ToList();
 
         return new PlanszaEpoki(Epoka.EpokaIII)
         {

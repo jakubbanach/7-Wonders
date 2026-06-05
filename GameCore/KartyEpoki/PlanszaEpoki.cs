@@ -46,13 +46,30 @@ public class PlanszaEpoki
     public void PotasujZakryteKarty(IRandom random)
     {
         var zakryte = ZakryteKarty.ToList();
-        for (int i = zakryte.Count - 1; i > 0; i--)
+        var kartyDoWylosowania = zakryte
+            .Where(p => p.Karta != null)
+            .Select(p => p.Karta)
+            .Concat(PozostaleKartyEpoki(Epoka))
+            .ToList();
+
+        kartyDoWylosowania.Shuffle(random);
+
+        for (int i = 0; i < zakryte.Count; i++)
         {
-            int j = random.Next(i + 1);
-            var temp = zakryte[i].Karta;
-            zakryte[i].Karta = zakryte[j].Karta;
-            zakryte[j].Karta = temp;
+            zakryte[i].Karta = i < kartyDoWylosowania.Count ? kartyDoWylosowania[i] : null;
         }
+    }
+
+    private static List<Karta> PozostaleKartyEpoki(Epoka epoka)
+    {
+        var taliaKart = epoka switch
+        {
+            Epoka.EpokaI => ZbiorPlanszEpok.PozostaleKartyEpokiI.Select(k => k.Clone()).ToList(),
+            Epoka.EpokaII => ZbiorPlanszEpok.PozostaleKartyEpokiII.Select(k => k.Clone()).ToList(),
+            Epoka.EpokaIII => ZbiorPlanszEpok.PozostaleKartyEpokiIII.Select(k => k.Clone()).ToList(),
+            _ => throw new ArgumentException("Nieznana epoka")
+        };
+        return taliaKart;
     }
 
     public void ZmienPlansze(PlanszaEpoki nowaPlansza)
