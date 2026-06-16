@@ -5,6 +5,8 @@
 
 ## Author
 analysis/
+GameAI/Encoding/*.md
+GameAI/MCTS_NN_pipeline_old/
 
 ##
 **/[Ll]ibrary/

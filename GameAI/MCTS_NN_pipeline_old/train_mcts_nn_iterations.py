@@ -259,13 +259,13 @@ def run_pipeline(
     round_reports = []
     resolved_initial_data = _resolve_input_data(repo_root, initial_data) if initial_data is not None else None
 
-    for round_index in range(2, rounds + 1):
+    for round_index in range(1, rounds + 1):
         round_tag = f"{round_index:03d}"
-        iter_prefix = f"{output_prefix}_iter_{round_tag}"
+        iter_prefix = f"{output_prefix}_iter_{round_tag}_mcts"
         print(f"\n=== Round {round_tag} ===")
         print(f"Self-play model: {current_model}")
 
-        if round_index == 2 and resolved_initial_data is not None:
+        if round_index == 1 and resolved_initial_data is not None:
             data_path = resolved_initial_data
             print(f"Using initial dataset: {data_path}")
         else:
@@ -311,7 +311,7 @@ def run_pipeline(
         _export_model(model, onnx_path)
         shutil.copy2(onnx_path, latest_path)
 
-        best_tag = f"policy_network_iter_{round_tag}_best.onnx"
+        best_tag = f"policy_network_mcts_iter_{round_tag}_best.onnx"
         best_path = model_dir / best_tag
         shutil.copy2(onnx_path, best_path)
 
@@ -352,7 +352,7 @@ def main() -> int:
     parser.add_argument("--epochs", type=int, default=10, help="Training epochs per round.")
     parser.add_argument("--seed", type=int, default=12345, help="Base random seed.")
     parser.add_argument("--start-model", type=Path, default=_default_start_model(repo_root), help="Initial ONNX model.")
-    parser.add_argument("--model-dir", type=Path, default=_encoding_dir(repo_root) / "onnx_models" / "mcts_nn_iterations", help="Where to store per-round models.")
+    parser.add_argument("--model-dir", type=Path, default=_encoding_dir(repo_root) / "onnx_models" / "mcts_first", help="Where to store per-round models.")
     parser.add_argument("--output-prefix", type=str, default="mcts_nn", help="Prefix for generated training files.")
     parser.add_argument("--batch-size", type=int, default=64, help="Training batch size.")
     parser.add_argument("--learning-rate", type=float, default=1e-3, help="Adam learning rate.")
