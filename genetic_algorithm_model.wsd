@@ -1,0 +1,39 @@
+@startuml Genetic Algorithm Model
+' skinparam backgroundColor white
+' skinparam ArrowColor #333333
+skinparam ActivityBackgroundColor #E8F4FD
+skinparam ActivityBorderColor #2980B9
+skinparam ActivityDiamondBackgroundColor #FEF9E7
+skinparam ActivityDiamondBorderColor #F39C12
+
+start
+
+:Generuj populację początkową 
+(losowe wagi z [1.0, 15.0]);
+note right: PunktyZwyciestwa = 10.0 (stała)
+
+:Przeciwnik = Agent Losowy;
+
+repeat
+
+  :Rozegraj gry każdego osobnika 
+  przeciwko aktualnemu przeciwnikowi;
+
+  :Posortuj populację według liczby zwycięstw;
+
+  if (Najlepszy osobnik > 50% zwycięstw?) then (TAK)
+    :Aktualizuj najlepszego osobnika;
+    :Przeciwnik = Najlepszy osobnik;
+  else (NIE)
+  endif
+
+ :Utwórz nową populację:\n2 najlepszych osobników\n+ mutacja najlepszego;
+  note right: Mutacja: każdy parametr \n± losowa wartość z [-2.0, 2.0]
+
+repeat while (Są kolejne iteracje?) is (TAK)
+->NIE;
+
+:Zwróć najlepszego osobnika;
+
+stop
+@enduml

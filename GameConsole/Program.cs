@@ -33,6 +33,7 @@ class Program
         //ExportTrainingDataFunction(args.Skip(1).ToArray());
         //BenchmarkModelsFunction(args.Skip(1).ToArray());
         //SimulationPuctTesting();
+        //SimulationMctsIterationsFunction();
         SimulationRunnerFunction();
         //HeuristicRunnerFunction();
         //HeuristicGameRunner();
@@ -341,7 +342,11 @@ class Program
         return new Dictionary<string, Func<IRandom, IAgent>>(StringComparer.OrdinalIgnoreCase)
         {
             ["random"] = r => new RandomAgent(r),
-            ["mcts"] = r => new MctsAgent(r),
+            ["mcts-rd-50"] = r => new MctsAgent(r, true, false, 50),
+            ["mcts-rd-100"] = r => new MctsAgent(r, true, false, 100),
+            ["mcts-rd-200"] = r => new MctsAgent(r, true, false, 200),
+            ["mcts-rd"] = r => new MctsAgent(r, true, false), //300
+            ["mcts-rd-rr"] = r => new MctsAgent(r, true, true),
             ["ismcts"] = r => new ISMctsAgent(r),
             ["heuristic-personal"] = r => new HeuristicAgent(HeuristicWeightPresets.Personal(), r),
             ["heuristic-double"] = r => new HeuristicAgent(HeuristicWeightPresets.GeneticDouble(), r),
@@ -459,26 +464,24 @@ class Program
     }
     static void SimulationRunnerFunction()
     {
-        int seed = 12345;
-        int games = 5000;
+        int seed = 10150; //12345
+        int games = 150;
 
         var agents = new List<(string Name, Func<IRandom, IAgent> Factory)>
         {
             //("RandomAgent", r => new RandomAgent(r)),
-            //("HeuristicAgent (Military)", r => new HeuristicAgent(HeuristicWeightPresets.Military(), r)),
-            //("HeuristicAgent (Balanced)", r => new HeuristicAgent(HeuristicWeightPresets.Balanced(), r)),
-            ("HeuristicAgent (GeneticPersonal)", CreateAgentFactoryFromSpec("heuristic-personal")),
-            ("HeuristicAgent (GeneticDouble)", CreateAgentFactoryFromSpec("heuristic-double")),
-            //("HeuristicAgent (GeneticDouble New)", CreateAgentFactoryFromSpec("heuristic-double-new")),
-            //("MCTSAgent", CreateAgentFactoryFromSpec("mcts")),
-            //("ISMCTSAgent", CreateAgentFactoryFromSpec("ismcts")),
+            //("HeuristicAgent (GeneticPersonal)", CreateAgentFactoryFromSpec("heuristic-personal")),
+            //("HeuristicAgent Genetic", CreateAgentFactoryFromSpec("heuristic-double")),
+            ("MCTSAgent RD", CreateAgentFactoryFromSpec("mcts-rd")),
+            ("MCTSAgent RD + RR", CreateAgentFactoryFromSpec("mcts-rd-rr")),
+            ("ISMCTSAgent", CreateAgentFactoryFromSpec("ismcts")),
             //("PUCTAgent", CreateAgentFactoryFromSpec("puct")),
             //("PUCTAgent Match", CreateAgentFactoryFromSpec("puct_match")),
             //("PUCTAgent Iter 2", CreateAgentFactoryFromSpec("puct_iter_2")),
             //("PUCTAgent Latest", CreateAgentFactoryFromSpec("puct_latest")),
         };
 
-
+        var allResults = new List<SimulationResult>();
         for (int i = 0; i < agents.Count; i++)
         {
             for (int j = 0; j < agents.Count; j++)
@@ -492,7 +495,9 @@ class Program
                     games,
                     SimulationMode.Tournament,
                     agents[i].Factory,
-                    agents[j].Factory
+                    agents[j].Factory,
+                    agents[i].Name,
+                    agents[j].Name
                 );
                 var result = simulationRunner.Run();
                 Console.WriteLine($"Total games: {result.TotalGames}");
@@ -508,8 +513,64 @@ class Program
                     Console.WriteLine($"{kvp.Agent},{kvp.TypZwyciestwa}: {kvp.Liczba}");
                 }
                 Console.WriteLine(new string('-', 50));
+                allResults.Add(result);
             }
         }
+        var path = GetBenchmarkOutputDirectory("full_comparison_summary_10150_150.json");
+        ResultWriter.Save(allResults, path);
+    }
+    static void SimulationMctsIterationsFunction()
+    {
+        int seed = 12345;
+        int games = 1;
+
+        var agents = new List<(string Name, Func<IRandom, IAgent> Factory)>
+        {
+            ("RandomAgent", r => new RandomAgent(r)),
+            ("HeuristicAgent Genetic", CreateAgentFactoryFromSpec("heuristic-double")),
+            ("MCTSAgent RD 50", CreateAgentFactoryFromSpec("mcts-rd-50")),
+            ("MCTSAgent RD 100", CreateAgentFactoryFromSpec("mcts-rd-100")),
+            ("MCTSAgent RD 200", CreateAgentFactoryFromSpec("mcts-rd-200")),
+            ("MCTSAgent RD 300", CreateAgentFactoryFromSpec("mcts-rd")),
+        };
+
+        var allResults = new List<SimulationResult>();
+        for (int i = 0; i < agents.Count; i++)
+        {
+            for (int j = 0; j < agents.Count; j++)
+            {
+                if (agents[i].Name.StartsWith("MCTSAgent") && agents[j].Name.StartsWith("MCTSAgent") && i != j)
+                    continue; // Skip different MCTS
+                Console.WriteLine($"Running simulation: {agents[i].Name} vs {agents[j].Name}");
+
+                var simulationRunner = new SimulationRunner(
+                    seed,
+                    games,
+                    SimulationMode.Tournament,
+                    agents[i].Factory,
+                    agents[j].Factory,
+                    agents[i].Name,
+                    agents[j].Name
+                );
+                var result = simulationRunner.Run();
+                Console.WriteLine($"Total games: {result.TotalGames}");
+                Console.WriteLine($"Agent1 max points: {result.Agent1MaxPoints}, min points: {result.Agent1MinPoints}");
+                Console.WriteLine($"Agent2 max points: {result.Agent2MaxPoints}, min points: {result.Agent2MinPoints}");
+                Console.WriteLine($"Agent1 wins: {result.Agent1Wins}, avg points: {result.Agent1AveragePoints:F2}");
+                Console.WriteLine($"Agent2 wins: {result.Agent2Wins}, avg points: {result.Agent2AveragePoints:F2}");
+                Console.WriteLine($"Total elapsed: {TimeSpan.FromMilliseconds(result.TotalElapsedMilliseconds):g}");
+                Console.WriteLine($"Average game elapsed: {result.AverageGameElapsedMilliseconds:F0} ms");
+                Console.WriteLine("Victory types count:");
+                foreach (var kvp in result.VictoryTypeCounts)
+                {
+                    Console.WriteLine($"{kvp.Agent},{kvp.TypZwyciestwa}: {kvp.Liczba}");
+                }
+                Console.WriteLine(new string('-', 50));
+                allResults.Add(result);
+            }
+        }
+        var path = GetBenchmarkOutputDirectory("full_comparison_mcts_summary.json");
+        ResultWriter.Save(allResults, path);
     }
     static void HeuristicRunnerFunction()
     {

@@ -7,6 +7,8 @@ public class SimulationRunner
 {
     private readonly Func<IRandom, IAgent> agent1Factory;
     private readonly Func<IRandom, IAgent> agent2Factory;
+    private readonly string? agent1Type;
+    private readonly string? agent2Type;
     private readonly int games;
     private readonly int seed;
     private readonly SimulationMode mode;
@@ -16,13 +18,17 @@ public class SimulationRunner
         int games,
         SimulationMode mode,
         Func<IRandom, IAgent> agent1Factory,
-        Func<IRandom, IAgent> agent2Factory)
+        Func<IRandom, IAgent> agent2Factory,
+        string? agent1Type = null,
+        string? agent2Type = null)
     {
         this.seed = seed;
         this.games = games;
         this.mode = mode;
         this.agent1Factory = agent1Factory;
         this.agent2Factory = agent2Factory;
+        this.agent1Type = agent1Type;
+        this.agent2Type = agent2Type;
     }
 
     public SimulationResult Run(bool both = false)
@@ -148,7 +154,9 @@ public class SimulationRunner
             Agent2AveragePoints = avgA2Points,
             //GameTimings = timings,
             VictoryTypeCounts = typeCounts,
-            MatchResults = results
+            Agent1Type = agent1Type,
+            Agent2Type = agent2Type,
+            //MatchResults = results
         };
     }
 }

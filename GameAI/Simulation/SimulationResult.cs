@@ -19,7 +19,9 @@ public class SimulationResult
     //public HeuristicWeights Agent1Weights { get; set; }
     //public HeuristicWeights Agent2Weights { get; set; }
     public List<VictoryTypeStat> VictoryTypeCounts { get; set; }
-    public List<MatchResult> MatchResults { get; set; }
+    public string? Agent1Type { get; set; }
+    public string? Agent2Type { get; set; }
+    public List<MatchResult>? MatchResults { get; set; }
 
     // używane w trakcie symulacji
     [JsonIgnore]

@@ -1,0 +1,38 @@
+@startuml Genetic Algorithm Model
+skinparam ActivityBackgroundColor #E8F4FD
+skinparam ActivityBorderColor #2980B9
+skinparam ActivityDiamondBackgroundColor #FEF9E7
+skinparam ActivityDiamondBorderColor #F39C12
+skinparam NoteBackgroundColor #FFF9E6
+skinparam NoteBorderColor #F39C12
+
+start
+
+:Inicjalizacja losowej populacji (PZ = 10, reszta wag 1-15);
+
+repeat
+  :Ocena populacji (Fitness);
+  note right
+    Każdy osobnik rozgrywa N gier: połowę jako gracz 1, połowę jako gracz 2.
+    Przeciwnik: BestEver (jeśli istnieje) lub Random.
+  end note
+
+  :Sortowanie populacji wg liczby wygranych;
+
+  if (Najlepszy z generacji > 50% wygranych?) then (tak)
+    :Aktualizacja BestEver;
+  endif
+
+  :Sukcesja i Mutacja;
+  note right
+    Do nowej generacji przechodzi Top 2.
+    Reszta to zmutowane kopie Top 1 (wagi +/- 2).
+  end note
+
+repeat while (Są kolejne generacje?) is (tak)
+->nie;
+
+:Zapisanie BestEver do JSON;
+
+stop
+@enduml

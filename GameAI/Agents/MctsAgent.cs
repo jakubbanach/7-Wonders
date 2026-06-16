@@ -16,9 +16,12 @@ public class MctsAgent : IAgent
     private readonly SimulationDecisionResolver rolloutResolver;
     private const double C = 1.414;
 
-    public MctsAgent(IRandom random)
+    public MctsAgent(IRandom random, bool useRootDeterminization = true, bool reshuffleInRollout = true, int iterations = 300)
     {
         this.random = random;
+        UseRootDeterminization = useRootDeterminization;
+        ReshuffleInRollout = reshuffleInRollout;
+        Iterations = iterations;
         rolloutAgent = new RandomAgent(random);
         rolloutResolver = new SimulationDecisionResolver(rolloutAgent);
     }
