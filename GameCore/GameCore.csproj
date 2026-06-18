@@ -5,4 +5,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Copy
+			SourceFiles="$(TargetDir)GameCore.dll"
+			DestinationFolder="C:\Users\kubeu\Kuba-dokumenty\Magisterka\7 Wonders\Unity\Assets\Plugins" />
+	</Target>
+
 </Project>

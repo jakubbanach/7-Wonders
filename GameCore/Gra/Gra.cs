@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 public class Gra
 {
@@ -96,7 +97,7 @@ public class Gra
             new StanGry());
     }
 
-    public void WykonajRuch(Ruch ruchNew, IDecisionResolver resolver, IRandom random)
+    public async Task WykonajRuch(Ruch ruchNew, IDecisionResolver resolver, IRandom random)
     {
         currentResolver = resolver;
         currentRandom = random;
@@ -130,7 +131,7 @@ public class Gra
             }
             planszaEpoki = UtworzPlanszeEpoki(planszaEpoki.Epoka + 1, random);
 
-            WybierzKtoZaczynaKolejnaEpoke(resolver);
+            await WybierzKtoZaczynaKolejnaEpoke(resolver);
             return;
         }
 
@@ -148,7 +149,7 @@ public class Gra
         ZmienTure(); 
     }
 
-    public void Efekt_Losuj3Zetony(IDecisionResolver? resolver = null)
+    public async void Efekt_Losuj3Zetony(IDecisionResolver? resolver = null)
     {
         //Console.WriteLine("Efekt: Wylosuj 3 zetony postepu");
         if (resolver != null)
@@ -181,12 +182,12 @@ public class Gra
             decisionResolver: currentResolver
         );
 
-        var wybor = currentResolver.Resolve(this.Clone(), decyzja);
+        var wybor = await currentResolver.Resolve(this.Clone(), decyzja);
 
         AktywnyGracz.DodajZetonPostepu(wybor);
         //Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} losuje zeton postepu {wybor.Nazwa}");
     }
-    public void Efekt_WybierzZetonPostepu(IDecisionResolver? resolver = null)
+    public async void Efekt_WybierzZetonPostepu(IDecisionResolver? resolver = null)
     {
         //Console.WriteLine($"Efekt: Wybierz 1 zeton postepu z {planszaKonfliktu.ZetonyPostepu.Count} dostepnych");
         if (resolver != null)
@@ -211,7 +212,7 @@ public class Gra
             decisionResolver: currentResolver
         );
 
-        var wybor = currentResolver.Resolve(this.Clone(), decyzja);
+        var wybor = await currentResolver.Resolve(this.Clone(), decyzja);
         if (wybor == null)
         {
             Console.WriteLine("Resolver nie zwrocil wyboru zetonu postepu!");
@@ -222,7 +223,7 @@ public class Gra
         planszaKonfliktu.UsunZetonPostepu(wybor);
         //Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} wybiera zeton postepu {wybor.Nazwa}");
     }
-    public void Efekt_OdlozKartePrzeciwnika(string kolorOdkladanejKarty)
+    public async void Efekt_OdlozKartePrzeciwnika(string kolorOdkladanejKarty)
     {
         //Console.WriteLine($"Efekt: Odloz karte przeciwnika o kolorze {kolorOdkladanejKarty}");
         if (currentResolver == null)
@@ -249,7 +250,7 @@ public class Gra
             decisionResolver: currentResolver
         );
 
-        var wybor = currentResolver?.Resolve(this.Clone(), decyzja);
+        var wybor = await currentResolver.Resolve(this.Clone(), decyzja);
         if (wybor == null)
         {
             Console.WriteLine("Resolver nie zwrocil wyboru karty przeciwnika!");
@@ -259,7 +260,7 @@ public class Gra
         Przeciwnik.UsunKarte(wybor);
         //Console.WriteLine($"Przeciwnik odklada karte {wybor.Nazwa}");
     }
-    public void Efekt_DarmowaBudowla()
+    public async void Efekt_DarmowaBudowla()
     {
         //Console.WriteLine("Efekt: Darmowa budowla z odrzuconych kart");
         if (currentResolver == null)
@@ -280,7 +281,7 @@ public class Gra
             decisionResolver: currentResolver
         );
 
-        var kartaDoDodania = currentResolver.Resolve(this.Clone(), decyzja);
+        var kartaDoDodania = await currentResolver.Resolve(this.Clone(), decyzja);
 
         //Console.WriteLine($"Gracz {AktywnyGracz.Nazwa} wybiera karte {kartaDoDodania.Nazwa} do darmowej budowy");
         kartaDoDodania.OznaczJakoZagrana();
@@ -294,7 +295,7 @@ public class Gra
             AktywnyGracz.DodajEfekt(efekt);
         }
     }
-    private void WybierzKtoZaczynaKolejnaEpoke(IDecisionResolver resolver)
+    private async Task WybierzKtoZaczynaKolejnaEpoke(IDecisionResolver resolver)
     {
         var decydujacy = UstalGraczaDecydujacego();
 
@@ -306,7 +307,7 @@ public class Gra
             decydujacy
         );
 
-        var wybrany = resolver.Resolve(this.Clone(), decyzja);
+        var wybrany = await resolver.Resolve(this.Clone(), decyzja);
 
         idAktywnegoGracza = Array.IndexOf(gracze, wybrany);
     }

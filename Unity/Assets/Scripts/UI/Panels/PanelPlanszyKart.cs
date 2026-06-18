@@ -35,7 +35,7 @@ public class PanelPlanszyKart : MonoBehaviour
 
             row.AddComponent<ContentSizeFitter>().horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
 
-            //Debug.Log("Liczba kart w tej linii: " + liczbaKart);
+            Debug.Log("Liczba kart w tej linii: " + liczbaKart);
             for (int i = 0; i < liczbaKart; i++)
             {
                 var pole = plansza.Pola[index++];

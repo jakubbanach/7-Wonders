@@ -61,10 +61,10 @@ public class PanelGracza : MonoBehaviour
     {
         return kolor switch
         {
-            KolorKarty.Br¹zowy => brownContainer,
+            KolorKarty.Brazowy => brownContainer,
             KolorKarty.Szary => grayContainer,
             KolorKarty.Niebieski => blueContainer,
-            KolorKarty.¯ó³ty => yellowContainer,
+            KolorKarty.Zolty => yellowContainer,
             KolorKarty.Czerwony => redContainer,
             KolorKarty.Zielony => greenContainer,
             KolorKarty.Fioletowy => purpleContainer,

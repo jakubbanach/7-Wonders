@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class UIManager : MonoBehaviour
 {
@@ -6,13 +8,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PanelPlanszyKonfliktu panelKonfliktu;
     [SerializeField] private PanelGracza panelGracz1;
     [SerializeField] private PanelGracza panelGracz2;
+    [SerializeField] private PanelAkcji panelAkcji;
 
     private Gra gra;
 
-    public void Setup(Gra gra)
+    public void Setup(GameController controller, Gra gra)
     {
         this.gra = gra;
 
+        panelAkcji.Init(controller);
         Odswiez();
     }
 
@@ -23,5 +27,25 @@ public class UIManager : MonoBehaviour
 
         panelGracz1.Odswiez(gra.Gracze[0]);
         panelGracz2.Odswiez(gra.Gracze[1]);
+        if (gra.AktywnyGracz == gra.Gracze[0])
+        {
+            panelGracz1.GetComponent<CanvasGroup>().alpha = 1f;
+            panelGracz2.GetComponent<CanvasGroup>().alpha = 0.5f;
+        }
+        else
+        {
+            panelGracz1.GetComponent<CanvasGroup>().alpha = 0.5f;
+            panelGracz2.GetComponent<CanvasGroup>().alpha = 1f;
+        }
+    }
+
+    public void PokazAkcje(List<Ruch> ruchy)
+    {
+        panelAkcji.Show(ruchy);
+    }
+
+    public void UkryjAkcje()
+    {
+        panelAkcji.Hide();
     }
 }

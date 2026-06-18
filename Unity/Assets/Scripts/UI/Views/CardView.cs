@@ -12,6 +12,7 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
 
     private Color normalColor = Color.black;
     private Color hoverColor = Color.yellow;
+    private Color pressedColor = Color.white;
 
     private PoleKarty pole;
     private GameController controller;
@@ -79,13 +80,18 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
             Debug.Log("Ta karta jest zablokowana przez inne pola. Nie mo¿na jej zagraæ.");
             return;
         }
-        controller.WykonajRuch(pole, TypRuchu.ZbudujKarte);
+        //border.color = pressedColor;
+        controller.WybranoKarte(pole);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (pole == null || pole.Karta == null || pole.CzyZakryta || !pole.CzyDostepna)
         {
             return;
+        }
+        if (border.color == pressedColor)
+        {
+            return; // nie zmieniaj koloru, jeœli karta jest w stanie "pressed"
         }
         border.color = hoverColor;
         //border.color *= 1.5f;
@@ -97,6 +103,10 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
         {
             return;
         }
+        if (border.color == pressedColor)
+        {
+            return; // nie zmieniaj koloru, jeœli karta jest w stanie "pressed"
+        }
         border.color = normalColor;
     }
 
@@ -104,7 +114,7 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
     {
         switch (kolor)
         {
-            case KolorKarty.Br¹zowy:
+            case KolorKarty.Brazowy:
                 cardImage.color = Hex("#6E4C1C");
                 break;
             case KolorKarty.Szary:
@@ -116,7 +126,7 @@ public class CardView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandle
             case KolorKarty.Niebieski:
                 cardImage.color = Hex("#026C9C");
                 break;
-            case KolorKarty.¯ó³ty: 
+            case KolorKarty.Zolty: 
                 cardImage.color = Hex("#F2B301");
                 break;
             case KolorKarty.Czerwony:
