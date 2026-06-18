@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 public class AgentDecisionResolver : IDecisionResolver
 {
@@ -14,7 +13,7 @@ public class AgentDecisionResolver : IDecisionResolver
         this.moveLog = moveLog;
     }
 
-    public T Resolve<T>(Gra gra, DecyzjaKontekst<T> kontekst)
+    public Task<T> Resolve<T>(Gra gra, DecyzjaKontekst<T> kontekst)
     {
         var wybor = agent.WybierzAkcjePosrednia(gra, kontekst);
         var fixedEncoding = GameStateEncoder.EncodeSubdecision(gra, kontekst.Efekt);
@@ -35,7 +34,7 @@ public class AgentDecisionResolver : IDecisionResolver
             });
         }
 
-        return wybor;
+        return Task.FromResult(wybor);
     }
 
     private static float[] CreateChoiceMask(string[] options, object wybor)

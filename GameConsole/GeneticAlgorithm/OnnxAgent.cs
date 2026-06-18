@@ -248,33 +248,33 @@ public static class TrainingDataExporter
         public Dictionary<string, object> Subdecisions { get; set; }
     }
 
-    public static void ExportToJson(List<MoveLog> moves, Gra gra, string outputPath)
-    {
-        var steps = new List<GameStep>();
+    //public static void ExportToJson(List<MoveLog> moves, Gra gra, string outputPath)
+    //{
+    //    var steps = new List<GameStep>();
 
-        foreach (var move in moves)
-        {
-            var encoding = GameStateEncoder.EncodePolicy(gra);
+    //    foreach (var move in moves)
+    //    {
+    //        var encoding = GameStateEncoder.EncodePolicy(gra);
 
-            var step = new GameStep
-            {
-                State = encoding.State,
-                ActionMask = encoding.ActionMask,
-                ActionTaken = 0, // TODO: Zdekoduj z move
-                ValueTarget = 0f, // TODO: Oblicz z wyniku gry
-                Advantage = 0f, // TODO: Oblicz GAE
-                Subdecisions = move.Decisions
-                    .Select(d => new { d.TypDecyzji, d.Wybor })
-                    .Cast<object>()
-                    .ToList()
-                    .ToDictionary(x => x.ToString(), x => x)
-            };
+    //        var step = new GameStep
+    //        {
+    //            State = encoding.State,
+    //            ActionMask = encoding.ActionMask,
+    //            ActionTaken = 0, // TODO: Zdekoduj z move
+    //            ValueTarget = 0f, // TODO: Oblicz z wyniku gry
+    //            Advantage = 0f, // TODO: Oblicz GAE
+    //            Subdecisions = move.Decisions
+    //                .Select(d => new { d.TypDecyzji, d.Wybor })
+    //                .Cast<object>()
+    //                .ToList()
+    //                .ToDictionary(x => x.ToString(), x => x)
+    //        };
 
-            steps.Add(step);
-        }
+    //        steps.Add(step);
+    //    }
 
-        var json = System.Text.Json.JsonSerializer.Serialize(steps, 
-            new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
-        System.IO.File.WriteAllText(outputPath, json);
-    }
+    //    var json = System.Text.Json.JsonSerializer.Serialize(steps, 
+    //        new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+    //    System.IO.File.WriteAllText(outputPath, json);
+    //}
 }

@@ -1,4 +1,5 @@
-﻿public class SimulationDecisionResolver : IDecisionResolver
+﻿using System.Threading.Tasks;
+public class SimulationDecisionResolver : IDecisionResolver
 {
     private readonly IAgent agent;
 
@@ -7,8 +8,8 @@
         this.agent = agent;
     }
 
-    public T Resolve<T>(Gra gra, DecyzjaKontekst<T> kontekst)
+    public Task<T> Resolve<T>(Gra gra, DecyzjaKontekst<T> kontekst)
     {
-        return agent.WybierzAkcjePosrednia(gra, kontekst);
+        return Task.FromResult(agent.WybierzAkcjePosrednia(gra, kontekst));
     }
 }

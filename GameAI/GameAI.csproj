@@ -9,14 +9,7 @@
 	    <ProjectReference Include="..\GameCore\GameCore.csproj" />
     </ItemGroup>
 	
-    <ItemGroup>
-      <Folder Include="Tournament\" />
-    </ItemGroup>
 	
-    <ItemGroup>
-      <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.25.1" />
-      <PackageReference Include="System.Text.Json" Version="10.0.5" />
-    </ItemGroup>
 
 
 </Project>
