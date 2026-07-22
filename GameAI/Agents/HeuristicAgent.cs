@@ -18,17 +18,11 @@ public class HeuristicAgent : IAgent
         var ruchy = gra.DostepneRuchy();
         var aktywnyGracz = gra.AktywnyGracz;
 
-        //var najlepszyRuch = ruchy
-        //    .OrderByDescending(r => OcenRuch(gra, r, aktywnyGracz))
-        //    .First();
         var najlepszyRuch = IAgent.WybierzNajlepszyLosowy(ruchy, r => OcenRuch(gra, r, aktywnyGracz), random);
         return najlepszyRuch;
     }
     public T WybierzAkcjePosrednia<T>(Gra gra, DecyzjaKontekst<T> decyzja)
     {
-        //return decyzja.Opcje
-        //    .OrderByDescending(o => OcenOpcje(gra, decyzja, o))
-        //    .First();
         return IAgent.WybierzNajlepszyLosowy(decyzja.Opcje, o => OcenOpcje(gra, decyzja, o), random);
     }
     public double OcenRuch(Gra gra, Ruch ruch, Gracz aktywnyGracz)
@@ -97,7 +91,7 @@ public class HeuristicAgent : IAgent
                 var karta = (Karta)(object)opcja;
                 foreach (var efekt in karta.Efekty)
                 {
-                    efekt.ZastosujEfekt(gracz, przeciwnik, symulacja.PlanszaKonfliktu, karta, symulacja,decisionResolver: decyzja.resolver);
+                    efekt.ZastosujEfekt(gracz, przeciwnik, symulacja.PlanszaKonfliktu, karta, symulacja);
                     gracz.DodajEfekt(efekt);
                 }
                 break;
@@ -111,7 +105,7 @@ public class HeuristicAgent : IAgent
             case TypEfektu.WybierzGraczaRozpoczynajacegoEpoke:
                 // wybor gracza rozpoczynajacego to niech bedzie wybor tego co podemuje decyzje, bo to jest bardziej korzystne dla niego (w wiekszosci przypadkow)
                 //return gracz == symulacja.Gracze[0] ? 1 : -1;
-                return 0; // TODO: zobaczyc jak to ocenic heurystycznie
+                return 0;
         }
         return OcenStan(symulacja, gracz);
     }

@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PanelPlanszyKonfliktu panelKonfliktu;
     [SerializeField] private PanelGracza panelGracz1;
     [SerializeField] private PanelGracza panelGracz2;
-    [SerializeField] private PanelAkcji panelAkcji;
+    [SerializeField] private PanelDecyzjiUI panelDecyzjiUI;
 
     private Gra gra;
 
@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     {
         this.gra = gra;
 
-        panelAkcji.Init(controller);
+        panelDecyzjiUI.Init(controller);
         Odswiez();
     }
 
@@ -39,13 +39,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void PokazAkcje(List<Ruch> ruchy)
+    public void PokazRuchy(List<Ruch> ruchy)
     {
-        panelAkcji.Show(ruchy);
+        panelDecyzjiUI.ShowRuchy(ruchy);
     }
 
     public void UkryjAkcje()
     {
-        panelAkcji.Hide();
+        panelDecyzjiUI.Hide();
     }
 }

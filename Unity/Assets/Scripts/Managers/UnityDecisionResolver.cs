@@ -1,16 +1,13 @@
 using System.Threading.Tasks;
+using UnityEngine;
 
-public class UnityDecisionResolver : IDecisionResolver
+public class UnityDecisionResolver : MonoBehaviour, IDecisionResolver
 {
-    private PanelDecyzjiUI panel;
-
-    public UnityDecisionResolver(PanelDecyzjiUI panel)
-    {
-        this.panel = panel;
-    }
+    [SerializeField]private PanelDecyzjiUI panel;
 
     public Task<T> Resolve<T>(Gra gra, DecyzjaKontekst<T> decyzja)
     {
-        return panel.ShowDecyzje(decyzja.Opcje);
+        Debug.Log($"Resolving decision {decyzja} for game {gra}");
+        return panel.ShowDecyzje<T>(decyzja.Opcje);
     }
 }

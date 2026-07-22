@@ -178,8 +178,7 @@ public class Gra
 
         var decyzja = new DecyzjaKontekst<ZetonPostepu>(
             TypEfektu.Wylosuj3ZetonyPostepu,
-            wylosowane,
-            decisionResolver: currentResolver
+            wylosowane
         );
 
         var wybor = await currentResolver.Resolve(this.Clone(), decyzja);
@@ -208,8 +207,7 @@ public class Gra
 
         var decyzja = new DecyzjaKontekst<ZetonPostepu>(
             TypEfektu.WybierzZetonPostepu,
-            zetonyNaPlanszy,
-            decisionResolver: currentResolver
+            zetonyNaPlanszy
         );
 
         var wybor = await currentResolver.Resolve(this.Clone(), decyzja);
@@ -246,8 +244,7 @@ public class Gra
 
         var decyzja = new DecyzjaKontekst<Karta>(
             TypEfektu.OdlozKartePrzeciwnika,
-            kartyPrzeciwnika,
-            decisionResolver: currentResolver
+            kartyPrzeciwnika
         );
 
         var wybor = await currentResolver.Resolve(this.Clone(), decyzja);
@@ -277,8 +274,7 @@ public class Gra
 
         var decyzja = new DecyzjaKontekst<Karta>(
             TypEfektu.DarmowaBudowlaZOdrzuconychKart,
-            odrzuconeKarty,
-            decisionResolver: currentResolver
+            odrzuconeKarty
         );
 
         var kartaDoDodania = await currentResolver.Resolve(this.Clone(), decyzja);

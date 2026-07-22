@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UI;
 
 public class PanelDecyzjiUI : MonoBehaviour
@@ -11,8 +12,15 @@ public class PanelDecyzjiUI : MonoBehaviour
 
     private List<GameObject> spawned = new();
 
-    // ====== RUCH ======
     private TaskCompletionSource<Ruch> ruchTcs;
+    private TaskCompletionSource<object> decisionTcs;
+    private GameController controller;
+    private List<GameObject> spawnedButtons = new();
+
+    public void Init(GameController controller)
+    {
+        this.controller = controller;
+    }
 
     public Task<Ruch> ShowRuchy(List<Ruch> ruchy)
     {
@@ -22,11 +30,28 @@ public class PanelDecyzjiUI : MonoBehaviour
 
         foreach (var ruch in ruchy)
         {
-            var btn = CreateButton(ruch.ToString());
+            var button = CreateButton(GetLabel(ruch));
 
-            btn.onClick.AddListener(() =>
+            button.onClick.AddListener(() =>
             {
-                ruchTcs.SetResult(ruch);
+                if (ruch.KartaDoZagrania == null)
+                {
+                    Debug.LogError("Karta do zagrania jest nullem!");
+                    return;
+                }
+                if (ruch.TypRuchu == TypRuchu.ZbudujCud)
+                {
+                    if (ruch.KartaCudu == null)
+                    {
+                        Debug.LogError("Karta cudu jest nullem przy ruchu ZbudujCud!");
+                        return;
+                    }
+                    controller.WykonajRuch(ruch.KartaDoZagrania, ruch.TypRuchu, ruch.KartaCudu);
+                }
+                else
+                {
+                    controller.WykonajRuch(ruch.KartaDoZagrania, ruch.TypRuchu);
+                }
                 Hide();
             });
         }
@@ -35,22 +60,24 @@ public class PanelDecyzjiUI : MonoBehaviour
         return ruchTcs.Task;
     }
 
-    // ====== DECYZJE POŒREDNIE ======
-    private TaskCompletionSource<object> decisionTcs;
-
-    public Task<T> ShowDecyzje<T>(List<T> opcje)
+    public Task<T> ShowDecyzje<T>(IReadOnlyList<T> opcje)
     {
         Clear();
+
+        Debug.Log($"Pokazujê decyzje: {string.Join(", ", opcje)}");
 
         decisionTcs = new TaskCompletionSource<object>();
 
         foreach (var opcja in opcje)
         {
+            Debug.Log($"Tworzê przycisk dla opcji: {opcja}");
+            Debug.Log($"Typ opcji: {opcja.GetType()}");
+            Debug.Log($"Wartoœæ opcji: {opcja.ToString()}");
             var btn = CreateButton(opcja.ToString());
 
             btn.onClick.AddListener(() =>
             {
-                decisionTcs.SetResult(opcja);
+                Debug.Log($"Wybrano opcjê: {opcja}");
                 Hide();
             });
         }
@@ -60,7 +87,6 @@ public class PanelDecyzjiUI : MonoBehaviour
         return decisionTcs.Task.ContinueWith(t => (T)t.Result);
     }
 
-    // ====== helper ======
     private Button CreateButton(string text)
     {
         var obj = Instantiate(przyciskPrefab, kontener);
@@ -86,5 +112,16 @@ public class PanelDecyzjiUI : MonoBehaviour
     {
         Clear();
         gameObject.SetActive(false);
+    }
+
+    private string GetLabel(Ruch ruch)
+    {
+        return ruch.TypRuchu switch
+        {
+            TypRuchu.ZbudujKarte => "Zbuduj kartê",
+            TypRuchu.OdrzucKarte => "Odrzuæ kartê",
+            TypRuchu.ZbudujCud => $"Zbuduj cud: {ruch.KartaCudu.Nazwa}",
+            _ => "?"
+        };
     }
 }

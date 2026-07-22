@@ -49,6 +49,6 @@ public class GameController : MonoBehaviour
             .Where(r => r.KartaDoZagrania == pole.Karta)
             .ToList();
 
-        uiManager.PokazAkcje(dostepneRuchy);
+        uiManager.PokazRuchy(dostepneRuchy);
     }
 }

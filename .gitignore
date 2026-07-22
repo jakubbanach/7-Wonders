@@ -7,6 +7,8 @@
 analysis/
 GameAI/Encoding/*.md
 GameAI/MCTS_NN_pipeline_old/
+run_self_play_train.cmd
+run_self_play_train.ps1
 
 ##
 **/[Ll]ibrary/
