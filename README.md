@@ -54,13 +54,13 @@ Below are example plots generated from the simulation results *(**row** means th
 
 
 ### Win rate heatmap for different agent pairings
-![alt text](analysis/results/plots-all/winrate_heatmap.png)
+![alt text](winrate_heatmap.png)
 
 ### Average points gap heatmap for different agent pairings
-![alt text](analysis/results/plots-all/avg_points_gap_heatmap.png)
+![alt text](avg_points_gap_heatmap.png)
 
 ### Average game time heatmap for different agent pairings
-![alt text](analysis/results/plots-all/avg_game_time_heatmap.png)
+![alt text](avg_game_time_heatmap.png)
 
 ## Supporting Files
 
